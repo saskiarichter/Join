@@ -1,10 +1,7 @@
 body {
     margin: 0;
     background-color: #F6F7F8;
-}
-
-.image-container {
-    position: relative;
+    font-family: "Inter", sans-serif;
 }
 
 .joinlogo {
@@ -16,6 +13,7 @@ body {
     animation-delay: 500ms; /* Verzögerung der Animation um 1 Sekunde */
 }
 
+
 @keyframes shrinkAndMove {
     0% {
         width: 274px;
@@ -26,7 +24,29 @@ body {
     100% {
         width: 100.03px;
         height: 121.97px;
-        top: 80px;
-        left: 77px;
+        top: 140px;
+        left: 127px;
     }
+}
+
+.sign_up_container {
+    position: absolute;
+    top: 67px;
+    right: 75px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    width: 279px;
+    height: 49px;
+}
+
+.sign_up_button {
+    font-size: 16px;
+    width: 91px;
+    height: 49px;
+    border-radius: 8px;
+    padding: 15px 16px 15px 16px;
+    gap: 10px;
+    background-color: #2A3647;
+    color: white;
 }
