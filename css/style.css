@@ -101,7 +101,8 @@ body {
     height: 493px;
     border-radius: 30px;
     background-color: white;
-    margin-top: 275px;
+    margin-top: 200px;
+    margin-bottom: 100px;
 }
 
 .formHeadline {
@@ -211,14 +212,11 @@ input[id="loginCheckBoxRememberMe"] + label {
     border: 2px solid #2a3647;
     border-radius: 3px;
     cursor: pointer;
+
 }
 
 input[id="loginCheckBoxRememberMe"] {
     display: none;
-}
-
-.loginCheckBoxRememberMeSpan {
-    margin: 0 0 0 4px;
 }
 
 input[id="loginCheckBoxRememberMe"]:checked + label:after {
@@ -278,10 +276,11 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
 }
 
 .footer {
-    margin-top: 100px;
     display: flex;
     gap: 35px;
     margin-bottom: 48px;
+    height: 100%;
+    align-items: end;
 }
 
 .footerLinks {
@@ -293,7 +292,7 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
 
 .footerLinks:hover {
     color: #29ABE2;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .fade-in {
@@ -306,13 +305,63 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
   100% { opacity: 1; }
 }
 
+.formSignUp {
+    width: 598px;
+    height: 630px;
+    margin-top: 155px;
+    margin-bottom: 60px;
+}
 
+.loginCheckboxSignUp {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
+.policeLink {
+    font-size: 16px;
+    color: #29ABE2;
+}
 
+.policeLink:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
+.inputNameSignUp {
+    width: 422px;
+    height: 48px;
+    margin: 10px;
+    background-image: url(/img/person.png);
+    background-repeat: no-repeat;
+    background-position: 377px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    text-indent: 21px;
+}
 
+.inputMailSignUp {
+    width: 422px;
+    height: 48px;
+    margin: 10px;
+    background-image: url(/img/mail.png);
+    background-repeat: no-repeat;
+    background-position: 377px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    text-indent: 21px;
+}
 
-
-
-
-
+.inputPasswordSignUp {
+    width: 422px;
+    height: 48px;
+    margin: 10px;
+    background-image: url(/img/lock.png);
+    background-repeat: no-repeat;
+    background-position: 377px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    text-indent: 21px;
+}

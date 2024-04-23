@@ -15,16 +15,16 @@
         <div class="content">
             <div class="header">
                 <div class="logoPlaceholder">
-                    <img class="joinlogoAnimation" src="/img/joinlogo.png" id="logo">
+                    <a href="index.html"><img class="joinlogoAnimation" src="/img/joinlogo.png" id="logo"></a>
                 </div>    
-                <div class="sign_up_container fade-in">
+                <div class="sign_up_container fade-in" id="signUpContainer">
                     <p class="signUpText">Not a Join user?</p>
-                    <button class="sign_up_button">Sign up</button>
+                    <button class="sign_up_button" onclick="changeForm()">Sign up</button>
                 </div>
             </div>
 
             <div class="formLinksContainer fade-in">
-                <form class="form">
+                <form id="form" class="form">
                     <div class="formHeadline">
                         <h1 class="formHeadlineText">Log in</h1>
                         <div class="formHeadlineBorder"></div>
@@ -38,25 +38,23 @@
                             </div>
                         
                         <div class="notification"></div>  
-                        <div class="loginCheckbox">
+                        <div id="checkboxSignUp" class="loginCheckbox">
                             <input type="checkbox" class="loginCheckBoxRememberMe" id="loginCheckBoxRememberMe">
                             <label for="loginCheckBoxRememberMe" class="loginCheckBoxRememberMeLabel"></label>
-                            <p for="exampleCheck1">Remember me</label>
+                            <p class="loginCheckBoxRememberMeSpan">Remember me</label>
                         </div>
                         <div class="buttons">
-                            <button class="buttonLogin" type="submit">Log in</button>
-                            <button class="buttonGuest" type="submit">Guest Log in</button>
+                            <button class="buttonLogin" >Log in</button>
+                            <button class="buttonGuest" >Guest Log in</button>
                         </div>
                     </div>
                 </form>
                 <div class="footer">
-                    <a class="footerLinks" href="">Privacy Policy</a>
-                    <a class="footerLinks" href="">Legal notice</a>
+                    <a class="footerLinks" href="#">Privacy Policy</a>
+                    <a class="footerLinks" href="#">Legal notice</a>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 </html>
