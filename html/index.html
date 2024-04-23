@@ -4,16 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
+    <link rel="icon" type="image/x-icon" href="/img/joinlogo.png">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js"></script>
 </head>
 <body>
-        <div>
-            <img class="joinlogo" src="/img/joinlogo.png" id="logo">
+
+
+   <div class="main">
+        <div class="content">
+            <div class="header">
+                <div class="logoPlaceholder">
+                    <img class="joinlogoAnimation" src="/img/joinlogo.png" id="logo">
+                </div>    
+                <div class="sign_up_container fade-in">
+                    <p class="signUpText">Not a Join user?</p>
+                    <button class="sign_up_button">Sign up</button>
+                </div>
+            </div>
+
+            <div class="formLinksContainer fade-in">
+                <form class="form">
+                    <div class="formHeadline">
+                        <h1 class="formHeadlineText">Log in</h1>
+                        <div class="formHeadlineBorder"></div>
+                    </div>
+                    <div class="mailPassword">    
+                            <div>
+                                <input class="inputMail" type="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                            </div>
+                            <div>
+                                <input class="inputPassword" type="password" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                        
+                        <div class="notification"></div>  
+                        <div class="loginCheckbox">
+                            <input type="checkbox" class="loginCheckBoxRememberMe" id="loginCheckBoxRememberMe">
+                            <label for="loginCheckBoxRememberMe" class="loginCheckBoxRememberMeLabel"></label>
+                            <p for="exampleCheck1">Remember me</label>
+                        </div>
+                        <div class="buttons">
+                            <button class="buttonLogin" type="submit">Log in</button>
+                            <button class="buttonGuest" type="submit">Guest Log in</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="footer">
+                    <a class="footerLinks" href="">Privacy Policy</a>
+                    <a class="footerLinks" href="">Legal notice</a>
+                </div>
+            </div>
         </div>
-        <div class="sign_up_container">
-            <p>Not a Join user?</p>
-            <button class="sign_up_button">Sign up</button>
-        </div>
+    </div>
+
+
 </body>
 </html>

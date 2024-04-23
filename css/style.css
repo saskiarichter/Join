@@ -1,25 +1,54 @@
 body {
     margin: 0;
+    width: 100%;
     background-color: #F6F7F8;
     font-family: "Inter", sans-serif;
 }
 
-.joinlogo {
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 1440px;
+    max-height: 1024px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 63.5px;
+}
+
+.logoPlaceholder {
+    width: 177px;
+    height: 208px;
+    position: relative;
+    top: 67px;
+    left: 75px;
+}
+
+.joinlogoAnimation {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: shrinkAndMove 1s ease-in-out forwards; /* Verwende die Animation */
-    animation-delay: 500ms; /* Verzögerung der Animation um 1 Sekunde */
+    animation: shrinkAndMove 500ms ease-in-out forwards; /* Verwende die Animation */
+    animation-delay: 800ms; /* Verzögerung der Animation um 1 Sekunde */
+    z-index: 100;
 }
-
 
 @keyframes shrinkAndMove {
     0% {
         width: 274px;
         height: 334.07px;
-        top: 50%;
-        left: 50%;
     }
     100% {
         width: 100.03px;
@@ -42,11 +71,248 @@ body {
 
 .sign_up_button {
     font-size: 16px;
+    font-weight: 700;
     width: 91px;
     height: 49px;
     border-radius: 8px;
+    border: none;
     padding: 15px 16px 15px 16px;
     gap: 10px;
     background-color: #2A3647;
     color: white;
+    cursor: pointer;
 }
+
+.sign_up_button:hover {
+    background-color: #29ABE2;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+.signUpText {
+    font-size: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 652px;
+    height: 493px;
+    border-radius: 30px;
+    background-color: white;
+    margin-top: 275px;
+}
+
+.formHeadline {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.formHeadlineText {
+    font-size: 61px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 73.2px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.formHeadlineBorder {
+    width: 150px;
+    border-bottom: 3px solid #29abe2;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.mailPassword {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputMail {
+    width: 422px;
+    height: 48px;
+    margin: 16px;
+    background-image: url(/img/mail.png);
+    background-repeat: no-repeat;
+    background-position: 377px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    text-indent: 21px;
+}
+
+.inputPassword {
+    width: 422px;
+    height: 48px;
+    margin: 16px 16px 4px 16px;
+    background-image: url(/img/lock.png);
+    background-repeat: no-repeat;
+    background-position: 377px 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    text-indent: 21px;
+    line-height: 20px;
+}
+
+.input,
+input::placeholder {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #d1d1d1;
+    transform: translateY(10%);
+}
+
+.formLinksContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.logInButton {
+    margin-bottom: 48px;
+}
+
+.notification {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 20px;
+    margin-left: 16px;
+    margin-bottom: 10px;
+}
+
+.loginCheckbox {
+    margin-left: 39px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+#exampleCheck1 {
+    width: 20px;
+    height: 20px;
+}
+
+.checkText {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+input[id="loginCheckBoxRememberMe"] + label {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #2a3647;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[id="loginCheckBoxRememberMe"] {
+    display: none;
+}
+
+.loginCheckBoxRememberMeSpan {
+    margin: 0 0 0 4px;
+}
+
+input[id="loginCheckBoxRememberMe"]:checked + label:after {
+    position: relative;
+    content: "\2714";
+    font-size: 24px;
+    top: -12px;
+}
+
+.loginCheckBoxRememberMeLabel {
+    margin-right: 5px;
+    margin-top: -1px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-bottom: 48px;
+}
+
+.buttonLogin {
+    width: 110px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #2A3647;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 21px;
+    border: none;
+    cursor: pointer;
+}
+
+.buttonLogin:hover {
+    background-color: #29ABE2;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+.buttonGuest {
+    width: 177px;
+    height: 48px;
+    border: 1px solid #2A3647;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    margin-right: 17.5px;
+    cursor: pointer;
+}
+
+.buttonGuest:hover {
+    border: 2px solid #29abe2;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+.footer {
+    margin-top: 100px;
+    display: flex;
+    gap: 35px;
+    margin-bottom: 48px;
+}
+
+.footerLinks {
+    text-decoration: none;
+    color: #A8A8A8;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.footerLinks:hover {
+    color: #29ABE2;
+    font-weight: 700;
+}
+
+.fade-in {
+    animation: fadeIn 1.2s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  80% {opacity: 0;}
+  100% { opacity: 1; }
+}
+
+
+
+
+
+
+
+
+
+
+
