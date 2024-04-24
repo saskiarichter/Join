@@ -121,3 +121,51 @@ body {
 .helpImage, .ellipseImage {
     cursor: pointer;
 }
+
+.textHeadline {
+    position: relative;
+    top: 206px;
+    left: 328px;
+    display: flex;
+    flex-direction: column;
+    width: 1024px;
+}
+
+.helpHeadline {
+    font-size: 61px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+span {
+    font-size: 16px;
+}
+
+ol {
+    list-style-type: none;
+    counter-reset: item;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+li span.howToHeadlines {
+    vertical-align: top;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+li span:not(.howToHeadlines) {
+    display: block;
+    margin-left: 50px; /* Should be greater than width of .howToHeadlines */
+}
+
+li::before {
+    content: counter(item);
+    counter-increment: item;
+    font-weight: 700;
+    font-size: 27px;
+    margin-right: 10px;
+}
