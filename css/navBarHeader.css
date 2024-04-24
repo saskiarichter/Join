@@ -24,6 +24,9 @@ body {
 .logo {
     padding-top: 64px;
 }
+.link {
+    cursor: pointer;
+}
 
 .links-container {
     display: flex;
@@ -45,7 +48,6 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    cursor: pointer;
 }
 
 .bgfocus {
@@ -70,4 +72,38 @@ body {
     font-weight: 400;
     line-height: 24px;
     text-align: left;
+}
+
+.navBar-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 64px;
+    color: #CDCDCD;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.fontfocus {
+    color: #FFFFFF;
+}
+
+.linksNav {
+    width: 232px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.linksNav:hover {
+    background-color: #2A3D59;
+}
+
+.navImage {
+    width: 30px;
+    height: 30px;
+    margin-left: 56px;
+    margin-right: 8px;
 }

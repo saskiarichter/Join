@@ -44,11 +44,11 @@ function changeForm() {
 
 function changeBg(clickedElement) {
     // Alle Links holen
-    let links = document.querySelectorAll('.links');
+    let links = document.querySelectorAll('.links, .linksNav');
 
     // Für jeden Link prüfen, ob er angeklickt wurde und die Klasse entsprechend hinzufügen/entfernen
     Array.from(links).forEach(link => {
-        if (link === clickedElement.parentElement) {
+        if (link === clickedElement.parentElement || link === clickedElement) {
             // Dem angeklickten Link die Klasse hinzufügen
             link.classList.add('bgfocus');
         } else {
