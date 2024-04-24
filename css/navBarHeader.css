@@ -58,6 +58,9 @@ body {
 
 .header {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100vw;
     height: 96px;
     background-color: #FFFFFF;
@@ -67,7 +70,6 @@ body {
 .headline {
     position: relative;
     left: 348px;
-    top: 36px;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
@@ -106,4 +108,16 @@ body {
     height: 30px;
     margin-left: 56px;
     margin-right: 8px;
+}
+
+.helpUser {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    margin-right: 40px;
+}
+
+.helpImage, .ellipseImage {
+    cursor: pointer;
 }

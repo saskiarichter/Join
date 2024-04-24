@@ -59,8 +59,12 @@ function changeBg(clickedElement) {
 }
 
 
-function returnToHome(fromFunction) {
+function returnToHome() {
     window.location.href = "index.html";
+}
+
+function redirectToHelp() {
+    window.location.href = "help.html";
 }
 
 
