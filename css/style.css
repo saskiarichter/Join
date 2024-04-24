@@ -40,9 +40,12 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.animationLogo {
     animation: shrinkAndMove 500ms ease-in-out forwards; /* Verwende die Animation */
     animation-delay: 800ms; /* Verzögerung der Animation um 1 Sekunde */
-    z-index: 100;
 }
 
 @keyframes shrinkAndMove {
@@ -105,6 +108,19 @@ body {
     margin-bottom: 100px;
 }
 
+.vector {
+    position: relative;
+    right: 130px;
+    top: 90px;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.vector:hover {
+    background-color: lightgrey;
+    border-radius: 50%;
+}
+
 .formHeadline {
     align-items: center;
     display: flex;
@@ -118,6 +134,7 @@ body {
     line-height: 73.2px;
     font-weight: bold;
     margin-bottom: 16px;
+    margin-top: 20px;
 }
 
 .formHeadlineBorder {

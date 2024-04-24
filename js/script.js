@@ -6,10 +6,13 @@ function changeForm() {
     checkboxSignUp.classList.add("loginCheckboxSignUp");
 
     form.innerHTML = "";
-
     form.innerHTML = `
+                        
                         <div class="formHeadline">
-                            <h1 class="formHeadlineText">Sign up</h1>
+                            <div class="headline">
+                                <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
+                                <h1 class="formHeadlineText">Sign up</h1>
+                            </div>            
                             <div class="formHeadlineBorder"></div>
                         </div>    
                         <div class="mailPassword">
@@ -54,4 +57,12 @@ function changeBg(clickedElement) {
         }
     });
 }
+
+
+function returnToHome(fromFunction) {
+    window.location.href = "index.html";
+}
+
+
+
 
