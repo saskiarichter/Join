@@ -183,6 +183,10 @@ input::placeholder {
     transform: translateY(10%);
 }
 
+input {
+    cursor: pointer;
+}
+
 .formLinksContainer {
     display: flex;
     justify-content: center;
