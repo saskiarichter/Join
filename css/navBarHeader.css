@@ -34,7 +34,9 @@ html {
     padding-top: 64px;
 }
 .link {
+    text-decoration: none;
     cursor: pointer;
+    color: #A8A8A8;
 }
 
 .links-container {
