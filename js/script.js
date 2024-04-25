@@ -86,6 +86,10 @@ function redirectToHelp() {
     window.location.href = "help.html";
 }
 
+function redirectToSummary() {
+    window.location.href = "summary.html";
+}
+
 
 
 
