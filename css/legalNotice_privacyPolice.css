@@ -4,7 +4,8 @@
     left: 328px;
     display: flex;
     flex-direction: column;
-    width: 1024px;
+    text-wrap: balance;
+    padding-right: 400px;
 }
 
 .main-headline {
@@ -36,6 +37,7 @@ span {
 
 .vector:hover {
     background-color: lightgrey;
+    scale: 1.1;
 }
 
 .imprint {

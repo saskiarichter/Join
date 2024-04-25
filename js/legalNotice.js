@@ -1,6 +1,5 @@
 function init() {
     includeHTML();
-    adjustSidebarVisibility();
 }
 
 async function includeHTML() {

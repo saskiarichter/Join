@@ -119,6 +119,7 @@ body {
 .vector:hover {
     background-color: lightgrey;
     border-radius: 50%;
+    scale: 1.1;
 }
 
 .formHeadline {
@@ -313,7 +314,7 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
 
 .footerLinks:hover {
     color: #29ABE2;
-    font-weight: 600;
+    scale: 1.1;
 }
 
 .fade-in {
