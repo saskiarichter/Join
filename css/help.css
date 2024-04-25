@@ -1,0 +1,69 @@
+.textHeadline {
+    position: relative;
+    top: 206px;
+    left: 328px;
+    display: flex;
+    flex-direction: column;
+    width: 1024px;
+}
+
+.helpHeadline {
+    font-size: 61px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+span {
+    font-size: 16px;
+}
+
+ol {
+    list-style-type: none;
+    counter-reset: item;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+li span.howToHeadlines {
+    vertical-align: top;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.listMargin {
+    display: block;
+    margin-left: 50px; 
+}
+
+li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+    font-weight: 700;
+    font-size: 27px;
+    margin-right: 22px;
+}
+
+.highlight {
+    color: #29ABE2;
+}
+
+.vector {
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.headline-vector {
+    display: flex;
+    justify-content: space-between;
+}
+
+.vector:hover {
+    background-color: lightgrey;
+    border-radius: 50%;
+}
