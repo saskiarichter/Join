@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/navBarHeader.css">
-    <script src="/js/script.js"></script>
+    <script src="/js/include.js"></script>
 </head>
 <body onload="init()">
     <div class="main">
@@ -13,27 +13,27 @@
             <div>
                 <img class="logo" src="/img/joinlogo2.png">
             </div>
-            <div class="navBar-container" onclick="redirectToSummary()">
-                <div class="linksNav" onclick="changeBg(this)">
+            <div class="navBar-container">
+                <div class="linksNav" onclick="redirectToSummary()" id="summary">
                     <img class="navImage" src="/img/summary.png">
                     <p>Summary</p> 
                 </div>
-                <div class="linksNav" onclick="changeBg(this)">
+                <div class="linksNav" onclick="redirectToAddTask()">
                     <img  class="navImage"src="/img/addTask.png">
                     <p>Add Task</p>
                 </div>
-                <div class="linksNav" onclick="changeBg(this)">
+                <div class="linksNav" onclick="redirectToBoard()">
                     <img  class="navImage"src="/img/board.png">
                     <p>Board</p>
                 </div>
-                <div class="linksNav" onclick="changeBg(this)">
+                <div class="linksNav" onclick="redirectToContact()">
                     <img  class="navImage"src="/img/contact.png">
                     <p>Contacts</p>
                 </div>
             </div>
             <div class="links-container">
-                <div class="links"><a onclick="changeBg(this)" class="link" href="/html/privacyPolice.html">Privacy Police</a></div>
-                <div class="links"><a onclick="changeBg(this)" class="link" href="/html/legalNotice.html">Legal notice</a></div>
+                <div class="links" id="privacyPolice"><a class="link" href="/html/privacyPolice.html">Privacy Police</a></div>
+                <div class="links" id="legalNotice"><a class="link" href="/html/legalNotice.html">Legal notice</a></div>
             </div>
         </div>
     </div>

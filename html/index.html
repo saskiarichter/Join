@@ -7,10 +7,9 @@
     <link rel="icon" type="image/x-icon" href="/img/joinlogo.png">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js"></script>
+    <script src="/js/include.js"></script>
 </head>
 <body>
-
-
    <div class="main">
         <div class="content">
             <div class="header">
@@ -44,8 +43,8 @@
                             <p class="loginCheckBoxRememberMeSpan">Remember me</label>
                         </div>
                         <div class="buttons">
-                            <button class="buttonLogin" >Log in</button>
-                            <button class="buttonGuest" >Guest Log in</button>
+                            <button class="buttonLogin">Log in</button>
+                            <button class="buttonGuest" type="button" onclick="redirectToSummary()">Guest Log in</button>
                         </div>
                     </div>
                 </form>
