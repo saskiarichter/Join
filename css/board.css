@@ -1,0 +1,388 @@
+/*border-header*/
+
+.board-section{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 100vh;
+}
+
+.board-content{
+  height: 70%;
+  margin-left: 280px;
+  width: 80%;
+}
+
+h1{
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
+}
+
+.board-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addTask-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  height: 48px;
+}
+
+.search-content{
+  display: flex;
+  border: 1px solid #A8A8A8;
+  border-radius: 10px;
+  padding: 8px 16px;
+  background-color: #FFFFFF;
+  height: 36px;
+}
+
+.line-content{
+  width: 1px;
+  background-color: #D1D1D1;
+  margin-right: 0px;
+  height: 36px;
+}
+
+.search-btn{
+  background-color: #FFFFFF;
+  border: none;
+}
+
+#search-input{
+  outline: none;
+  border: none;
+  font-size: 24px;
+}
+
+#search-input::placeholder{
+  color: #D1D1D1;
+}
+
+#search-icon{
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#search-icon:hover{
+  background-color: #e9e6e6;
+  border-radius: 15px;
+}
+
+.search-line-content{
+  display: flex;
+  justify-content: space-between;
+  width: 40px;
+}
+
+.addTask-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #2A3647;
+  color: #FFFFFF;
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  width: 125px;
+  height: 36px;
+  font-size: 21px;
+  line-height: 25.2px;
+  transition: background-color 0.1s;
+}
+
+.addTask-button:hover{
+  background-color: #29ABE2;
+  box-shadow: 0px 4px 4px 0 rgba(17, 3, 3, 0.24);
+}
+
+/*Border-Management*/
+
+.border-management-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:24px;
+}
+
+.inner-management-content{
+  width: 320px;
+}
+
+
+.title-m-content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.plus-btn{
+  background-color: transparent;
+  border: 2px solid #2A3647;
+  border-radius: 8px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  cursor: pointer;
+}
+.plus-btn:hover{
+  border-color: #29ABE2;
+  color: #29ABE2;
+}
+
+.title-m{
+  font-size: 20px;
+  line-height: 24px;
+  color: #42526E;
+  font-weight: 700;
+}
+
+#newTask{
+  width: 320px;
+  height: 48px;
+  background-color: #E7E7E7;
+  border-radius: 10px;
+  border: 1px dashed #A8A8A8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#newTask p{
+  color: #A8A8A8;
+}
+
+.hidden{
+  display: none !important;
+}
+
+/*Add Task der größte Teil ist von Saskia */
+
+#addTask{
+  height: 650px;
+  width: 976.25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
+  border-radius: 30px;
+  z-index: 999;
+}
+
+.addTask-title-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-btn{
+  color: #2A3647;
+  font-size: 30px !important;
+  font-weight: 100;
+  cursor: pointer;
+  padding: 5px 7px 0px 7px;
+  height: 36px;
+}
+
+.close-btn:hover{
+  background-color: #E7E7E7;
+  border-radius: 20px;
+}
+
+.overlay{
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.addTask-top{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.addTask-title{
+  margin: 0;
+  font-size: 61px;
+  font-weight: 700;
+}
+
+#addTask-title, #addTask-description, #addTask-dueDate, #addTask-category, #addTask-subtasks, #addTask-assigned{
+  outline-color:#29ABE2 ;
+}
+
+.input-section{
+  width: 100%;
+  height: 424px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.input-section-left{
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.parting-line{
+  height: 424px;
+  border: 1px solid #D1D1D1;
+}
+
+.input-section-right{
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input{
+  border: 1px solid #D1D1D1;
+  border-radius: 10px;
+  padding: 12px 21px 12px 21px;
+  background-color: white;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.input::placeholder{
+  color: #D1D1D1;
+}
+
+.prio-buttons{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.prio-buttons button{
+  width: 136px;
+  height: 56px;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 10px 16px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  background-color: transparent;
+  border: 1px solid #E7E7E7;
+  cursor: pointer;
+}
+
+.prio-buttons button:hover{
+  box-shadow: 0px 4px 2px 0 rgba(17, 3, 3, 0.24);
+}
+
+.urgent-button:focus{
+  background-color: #FF3d00;
+  color: #FFFFFF;
+}
+
+.medium-button:focus{
+  background-color: #FFA800;
+  color: #FFFFFF;
+}
+
+.low-button:focus{
+  background-color: #7AE229;
+  color: #FFFFFF;
+}
+
+.urgent-button img, .medium-button img, .low-button img{
+  background-color: #FFFFFF;
+  border: none;
+  padding: 2px;
+}
+
+.addTask-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.addTask-bottom-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.addTask-bottom-buttons button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  border: 1px solid #2A3647;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.create-button{
+  background-color: #2A3647;
+  color: #FFFFFF;
+  width: 183px;
+  cursor: pointer;
+  height: 56px;
+  border: none !important;
+}
+
+.create-button:hover{
+  background-color: #29ABE2;
+}
+
+.clear-button{
+  background-color: transparent;
+  height: 56px;
+  width: 110px;
+  cursor: pointer;
+}
+
+.clear-button:hover{
+  border-color: #29ABE2;
+  color: #29ABE2;
+}
+
+.addTask-bottom-buttons img{
+  width: 24px;
+  height: 24px;
+}
