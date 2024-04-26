@@ -1,0 +1,66 @@
+<div class="addTask">
+    <div class="addTask-top">
+        <h2 class="addTask-title">Add Task</h2>
+        <div class="input-section">
+            <div class="input-section-left">
+                <div class="input-container">
+                    <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
+                    <input id="addTask-title" class="input" type="text" placeholder="Enter a title">
+                </div>
+                <div class="input-container">
+                    <label for="addTask-description">Description</label>
+                    <textarea id="addTask-description" class="input" placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="input-container">
+                    <label for="addTask-assigned">Assigned to</label>
+                    <input id="addTask-assigned" class="input" type="text" placeholder="Select contacts to assign">
+                </div>
+            </div>
+            <div class="parting-line"></div>
+            <div class="input-section-right">
+                <div class="input-container">
+                    <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
+                    <input id="addTask-dueDate" class="input" type="date" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="input-container">
+                    <span>Prio</span>
+                    <div class="prio-buttons">
+                        <button>
+                            <span>Urgent</span>
+                            <img src="/img/PrioAltaRed.png" alt="Schließen">
+                        </button>
+                        <button>
+                            <span>Medium</span>
+                            <img src="/img/PrioMediaOrange.png" alt="Schließen">
+                        </button>
+                        <button>
+                            <span>Low</span>
+                            <img src="/img/PrioBajaGreen.png" alt="Schließen">
+                        </button>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
+                    <input id="addTask-category" class="input" type="text" placeholder="Select task category">
+                </div>
+                <div class="input-container">
+                    <label for="addTask-subtasks">Subtasks</label>
+                    <input id="addTask-subtasks" class="input" type="text" placeholder="Add new subtask">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="addTask-bottom">
+        <span><span style="color: #FF8190">*</span>This field is required</span>
+        <div class="addTask-bottom-buttons">
+            <button>
+                <span>Clear</span>
+                <img src="/img/close.png" alt="Schließen">
+            </button>
+            <button>
+                <span>Create Task</span>
+                <img src="/img/check.png" alt="Bestätigen">
+            </button>
+        </div>
+    </div>
+</div>

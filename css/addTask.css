@@ -1,0 +1,126 @@
+.content{
+    margin-top: 206px;
+    margin-left: 328px;
+}
+
+.addTask{
+    height: 650px;
+    width: 976.25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #2A3647;
+}
+
+.addTask-top{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.addTask-title{
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.input-section{
+    width: 100%;
+    height: 424px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.input-section-left{
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.parting-line{
+    height: 424px;
+    border: 1px solid #D1D1D1;
+}
+
+.input-section-right{
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input{
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 12px 21px 12px 21px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.input::placeholder{
+    color: #D1D1D1;
+}
+
+.prio-buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.prio-buttons button{
+    width: 136px;
+    height: 56px;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 10px 16px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.addTask-bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.addTask-bottom-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.addTask-bottom-buttons button{
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 16px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.addTask-bottom-buttons img{
+    width: 24px;
+    height: 24px;
+}
