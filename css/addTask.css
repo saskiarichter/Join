@@ -53,24 +53,96 @@
     gap: 16px;
 }
 
-.input-container{
+.input-section-element{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.input{
+.input-container{
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 12px 21px 12px 21px;
     background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-container:focus {
+    border: 1px solid #29ABE2;
+}
+
+.inputfield{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
+    font-family: "Inter", sans-serif;
 }
 
-.input::placeholder{
+.inputfield::placeholder{
     color: #D1D1D1;
+}
+
+.inputfield:focus {
+    outline: black;
+}
+
+.dropdown-img{
+    position: relative;
+    
+}
+
+.input-container-required{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.empty {
+    border-color: #FF8190;
+}
+
+.required-text{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: #FF8190;
+}
+
+.transparent{
+    color: transparent;
+}
+
+.textarea-description{
+    min-height: 100px;
+    resize: vertical;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 18px 16px 18px 16px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: "Inter", sans-serif;
+}
+
+.textarea-description:focus{
+    border-color: #29ABE2;
+    outline: none;
+}
+
+.textarea-description::placeholder{
+    color: #D1D1D1;
+}
+
+.textarea-description::-webkit-resizer {
+    background-image: url(../img/textarea.png);
+    background-size: cover;
 }
 
 .prio-buttons{
@@ -92,6 +164,7 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
+    background-color: white;
 }
 
 .addTask-bottom{
@@ -123,4 +196,13 @@
 .addTask-bottom-buttons img{
     width: 24px;
     height: 24px;
+}
+
+#clearButton{
+    background-color: transparent;
+}
+
+#createTaskButton{
+    background-color: #2A3647;
+    color: white;
 }
