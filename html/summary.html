@@ -11,10 +11,75 @@
 </head>
 <body onload="initSummary()">
     <div w3-include-html="/html/navigationBar.html"></div>
+    <div w3-include-html="/html/header.html"></div>
     
-    <div>
-        <div w3-include-html="/html/header.html"></div>
-    </div>
-    
+    <section class="content">
+        <div class="header-summary">
+            <div><span class="headline-summary">Join 360</span></div>
+            <div class="vertical-line"></div>
+            <span class="span-headline">Key Metrics at a Glance</span>
+        </div>
+        <div class="summary-greeting">
+            <div class="summary-container">
+                <div class="toDo-Done">
+                    <div class="to-do">
+                        <div>
+                            <img class="summary-images" src="/img/pencil.png">
+                        </div>
+                        <div class="to-do-span">
+                            <span class="number">1</span>
+                            <span class="summary-text">To-do</span>
+                        </div>
+                </div>
+                    <div class="to-do done">
+                        <div>
+                            <img class="summary-images" src="/img/check_summary.png">
+                        </div>
+                        <div class="to-do-span">
+                            <span class="number">1</span>
+                            <span class="summary-text">Done</span>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="summary-board">
+                        <div>
+                            <img class="summary-images-urgency" src="/img/urgency.png">
+                        </div>
+                        <div class="to-do-span">
+                            <span class="number">1</span>
+                            <span class="summary-text">urgency</span>
+                        </div>
+                        <div class="summary-board-border"></div>
+                        <div class="summary-board-span">
+                            <span>April 27, 2024</span>
+                            <span>Upcoming Deadline</span>
+                        </div>
+                    </div>
+
+                <div class="task-progress-feedback">
+                    <div class="tpf-container">
+                        <span class="number">5</span>
+                        <span class="summary-text">Tasks in</span>
+                        <span class="summary-text">Board</span>
+                    </div>
+                    <div class="tpf-container">
+                        <span class="number">2</span>
+                        <span class="summary-text">Tasks in</span>
+                        <span class="summary-text">Progress</span>
+                    </div>
+                    <div class="tpf-container">
+                        <span class="number">2</span>
+                        <span class="summary-text">Awaiting</span>
+                        <span class="summary-text">Feedback</span>
+                    </div>
+                </div>
+            </div>
+            <div class="greeting">
+                <span class="daytime">Good ["daytime"]</span>
+                <span class="guest-name">["user name"]</span>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
