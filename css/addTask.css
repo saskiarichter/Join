@@ -62,14 +62,14 @@
 .input-container{
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    padding: 12px 21px 12px 21px;
+    padding: 12px 16px 12px 16px;
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.input-container:focus {
+.input-container:focus-within {
     border: 1px solid #29ABE2;
 }
 
@@ -77,11 +77,11 @@
     width: 100%;
     border: none;
     border-radius: 10px;
-    
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     font-family: "Inter", sans-serif;
+    box-sizing: border-box;
 }
 
 .inputfield::placeholder{
@@ -89,12 +89,31 @@
 }
 
 .inputfield:focus {
-    outline: black;
+    outline: none;
+}
+
+.inputfield[type="date"]{
+    position: relative;
+}
+
+.inputfield[type=date]:invalid::-webkit-datetime-edit { 
+    color: #D1D1D1; 
+}
+
+.inputfield[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
 }
 
 .dropdown-img{
     position: relative;
-    
+    width: 24px;
+    height: 24px;
 }
 
 .input-container-required{

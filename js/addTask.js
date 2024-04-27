@@ -1,5 +1,10 @@
-function init() {
-    initInclude();
+async function init() {
+    await initInclude();
+    addTaskBgMenu();
+}
+
+function addTaskBgMenu() {
+    document.getElementById('addTaskMenu').classList.add('bgfocus');
 }
 
 function titleRequired() {
