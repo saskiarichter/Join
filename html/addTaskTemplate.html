@@ -1,66 +1,104 @@
 <div class="addTask">
+
     <div class="addTask-top">
+
         <h2 class="addTask-title">Add Task</h2>
+
         <div class="input-section">
+
             <div class="input-section-left">
-                <div class="input-container">
+                <div class="input-section-element">
                     <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
-                    <input id="addTask-title" class="input" type="text" placeholder="Enter a title">
+                    <div class="input-container-required">
+                        <div class="input-container" tabindex="1">
+                            <input id="addTask-title" onclick="titleRequired()" class="inputfield" type="text"
+                                placeholder="Enter a title" required>
+                        </div>
+                        <span id="required-title" class="required-text transparent">This field is required</span>
+                    </div>
                 </div>
-                <div class="input-container">
+
+                <div class="input-section-element">
                     <label for="addTask-description">Description</label>
-                    <textarea id="addTask-description" class="input" placeholder="Enter a Description"></textarea>
+                    <textarea id="addTask-description" class="textarea-description"
+                        placeholder="Enter a Description"></textarea>
                 </div>
-                <div class="input-container">
+
+                <div class="input-section-element">
                     <label for="addTask-assigned">Assigned to</label>
-                    <input id="addTask-assigned" class="input" type="text" placeholder="Select contacts to assign">
+                    <div class="input-container">
+                        <input id="addTask-assigned" class="inputfield" type="text"
+                            placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Select contacts to assign'">
+                        <img class="dropdown-img" src="../img/arrow_drop_down.png">
+                    </div>
                 </div>
             </div>
+
             <div class="parting-line"></div>
+
             <div class="input-section-right">
-                <div class="input-container">
+
+                <div class="input-section-element">
                     <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
-                    <input id="addTask-dueDate" class="input" type="date" placeholder="dd/mm/yyyy">
+                    <div class="input-container-required">
+                        <input id="addTask-dueDate" onclick="dueDateRequired()" class="inputfield" type="date"
+                            placeholder="dd/mm/yyyy" required>
+                        <span id="required-date" class="required-text transparent">This field is required</span>
+                    </div>
                 </div>
-                <div class="input-container">
+
+                <div class="input-section-element">
                     <span>Prio</span>
                     <div class="prio-buttons">
                         <button>
                             <span>Urgent</span>
-                            <img src="/img/PrioAltaRed.png" alt="Schließen">
+                            <img src="../img/PrioAltaRed.png" alt="Schließen">
                         </button>
                         <button>
                             <span>Medium</span>
-                            <img src="/img/PrioMediaOrange.png" alt="Schließen">
+                            <img src="../img/PrioMediaOrange.png" alt="Schließen">
                         </button>
                         <button>
                             <span>Low</span>
-                            <img src="/img/PrioBajaGreen.png" alt="Schließen">
+                            <img src="../img/PrioBajaGreen.png" alt="Schließen">
                         </button>
                     </div>
                 </div>
-                <div class="input-container">
+
+                <div class="input-section-element">
                     <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
-                    <input id="addTask-category" class="input" type="text" placeholder="Select task category">
+                    <div class="input-container">
+                        <input id="addTask-category" onclick="categoryRequired()" class="inputfield" type="text"
+                            placeholder="Select task category" required>
+                        <img src="../img/arrow_drop_down.png">
+                    </div>
                 </div>
-                <div class="input-container">
+
+                <div class="input-section-element">
                     <label for="addTask-subtasks">Subtasks</label>
-                    <input id="addTask-subtasks" class="input" type="text" placeholder="Add new subtask">
+                    <div class="input-container">
+                        <input id="addTask-subtasks" class="inputfield" type="text" placeholder="Add new subtask">
+                        <img src="../img/subtasks.png">
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
+
     <div class="addTask-bottom">
         <span><span style="color: #FF8190">*</span>This field is required</span>
         <div class="addTask-bottom-buttons">
-            <button>
+            <button id="clearButton">
                 <span>Clear</span>
-                <img src="/img/close.png" alt="Schließen">
+                <img src="../img/close.png" alt="Schließen">
             </button>
-            <button>
+            <button id="createTaskButton" onclick="checkInput()">
                 <span>Create Task</span>
-                <img src="/img/check.png" alt="Bestätigen">
+                <img src="../img/check-white.png" alt="Bestätigen">
             </button>
         </div>
     </div>
+
 </div>
