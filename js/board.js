@@ -1,3 +1,5 @@
+let allTasks=[];
+
 function init() {
   initInclude();
   load();
@@ -18,7 +20,6 @@ function closeMe() {
   overlay.classList.add('hidden');
 }
 
-let allTasks=[];
 
 function addTask() {
   let title = document.getElementById("addTask-title").value;
@@ -68,9 +69,4 @@ function render() {
     <p>ich bin gerendert</p>
     `;
   }
-}
-
-function titleRequired() {
-  document.getElementById('addTask-title').classList.remove('empty');
-  document.getElementById('required-title').classList.add('transparent');
 }
