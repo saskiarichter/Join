@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./img/joinlogo.png">
@@ -9,141 +10,165 @@
     <script src="./js/include.js"></script>
     <link rel="stylesheet" href="/css/board.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./img/joinlogo.png">
+  <title>Board</title>
+  <script src="./js/include.js"></script>
+  <link rel="stylesheet" href="./css/board.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+>>>>>>> 58b5c378aaadad1772a99d723c652bee3937f087
 </head>
 
 <body onload="init()">
-    <div w3-include-html="navigationBar.html"></div>
-    <div w3-include-html="header.html"></div>
-    <section class="board-section">
-      <div class="board-content">
-        <div class="board-header">
-          <h1>Board</h1>
-          <div class="addTask-content">
-            <div class="search-content">
-              <input type="text" placeholder="Find Task" id="search-input">
-              <div class="search-line-content">
-                <div class="line-content"></div>
-                <button class="search-btn">
-                  <i class="fa fa-search" id="search-icon"></i>
-                </button>
-              </div>
-            </div>
-            <div class="addTask-button" onclick="openAddTask()">
-              Add task
-              <i class="fa fa-plus" style="font-size:24px;"></i>
+  <div w3-include-html="navigationBar.html"></div>
+  <div w3-include-html="header.html"></div>
+  <section class="board-section">
+    <div class="board-content">
+      <div class="board-header">
+        <h1>Board</h1>
+        <div class="addTask-content">
+          <div class="search-content">
+            <input type="text" placeholder="Find Task" id="search-input">
+            <div class="search-line-content">
+              <div class="line-content"></div>
+              <button class="search-btn">
+                <i class="fa fa-search" id="search-icon"></i>
+              </button>
             </div>
           </div>
-        </div>
-
-        <div id="addTask" class="hidden">
-          <div class="addTask-top">
-            <div class="addTask-title-content">
-              <h2 class="addTask-title">Add Task</h2>
-              <i onclick="closeMe()" class="fa fa-close close-btn"></i>
-            </div>
-              <div class="input-section">
-                  <div class="input-section-left">
-                      <div class="input-container">
-                          <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
-                          <input id="addTask-title" class="input" type="text" placeholder="Enter a title">
-                      </div>
-                      <div class="input-container">
-                          <label for="addTask-description">Description</label>
-                          <textarea id="addTask-description" class="input" placeholder="Enter a Description"></textarea>
-                      </div>
-                      <div class="input-container">
-                          <label for="addTask-assigned">Assigned to</label>
-                          <input id="addTask-assigned" class="input" type="text" placeholder="Select contacts to assign">
-                      </div>
-                  </div>
-                  <div class="parting-line"></div>
-                  <div class="input-section-right">
-                      <div class="input-container">
-                          <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
-                          <input id="addTask-dueDate" class="input" type="date" placeholder="dd/mm/yyyy">
-                      </div>
-                      <div class="input-container">
-                          <span>Prio</span>
-                          <div class="prio-buttons">
-                              <button class="urgent-button">
-                                  <span>Urgent</span>
-                                  <img src="./img/PrioAltaRed.png" alt="Schließen">
-                              </button>
-                              <button class="medium-button">
-                                  <span>Medium</span>
-                                  <img src="./img/PrioMediaOrange.png" alt="Schließen">
-                              </button>
-                              <button class="low-button">
-                                  <span>Low</span>
-                                  <img src="./img/PrioBajaGreen.png" alt="Schließen">
-                              </button>
-                          </div>
-                      </div>
-                      <div class="input-container">
-                          <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
-                          <input id="addTask-category" class="input" type="text" placeholder="Select task category">
-                      </div>
-                      <div class="input-container">
-                          <label for="addTask-subtasks">Subtasks</label>
-                          <input id="addTask-subtasks" class="input" type="text" placeholder="Add new subtask">
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="addTask-bottom">
-              <span><span style="color: #FF8190">*</span>This field is required</span>
-              <div class="addTask-bottom-buttons">
-                  <button class="clear-button">
-                      <span>Clear</span>
-                      <i class="fa fa-close"></i>
-                  </button>
-                  <button class="create-button">
-                      <span>Create Task</span>
-                      <i class="fa fa-check" style="font-size:24px"></i>
-                  </button>
-              </div>
-          </div>
-      </div>
-
-        <div class="border-management-content">
-          <div class="inner-management-content">
-            <div class="title-m-content">
-              <p class="title-m">To do</p>
-              <button class="plus-btn"><i class="fa fa-plus" style="font-size:12px;"></i></button>
-            </div>
-            <div id="newTask">
-              <p>No tasks to do</p>
-            </div>
-          </div>
-          <div class="inner-management-content">
-            <div class="title-m-content">
-              <p class="title-m">In progress</p>
-              <button class="plus-btn"><i class="fa fa-plus" style="font-size:12px;"></i></button>
-            </div>
-            <div id="newTask">
-              <p>No tasks to do</p>
-            </div>
-          </div>
-          <div class="inner-management-content">
-            <div class="title-m-content">
-              <p class="title-m">Await feedback</p>
-              <button class="plus-btn"><i class="fa fa-plus" style="font-size:12px;"></i></button>
-            </div>
-            <div id="newTask">
-              <p>No tasks to do</p>
-            </div>
-          </div>
-          <div class="inner-management-content">
-            <div class="title-m-content">
-              <p class="title-m">Done</p>
-            </div>
-            <div id="newTask">
-              <p>No tasks to do</p>
-            </div>
+          <div class="addTask-button" onclick="openAddTask()">
+            Add task
+            <i class="fa fa-plus" style="font-size:24px;"></i>
           </div>
         </div>
       </div>
-    </section>
-    <div class="overlay hidden" onclick="closeMe()"></div>
-    <script src="./js/board.js"></script>
+
+      <div id="addTask" class="hidden">
+        <div class="addTask-top">
+          <div class="addTask-title-content">
+            <h2 class="addTask-title">Add Task</h2>
+            <i onclick="closeMe()" class="fa fa-close close-btn"></i>
+          </div>
+          <div class="input-section">
+            <div class="input-section-left">
+              <div class="input-container">
+                <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
+                <div class="input-container-required">
+                  <div class="input-container" tabindex="1">
+                    <input id="addTask-title" class="inputfield input" type="text"
+                      placeholder="Enter a title" required>
+                  </div>
+                  <span id="required-title" class="required-text transparent hidden">This field is required</span>
+                </div>
+              </div>
+              <div class="input-container">
+                <label for="addTask-description">Description</label>
+                <textarea id="addTask-description" class="input" placeholder="Enter a Description"
+                  style="resize: none;"></textarea>
+              </div>
+              <div class="input-container">
+                <label for="addTask-assigned">Assigned to</label>
+                <select id="addTask-assigned" class="input" placeholder="Select contacts to assign">
+                  <option>User 1</option>
+                  <option>User 2</option>
+                </select>
+              </div>
+            </div>
+            <div class="parting-line"></div>
+            <div class="input-section-right">
+              <div class="input-container">
+                <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
+                <input id="addTask-dueDate" class="input" type="date" placeholder="dd/mm/yyyy" required>
+                <span id="required-title" class="required-text transparent hidden">This field is required</span>
+              </div>
+              <div class="input-container">
+                <span>Prio</span>
+                <div class="prio-buttons">
+                  <button class="urgent-button">
+                    <span>Urgent</span>
+                    <img src="./img/PrioAltaRed.png" alt="Schließen">
+                  </button>
+                  <button class="medium-button">
+                    <span>Medium</span>
+                    <img src="./img/PrioMediaOrange.png" alt="Schließen">
+                  </button>
+                  <button class="low-button">
+                    <span>Low</span>
+                    <img src="./img/PrioBajaGreen.png" alt="Schließen">
+                  </button>
+                </div>
+              </div>
+              <div class="input-container">
+                <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
+                <select id="addTask-category" placeholder="Select task category" class="input">
+                  <option value="user">User Story</option>
+                  <option value="technical">Technical Task</option>
+                </select>
+              </div>
+              <div class="input-container">
+                <label for="addTask-subtasks">Subtasks</label>
+                <input id="addTask-subtasks" class="input" type="text" placeholder="Add new subtask">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="addTask-bottom">
+          <span><span style="color: #FF8190">*</span>This field is required</span>
+          <div class="addTask-bottom-buttons">
+            <button onclick="closeMe()" class="clear-button">
+              <span>Clear</span>
+              <i class="fa fa-close"></i>
+            </button>
+            <button class="create-button" onclick="addTask()">
+              <span>Create Task</span>
+              <i class="fa fa-check" style="font-size:24px"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-management-content">
+        <div class="inner-management-content">
+          <div class="title-m-content">
+            <p class="title-m">To do</p>
+            <button onclick="openAddTask()" class="plus-btn"><i class="fa fa-plus" style="font-size:12px;"></i></button>
+          </div>
+          <div id="newTask-toDo">
+            <p>No tasks to do</p>
+          </div>
+        </div>
+        <div class="inner-management-content">
+          <div class="title-m-content">
+            <p class="title-m">In progress</p>
+            <button onclick="openAddTask()" class="plus-btn"><i class="fa fa-plus" style="font-size:12px;"></i></button>
+          </div>
+          <div id="newTask-inProgress">
+            <p>No tasks to do</p>
+          </div>
+        </div>
+        <div class="inner-management-content">
+          <div class="title-m-content">
+            <p class="title-m">Await feedback</p>
+            <button onclick="openAddTask()" class="plus-btn"><i class="fa fa-plus" style="font-size:12px;"></i></button>
+          </div>
+          <div id="newTask-await">
+            <p>No tasks to do</p>
+          </div>
+        </div>
+        <div class="inner-management-content">
+          <div class="title-m-content">
+            <p class="title-m">Done</p>
+          </div>
+          <div id="newTask-done">
+            <p>No tasks to do</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="overlay hidden" onclick="closeMe()"></div>
+  <script src="./js/storage.js"></script>
+  <script src="./js/board.js"></script>
 </body>

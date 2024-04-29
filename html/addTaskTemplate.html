@@ -42,8 +42,11 @@
                 <div class="input-section-element">
                     <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
                     <div class="input-container-required">
-                        <input id="addTask-dueDate" onclick="dueDateRequired()" class="inputfield" type="date"
-                            placeholder="dd/mm/yyyy" required>
+                        <div class="input-container">
+                            <input id="addTask-dueDate" onclick="dueDateRequired()" class="inputfield" type="date"
+                                placeholder="dd/mm/yyyy" required>
+                            <img src="../img/event.png">
+                        </div>
                         <span id="required-date" class="required-text transparent">This field is required</span>
                     </div>
                 </div>
@@ -68,7 +71,7 @@
 
                 <div class="input-section-element">
                     <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
-                    <div class="input-container">
+                    <div class="input-container input-container-category">
                         <input id="addTask-category" onclick="categoryRequired()" class="inputfield" type="text"
                             placeholder="Select task category" required>
                         <img src="../img/arrow_drop_down.png">
