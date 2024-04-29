@@ -7,6 +7,7 @@
         <div class="input-section">
 
             <div class="input-section-left">
+                <!-- TITLE -->
                 <div class="input-section-element">
                     <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
                     <div class="input-container-required">
@@ -17,20 +18,23 @@
                         <span id="required-title" class="required-text transparent">This field is required</span>
                     </div>
                 </div>
-
+                <!-- DESCRIPTION -->
                 <div class="input-section-element">
                     <label for="addTask-description">Description</label>
-                    <textarea id="addTask-description" class="textarea-description"
-                        placeholder="Enter a Description"></textarea>
+                    <div id="input-container-description" class="input-container">
+                        <textarea id="addTask-description" class="textarea-description"
+                            placeholder="Enter a Description"></textarea>
+                        <img src="../img/textarea.svg" alt="">
+                    </div>
                 </div>
-
+                <!-- ASSIGNED TO -->
                 <div class="input-section-element">
                     <label for="addTask-assigned">Assigned to</label>
-                    <div class="input-container">
+                    <div class="input-container input-container-select">
                         <input id="addTask-assigned" class="inputfield" type="text"
                             placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = 'Select contacts to assign'">
-                        <img class="dropdown-img" src="../img/arrow_drop_down.png">
+                        <img class="dropdown-img" src="../img/arrow_drop_down.svg">
                     </div>
                 </div>
             </div>
@@ -38,51 +42,53 @@
             <div class="parting-line"></div>
 
             <div class="input-section-right">
-
+                <!-- DUE DATE -->
                 <div class="input-section-element">
                     <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
                     <div class="input-container-required">
                         <div class="input-container">
                             <input id="addTask-dueDate" onclick="dueDateRequired()" class="inputfield" type="date"
                                 placeholder="dd/mm/yyyy" required>
-                            <img src="../img/event.png">
+                            <img src="../img/event.svg">
                         </div>
                         <span id="required-date" class="required-text transparent">This field is required</span>
                     </div>
                 </div>
-
+                <!-- PRIO -->
                 <div class="input-section-element">
                     <span>Prio</span>
                     <div class="prio-buttons">
-                        <button>
+                        <button class="urgentButton">
                             <span>Urgent</span>
-                            <img src="../img/PrioAltaRed.png" alt="Schließen">
+                            <div class="urgentImg"></div>
+                           
                         </button>
-                        <button>
+                        <button class="mediumButton">
                             <span>Medium</span>
-                            <img src="../img/PrioMediaOrange.png" alt="Schließen">
+                            <div class="mediumImg"></div>
                         </button>
-                        <button>
+                        <button class="lowButton">
                             <span>Low</span>
-                            <img src="../img/PrioBajaGreen.png" alt="Schließen">
+                            <div class="lowImg"></div>
                         </button>
                     </div>
                 </div>
-
+                <!-- CATEGORY -->
                 <div class="input-section-element">
                     <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
-                    <div class="input-container input-container-category">
-                        <input id="addTask-category" onclick="categoryRequired()" class="inputfield" type="text"
-                            placeholder="Select task category" required>
-                        <img src="../img/arrow_drop_down.png">
+                    <div class="input-container input-container-category input-container-select">
+                        <span id="addTask-category" onclick="categoryRequired()" class="inputfield">
+                            Select task category
+                        </span>
+                        <img class="dropdown-img" src="../img/arrow_drop_down.svg">
                     </div>
                 </div>
-
+                <!-- SUBTASKS -->
                 <div class="input-section-element">
                     <label for="addTask-subtasks">Subtasks</label>
                     <div class="input-container">
                         <input id="addTask-subtasks" class="inputfield" type="text" placeholder="Add new subtask">
-                        <img src="../img/subtasks.png">
+                        <img class="dropdown-img" src="../img/subtasks.svg">
                     </div>
                 </div>
             </div>
@@ -93,13 +99,17 @@
     <div class="addTask-bottom">
         <span><span style="color: #FF8190">*</span>This field is required</span>
         <div class="addTask-bottom-buttons">
+
             <button id="clearButton">
                 <span>Clear</span>
-                <img src="../img/close.png" alt="Schließen">
+                <div class="closeImg"></div>
             </button>
+
+            
+
             <button id="createTaskButton" onclick="checkInput()">
                 <span>Create Task</span>
-                <img src="../img/check-white.png" alt="Bestätigen">
+                <img src="../img/check-white.svg" alt="Bestätigen">
             </button>
         </div>
     </div>
