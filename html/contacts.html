@@ -7,7 +7,7 @@
 <script src="./contacts.js"></script>
 <link rel="stylesheet" href="./contacts.css">
 </head>
-<body onload="includeHTML()">
+<body onload="init()">
 <div w3-include-html="templates/header.html"></div>
 <div w3-include-html="templates/navigationBar.html"></div>
 <div id="overlay" class="overlay"></div>
@@ -46,17 +46,30 @@
         <p class="contactsRightBetterWith">Better with a team</p>
     </div>
     <div class="contactsRightSectionShowProfil">
-        <div class="contactsRightSectionShowProfilInner">
-            <div class="circleProfilPicShow">AM</div>
-                <div class="proilNameAndEdit">
-                    <p class="nameProfilShow">Anton Mayer</p>
-                    <div class="proilNameAndEditInner">
-                        <p>Edit</p>
-                        <img class="logoRightSection" src="./img/edit.png">
-                        <p>Delete</p>
-                        <img class="logoRightSection" src="./img/delete.png">
-                    </div>
+    <div class="contactsRightSectionShowProfilInner">
+    <div class="circleProfilPicShow">AM</div>
+    <div class="proilNameAndEdit">
+        <p class="nameProfilShow">Anton Mayer</p>
+            <div class="proilNameAndEditInner">
+                <p class="profilEdit">Edit</p>
+                <img class="logoRightSection" src="./img/edit.png">
+                <p class="profilDelete">Delete</p>
+                <img class="logoRightSection" src="./img/delete.png">
                 </div>
+            </div>
+        </div>
+        <div class="contactInformation">
+            <p>Contact Information</p>
+        </div>
+        <div class="contactInformationEmailAndPhone">
+            <div>
+                <p class="contactInformationlHeadlineMailAndPhone">Email</p>
+                <p class="contactInformationMail">antom@gmail.com</p>
+            </div>
+            <div>
+                <p class="contactInformationlHeadlineMailAndPhone">Phone</p>
+                <p class="contactInformationPhone">+49 1111 111 11 1</p>
+            </div>
         </div>
     </div>
 </div>
