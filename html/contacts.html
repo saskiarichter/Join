@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+<script src="./contacts.js"></script>
+<link rel="stylesheet" href="./contacts.css">
+</head>
+<body onload="includeHTML()">
+<div w3-include-html="templates/header.html"></div>
+<div w3-include-html="templates/navigationBar.html"></div>
+<div id="overlay" class="overlay"></div>
+<div id="dialogNewContactDiv" class="dialogNewContactDiv"></div>
+<div class="contactsMainDiv">
+<div class="contactsLeftSide">
+<div class="contactsLeftSideinnerDiv">
+<div class="addNewContactDiv">
+    <button onclick="addNewContact()" class="addContactButton">
+        <b class="addNewContactHeadline">Add new contact</b>
+        <img class="addPersonPng" src="./img/person_add.png">
+    </button>
+</div>
+<div class="contactsDiv">
+    <div class="contactInnerDiv">
+    <div class="letter">
+        A
+    </div>
+    <div class="lineLeftSection">
+    </div>
+    <div class="contactList">
+        <div class="circleProfilPic">AM</div>
+        <div class="nameAndEmail">
+            <p class="nameProfil">Anton Mayer</p>
+            <p class="emailAdress">anton@gmail.com</p>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="contactsRightSideMainDiv">
+    <div class="contactsRightSide">
+        <h1 class="contactsHeadlineRightSection">Contacts</h1>
+        <div class="lineRightSection"></div>
+        <p class="contactsRightBetterWith">Better with a team</p>
+    </div>
+    <div class="contactsRightSectionShowProfil">
+        <div class="contactsRightSectionShowProfilInner">
+            <div class="circleProfilPicShow">AM</div>
+                <div class="proilNameAndEdit">
+                    <p class="nameProfilShow">Anton Mayer</p>
+                    <div class="proilNameAndEditInner">
+                        <p>Edit</p>
+                        <img class="logoRightSection" src="./img/edit.png">
+                        <p>Delete</p>
+                        <img class="logoRightSection" src="./img/delete.png">
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
