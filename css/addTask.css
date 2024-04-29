@@ -3,6 +3,16 @@
     margin-left: 328px;
 }
 
+.d-none{
+    display: none;
+}
+
+.transparent{
+    color: transparent !important;
+}
+
+/*  LAYOUT  */
+
 .addTask{
     height: 650px;
     width: 976.25px;
@@ -53,6 +63,18 @@
     gap: 20px;
 }
 
+.addTask-bottom{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/*  INPUT ELEMENT   */
+
 .input-section-element{
     display: flex;
     flex-direction: column;
@@ -69,6 +91,10 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+}
+
+.input-container:focus {
+    border: 1px solid #29ABE2;
 }
 
 .input-container-select:hover{
@@ -95,44 +121,11 @@
     color: #D1D1D1;
 }
 
-#addTask-assigned::placeholder{
-    color: #000000;
-}
-
 .inputfield:focus {
     outline: none;
 }
 
-.inputfield[type="date"]{
-    position: relative;
-}
-
-.inputfield[type=date]:invalid::-webkit-datetime-edit { 
-    color: #D1D1D1; 
-}
-
-.inputfield[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: auto;
-    cursor: pointer;
-}
-
-.dropdown-img{
-    position: relative;
-    width: 24px;
-    height: 24px;
-}
-
-.dropdown-img:hover{
-    background-color: #F6F7F8;
-    border-radius: 50%;
-}
-
+/*  REQUIRED ELEMENTS   */
 .input-container-required{
     display: flex;
     flex-direction: column;
@@ -150,9 +143,7 @@
     color: #FF8190;
 }
 
-.transparent{
-    color: transparent;
-}
+/*  DESCRIPTION FIELD  */
 
 #input-container-description{
     height: 120px;
@@ -195,6 +186,68 @@
 .textarea-description::-webkit-resizer {
     display: none;
 }
+
+/*  ASSIGNED TO FIELD  */
+
+#addTask-assigned::placeholder{
+    color: #000000;
+}
+
+.dropdown-img{
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.dropdown-img:hover{
+    background-color: #F6F7F8;
+    border-radius: 50%;
+}
+
+.dropdown-img-rotated{
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.addTask-contacts-section{
+    height: 336px;
+    position: relative;
+    z-index: 1;
+}
+
+#addTask-contacts-container{
+    width: 440px;
+    height: 200px;
+    background-color: white;
+    margin-top: -20px;
+    position: relative;
+    z-index: -1;
+    border-radius: 10px;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+/*  DATE FIELD  */
+
+.inputfield[type="date"]{
+    position: relative;
+}
+
+.inputfield[type=date]:invalid::-webkit-datetime-edit { 
+    color: #D1D1D1; 
+}
+
+.inputfield[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    cursor: pointer;
+}
+
+/*  PRIO FIELD    */
 
 .prio-buttons{
     display: flex;
@@ -280,14 +333,25 @@
     height: 14.51px;
 }
 
-.addTask-bottom{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    font-size: 20px;
-    font-weight: 400;
+/*  CATEGORY FIELD  */
+
+.addTask-category-section{
+    position: relative;
+    z-index: 1;
 }
+
+#addTask-category-container{
+    width: 440px;
+    height: 100px;
+    background-color: white;
+    margin-top: -20px;
+    position: absolute;
+    z-index: -1;
+    border-radius: 10px;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+/*  ADD TASK BOTTOM SECTION   */
 
 .addTask-bottom-buttons{
     display: flex;

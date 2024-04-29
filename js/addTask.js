@@ -43,6 +43,34 @@ function categoryRequired() {
 
 /**
  * 
+ * opens and closes contacts & rotates dropdown icon
+ */
+function openContactSelection(){
+    let container = document.getElementById('addTask-contacts-container');
+    let img = document.getElementById('dropdown-img-contacts');
+    if (container.classList.contains('d-none')) {
+        container.classList.remove('d-none');
+        img.classList.add('dropdown-img-rotated');
+    }else{
+        container.classList.add('d-none');
+        img.classList.remove('dropdown-img-rotated');
+    }
+}
+
+function openCategorySelection(){
+    let container = document.getElementById('addTask-category-container');
+    let img = document.getElementById('dropdown-img-category');
+    if (container.classList.contains('d-none')) {
+        container.classList.remove('d-none');
+        img.classList.add('dropdown-img-rotated');
+    }else{
+        container.classList.add('d-none');
+        img.classList.remove('dropdown-img-rotated');
+    }
+}
+
+/**
+ * 
  * checks if required inputs are filled out 
  */
 function checkInput() {
