@@ -1,3 +1,7 @@
+async function init(){
+    await includeHTML();
+}
+
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -57,7 +61,6 @@ function HTMLTemplateNewContact(){
         <div class="dialogButtonDiv">
             <button onclick="closeNewContact()" class="cancelButton">Cancel</button>
             <button class="createContactButton">Create contact<img src="./img/check.png"></button>
-  
         </div>
     </div> 
     </div>  
