@@ -40,3 +40,13 @@ function redirectToBoard() {
 function redirectToContact() {
     window.location.href = "contacts.html";
 }
+
+function redirectToLegalNotice() {
+    window.location.href = "legalNotice.html";
+}
+
+function redirectToPrivacyPolice() {
+    window.location.href = "privacyPolice.html";
+}
+
+

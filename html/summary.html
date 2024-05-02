@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="/css/navBarHeader.css">
     <link rel="stylesheet" href="/css/summary.css">
     <script src="/js/include.js"></script>
+    <script src="/js/register.js"></script>
     <script src="/js/summary.js"></script>
+    <script src="/js/script.js"></script>
+
 </head>
 <body onload="initSummary()">
     <div w3-include-html="/html/navigationBar.html"></div>
@@ -75,8 +78,8 @@
                 </div>
             </div>
             <div class="greeting">
-                <span class="daytime" id="daytimeGreeting">Good ["daytime"]</span>
-                <span class="guest-name">["user name"]</span>
+                <span class="daytime" id="daytimeGreeting"></span>
+                <span class="guest-name" id="nameGreeting"></span>
             </div>
         </div>
     </section>

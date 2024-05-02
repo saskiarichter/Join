@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js"></script>
     <script src="/js/include.js"></script>
+    <script src="/js/register.js"></script>
+    <script src="/js/storage.js"></script>
 </head>
 <body>
    <div class="main">
@@ -23,17 +25,17 @@
             </div>
 
             <div id="formFadeIn" class="formLinksContainer fade-in">
-                <form id="form" class="form">
+                <form id="form" class="form" onsubmit="addUser(); return false;">
                     <div class="formHeadline">
                         <h1 class="formHeadlineText">Log in</h1>
                         <div class="formHeadlineBorder"></div>
                     </div>
                     <div class="mailPassword">    
                             <div>
-                                <input class="inputMail" type="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                                <input class="inputMail" type="email" id="email-login" placeholder="Email" required>
                             </div>
                             <div>
-                                <input class="inputPassword" type="password" id="exampleInputPassword1" placeholder="Password">
+                                <input class="inputPassword"  id="password-login" placeholder="Password" required>
                             </div>
                         
                         <div class="notification"></div>  
@@ -43,7 +45,7 @@
                             <p class="loginCheckBoxRememberMeSpan">Remember me</label>
                         </div>
                         <div class="buttons">
-                            <button class="buttonLogin">Log in</button>
+                            <button class="buttonLogin" onclick="login(); return false;">Log in</button>
                             <button class="buttonGuest" type="button" onclick="redirectToSummary()">Guest Log in</button>
                         </div>
                     </div>

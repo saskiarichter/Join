@@ -79,6 +79,14 @@ html {
     z-index: 50;
 }
 
+.headerInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    margin-left: 16px;
+}
+
 .headline {
     position: relative;
     left: 348px;
@@ -92,8 +100,7 @@ html {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 16px;
-    margin-right: 40px;
+    margin-right: 16px;
 }
 
 .helpImage, .ellipseImage {
@@ -133,3 +140,92 @@ html {
     margin-left: 56px;
     margin-right: 8px;
 }
+
+.headerInfoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerLogoutButton {
+    width: 56px;
+    height: 56px;
+    border: 3px solid #2a3647;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    margin-left: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.headerUserProfileInitials {
+    width: 50px;
+    height: 15px;
+    color: #29abe2;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+}
+
+.dropdownMenu {
+    position: absolute;
+    width: 160px;
+    top: 76px;
+    left: -80px;
+    z-index: 1;
+    background-color: #2a3647;
+    border-radius: 20px 0 20px 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.d-none {
+    display: none;
+}
+
+.dropdownMenu a {
+    padding: 12px 25px;
+    text-decoration: none;
+    color: #cdcdcd;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+.dropdownMenu a:hover {
+    background-color: #091931;
+    border-radius: 20px;
+}
+
+#hHPP {
+    display: block;
+}
+
+#hHLN {
+    display: block;
+}
+
+#hLogout {
+    display: block;
+}
+
+.userInitials {
+    width: 50px;
+    height: 15px;
+    color: #29abe2;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+}
+
+.ellipseInitials {
+    display: flex;
+}
+
+

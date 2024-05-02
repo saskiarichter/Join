@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/navBarHeader.css">
+    <script src="/js/include.js"></script>
     <script src="/js/script.js"></script>
 </head>
 <body>
     <div class="header">
         <div class="headline">
             <p>Kanban Project Management Tool</p>
-        </div>    
-        <div class="helpUser">
-            <img class="helpImage" src="/img/help.png" onclick="redirectToHelp()">
-            <img class="ellipseImage" src="/img/ellipse.png">
         </div>
-    </div>   
+        <div class="headerInfo">   
+            <div class="helpUser">
+                <img class="helpImage" src="/img/help.png" onclick="redirectToHelp()">
+            </div>    
+            <div class="headerLogoutButton" onclick="toggleMenu()">
+                <div class="ellipseInitials">
+                    <span class="userInitials" id="userInitials">A</span>
+                </div>
+                <div class="dropdownMenu d-none">
+                    <a href="#" id="hHPP" onclick="redirectToPrivacyPolice()">Privacy Police</a>
+                    <a href="#" id="hHLN" onclick="redirectToLegalNotice()">Legal Notice</a>
+                    <a href="#" id="hLogout" onclick="logout()">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

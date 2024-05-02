@@ -387,3 +387,4 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
     border-radius: 10px;
     text-indent: 21px;
 }
+
