@@ -1,0 +1,522 @@
+.contactsMainDiv{
+    display:flex;
+    background-color: rgb(184,185,186);
+}
+
+
+.contactsLeftSide{
+    width:456px;
+    height:928px;
+    padding-top:96px;
+    padding-left:232px;
+    background-color: #FFFFFF;
+    display:flex;
+    justify-content: center;
+    box-shadow: 4px 0px 6px 0px #00000014; 
+    position:fixed;
+
+}
+
+.contactsLeftSideinnerDiv{
+    width:400px;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.addNewContactDiv{
+    height:101px;
+    width:456px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.addContactButton{
+    width:352px;
+    height:56px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(42,54,71);
+    cursor: pointer;
+    border-radius:10px;
+    transition: all 100ms ease-in-out;
+    gap:16px;
+    border: 0px;
+}
+
+.addContactButton:hover {
+    background-color: rgb(80,171,226);
+    box-shadow: 0 4px 8px rgba(194, 194, 194, 1);
+}
+
+.addNewContactHeadline{
+    color: #FFFFFF;
+    width: 175px;
+    height: 25px;
+    letter-spacing: 0em;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: left;
+    font-weight: 700;
+}
+
+.addPersonPng{
+    width:32px;
+    height:32px;
+}
+
+.contactsDiv{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.letter{
+    width:352px;
+    font-size:20px;
+    height:58px;
+    padding-top: 17px;
+    padding-left: 36px;
+
+}
+
+.lineLeftSection{
+    width:352px;
+    border: 1px solid #D1D1D1;
+    gap:10px;
+    
+}
+
+.contactInnerDiv{
+    width:352px;
+    height:58px;
+    Gap:8px;
+}
+
+.contactsRightSideMainDiv{
+    background-color:rgb(246,247,248);
+    height:928px;
+    padding-top:96px;
+    width:100%;
+}
+
+.contactsRightSide{
+    display:flex;
+    align-items: center;
+    height:73px;
+    width:569px;
+    gap:30px;
+    position:absolute;
+    left:743px;
+    top:206px;
+}
+
+.contactsHeadlineRightSection{
+    font-size: 61px;
+    height:73px;
+    width:274px;
+    text-align: left;
+    letter-spacing: 0em;
+    font-weight:274px;
+}
+
+.lineRightSection{
+    height:59px;
+    border: 3px solid #29abe2;
+    border-radius:3px;
+}
+
+.contactsRightBetterWith{
+    width:235px;
+    height:32px;
+    font-weight:400;
+    font-size:27px;
+    line-height: 32.4px;
+    
+}
+
+.contactListInner{
+    width:352px;
+    height:78px;
+    gap:35px;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+
+    
+}
+
+.circleProfilPic{
+    background-color:orange;
+    width:42px;
+    height:42px;
+    border-radius:45px;
+    gap:10px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    font-size:12px;
+    line-height: 14.4px;
+    font-weight:400px;
+    color:#FFFFFF;
+}
+
+.nameAndEmail{
+    width:140px;
+    height:48px;
+    gap:5px;
+}
+
+.nameProfil{
+    width:121px;
+    height:24px;
+    font-size:20px;
+    line-height: 24px;
+    font-weight:400;
+    margin-block-start: 0;
+    margin-block-end:0;
+}
+
+.emailAdress{
+    width:140px;
+    height:19px;
+    font-size:16px;
+    line-height:19.2px;
+    font-weight:400;
+    margin-block-start: 0;
+    margin-block-end:0;
+    color:#007CEE;
+}
+
+.dialogNewContactInnerDiv{
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: transparent; 
+    transition: all 500ms ease-in-out;
+    height: 594px;
+    z-index: 899;
+    width: 1212px;
+
+}
+
+.dialogLeft{
+    width: 467px;
+    padding: 66px 48px 66px 48px;
+    gap: 12px;
+    background-color: #2A3647;
+    display:flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-direction: column;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+}
+
+.dialogLeftInnerDiv{
+    width: 371px;
+    height: 113px;
+    gap: 8px;
+    opacity: 0px;
+
+
+}
+
+.dialogRight{
+    background-color: #ffffff;
+    width: -webkit-fill-available;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.joinLogoDialog{
+    width:53.93px;
+    height:66.48px;
+}
+
+.dialogInputfieldDiv{
+    width:422px;
+    height:50px;
+    gap: 8px;
+    border: 1px solid #D1D1D1;
+    background: #ffffff;
+    border-radius:8px;
+    display:flex;
+    align-items: center;
+}
+
+.HeadlineDialog{
+    width:361px;
+    height:73px;
+    font-weight:700;
+    font-size:61px;
+    line-height:73.2px;
+    color:#FFFFFF;
+    margin-block-start: 0em;
+    margin-block-end:0em;
+}
+
+.subheadingDialog{
+    font-weight:400;
+    font-size:27px;
+    line-height:32.4px;
+    color:#FFFFFF; 
+    margin-block-start: 0em;
+    margin-block-end:0em;
+}
+
+.dialogProfilPictureDiv{
+    height:100%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.dialogProfilPicture{
+    width:120px;
+    height:120px;
+    top:204px;
+    left:550px;
+    background-color:#FFFFFF;
+
+}
+
+.dialogInputfield{
+    width:422px;
+    height:215px;
+    gap:32px;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+input{
+    width:380px;
+    height:24px;
+    font-size:20px;
+    display:flex;
+    padding-left:10px;
+    border: none;
+    outline:none;
+}
+
+.dialogIcons{
+    width:24px;
+    height:24px;
+    padding-right:10px;
+}
+
+.closeIcon{
+    width:32px;
+    height:32px;
+    cursor: pointer;
+    position:absolute;
+    top:48px;
+    left:1132px;
+
+}
+
+.d-none{
+    display:none;
+}
+
+.dialogButtonDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 364px;
+    height: 57px;
+    position: absolute;
+    top: 440px;
+    left: 742px;
+}
+
+
+.cancelButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    gap: 4px;
+    font-size: 20px;
+    color: #2A3647;
+    transition: all 100ms ease-in-out;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+.cancelButton:hover{
+    color: rgb(80,171,226);
+    box-shadow: 0px 4px 4px 2px #2a262640;
+    border-color: rgb(80,171,226);
+}
+
+.createContactButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 214px;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    gap: 4px;
+    font-size: 20px;
+    color: #2A3647;
+    transition: all 100ms ease-in-out;
+    cursor: pointer;
+    background-color: #2A3647;
+    color:white;
+}
+
+.createContactButton:hover{
+    background-color: rgb(80,171,226);
+    box-shadow: 0px 4px 4px 2px #2a262640;
+    border-color: rgb(80,171,226);
+}
+
+.no-spinners::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.dialogNewContactDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 1001;
+}
+
+.contactsRightSectionShowProfilInner{
+    display:flex;
+    
+}
+
+.proilNameAndEdit{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contactsRightSectionShowProfil{
+    position:absolute;
+    width:461px;
+    height:364px;
+    top:311px;
+    left:750px;
+    gap:21px;
+
+}
+
+.circleProfilPicShow{
+    width:120px;
+    height:120px;
+    border-radius: 70px;
+    border:3px;
+    gap:10px;
+    background-color: orange;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:47px;
+    line-height:56.4px;
+    color: #FFFFFF;
+    font-weight:500;
+
+}
+
+.nameProfilShow{
+    font-size:47px;
+    font-weight:500;
+    line-height:56.4px;
+    margin-block-start: 0;
+    margin-block-end:0;
+}
+
+.logoRightSection{
+    width:24px;
+    height:24px;
+    cursor: pointer;
+
+}
+
+.proilNameAndEditInner{
+    display:flex;
+    align-items: center;
+    width:159px;
+    height:24px;
+    justify-content: space-between;
+    
+}
+
+.profilEdit{
+    cursor: pointer;
+}
+
+.profilDelete{
+    cursor: pointer;
+}
+
+.contactInformation{
+    padding-top:21px;
+    width: 207px;
+    height:74px;
+    gap:59px;
+    font-weight: 400;
+    font-size:20px;
+    line-height: 24px;
+
+}
+
+.contactInformationEmailAndPhone{
+    width:140px;
+    height:128px;
+    gap:22px;
+    display:flex;
+    flex-direction: column;
+
+}
+
+.contactInformationlHeadlineMailAndPhone{
+    font-weight:700;
+    font-size:16px;
+    line-height:19.2px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.contactInformationMail{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.contactInformationPhone{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
