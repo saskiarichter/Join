@@ -2,23 +2,12 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./img/joinlogo.png">
-    <title>Board</title>
-    <script src="./js/include.js"></script>
-    <link rel="stylesheet" href="/css/board.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-=======
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="./img/joinlogo.png">
   <title>Board</title>
-  <script src="./js/include.js"></script>
   <link rel="stylesheet" href="./css/board.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
->>>>>>> 58b5c378aaadad1772a99d723c652bee3937f087
 </head>
 
 <body onload="init()">
@@ -57,22 +46,21 @@
                 <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
                 <div class="input-container-required">
                   <div class="input-container" tabindex="1">
-                    <input id="addTask-title" class="inputfield input" type="text"
-                      placeholder="Enter a title" required>
+                    <input id="addTask-title" class="input" type="text" placeholder="Enter a title" autocomplete="off" required>
                   </div>
-                  <span id="required-title" class="required-text transparent hidden">This field is required</span>
+                  <span id="required-title" class="required-text hidden">This field is required</span>
                 </div>
               </div>
               <div class="input-container">
                 <label for="addTask-description">Description</label>
                 <textarea id="addTask-description" class="input" placeholder="Enter a Description"
-                  style="resize: none;"></textarea>
+                  style="resize: none;" autocomplete="off"></textarea>
               </div>
               <div class="input-container">
                 <label for="addTask-assigned">Assigned to</label>
                 <select id="addTask-assigned" class="input" placeholder="Select contacts to assign">
-                  <option>User 1</option>
-                  <option>User 2</option>
+                  <option>Sofia Müller</option>
+                  <option>Anton Mayer</option>
                 </select>
               </div>
             </div>
@@ -81,7 +69,7 @@
               <div class="input-container">
                 <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
                 <input id="addTask-dueDate" class="input" type="date" placeholder="dd/mm/yyyy" required>
-                <span id="required-title" class="required-text transparent hidden">This field is required</span>
+                <span id="required-title" class="required-text hidden">This field is required</span>
               </div>
               <div class="input-container">
                 <span>Prio</span>
@@ -103,14 +91,19 @@
               <div class="input-container">
                 <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
                 <select id="addTask-category" placeholder="Select task category" class="input">
-                  <option value="user">User Story</option>
-                  <option value="technical">Technical Task</option>
+                  <option value="User Story">User Story</option>
+                  <option value="Technical Task">Technical Task</option>
                 </select>
               </div>
-              <div class="input-container">
+              <div class="input-section-element">
                 <label for="addTask-subtasks">Subtasks</label>
-                <input id="addTask-subtasks" class="input" type="text" placeholder="Add new subtask">
-              </div>
+                <div class="input-container-sub" onclick="setFocus(this)">
+                    <input id="addTask-subtasks" class="inputfield" type="text" placeholder="Add new subtask" maxlength="26" autocomplete="off">
+                    <img src="./img/subtasks.png" class="plus-icon-subtasks" onclick="addSubtask()">
+                </div>
+                <ul id="newSubtask" class="hidden">
+                </ul>
+            </div>
             </div>
           </div>
         </div>
@@ -169,6 +162,7 @@
     </div>
   </section>
   <div class="overlay hidden" onclick="closeMe()"></div>
+  <script src="./js/include.js"></script>
   <script src="./js/storage.js"></script>
   <script src="./js/board.js"></script>
 </body>
