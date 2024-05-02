@@ -25,7 +25,7 @@ function HTMLTemplateNewContact(){
     </div>
     <div class="dialogRight">
         <div class="dialogCloseDiv">
-            <img onclick="closeNewContact()" class="closeIcon" src="./img/Close.png">
+            <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
         </div>
         <div class="dialogProfilPictureDiv">
             <img class="dialogProfilPicture" src="./img/Group 13.png">
@@ -45,7 +45,7 @@ function HTMLTemplateNewContact(){
                     </div>
                 </div>
                 <div class="dialogButtonDiv">
-                    <button onclick="closeNewContact()" class="cancelButton">Cancel</button>
+                    <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
                     <button onclick="createNewContact()" class="createContactButton">Create contact<img src="./img/check.png"></button>
                 </div>
             </div> 
@@ -98,7 +98,7 @@ function HTMLTemplateEditContact(index){
                 </div>
                 <div class="dialogButtonDiv">
                     <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                    <button onclick="saveEditContact(${index})" class="createContactButton">Save contact<img src="./img/check.png"></button>
+                    <button onclick="saveEditContact(${index})" class="createContactButton">Save<img src="./img/check.png"></button>
                 </div>
             </div> 
         </div>
@@ -144,7 +144,6 @@ function renderHTMLcreateNewContact(name, email, phoneNumber, index){
     `;
     
 }
-
 
 function showFullContact(index){
     let content = document.getElementById('contactsRightSectionShowProfil');
@@ -200,15 +199,9 @@ function saveEditContact(index) {
 }
 
 function renderEditContact(index) {
-    // HTML für den geänderten Kontakt generieren
     let editedContactHTML = renderHTMLcreateNewContact(nameInput[index], emailInput[index], phoneNumbersInput[index], index);
-
-    // Das Element des geänderten Kontakts im DOM finden
     let contactListItem = document.getElementById(`contactListInner${index}`);
-
-    // Überprüfen, ob das Element gefunden wurde
     if (contactListItem) {
-        // Das HTML des geänderten Kontakts aktualisieren
         contactListItem.innerHTML = editedContactHTML;
     } else {
         console.error(`Element with ID contactListInner${index} not found.`);
@@ -216,14 +209,11 @@ function renderEditContact(index) {
 }
 
 function deleteContact(index) {
-    // Überprüfen, ob der Index gültig ist
     if (index >= 0 && index < nameInput.length) {
-        // Den Kontakt aus den Arrays entfernen
         nameInput.splice(index, 1);
         emailInput.splice(index, 1);
         phoneNumbersInput.splice(index, 1);
 
-        // Das entsprechende DOM-Element entfernen
         let contactListItem = document.getElementById(`contactListInner${index}`);
         if (contactListItem) {
             contactListItem.remove();
