@@ -1,19 +1,19 @@
-.content{
+.content {
     margin-top: 206px;
     margin-left: 328px;
 }
 
-.d-none{
-    display: none;
+.d-none {
+    display: none !important;
 }
 
-.transparent{
+.transparent {
     color: transparent !important;
 }
 
 /*  LAYOUT  */
 
-.addTask{
+.addTask {
     height: 650px;
     width: 976.25px;
     display: flex;
@@ -22,19 +22,19 @@
     color: #2A3647;
 }
 
-.addTask-top{
+.addTask-top {
     display: flex;
     flex-direction: column;
     gap: 32px;
 }
 
-.addTask-title{
+.addTask-title {
     margin: 0;
     font-size: 61px;
     font-weight: 700;
 }
 
-.input-section{
+.input-section {
     width: 100%;
     height: 424px;
     display: flex;
@@ -44,26 +44,26 @@
     line-height: 24px;
 }
 
-.input-section-left{
+.input-section-left {
     width: 440px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.parting-line{
+.parting-line {
     height: 424px;
     border: 1px solid #D1D1D1;
 }
 
-.input-section-right{
+.input-section-right {
     width: 440px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.addTask-bottom{
+.addTask-bottom {
     position: relative;
     width: 100%;
     display: flex;
@@ -75,13 +75,13 @@
 
 /*  INPUT ELEMENT   */
 
-.input-section-element{
+.input-section-element {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.input-container{
+.input-container {
     border: 1px solid #D1D1D1;
     box-sizing: border-box;
     border-radius: 10px;
@@ -97,7 +97,11 @@
     border: 1px solid #29ABE2;
 }
 
-.input-container-select:hover{
+.input-container-select{
+    z-index: 1;
+}
+
+.input-container-select:hover {
     border: 1px solid #A8A8A8;
 }
 
@@ -105,7 +109,7 @@
     border: 1px solid #29ABE2;
 }
 
-.inputfield{
+.inputfield {
     width: 100%;
     border: none;
     padding: 0;
@@ -115,9 +119,10 @@
     font-family: "Inter", sans-serif;
     box-sizing: border-box;
     cursor: pointer;
+    color: black;
 }
 
-.inputfield::placeholder{
+.inputfield::placeholder {
     color: #D1D1D1;
 }
 
@@ -126,17 +131,17 @@
 }
 
 /*  REQUIRED ELEMENTS   */
-.input-container-required{
+.input-container-required {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
 .empty {
-    border-color: #FF8190;
+    border-color: #FF8190 !important;
 }
 
-.required-text{
+.required-text {
     font-size: 12px;
     font-weight: 400;
     line-height: 14.4px;
@@ -145,7 +150,7 @@
 
 /*  DESCRIPTION FIELD  */
 
-#input-container-description{
+#input-container-description {
     height: 120px;
     display: flex;
     flex-direction: column !important;
@@ -154,14 +159,14 @@
     padding: 18px 16px 4px 16px !important;
 }
 
-#input-container-description img{
+#input-container-description img {
     margin-right: -12px;
     height: 18.9px;
     width: 18.9px;
     cursor: auto;
 }
 
-.textarea-description{
+.textarea-description {
     width: 100%;
     height: 100%;
     resize: vertical;
@@ -174,12 +179,12 @@
     cursor: pointer;
 }
 
-.textarea-description:focus{
+.textarea-description:focus {
     border-color: #29ABE2;
     outline: none;
 }
 
-.textarea-description::placeholder{
+.textarea-description::placeholder {
     color: #D1D1D1;
 }
 
@@ -189,51 +194,107 @@
 
 /*  ASSIGNED TO FIELD  */
 
-#addTask-assigned::placeholder{
+#addTask-assigned::placeholder {
     color: #000000;
 }
 
-.dropdown-img{
+.dropdown-img {
     position: relative;
     width: 24px;
     height: 24px;
 }
 
-.dropdown-img:hover{
+.dropdown-img:hover {
     background-color: #F6F7F8;
     border-radius: 50%;
 }
 
-.dropdown-img-rotated{
+.dropdown-img-rotated {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
 
-.addTask-contacts-section{
-    height: 336px;
-    position: relative;
-    z-index: 1;
-}
-
-#addTask-contacts-container{
+#addTask-contacts-container {
+    position: relative; 
     width: 440px;
-    height: 200px;
+    max-height: 200px;
     background-color: white;
-    margin-top: -20px;
+    margin-top: -70px;
+    padding-top: 10px;
     position: relative;
-    z-index: -1;
     border-radius: 10px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
 }
 
+.contact-container {    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 16px 7px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+}
+
+.contact-container:hover {
+    background-color: #EEEEEE;
+}
+
+.contact-container-focus {
+    background-color: #2A3647;
+    color: white !important;
+    .contact-container-check{
+        background-image: url(../img/checkedbuttonWhite.svg);
+    }
+}
+
+.contact-container-focus:hover {
+    background-color: #091931;
+}
+
+.contact-container-name {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.circleName {
+    width: 42px;
+    height: 42px;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: #FF7A00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: white;
+}
+
+.contact-container-check {
+    background-image: url(../img/CheckButtonBlue.svg);
+    width: 24px;
+    height: 24px;
+}
+
+.contact-circles{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 /*  DATE FIELD  */
 
-.inputfield[type="date"]{
+.inputfield[type="date"] {
     position: relative;
 }
 
-.inputfield[type=date]:invalid::-webkit-datetime-edit { 
-    color: #D1D1D1; 
+.inputfield[type=date]:invalid::-webkit-datetime-edit {
+    color: #D1D1D1;
 }
 
 .inputfield[type="date"]::-webkit-calendar-picker-indicator {
@@ -249,13 +310,13 @@
 
 /*  PRIO FIELD    */
 
-.prio-buttons{
+.prio-buttons {
     display: flex;
     justify-content: space-between;
     gap: 16px;
 }
 
-.prio-buttons button{
+.prio-buttons button {
     width: 136px;
     border: none;
     border-radius: 10px;
@@ -272,22 +333,23 @@
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
-.prio-buttons button:hover{
+.prio-buttons button:hover {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.urgentButton:focus{
+.urgentButton:focus {
     background-color: #FF3D00 !important;
     color: white;
     font-size: 21px !important;
     font-weight: 700 !important;
     line-height: 25.2px !important;
-    .urgentImg{
+
+    .urgentImg {
         background-image: url(../img/PrioAltaWhite.svg);
     }
 }
 
-.urgentImg{
+.urgentImg {
     background-image: url(../img/PrioAltaRed.svg);
     background-size: contain;
     background-repeat: no-repeat;
@@ -295,18 +357,19 @@
     height: 14.51px;
 }
 
-.mediumButton:focus{
+.mediumButton:focus {
     background-color: #FFA800 !important;
     color: white;
     font-size: 21px !important;
     font-weight: 700 !important;
     line-height: 25.2px !important;
-    .mediumImg{
+
+    .mediumImg {
         background-image: url(../img/PrioMediaWhite.svg);
     }
 }
 
-.mediumImg{
+.mediumImg {
     background-image: url(../img/PrioMediaOrange.svg);
     background-size: contain;
     background-repeat: no-repeat;
@@ -314,18 +377,19 @@
     height: 7.45px;
 }
 
-.lowButton:focus{
+.lowButton:focus {
     background-color: #7AE229 !important;
     color: white;
     font-size: 21px !important;
     font-weight: 700 !important;
     line-height: 25.2px !important;
-    .lowImg{
+
+    .lowImg {
         background-image: url(../img/PrioBajaWhite.svg);
     }
 }
 
-.lowImg{
+.lowImg {
     background-image: url(../img/PrioBajaGreen.svg);
     background-size: contain;
     background-repeat: no-repeat;
@@ -335,31 +399,43 @@
 
 /*  CATEGORY FIELD  */
 
-.addTask-category-section{
+.addTask-category-section {
     position: relative;
     z-index: 1;
 }
 
-#addTask-category-container{
+#addTask-category-container {
     width: 440px;
-    height: 100px;
     background-color: white;
     margin-top: -20px;
     position: absolute;
     z-index: -1;
     border-radius: 10px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.single-Category {
+    padding: 12px 16px 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.single-Category:hover {
+    background-color: #D1D1D1;
 }
 
 /*  ADD TASK BOTTOM SECTION   */
 
-.addTask-bottom-buttons{
+.addTask-bottom-buttons {
     display: flex;
     justify-content: center;
     gap: 16px;
 }
 
-.addTask-bottom-buttons button{
+.addTask-bottom-buttons button {
     display: flex;
     justify-content: center;
     gap: 4px;
@@ -368,14 +444,15 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
+    cursor: pointer;
 }
 
-.addTask-bottom-buttons img{
+.addTask-bottom-buttons img {
     width: 24px;
     height: fit-content;
 }
 
-#clearButton{
+#clearButton {
     height: 56px;
     border: 1px solid #2A3647;
     box-sizing: border-box;
@@ -384,29 +461,30 @@
     align-items: center;
 }
 
-#clearButton:hover{
+#clearButton:hover {
     border: 2px solid #29ABE2;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     color: #29ABE2;
-    cursor: pointer;
-    .closeImg{
+
+    .closeImg {
         background-image: url(../img/closeVectorBlue.svg);
     }
 }
 
-.closeImg{
+.closeImg {
     background-image: url(../img/closeVectorBlack.svg);
     background-size: contain;
     width: 24px;
     height: 24px;
 }
 
-#createTaskButton{
+#createTaskButton {
     background-color: #2A3647;
     color: white;
     border: none;
 }
 
-#createTaskButton:hover{
+#createTaskButton:hover {
     background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }

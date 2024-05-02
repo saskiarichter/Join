@@ -11,11 +11,11 @@
                 <div class="input-section-element">
                     <label for="addTask-title">Title<span style="color: #FF8190">*</span></label>
                     <div class="input-container-required">
-                        <div class="input-container" tabindex="1">
-                            <input id="addTask-title" onclick="titleRequired()" class="inputfield" type="text"
-                                placeholder="Enter a title" required>
+                        <div id="addTask-title" onclick="hideRequiredInfo('addTask-title', 'required-title')"
+                            class="input-container" tabindex="1">
+                            <input id="taskTitle" class="inputfield" type="text" placeholder="Enter a title" required>
                         </div>
-                        <span id="required-title" class="transparent required-text">This field is required</span>
+                        <span id="required-title" class="required-text transparent">This field is required</span>
                     </div>
                 </div>
                 <!-- DESCRIPTION -->
@@ -30,15 +30,26 @@
                 <!-- ASSIGNED TO -->
                 <div class="input-section-element">
                     <label for="addTask-assigned">Assigned to</label>
-                    <div class="addTask-contacts-section">
-                        <div onclick="openContactSelection()" class="input-container input-container-select"
-                            tabindex="1">
-                            <input id="addTask-assigned" class="inputfield" type="text"
-                                placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
-                                onblur="this.placeholder = 'Select contacts to assign'">
-                            <img id="dropdown-img-contacts" class="dropdown-img" src="../img/arrow_drop_down.svg">
+                    <div onclick="openCloseDropdown('addTask-contacts-container', 'dropdown-img-contacts')"
+                        class="input-container input-container-select" tabindex="1">
+                        <input id="addTask-assigned" class="inputfield" type="text"
+                            placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Select contacts to assign'">
+                        <img id="dropdown-img-contacts" class="dropdown-img" src="../img/arrow_drop_down.svg">
+                    </div>
+                    <div class="contact-circles">
+                        <span class="circleName">SM</span>
+                        <span class="circleName">SM</span>
+                        <span class="circleName">SM</span>
+                    </div>
+                    <div id="addTask-contacts-container" class="d-none">
+                        <div id="contact-container" onclick="selectContact()" class="contact-container" tabindex="1">
+                            <div class="contact-container-name">
+                                <span class="circleName">SM</span>
+                                <span>Sofia Müller</span>
+                            </div>
+                            <div class="contact-container-check"></div>
                         </div>
-                        <div id="addTask-contacts-container" class="d-none"></div>
                     </div>
                 </div>
             </div>
@@ -50,9 +61,9 @@
                 <div class="input-section-element">
                     <label for="addTask-dueDate">Due Date<span style="color: #FF8190">*</span></label>
                     <div class="input-container-required">
-                        <div class="input-container">
-                            <input id="addTask-dueDate" onclick="dueDateRequired()" class="inputfield" type="date"
-                                placeholder="dd/mm/yyyy" required>
+                        <div id="addTask-dueDate" onclick="hideRequiredInfo('addTask-dueDate', 'required-date')"
+                            class="input-container">
+                            <input id="taskDate" class="inputfield" type="date" placeholder="dd/mm/yyyy" required>
                             <img src="../img/event.svg">
                         </div>
                         <span id="required-date" class="required-text transparent">This field is required</span>
@@ -80,14 +91,18 @@
                 <!-- CATEGORY -->
                 <div class="input-section-element">
                     <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
-                    <div class="addTask-category-section" >
-                        <div onclick="openCategorySelection()" class="input-container input-container-category input-container-select">
-                            <span id="addTask-category" onclick="categoryRequired()" class="inputfield">
-                                Select task category
-                            </span>
+                    <div class="addTask-category-section">
+                        <div id="addTask-category" onclick="openCategorySelection('addTask-category-container', 'dropdown-img-category')"
+                            class="input-container input-container-category input-container-select">
+                            <span id="select-task-text" class="inputfield">Select task category</span>
                             <img id="dropdown-img-category" class="dropdown-img" src="../img/arrow_drop_down.svg">
                         </div>
-                        <div id="addTask-category-container" class="d-none"></div>
+                        <div id="addTask-category-container" class="d-none">
+                            <div id="technicalTask" onclick="selectCategory('technicalTask')" class="single-Category">
+                                Technical Task</div>
+                            <div id="userStory" onclick="selectCategory('userStory')" class="single-Category">User Story
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- SUBTASKS -->
@@ -107,7 +122,7 @@
         <span><span style="color: #FF8190">*</span>This field is required</span>
         <div class="addTask-bottom-buttons">
 
-            <button id="clearButton">
+            <button id="clearButton" onclick="emptyInput()">
                 <span>Clear</span>
                 <div class="closeImg"></div>
             </button>
