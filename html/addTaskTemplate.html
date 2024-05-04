@@ -49,7 +49,7 @@
                                 <span>Sofia Müller</span>
                             </div>
                             <div class="contact-container-check"></div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -108,10 +108,16 @@
                 <!-- SUBTASKS -->
                 <div class="input-section-element">
                     <label for="addTask-subtasks">Subtasks</label>
-                    <div class="input-container">
-                        <input id="addTask-subtasks" class="inputfield" type="text" placeholder="Add new subtask">
-                        <img class="dropdown-img" src="../img/subtasks.svg">
+                    <div id="addTask-subtasks-container" class="input-container">
+                        <input id="addTask-subtasks" onclick="openIcons()" class="inputfield" type="text" placeholder="Add new subtask">
+                        <div id="addTask-subtasks-icons" class="subtasks-icon d-none">
+                            <img onclick="emptySubtaskInput()" src="../img/closeVectorBlack.svg" alt="Löschen">
+                            <div class="parting-line subtasks-icon-line"></div>
+                            <img onclick="addSubtask()" src="../img/done.svg" alt="Bestätigen">
+                        </div>
+                        <img id="dropdown-img-plus" onclick="addSubtask()" class="dropdown-img dropdown-img-plus" src="../img/subtasks.svg">
                     </div>
+                    <div id="subtasks-list" class="subtasks-list"></div>
                 </div>
             </div>
         </div>
@@ -122,12 +128,10 @@
         <span><span style="color: #FF8190">*</span>This field is required</span>
         <div class="addTask-bottom-buttons">
 
-            <button id="clearButton" onclick="emptyInput()">
+            <button id="clearButton" onclick="clearAddTask()">
                 <span>Clear</span>
                 <div class="closeImg"></div>
             </button>
-
-
 
             <button id="createTaskButton" onclick="checkInput()">
                 <span>Create Task</span>

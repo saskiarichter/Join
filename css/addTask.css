@@ -11,10 +11,14 @@
     color: transparent !important;
 }
 
+.hidden{
+    visibility: hidden;
+}
+
 /*  LAYOUT  */
 
 .addTask {
-    height: 650px;
+    height: 750px;
     width: 976.25px;
     display: flex;
     flex-direction: column;
@@ -52,8 +56,8 @@
 }
 
 .parting-line {
-    height: 424px;
-    border: 1px solid #D1D1D1;
+    height: 100%;
+    border: 0.5px solid #D1D1D1;
 }
 
 .input-section-right {
@@ -97,7 +101,7 @@
     border: 1px solid #29ABE2;
 }
 
-.input-container-select{
+.input-container-select {
     z-index: 1;
 }
 
@@ -215,7 +219,7 @@
 }
 
 #addTask-contacts-container {
-    position: relative; 
+    position: relative;
     width: 440px;
     max-height: 200px;
     background-color: white;
@@ -226,7 +230,7 @@
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
 }
 
-.contact-container {    
+.contact-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -243,7 +247,8 @@
 .contact-container-focus {
     background-color: #2A3647;
     color: white !important;
-    .contact-container-check{
+
+    .contact-container-check {
         background-image: url(../img/checkedbuttonWhite.svg);
     }
 }
@@ -280,7 +285,7 @@
     height: 24px;
 }
 
-.contact-circles{
+.contact-circles {
     position: relative;
     display: flex;
     align-items: center;
@@ -425,6 +430,73 @@
 
 .single-Category:hover {
     background-color: #D1D1D1;
+}
+
+/*  SUBTASKS FIELD  */
+
+.input-container:focus-within {
+    .dropdown-img-plus {
+        display: none;
+    }
+}
+
+.subtasks-list-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 16px 6px 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.subtasks-list-element:hover {
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: space-between;
+
+    .subtasks-icon {
+        visibility: visible;
+    }
+
+    .subtasks-icon img:hover {
+        scale: 1.1;
+    }
+}
+
+.subtasks-list-element li {
+    cursor: pointer;
+}
+
+.subtasks-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.subtasks-icon img:hover {
+    scale: 1.1;
+}
+
+.subtasks-icon-line {
+    height: 22px;
+}
+
+.subtask-edit-container{
+    background-color: white;
+    border-bottom: 1px solid #005DFF;
+    border-radius: 0;
+    padding: 4px 16px 4px 16px;
+}
+
+.subtask-edit-container:hover{
+    background-color: white;
+}
+
+.subtask-edit-input{
+    font-size: 16px;
+    line-height: 19.2px;
 }
 
 /*  ADD TASK BOTTOM SECTION   */

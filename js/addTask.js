@@ -1,3 +1,5 @@
+let subtasks = [];
+
 /**
  * 
  * loads navBar and header
@@ -33,7 +35,7 @@ function hideRequiredInfo(borderId, textId) {
  * 
  * Removes red color from Category
  */
-function categoryRequired() {
+function hideRequiredCategory() {
     document.getElementById('addTask-category').classList.remove('empty');
 }
 
@@ -77,7 +79,7 @@ function selectContact() {
  * @param {string} imgId - id of the image that rotates
  */
 function openCategorySelection(containerId, imgId) {
-    categoryRequired();
+    hideRequiredCategory();
     openCloseDropdown(containerId, imgId);
     let selectedCategory = document.getElementById('select-task-text');
     selectedCategory.innerHTML = `Select task category`;
@@ -94,6 +96,136 @@ function selectCategory(categoryId) {
     let selectedCategory = document.getElementById('select-task-text');
     selectedCategory.innerHTML = `${category}`;
     openCloseDropdown('addTask-category-container', 'dropdown-img-category');
+}
+
+/**
+ * 
+ * changes icons of subtasks field when click inside or outside of container
+ */
+function openIcons() {
+    let container = document.getElementById('addTask-subtasks-container');
+    let icons = document.getElementById('addTask-subtasks-icons');
+    let plus = document.getElementById('dropdown-img-plus');
+    window.addEventListener('click', function (e) {
+        if (container.contains(e.target)) {
+            icons.classList.remove('d-none');
+            plus.classList.add('d-none');
+        } else {
+            icons.classList.add('d-none');
+            plus.classList.remove('d-none');
+        }
+    });
+}
+
+/**
+ * 
+ * empties subtask input
+ */
+function emptySubtaskInput() {
+    let container = document.getElementById('addTask-subtasks');
+    container.value = '';
+}
+
+/**
+ * 
+ * adds subtask to list 
+ */
+function addSubtask() {
+    let subtask = document.getElementById('addTask-subtasks').value;
+    if (subtask.length > 1) {
+        subtasks.push(subtask);
+        generateSubtasksList();
+        emptySubtaskInput();
+    }
+}
+
+/**
+ * 
+ * generates list of subtasks
+ */
+function generateSubtasksList() {
+    let container = document.getElementById('subtasks-list');
+    container.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        container.innerHTML += templateSubtaskListElement(i, subtask);
+    }
+}
+
+/**
+ * 
+ * generates HTML of list element
+ * 
+ * @param {number} i - position in subtasks array
+ * @param {string} subtask - name of subtask
+ * @returns 
+ */
+function templateSubtaskListElement(i, subtask) {
+    return `
+    <div id="subtasks-list-element${i}" class="subtasks-list-element">
+        <li ondblclick="editSubtask(${i})">${subtask}</li>
+        <div class="subtasks-icon hidden">
+            <img onclick="editSubtask(${i})" src="../img/edit.svg" alt="Bearbeiten">
+            <div class="parting-line subtasks-icon-line"></div>
+            <img onclick="deleteSubtask(${i})" src="../img/delete.svg" alt="Bestätigen">
+        </div>
+    </div>
+`;
+}
+
+/**
+ * 
+ * deletes one list element 
+ * 
+ * @param {number} i - position in subtasks array
+ */
+function deleteSubtask(i) {
+    subtasks.splice(i, 1);
+    generateSubtasksList();
+}
+
+/**
+ * 
+ * opens field to edit subtask
+ * 
+ * @param {number} i - position in subtasks array
+ */
+function editSubtask(i) {
+    let container = document.getElementById(`subtasks-list-element${i}`);
+    container.classList.add('subtask-edit-container');
+    container.innerHTML = templateEditSubtask(i);
+}
+
+/**
+ * 
+ * generates HTML of field to edit subtask
+ * 
+ * @param {number} i - position in subtasks array
+ * @returns 
+ */
+function templateEditSubtask(i) {
+    return `
+    <input id="newSubtask" value="${subtasks[i]}" class="inputfield subtask-edit-input" type="text">
+    <div id="addTask-subtasks-icons" class="subtasks-icon">
+        <img onclick="deleteSubtask(${i})" src="../img/delete.svg" alt="Löschen">
+        <div class="parting-line subtasks-icon-line"></div>
+        <img onclick="keepSubtask(${i})" src="../img/done.svg" alt="Bestätigen">
+    </div>
+    `;
+}
+
+/**
+ * 
+ * generates list with new Subtask & closes edit field
+ * 
+ * @param {number} i - position in subtasks array
+ */
+function keepSubtask(i) {
+    let newSubtask = document.getElementById('newSubtask').value;
+    if (newSubtask.length > 1) {
+        subtasks.splice(i, 1, newSubtask);
+        generateSubtasksList();
+    }
 }
 
 /**
@@ -151,6 +283,19 @@ function checkCategory(category) {
     }
 }
 
+
+/**
+ * 
+ * resets whole AddTask page
+ */
+function clearAddTask(){
+    hideRequiredInfo('addTask-title', 'required-title');
+    hideRequiredInfo('addTask-dueDate', 'required-date');
+    hideRequiredCategory();
+    emptyInput();
+    subtasks = [];
+}
+
 /**
  * 
  * empties all inputfields 
@@ -162,4 +307,5 @@ function emptyInput() {
     document.getElementById('taskDate').value = '';
     document.getElementById('select-task-text').innerHTML = `Select task category`;
     document.getElementById('addTask-subtasks').value = '';
+    document.getElementById('subtasks-list').innerHTML = '';
 }
