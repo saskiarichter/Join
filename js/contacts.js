@@ -1,11 +1,27 @@
 let nameInput = [];
 let emailInput = [];
 let phoneNumbersInput = [];
+let colorIndex = 0;
+
+const colors = [
+    "#FF5733",
+    "#3380FF",
+    "#1d6331",
+    "#FFEA33",
+    "#FF5733",
+    "#7A33FF",
+    "#FF33C1",
+    "#33E6FF",
+    "#FF33A2",
+    "#33FFF1"
+  ];
+  
 
 function addNewContact() {
-    document.getElementById('overlay').style.display = 'block'; // Overlay anzeigen
+    document.getElementById('overlay').style.display = 'block'; 
     document.getElementById('dialogNewContactDiv').classList.remove('d-none');
     document.getElementById('dialogNewContactDiv').innerHTML = HTMLTemplateNewContact();
+
 }
 
 function closeContactDialog() {
@@ -56,57 +72,63 @@ function HTMLTemplateNewContact(){
     `;
 }
 
-function editContact(index){
-    document.getElementById('overlay').style.display = 'block'; // Overlay anzeigen
+function editContact(index, nextColor){
+    document.getElementById('overlay').style.display = 'block';
     document.getElementById('dialogNewContactDiv').classList.remove('d-none');
-    document.getElementById('dialogNewContactDiv').innerHTML = HTMLTemplateEditContact(index); // Index übergeben
+    document.getElementById('dialogNewContactDiv').innerHTML = HTMLTemplateEditContact(index); 
 }
 
-function HTMLTemplateEditContact(index){
+function editContact(index, nextColor){
+    document.getElementById('overlay').style.display = 'block'; 
+    document.getElementById('dialogNewContactDiv').classList.remove('d-none');
+    document.getElementById('dialogNewContactDiv').innerHTML = HTMLTemplateEditContact(index, nextColor); 
+}
+
+function HTMLTemplateEditContact(index, nextColor){
     let name = nameInput[index];
     let email = emailInput[index];
     let phone = phoneNumbersInput[index];
-
+    let initials = getInitials(name);
+    
     return `    
-    <div class="dialogNewContactInnerDiv">
-    <div class="dialogLeft">
-        <img class="joinLogoDialog" src="./img/Capa 2.png">
-        <div class="dialogLeftInnerDiv">
-            <h1 class="HeadlineDialog">Edit contact</h1>
-        </div>
-    </div>
-    <div class="dialogRight">
-        <div class="dialogCloseDiv">
-            <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
-        </div>
-        <div class="dialogProfilPictureDiv">
-            <img class="dialogProfilPicture" src="./img/Group 13.png">
-            <div class="dialogAddData">
-                <div class="dialogInputfield">
-                    <div class="dialogInputfieldDiv">
-                        <input id="inputName" value="${name}">
-                        <img class="dialogIcons" src="./img/person.png">
-                    </div>
-                    <div class="dialogInputfieldDiv">
-                        <input id="inputMail" value="${email}" type="email" pattern=".+@.+" required>
-                        <img class="dialogIcons" src="./img/mail.png">
-                    </div>
-                    <div class="dialogInputfieldDiv">
-                        <input id="inputPhone" value="${phone}" type="number" class="no-spinners">
-                        <img class="dialogIcons" src="./img/call.png">
-                    </div>
+        <div class="dialogNewContactInnerDiv">
+            <div class="dialogLeft">
+                <img class="joinLogoDialog" src="./img/Capa 2.png">
+                <div class="dialogLeftInnerDiv">
+                    <h1 class="HeadlineDialog">Edit contact</h1>
                 </div>
-                <div class="dialogButtonDiv">
-                    <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                    <button onclick="saveEditContact(${index})" class="createContactButton">Save<img src="./img/check.png"></button>
+            </div>
+            <div class="dialogRight">
+                <div class="dialogCloseDiv">
+                    <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
                 </div>
-            </div> 
+                <div class="dialogProfilPictureDiv">
+                    <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
+                    <div class="dialogAddData">
+                        <div class="dialogInputfield">
+                            <div class="dialogInputfieldDiv">
+                                <input id="inputName" value="${name}">
+                                <img class="dialogIcons" src="./img/person.png">
+                            </div>
+                            <div class="dialogInputfieldDiv">
+                                <input id="inputMail" value="${email}" type="email" pattern=".+@.+" required>
+                                <img class="dialogIcons" src="./img/mail.png">
+                            </div>
+                            <div class="dialogInputfieldDiv">
+                                <input id="inputPhone" value="${phone}" type="number" class="no-spinners">
+                                <img class="dialogIcons" src="./img/call.png">
+                            </div>
+                        </div>
+                        <div class="dialogButtonDiv">
+                            <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
+                            <button onclick="saveEditContact(${index})" class="createContactButton">Save<img src="./img/check.png"></button>
+                        </div>
+                    </div> 
+                </div>
+            </div>  
         </div>
-    </div>  
-</div>
     `;
 }
-
 
 function createNewContact(){
     let name = document.getElementById('inputName').value;
@@ -120,22 +142,26 @@ function createNewContact(){
     nameInput.push(name);
     emailInput.push(mail);
     phoneNumbersInput.push(phone);
+    safeContact();
 
-    let index = nameInput.length - 1; // Index des neuen Kontakts
+    let index = nameInput.length - 1; 
+    const nextColor = getNextColor();
 
     let newContactDiv = document.createElement('div');
     newContactDiv.classList.add('contactList');
-    newContactDiv.innerHTML = renderHTMLcreateNewContact(name, mail, phone, index);
+    newContactDiv.innerHTML = renderHTMLcreateNewContact(name, mail, phone, index, nextColor);
     document.getElementById('contactList').appendChild(newContactDiv);
 
     document.getElementById('overlay').style.display = 'none'; 
     document.getElementById('dialogNewContactDiv').classList.add('d-none');
 }
 
-function renderHTMLcreateNewContact(name, email, phoneNumber, index){
+function renderHTMLcreateNewContact(name, email, phoneNumber, index, nextColor){
+    let initials = getInitials(name);
+
     return `
-    <div onclick="showFullContact(${index})" id="contactListInner${index}" class="contactListInner">
-    <div class="circleProfilPic">CS</div>
+    <div onclick="showFullContact(${index}, '${nextColor}')" id="contactListInner${index}" class="contactListInner">
+    <div class="circleProfilPic" style="background-color: ${nextColor}">${initials}</div>
     <div class="nameAndEmail">
         <p class="nameProfil">${name}</p>
         <p class="emailAdress">${email}</p>
@@ -145,21 +171,32 @@ function renderHTMLcreateNewContact(name, email, phoneNumber, index){
     
 }
 
-function showFullContact(index){
+function getInitials(name) {
+    return name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+
+}
+
+function getNextColor(){
+    colorIndex = (colorIndex + 1) % colors.length;
+    return colors[colorIndex];
+}
+
+function showFullContact(index, nextColor){
     let content = document.getElementById('contactsRightSectionShowProfil');
     content.innerHTML = '';
 
         let name = nameInput[index];
         let email = emailInput[index];
         let phone = phoneNumbersInput[index];
+        let initials = getInitials(name);
 
         content.innerHTML = `
         <div class="contactsRightSectionShowProfilInner">
-        <div class="circleProfilPicShow">AM</div>
+        <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
         <div class="proilNameAndEdit">
             <p class="nameProfilShow">${name}</p>
                 <div class="proilNameAndEditInner">
-                    <p onclick="editContact(${index})" class="profilEdit">Edit</p>
+                    <p onclick="editContact(${index}, '${nextColor}')" class="profilEdit">Edit</p>
                     <img class="logoRightSection" src="./img/edit.png">
                     <p onclick="deleteContact(${index})" class="profilDelete">Delete</p>
                     <img class="logoRightSection" src="./img/delete.png">
@@ -226,4 +263,29 @@ function deleteContact(index) {
     }
     let content = document.getElementById('contactsRightSectionShowProfil');
     content.innerHTML = '';
+}
+
+function safeContact(){
+    let ContactsNamesAsText = JSON.stringify(nameInput);
+    localStorage.setItem('names', ContactsNamesAsText);
+
+    let emailsAsText = JSON.stringify(emailInput);
+    localStorage.setItem('mails', emailsAsText);
+
+    let phoneNumbersAsText = JSON.stringify(phoneNumbersInput);
+    localStorage.setItem('phoneNumbers', phoneNumbersAsText);
+
+}
+
+function loadContacts(){
+    let ContactsNamesAsText = localStorage.getItem('names');
+    let emailsAsText = localStorage.getItem('mails');
+    let phoneNumbersAsText = localStorage.getItem('phoneNumbers')
+
+    if (ContactsNamesAsText && emailsAsText && phoneNumbersAsText ) {
+        nameInput = JSON.parse(ContactsNamesAsText);
+        emailInput = JSON.parse(emailsAsText);
+        phoneNumbersInput = JSON.parse(phoneNumbersAsText);
+
+        }
 }
