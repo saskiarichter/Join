@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="./img/joinlogo.png">
+  <link rel="icon" type="image/x-icon" href="/img/joinlogo.png">
   <title>Board</title>
   <link rel="stylesheet" href="/css/board.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,10 +19,10 @@
         <h1>Board</h1>
         <div class="addTask-content">
           <div class="search-content">
-            <input type="text" placeholder="Find Task" id="search-input">
+            <input type="text" placeholder="Find Task" id="search-input" autocomplete="off" onkeyup="searchTask()">
             <div class="search-line-content">
               <div class="line-content"></div>
-              <button class="search-btn">
+              <button class="search-btn" onclick="searchTask()">
                 <i class="fa fa-search" id="search-icon"></i>
               </button>
             </div>
@@ -74,15 +74,15 @@
               <div class="input-container">
                 <span>Prio</span>
                 <div class="prio-buttons">
-                  <button class="urgent-button">
+                  <button class="urgent-button" id="urgent-button" onclick="urgentbtn(id)">
                     <span>Urgent</span>
                     <img src="./img/PrioAltaRed.png" alt="Schließen">
                   </button>
-                  <button class="medium-button">
+                  <button class="medium-button" id="medium-button" onclick="mediumbtn(id)">
                     <span>Medium</span>
                     <img src="./img/PrioMediaOrange.png" alt="Schließen">
                   </button>
-                  <button class="low-button">
+                  <button class="low-button" id="low-button" onclick="lowbtn()">
                     <span>Low</span>
                     <img src="./img/PrioBajaGreen.png" alt="Schließen">
                   </button>
