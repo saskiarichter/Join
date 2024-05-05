@@ -269,6 +269,17 @@ h1{
   z-index: 999;
 }
 
+.overlay{
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 .addTask-title-content{
   display: flex;
   align-items: center;
@@ -287,17 +298,6 @@ h1{
 .close-btn:hover{
   background-color: #E7E7E7;
   border-radius: 20px;
-}
-
-.overlay{
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(3px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
 }
 
 .addTask-top{
@@ -483,6 +483,7 @@ h1{
   color: #FF8190;
 }
 
+
 /*new*/
 .input-section-element{
   display: flex;
@@ -552,6 +553,11 @@ h1{
   height: 8px;
   width: 128px;
   border-radius: 10px;
+}
+
+.width{
+  width: 50%;
+  background-color: #0038FF;
 }
 
 .user-inner-container{
