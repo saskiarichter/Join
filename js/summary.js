@@ -52,8 +52,3 @@ function displayUserInitials() {
         userInitials.innerText = "G";
     }
 }
-
-
-
-
-

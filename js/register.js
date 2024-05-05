@@ -12,7 +12,7 @@ let users = [
 ];
 
 
-function addUser() {
+async function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -24,23 +24,45 @@ function addUser() {
         return;
     }
 
+    // Überprüfen, ob die Checkbox aktiviert ist
+    if (!document.getElementById('loginCheckBoxRememberMe').checked) {
+        alert("Please accept the Privacy Policy");
+        return;
+    }
+    
+    // Überprüfen, ob die E-Mail bereits existiert
+    if (users.some(user => user.email === email)) {
+        alert("Email already exists");
+        return;
+    }
+
+    // Überprüfen, ob das Passwort bereits existiert
+    if (users.some(user => user.password === password)) {
+        alert("Password already exists");
+        return;
+    }
+
     // Benutzer zum Array hinzufügen
     users.push({name: name, email: email, password: password});
+
+    // Daten in Firebase speichern
+    await postData("users", {name: name, email: email, password: password});
 
     // Optional: Feedback geben, dass der Benutzer erfolgreich hinzugefügt wurde
     alert("User added successfully");
 
-    window.location.href = 'index.html?msg=Du hast dich erfolgreich registriert'
+    window.location.href = 'index.html?msg=Du hast dich erfolgreich registriert';
 
-     // Eingabefelder leeren
-     document.getElementById('name').value = "";
-     document.getElementById('email').value = "";
-     document.getElementById('password').value = "";
-     document.getElementById('password-confirm').value = "";
+    // Eingabefelder leeren
+    document.getElementById('name').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('password').value = "";
+    document.getElementById('password-confirm').value = "";
 }
 
 
-function login() {
+
+async function login() {
     let email = document.getElementById('email-login').value;
     let password = document.getElementById('password-login').value;
 
@@ -57,3 +79,12 @@ function login() {
         alert("Invalid email and password. Please try again.");
     }
 }
+
+
+function logout() {
+    let logout = document.getElementById('hLogout');
+
+    logout.addEventListener("click", returnToHome) 
+    }
+
+

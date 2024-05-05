@@ -1,3 +1,59 @@
+async function onloadFunc() {
+    await loadData();
+}
+
+
+const BASE_URL = "https://remotestorage-2c309-default-rtdb.europe-west1.firebasedatabase.app/";
+
+async function loadData() {
+    let response = await fetch(BASE_URL + "users.json");
+    let usersData = await response.json();
+
+    // Überprüfen, ob Daten vorhanden sind
+    if (usersData) {
+        // Iteriere durch die Benutzerdaten und füge sie dem users-Array hinzu
+        Object.keys(usersData).forEach(key => {
+            users.push(usersData[key]);
+        });
+    }
+}
+
+
+async function postData(path="", data={}){
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        header: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
+
+
+async function deleteData(path=""){
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return responseToJson = await response.json();
+}
+
+
+async function putData(path="", data={}){
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
+
+
+
+
+
 const STORAGE_TOKEN = 'CtxTcEZlVAPVkjOjpZldtlcmqUaZRJ2I2WAuicYHaD9MSDiKX9dIFrhP8kxmEUqz';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
@@ -15,3 +71,4 @@ async function getItem(key) {
         } throw `Could not find data with key "${key}".`;
     });
 }
+

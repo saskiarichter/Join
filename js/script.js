@@ -5,20 +5,19 @@ function changeForm() {
     let checkboxSignUp = document.getElementById('checkboxSignUp');
     checkboxSignUp.classList.add("loginCheckboxSignUp");
 
-    form.innerHTML = "";
-        form.innerHTML = `
-                        <form onsubmit="addUser(); return false;">
-                            <div class="formHeadline">
-                                <div class="headline">
-                                    <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
-                                    <h1 class="formHeadlineText">Sign up</h1>
-                                </div>            
-                                <div class="formHeadlineBorder"></div>
+    form.innerHTML = `
+                    <form onsubmit="return false;">
+                        <div class="formHeadline">
+                            <div class="headline">
+                                <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
+                                <h1 class="formHeadlineText">Sign up</h1>
+                            </div>            
+                            <div class="formHeadlineBorder"></div>
+                        </div>    
+                        <div class="mailPassword">
+                            <div>
+                                <input class="inputNameSignUp" type="text" placeholder="Name" required id="name">
                             </div>    
-                            <div class="mailPassword">
-                                <div>
-                                    <input class="inputNameSignUp" type="text" placeholder="Name" required id="name"
-                                </div>    
                             <div>
                                 <input class="inputMailSignUp" type="email" placeholder="Email" required id="email">
                             </div>
@@ -36,11 +35,14 @@ function changeForm() {
                                 <p for="exampleCheck1">I accept the <a class="policeLink" href"#">Privacy Police</a></label>
                             </div>
                             <div class="buttons">
-                                <button class="buttonLogin" type="submit">Sign up</button>
+                                <button class="buttonLogin" onclick="addUser()">Sign up</button>
                             </div>
-                        </form> 
+                        </div>
+                    </form> 
     `;
 }
+
+
 
 
 function toggleMenu() {
