@@ -1,4 +1,5 @@
 let subtasks = [];
+let selectedContacts = [];
 
 /**
  * 
@@ -41,22 +42,59 @@ function hideRequiredCategory() {
 
 /**
  * 
- * opens and closes dropdown field & rotates dropdown icon
+ * opens dropdown
  * 
- * @param {string} containerId - id of the dropdown container
- * @param {string} imgId - id of the image that rotates
+ * @param {object} container - dropdown container
+ * @param {object} img - rotating image
  */
-function openCloseDropdown(containerId, imgId) {
-    let container = document.getElementById(`${containerId}`);
-    let img = document.getElementById(`${imgId}`);
-    if (container.classList.contains('d-none')) {
-        container.classList.remove('d-none');
-        img.classList.add('dropdown-img-rotated');
-    } else {
-        container.classList.add('d-none');
-        img.classList.remove('dropdown-img-rotated');
-    }
+function openDropdown(container, img) {
+    container.classList.remove('d-none');
+    img.classList.add('dropdown-img-rotated');
 }
+
+/**
+ * 
+ * closes dropdown
+ * 
+ * @param {object} container - dropdown container
+ * @param {object} img - rotating image
+ */
+function closeDropdown(container, img) {
+    container.classList.add('d-none');
+    img.classList.remove('dropdown-img-rotated');
+}
+
+/**
+ * 
+ * opens/closes contacts & shows/hides selected contacts
+ */
+function openContacts() {
+    let container = document.getElementById('input-section-element');
+    let contacts = document.getElementById('addTask-contacts-container');
+    let img = document.getElementById('dropdown-img-contacts');
+
+    window.addEventListener('click', function (e) {
+        if (container.contains(e.target)) {
+            openDropdown(contacts, img);
+            hideSelectedContacts();
+        } else {
+            closeDropdown(contacts, img);
+            showSelectedContacts();
+        }
+    });
+}
+
+function openCloseContacts() {
+    let container = document.getElementById('addTask-contacts-container');
+    let img = document.getElementById('dropdown-img-contacts');
+    if (container.contains('d-none')) {
+        openDropdown(container, img);
+        hideSelectedContacts();
+    } else {
+        closeDropdown(container, img);
+        showSelectedContacts();
+    }
+};
 
 /**
  * 
@@ -64,11 +102,41 @@ function openCloseDropdown(containerId, imgId) {
  */
 function selectContact() {
     let container = document.getElementById('contact-container');
+    let name = document.getElementById('contactName').innerHTML;
+    let initals = document.getElementById('contactInitals').innerHTML;
+
     if (container.classList.contains('contact-container-focus')) {
         container.classList.remove('contact-container-focus');
+        selectedContacts.splice({ 'name': name, 'initals': initals });
     } else {
         container.classList.add('contact-container-focus');
+        selectedContacts.push({ 'name': name, 'initals': initals });
     }
+}
+
+/**
+ * 
+ * renders selected Contacts
+ */
+function showSelectedContacts() {
+    let container = document.getElementById('selectedContacts');
+    container.classList.remove('d-none');
+    container.innerHTML = '';
+    for (let i = 0; i < selectedContacts.length; i++) {
+        const contact = selectedContacts[i];
+        container.innerHTML += `
+        <span class="circleName">${contact['initals']}</span>
+        `;
+    }
+}
+
+/**
+ * 
+ * hides selected contacts
+ */
+function hideSelectedContacts() {
+    let container = document.getElementById('selectedContacts');
+    container.classList.add('d-none');
 }
 
 /**
@@ -78,9 +146,15 @@ function selectContact() {
  * @param {string} containerId  - id of the dropdown container
  * @param {string} imgId - id of the image that rotates
  */
-function openCategorySelection(containerId, imgId) {
+function openCategories() {
     hideRequiredCategory();
-    openCloseDropdown(containerId, imgId);
+    let container = document.getElementById('addTask-category-container');
+    let img = document.getElementById('dropdown-img-category');
+    if (container.classList.contains('d-none')) {
+        openDropdown(container, img);
+    } else {
+        closeDropdown(container, img);
+    }
     let selectedCategory = document.getElementById('select-task-text');
     selectedCategory.innerHTML = `Select task category`;
 }
@@ -288,7 +362,7 @@ function checkCategory(category) {
  * 
  * resets whole AddTask page
  */
-function clearAddTask(){
+function clearAddTask() {
     hideRequiredInfo('addTask-title', 'required-title');
     hideRequiredInfo('addTask-dueDate', 'required-date');
     hideRequiredCategory();

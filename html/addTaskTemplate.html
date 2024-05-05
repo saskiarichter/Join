@@ -28,28 +28,23 @@
                     </div>
                 </div>
                 <!-- ASSIGNED TO -->
-                <div class="input-section-element">
+                <div id="input-section-element" class="input-section-element">
                     <label for="addTask-assigned">Assigned to</label>
-                    <div onclick="openCloseDropdown('addTask-contacts-container', 'dropdown-img-contacts')"
-                        class="input-container input-container-select" tabindex="1">
+                    <div onclick="openContacts()" class="input-container input-container-select" tabindex="1">
                         <input id="addTask-assigned" class="inputfield" type="text"
                             placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = 'Select contacts to assign'">
-                        <img id="dropdown-img-contacts" class="dropdown-img" src="../img/arrow_drop_down.svg">
+                        <img id="dropdown-img-contacts" onclick="openCloseContacts()" class="dropdown-img" src="../img/arrow_drop_down.svg">
                     </div>
-                    <div class="contact-circles">
-                        <span class="circleName">SM</span>
-                        <span class="circleName">SM</span>
-                        <span class="circleName">SM</span>
-                    </div>
+                    <div id="selectedContacts" class="contact-circles d-none"></div>
                     <div id="addTask-contacts-container" class="d-none">
                         <div id="contact-container" onclick="selectContact()" class="contact-container" tabindex="1">
                             <div class="contact-container-name">
-                                <span class="circleName">SM</span>
-                                <span>Sofia Müller</span>
+                                <span  id="contactInitals" class="circleName">SM</span>
+                                <span id="contactName">Sofia Müller</span>
                             </div>
                             <div class="contact-container-check"></div>
-                        </div>                        
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -92,7 +87,7 @@
                 <div class="input-section-element">
                     <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
                     <div class="addTask-category-section">
-                        <div id="addTask-category" onclick="openCategorySelection('addTask-category-container', 'dropdown-img-category')"
+                        <div id="addTask-category" onclick="openCategories()"
                             class="input-container input-container-category input-container-select">
                             <span id="select-task-text" class="inputfield">Select task category</span>
                             <img id="dropdown-img-category" class="dropdown-img" src="../img/arrow_drop_down.svg">

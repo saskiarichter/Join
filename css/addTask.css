@@ -219,11 +219,10 @@
 }
 
 #addTask-contacts-container {
-    position: relative;
     width: 440px;
     max-height: 200px;
     background-color: white;
-    margin-top: -70px;
+    margin-top: -18px;
     padding-top: 10px;
     position: relative;
     border-radius: 10px;
