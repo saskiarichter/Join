@@ -6,6 +6,7 @@ async function initSummary() {
     displayUserInitials();
 }
 
+
 function summaryBg() {
     document.getElementById('summary').classList.add("bgfocus");
 }
@@ -36,6 +37,7 @@ function displayUsername() {
     // Setze den Benutzernamen in das HTML-Element ein
     greetingName.innerText = username || "Guest";
 }
+
 
 // Funktion, um den Benutzernamen auf der Seite anzuzeigen
 function displayUserInitials() {
