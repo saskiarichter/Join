@@ -4,6 +4,7 @@ async function initSummary() {
     updateGreeting();
     displayUsername();
     displayUserInitials();
+    await loadData();
 }
 
 

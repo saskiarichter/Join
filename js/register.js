@@ -84,6 +84,6 @@ async function login() {
 function logout() {
     let logout = document.getElementById('hLogout');
     logout.addEventListener("click", returnToHome()) 
-    }
+}
 
 

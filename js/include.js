@@ -1,6 +1,8 @@
 async function initInclude() {
     await includeHTML();
+    await loadData();
 }
+
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
@@ -49,4 +51,10 @@ function redirectToPrivacyPolice() {
     window.location.href = "privacyPolice.html";
 }
 
+function redirectToPrivacyPoliceSignup() {
+    window.open("privacyPoliceSignup.html", "_blank");
+}
 
+function redirectToLegalNoticeSignup() {
+    window.open("legalNoticeSignup.html", "_blank");
+}

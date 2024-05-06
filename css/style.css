@@ -306,6 +306,7 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
 }
 
 .footerLinks {
+    cursor: pointer;
     text-decoration: none;
     color: #A8A8A8;
     font-size: 16px;

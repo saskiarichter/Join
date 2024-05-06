@@ -1,6 +1,7 @@
 async function init() {
     await includeHTML();
     legalNoticeBg();
+    await loadData();
 }
 
 
