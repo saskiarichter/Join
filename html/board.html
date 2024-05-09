@@ -7,6 +7,7 @@
   <link rel="icon" type="image/x-icon" href="/img/joinlogo.png">
   <title>Board</title>
   <link rel="stylesheet" href="/css/board.css">
+  <link rel="stylesheet" href="/css/edit.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -74,11 +75,11 @@
               <div class="input-container">
                 <span>Prio</span>
                 <div class="prio-buttons">
-                  <button class="urgent-button" id="urgent-button" onclick="urgentbtn(id)">
+                  <button class="urgent-button" id="urgent-button" onclick="urgentbtn()">
                     <span>Urgent</span>
                     <img src="./img/PrioAltaRed.png" alt="Schließen">
                   </button>
-                  <button class="medium-button" id="medium-button" onclick="mediumbtn(id)">
+                  <button class="medium-button" id="medium-button" onclick="mediumbtn()">
                     <span>Medium</span>
                     <img src="./img/PrioMediaOrange.png" alt="Schließen">
                   </button>
@@ -122,6 +123,8 @@
         </div>
       </div>
 
+      <div w3-include-html="/html/edit.html"></div>
+
       <div class="border-management-content">
         <div class="inner-management-content">
           <div class="title-m-content">
@@ -160,6 +163,7 @@
         </div>
       </div>
     </div>
+    <div id="showTask" class="hidden"></div>
   </section>
   <div class="overlay hidden" onclick="closeMe()"></div>
   <script src="/js/include.js"></script>

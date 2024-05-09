@@ -194,6 +194,11 @@ h1{
  position: relative;
  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
  cursor: pointer;
+ transition: transform 0.3s ease-in-out;
+}
+
+.card:hover{
+  transform: rotate(5deg);
 }
 
 .card-category-title{
@@ -269,15 +274,22 @@ h1{
   z-index: 999;
 }
 
-.overlay{
-  background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(3px);
+
+#showTask{
+  width: 370px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  justify-content: space-between;
+  border-radius: 30px;
+  padding: 38px 30px;
+  gap: 14px;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
 }
 
 .addTask-title-content{
@@ -298,6 +310,17 @@ h1{
 .close-btn:hover{
   background-color: #E7E7E7;
   border-radius: 20px;
+}
+
+.overlay{
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .addTask-top{
@@ -321,6 +344,7 @@ h1{
   padding: 18px 16px !important;
 }
 
+
 .input-section{
   width: 100%;
   height: 424px;
@@ -330,6 +354,7 @@ h1{
   font-weight: 400;
   line-height: 24px;
 }
+
 
 .input-section-left{
   width: 440px;
@@ -471,6 +496,34 @@ h1{
   color: #29ABE2;
 }
 
+.save-button{
+  background-color: #2A3647;
+  color: #FFFFFF;
+  width: 143px;
+  cursor: pointer;
+  height: 36px;
+  border: none !important;
+  font-size: 16px !important;
+}
+
+.save-button:hover{
+  background-color: #29ABE2;
+}
+
+.back-button{
+  background-color: transparent;
+  height: 36px;
+  width: 55px;
+  cursor: pointer;
+  border: 1px solid #2A3647;
+  font-size: 16px !important;
+}
+
+.back-button:hover{
+  border-color: #29ABE2;
+  color: #29ABE2;
+}
+
 .addTask-bottom-buttons img{
   width: 24px;
   height: 24px;
@@ -482,7 +535,6 @@ h1{
   line-height: 14.4px;
   color: #FF8190;
 }
-
 
 /*new*/
 .input-section-element{
@@ -555,19 +607,95 @@ h1{
   border-radius: 10px;
 }
 
-.width{
-  width: 50%;
-  background-color: #0038FF;
-}
-
 .user-inner-container{
   background-color: #FF3d00;
   color: white;
-  padding: 20px;
-  width: 20px;
-  height: 20px;
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  font-size: 12px;
   border-radius: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/*show card*/
+
+.show-card-title{
+  font-size: 51px;
+  font-weight: 700;
+  line-height: 53.2px;
+  color: #000000;
+  margin-block-start: 0;
+  margin-block-end: 14px;
+}
+
+.show-card-description{
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.dueDate-content{
+  display: flex;
+  gap: 20px;
+}
+
+.dueDateText-content,.prioText,.assignedToText{
+  color: #2A3647;
+}
+
+.priority-content{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.prio-icon-text-content{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.show-assignedTo-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.show-user-content{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.show-btn-content{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+}
+
+.show-btn-content button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.show-line-content{
+  width: 1px;
+  background-color: #D1D1D1;
+  margin-right: 0px;
+  height: 24px;
+}
+
+.show-delete-content, .show-edit-content{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }

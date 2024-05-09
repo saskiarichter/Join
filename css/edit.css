@@ -1,0 +1,130 @@
+#addTask-edit{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5rem;
+    border-radius: 30px;
+    z-index: 999;
+  }
+
+  .addTask-edit-top{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #addTask-edit-description{
+    height: 60px;
+  }
+
+  .addTask-edit-bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .input-section-edit{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    flex-direction: column;
+  }
+
+  .input-section-left-edit{
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-edit{
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 6px 11px 6px 11px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .input-edit-subtask{
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 6px 11px 6px 11px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .prio-edit-buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .prio-edit-buttons button{
+    width: 128px;
+    height: 26px;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    background-color: transparent;
+    border: 1px solid #E7E7E7;
+    cursor: pointer;
+  }
+
+  .prio-edit-buttons button:hover{
+    box-shadow: 0px 4px 2px 0 rgba(17, 3, 3, 0.24);
+  }
+  
+  .urgent-edit-button:focus, .urgent-edit-button.active{
+    background-color: #FF3d00;
+    color: #FFFFFF;
+  }
+  
+  .medium-edit-button:focus, .medium-edit-button.active{
+    background-color: #FFA800;
+    color: #FFFFFF;
+  }
+  
+  .low-edit-button:focus, .low-edit-button.active{
+    background-color: #7AE229;
+    color: #FFFFFF;
+  }
+  
+  .urgent-edit-button img, .medium-edit-button img, .low-edit-button img{
+    background-color: #FFFFFF;
+    border: none;
+    padding: 2px;
+  }
+
+  .close-edit-btn{
+    color: #2A3647;
+    font-size: 20px !important;
+    font-weight: 100;
+    cursor: pointer;
+    padding: 5px 7px 0px 7px;
+    height: 36px;
+  }

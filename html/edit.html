@@ -1,0 +1,84 @@
+<div id="addTask-edit" class="hidden">
+    <div class="addTask-edit-top">
+      <div class="addTask-title-content">
+        <h2 class="addTask-edit-title">Edit Task</h2>
+        <i onclick="closeMe()" class="fa fa-close close-edit-btn"></i>
+      </div>
+      <div class="input-section-edit">
+        <div class="input-section-left-edit">
+          <div class="input-container">
+            <label for="addTask-title">Title</label>
+            <div class="input-container-required">
+              <div class="input-container" tabindex="1">
+                <input id="addTask-edit-title" class="input-edit" type="text" placeholder="Enter a title" autocomplete="off" required>
+                <input type="text" class="hidden" id="hiddenInput">
+              </div>
+              <span id="required-title" class="required-text hidden">This field is required</span>
+            </div>
+          </div>
+          <div class="input-container">
+            <label for="addTask-description">Description</label>
+            <textarea id="addTask-edit-description" class="input-edit" placeholder="Enter a Description"
+              style="resize: none;" autocomplete="off"></textarea>
+          </div>
+          <div class="input-container">
+            <label for="addTask-assigned">Assigned to</label>
+            <select id="addTask-edit-assigned" class="input-edit" placeholder="Select contacts to assign">
+              <option>Sofia Müller</option>
+              <option>Anton Mayer</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-section-right">
+          <div class="input-container">
+            <label for="addTask-dueDate">Due Date</label>
+            <input id="addTask-edit-dueDate" class="input-edit" type="date" placeholder="dd/mm/yyyy" required>
+          </div>
+          <div class="input-container">
+            <span>Prio</span>
+            <div class="prio-edit-buttons">
+              <button class="urgent-edit-button" id="3" onclick="urgentbtn()">
+                <span>Urgent</span>
+                <img src="./img/PrioAltaRed.png" alt="Schließen">
+              </button>
+              <button class="medium-edit-button" id="4" onclick="mediumbtn()">
+                <span>Medium</span>
+                <img src="./img/PrioMediaOrange.png" alt="Schließen">
+              </button>
+              <button class="low-edit-button" id="5" onclick="lowbtn()">
+                <span>Low</span>
+                <img src="./img/PrioBajaGreen.png" alt="Schließen">
+              </button>
+            </div>
+          </div>
+          <div class="input-container">
+            <label for="addTask-category">Category</label>
+            <select id="addTask-edit-category" placeholder="Select task category" class="input-edit">
+              <option value="User Story">User Story</option>
+              <option value="Technical Task">Technical Task</option>
+            </select>
+          </div>
+          <div class="input-section-element">
+            <label for="addTask-subtasks">Subtasks</label>
+            <div class="input-edit-subtask" onclick="setFocus(this)">
+                <input id="addTask-edit-subtasks" class="inputfield" type="text" placeholder="Add new subtask" maxlength="26" autocomplete="off">
+                <img src="./img/subtasks.png" class="plus-icon-subtasks" onclick="addSubtask()">
+            </div>
+            <ul id="newSubtask" class="hidden">
+            </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="addTask-edit-bottom">
+      <div class="addTask-bottom-buttons">
+        <button onclick="closeMe()" class="back-button">
+          <span>Back</span>
+        </button>
+        <button class="save-button" onclick="saveEditTask()">
+          <span>Save Task</span>
+        </button>
+      </div>
+    </div>
+  </div>
