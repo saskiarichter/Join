@@ -30,22 +30,14 @@
                 <!-- ASSIGNED TO -->
                 <div id="input-section-element" class="input-section-element">
                     <label for="addTask-assigned">Assigned to</label>
-                    <div onclick="openContacts()" class="input-container input-container-select" tabindex="1">
-                        <input id="addTask-assigned" class="inputfield" type="text"
+                    <div id="contacts-input-container" onclick="openContacts()" class="input-container input-container-select" tabindex="1">
+                        <input id="addTask-assigned" onkeyup="searchContacts()" class="inputfield" type="text"
                             placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = 'Select contacts to assign'">
-                        <img id="dropdown-img-contacts" onclick="openCloseContacts()" class="dropdown-img" src="../img/arrow_drop_down.svg">
+                        <img id="dropdown-img-contacts" onclick="openCloseContacts(event)" class="dropdown-img" src="../img/arrow_drop_down.svg">
                     </div>
                     <div id="selectedContacts" class="contact-circles d-none"></div>
-                    <div id="addTask-contacts-container" class="d-none">
-                        <div id="contact-container" onclick="selectContact()" class="contact-container" tabindex="1">
-                            <div class="contact-container-name">
-                                <span  id="contactInitals" class="circleName">SM</span>
-                                <span id="contactName">Sofia Müller</span>
-                            </div>
-                            <div class="contact-container-check"></div>
-                        </div> 
-                    </div>
+                    <div id="addTask-contacts-container" class="d-none"></div>
                 </div>
             </div>
 
@@ -93,10 +85,8 @@
                             <img id="dropdown-img-category" class="dropdown-img" src="../img/arrow_drop_down.svg">
                         </div>
                         <div id="addTask-category-container" class="d-none">
-                            <div id="technicalTask" onclick="selectCategory('technicalTask')" class="single-Category">
-                                Technical Task</div>
-                            <div id="userStory" onclick="selectCategory('userStory')" class="single-Category">User Story
-                            </div>
+                            <span id="technicalTask" onclick="selectCategory('technicalTask')" class="single-Category">Technical Task</span>
+                            <span id="userStory" onclick="selectCategory('userStory')" class="single-Category">User Story</span>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,18 @@
-let subtasks = [];
+let contacts = [{
+    'name': 'Sofia Müller',
+    'initials': 'SM'
+}, {
+    'name': 'Alex Richter',
+    'initials': 'AR'
+}, {
+    'name': 'Jan Meiler',
+    'initials': 'JM'
+}, {
+    'name': 'Maria Manner',
+    'initials': 'MM'
+}];
 let selectedContacts = [];
+let subtasks = [];
 
 /**
  * 
@@ -8,6 +21,8 @@ let selectedContacts = [];
 async function init() {
     await initInclude();
     addTaskBgMenu();
+    displayUserInitials();
+    renderContacts();
 }
 
 /**
@@ -16,6 +31,37 @@ async function init() {
  */
 function addTaskBgMenu() {
     document.getElementById('addTaskMenu').classList.add('bgfocus');
+}
+
+/**
+ * loads Contacts
+ */
+function renderContacts() {
+    let container = document.getElementById('addTask-contacts-container');
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        container.innerHTML += templateContact(i, contact);
+    }
+}
+
+/**
+ * 
+ * returns HTML of single contact
+ * 
+ * @param {number} i - position in contacts json
+ * @param {json} contact - json of single contact
+ * @returns 
+ */
+function templateContact(i, contact){
+    return `
+    <div id="contact-container${i}" onclick="selectContact(${i})" class="contact-container" tabindex="1">
+        <div class="contact-container-name">
+            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
+            <span id="contactName${i}">${contact['name']}</span>
+        </div>
+        <div class="contact-container-check"></div>
+    </div> 
+`;
 }
 
 /**
@@ -66,7 +112,8 @@ function closeDropdown(container, img) {
 
 /**
  * 
- * opens/closes contacts & shows/hides selected contacts
+ * opens/closes contacts & shows/hides selected contacts 
+ * --> with click within or outside of container
  */
 function openContacts() {
     let container = document.getElementById('input-section-element');
@@ -84,10 +131,18 @@ function openContacts() {
     });
 }
 
-function openCloseContacts() {
+/**
+ * 
+ * opens/closes contacts & shows/hides selected contacts
+ * --> with click on child element
+ * 
+ * @param {*} event 
+ */
+function openCloseContacts(event) {
+    event.stopPropagation();
     let container = document.getElementById('addTask-contacts-container');
     let img = document.getElementById('dropdown-img-contacts');
-    if (container.contains('d-none')) {
+    if (container.classList.contains('d-none')) {
         openDropdown(container, img);
         hideSelectedContacts();
     } else {
@@ -96,18 +151,50 @@ function openCloseContacts() {
     }
 };
 
+
+/**
+ * 
+ * searches for contacts
+ */
+function searchContacts() {
+    let search = document.getElementById('addTask-assigned').value.toLowerCase();
+    contactsSearch = [];
+    for (let i = 0; i < contacts.length; i++) {
+        let contactName = contacts[i]['name'];
+        let contactInitials = contacts[i]['initials'];
+        if (contactName.toLowerCase().includes(search)) {
+            contactsSearch.push({ 'name': contactName, 'initials': contactInitials });
+        }
+    }
+    showContactResults();
+}
+
+
+/**
+ * 
+ * shows results of search
+ */
+function showContactResults(){
+    let container = document.getElementById('addTask-contacts-container');
+    container.innerHTML = '';
+    for (let i = 0; i < contactsSearch.length; i++) {
+        const contact = contactsSearch[i];
+        container.innerHTML += templateContact(i, contact);
+    }
+}
+
 /**
  * 
  * adds and removes hover style when selecting contact
  */
-function selectContact() {
-    let container = document.getElementById('contact-container');
-    let name = document.getElementById('contactName').innerHTML;
-    let initals = document.getElementById('contactInitals').innerHTML;
+function selectContact(i) {
+    let container = document.getElementById(`contact-container${i}`);
+    let name = document.getElementById(`contactName${i}`).innerHTML;
+    let initals = document.getElementById(`contactInitals${i}`).innerHTML;
 
     if (container.classList.contains('contact-container-focus')) {
         container.classList.remove('contact-container-focus');
-        selectedContacts.splice({ 'name': name, 'initals': initals });
+        selectedContacts.splice({ 'name': name, 'initals': initals },1);
     } else {
         container.classList.add('contact-container-focus');
         selectedContacts.push({ 'name': name, 'initals': initals });
@@ -166,10 +253,12 @@ function openCategories() {
  * @param {string} categoryId - id of the selected Category
  */
 function selectCategory(categoryId) {
+    let container = document.getElementById('addTask-category-container');
+    let img = document.getElementById('dropdown-img-category');
     let category = document.getElementById(`${categoryId}`).innerHTML;
     let selectedCategory = document.getElementById('select-task-text');
     selectedCategory.innerHTML = `${category}`;
-    openCloseDropdown('addTask-category-container', 'dropdown-img-category');
+    closeDropdown(container, img);
 }
 
 /**
@@ -367,6 +456,7 @@ function clearAddTask() {
     hideRequiredInfo('addTask-dueDate', 'required-date');
     hideRequiredCategory();
     emptyInput();
+    selectedContacts = [];
     subtasks = [];
 }
 
