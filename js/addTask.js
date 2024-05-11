@@ -13,6 +13,7 @@ let contacts = [{
 }];
 let selectedContacts = [];
 let subtasks = [];
+let tasks = [];
 
 /**
  * 
@@ -22,6 +23,7 @@ async function init() {
     await initInclude();
     addTaskBgMenu();
     displayUserInitials();
+    onloadFunc();
     renderContacts();
 }
 
@@ -32,6 +34,8 @@ async function init() {
 function addTaskBgMenu() {
     document.getElementById('addTaskMenu').classList.add('bgfocus');
 }
+
+
 
 /**
  * loads Contacts
@@ -52,7 +56,7 @@ function renderContacts() {
  * @param {json} contact - json of single contact
  * @returns 
  */
-function templateContact(i, contact){
+function templateContact(i, contact) {
     return `
     <div id="contact-container${i}" onclick="selectContact(${i})" class="contact-container" tabindex="1">
         <div class="contact-container-name">
@@ -174,7 +178,7 @@ function searchContacts() {
  * 
  * shows results of search
  */
-function showContactResults(){
+function showContactResults() {
     let container = document.getElementById('addTask-contacts-container');
     container.innerHTML = '';
     for (let i = 0; i < contactsSearch.length; i++) {
@@ -194,7 +198,7 @@ function selectContact(i) {
 
     if (container.classList.contains('contact-container-focus')) {
         container.classList.remove('contact-container-focus');
-        selectedContacts.splice({ 'name': name, 'initals': initals },1);
+        selectedContacts.splice({ 'name': name, 'initals': initals }, 1);
     } else {
         container.classList.add('contact-container-focus');
         selectedContacts.push({ 'name': name, 'initals': initals });
@@ -224,6 +228,42 @@ function showSelectedContacts() {
 function hideSelectedContacts() {
     let container = document.getElementById('selectedContacts');
     container.classList.add('d-none');
+}
+
+function selectUrgent() {
+    let button = document.getElementById('urgentButton');
+
+    if (button.classList.contains('urgentButton-focus')) {
+        button.classList.remove('urgentButton-focus');
+    } else {
+        button.classList.add('urgentButton-focus');
+        document.getElementById('mediumButton').classList.remove('mediumButton-focus');
+        document.getElementById('lowButton').classList.remove('lowButton-focus');
+    }
+}
+
+function selectMedium() {
+    let button = document.getElementById('mediumButton');
+
+    if (button.classList.contains('mediumButton-focus')) {
+        button.classList.remove('mediumButton-focus');
+    } else {
+        button.classList.add('mediumButton-focus');
+        document.getElementById('urgentButton').classList.remove('urgentButton-focus');
+        document.getElementById('lowButton').classList.remove('lowButton-focus');
+    }
+}
+
+function selectLow() {
+    let button = document.getElementById('lowButton');
+
+    if (button.classList.contains('lowButton-focus')) {
+        button.classList.remove('lowButton-focus');
+    } else {
+        button.classList.add('lowButton-focus');
+        document.getElementById('urgentButton').classList.remove('urgentButton-focus');
+        document.getElementById('mediumButton').classList.remove('mediumButton-focus');
+    }
 }
 
 /**
@@ -327,7 +367,7 @@ function templateSubtaskListElement(i, subtask) {
     return `
     <div id="subtasks-list-element${i}" class="subtasks-list-element">
         <li ondblclick="editSubtask(${i})">${subtask}</li>
-        <div class="subtasks-icon hidden">
+        <div class="subtasks-icon subtasks-icon-hidden">
             <img onclick="editSubtask(${i})" src="../img/edit.svg" alt="Bearbeiten">
             <div class="parting-line subtasks-icon-line"></div>
             <img onclick="deleteSubtask(${i})" src="../img/delete.svg" alt="Bestätigen">
@@ -400,12 +440,69 @@ function checkInput() {
     let date = document.getElementById('taskDate').value;
     let category = document.getElementById('select-task-text').innerHTML;
     if (title !== '' && date !== '' && category !== `Select task category`) {
-        emptyInput();
+        createTask();
+        safeTask();
+        clearAddTask();
+        openBoard();
     } else {
         checkTitle(title);
         checkDate(date);
         checkCategory(category);
     }
+}
+
+function createTask() {
+    let title = document.getElementById('taskTitle').value;
+    let description = document.getElementById('addTask-description').value;
+    if (description === '') { description = '' };
+    let date = document.getElementById('taskDate').value;
+    let prio;
+    prio = getPrio();
+    let category = document.getElementById('select-task-text').innerHTML;
+    pushTaskElements(title, description, date, prio, category);
+}
+
+function getPrio() {
+    let urgent = document.getElementById('urgentButton');
+    let medium = document.getElementById('mediumButton');
+    let low = document.getElementById('lowButton');
+    let prio;
+    if (urgent.classList.contains('urgentButton-focus')) {
+        prio = 'Urgent'
+    } else if (medium.classList.contains('mediumButton-focus')) {
+        prio = 'Medium'
+    } else if (low.classList.contains('lowButton-focus')) {
+        prio = 'Low'
+    } else {
+        prio = ''
+    }
+    return prio
+}
+
+function pushTaskElements(title, description, date, prio, category) {
+    if (selectedContacts.length < 1) { selectedContacts = '' };
+    if (subtasks.length < 1) { subtasks = '' }
+    tasks.push({
+        'title': title,
+        'description': description,
+        'contacts': selectedContacts,
+        'date': date,
+        'prio': prio,
+        'category': category,
+        'subtasks': subtasks,
+    })
+}
+
+function safeTask() {
+    if (tasks === '') {
+        postData("/tasks", tasks)
+    } else {
+        putData("/tasks", tasks)
+    }
+}
+
+function openBoard() {
+
 }
 
 /**
@@ -455,9 +552,16 @@ function clearAddTask() {
     hideRequiredInfo('addTask-title', 'required-title');
     hideRequiredInfo('addTask-dueDate', 'required-date');
     hideRequiredCategory();
+    deletePrio();
     emptyInput();
     selectedContacts = [];
     subtasks = [];
+}
+
+function deletePrio() {
+    document.getElementById('urgentButton').classList.remove('urgentButton-focus');
+    document.getElementById('mediumButton').classList.remove('mediumButton-focus');
+    document.getElementById('lowButton').classList.remove('lowButton-focus');
 }
 
 /**
