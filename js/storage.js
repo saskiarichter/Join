@@ -1,6 +1,10 @@
 async function onloadFunc() {
     await loadData();
+<<<<<<< HEAD
     fillRemembereInputs();
+=======
+    await loadTasks();
+>>>>>>> 17244aae2704385f5ee01660a57e7351c04d323f
 }
 
 
@@ -15,6 +19,19 @@ async function loadData() {
         // Iteriere durch die Benutzerdaten und füge sie dem users-Array hinzu
         Object.keys(usersData).forEach(key => {
             users.push(usersData[key]);
+        });
+    }
+}
+
+async function loadTasks(){
+    let response = await fetch(BASE_URL + "tasks.json");
+    let tasksData = await response.json();
+
+    // Überprüfen, ob Daten vorhanden sind
+    if (tasksData) {
+        // Iteriere durch die Benutzerdaten und füge sie dem users-Array hinzu
+        Object.keys(tasksData).forEach(key => {
+            tasks.push(tasksData[key]);
         });
     }
 }
