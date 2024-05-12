@@ -1,3 +1,5 @@
+
+
 let nameInput = [];
 let emailInput = [];
 let phoneNumbersInput = [];
@@ -25,7 +27,7 @@ function addNewContact() {
 }
 
 function closeContactDialog() {
-    document.getElementById('overlay').style.display = 'none'; // Overlay ausblenden
+    document.getElementById('overlay').style.display = 'none';
     document.getElementById('dialogNewContactDiv').classList.add('d-none');
 }
 
@@ -73,12 +75,6 @@ function HTMLTemplateNewContact(){
 }
 
 function editContact(index, nextColor){
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('dialogNewContactDiv').classList.remove('d-none');
-    document.getElementById('dialogNewContactDiv').innerHTML = HTMLTemplateEditContact(index); 
-}
-
-function editContact(index, nextColor){
     document.getElementById('overlay').style.display = 'block'; 
     document.getElementById('dialogNewContactDiv').classList.remove('d-none');
     document.getElementById('dialogNewContactDiv').innerHTML = HTMLTemplateEditContact(index, nextColor); 
@@ -121,7 +117,7 @@ function HTMLTemplateEditContact(index, nextColor){
                         </div>
                         <div class="dialogButtonDiv">
                             <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                            <button onclick="saveEditContact(${index})" class="createContactButton">Save<img src="./img/check.png"></button>
+                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="./img/check.png"></button>
                         </div>
                     </div> 
                 </div>
@@ -144,16 +140,37 @@ function createNewContact(){
     phoneNumbersInput.push(phone);
     safeContact();
 
-    let index = nameInput.length - 1; 
-    const nextColor = getNextColor();
-
-    let newContactDiv = document.createElement('div');
-    newContactDiv.classList.add('contactList');
-    newContactDiv.innerHTML = renderHTMLcreateNewContact(name, mail, phone, index, nextColor);
-    document.getElementById('contactList').appendChild(newContactDiv);
-
     document.getElementById('overlay').style.display = 'none'; 
     document.getElementById('dialogNewContactDiv').classList.add('d-none');
+    sortContactsByNameAndRender();
+}
+
+function sortContactsByNameAndRender() {
+    nameInput.sort((a, b) => a.localeCompare(b));
+    const contactList = document.getElementById('contactList');
+    contactList.innerHTML = '';
+
+    let currentInitial = '';
+    nameInput.forEach((name, index) => {
+        const initial = name.charAt(0).toUpperCase();
+        if (initial !== currentInitial) {
+            const letterDiv = document.createElement('div');
+            letterDiv.classList.add('letter');
+            letterDiv.textContent = initial;
+            contactList.appendChild(letterDiv);
+
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('lineLeftSection');
+            contactList.appendChild(lineDiv);
+
+            currentInitial = initial;
+        }
+
+        const contactDiv = document.createElement('div');
+        contactDiv.classList.add('contactListInner');
+        contactDiv.innerHTML = renderHTMLcreateNewContact(name, emailInput[index], phoneNumbersInput[index], index, getNextColor());
+        contactList.appendChild(contactDiv);
+    });
 }
 
 function renderHTMLcreateNewContact(name, email, phoneNumber, index, nextColor){
@@ -196,10 +213,10 @@ function showFullContact(index, nextColor){
         <div class="proilNameAndEdit">
             <p class="nameProfilShow">${name}</p>
                 <div class="proilNameAndEditInner">
+                    <img class="logoRightSection" src="./img/edit.svg">
                     <p onclick="editContact(${index}, '${nextColor}')" class="profilEdit">Edit</p>
-                    <img class="logoRightSection" src="./img/edit.png">
-                    <p onclick="deleteContact(${index})" class="profilDelete">Delete</p>
                     <img class="logoRightSection" src="./img/delete.png">
+                    <p onclick="deleteContact(${index})" class="profilDelete">Delete</p>
                     </div>
                 </div>
             </div>
@@ -221,7 +238,7 @@ function showFullContact(index, nextColor){
     
 }
 
-function saveEditContact(index) {
+function saveEditContact(index,nextColor) {
     let changedName = document.getElementById('inputName').value;
     let changedMail = document.getElementById('inputMail').value;
     let changedPhone = document.getElementById('inputPhone').value;
@@ -231,12 +248,12 @@ function saveEditContact(index) {
     phoneNumbersInput[index] = changedPhone;
 
     closeContactDialog();
-    showFullContact(index);
-    renderEditContact(index);
+    showFullContact(index,nextColor);
+    renderEditContact(index,nextColor);
 }
 
-function renderEditContact(index) {
-    let editedContactHTML = renderHTMLcreateNewContact(nameInput[index], emailInput[index], phoneNumbersInput[index], index);
+function renderEditContact(index,nextColor) {
+    let editedContactHTML = renderHTMLcreateNewContact(nameInput[index], emailInput[index], phoneNumbersInput[index], index, nextColor);
     let contactListItem = document.getElementById(`contactListInner${index}`);
     if (contactListItem) {
         contactListItem.innerHTML = editedContactHTML;
@@ -278,14 +295,17 @@ function safeContact(){
 }
 
 function loadContacts(){
-    let ContactsNamesAsText = localStorage.getItem('names');
-    let emailsAsText = localStorage.getItem('mails');
-    let phoneNumbersAsText = localStorage.getItem('phoneNumbers')
+    let ContactsNamesAsText = localStorage.getItem('names'),
+        emailsAsText = localStorage.getItem('mails'),
+        phoneNumbersAsText = localStorage.getItem('phoneNumbers');
 
     if (ContactsNamesAsText && emailsAsText && phoneNumbersAsText ) {
         nameInput = JSON.parse(ContactsNamesAsText);
         emailInput = JSON.parse(emailsAsText);
         phoneNumbersInput = JSON.parse(phoneNumbersAsText);
 
-        }
+    } else {
+        console.log("Fehler");
+    }
+    
 }
