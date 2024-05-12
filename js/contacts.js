@@ -35,7 +35,7 @@ function HTMLTemplateNewContact(){
     return `    
 <div class="dialogNewContactInnerDiv">
     <div class="dialogLeft">
-        <img class="joinLogoDialog" src="./img/Capa 2.png">
+        <img class="joinLogoDialog" src="../img/Capa 2.png">
         <div class="dialogLeftInnerDiv">
             <h1 class="HeadlineDialog">Add contact</h1>
             <p class="subheadingDialog">Tasks are better with a team!</p>
@@ -43,28 +43,28 @@ function HTMLTemplateNewContact(){
     </div>
     <div class="dialogRight">
         <div class="dialogCloseDiv">
-            <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
+            <img onclick="closeContactDialog()" class="closeIcon" src="../img/close.png">
         </div>
         <div class="dialogProfilPictureDiv">
-            <img class="dialogProfilPicture" src="./img/Group 13.png">
+            <img class="dialogProfilPicture" src="../img/Group 13.png">
             <div class="dialogAddData">
                 <div class="dialogInputfield">
                     <div class="dialogInputfieldDiv">
                         <input id="inputName" placeholder="Name">
-                        <img class="dialogIcons" src="./img/person.png">
+                        <img class="dialogIcons" src="../img/person.png">
                     </div>
                     <div class="dialogInputfieldDiv">
                         <input id="inputMail"  type="email" placeholder="Email" pattern=".+@.+" required>
-                        <img class="dialogIcons" src="./img/mail.png">
+                        <img class="dialogIcons" src="../img/mail.png">
                     </div>
                     <div class="dialogInputfieldDiv">
                         <input id="inputPhone" type="number" placeholder="Phone" class="no-spinners">
-                        <img class="dialogIcons" src="./img/call.png">
+                        <img class="dialogIcons" src="../img/call.png">
                     </div>
                 </div>
                 <div class="dialogButtonDiv">
                     <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                    <button onclick="createNewContact()" class="createContactButton">Create contact<img src="./img/check.png"></button>
+                    <button onclick="createNewContact()" class="createContactButton">Create contact<img src="../img/check.png"></button>
                 </div>
             </div> 
         </div>

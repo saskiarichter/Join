@@ -24,7 +24,7 @@
                     <div id="input-container-description" class="input-container">
                         <textarea id="addTask-description" class="textarea-description"
                             placeholder="Enter a Description"></textarea>
-                        <img src="../img/textarea.svg" alt="">
+                        <img src="/img/textarea.svg" alt="">
                     </div>
                 </div>
                 <!-- ASSIGNED TO -->
@@ -34,7 +34,7 @@
                         <input id="addTask-assigned" onkeyup="searchContacts()" class="inputfield" type="text"
                             placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = 'Select contacts to assign'">
-                        <img id="dropdown-img-contacts" onclick="openCloseContacts(event)" class="dropdown-img" src="../img/arrow_drop_down.svg">
+                        <img id="dropdown-img-contacts" onclick="openCloseContacts(event)" class="dropdown-img" src="/img/arrow_drop_down.svg">
                     </div>
                     <div id="selectedContacts" class="contact-circles d-none"></div>
                     <div id="addTask-contacts-container" class="d-none"></div>
@@ -51,7 +51,7 @@
                         <div id="addTask-dueDate" onclick="hideRequiredInfo('addTask-dueDate', 'required-date')"
                             class="input-container">
                             <input id="taskDate" class="inputfield" type="date" placeholder="dd/mm/yyyy" required>
-                            <img src="../img/event.svg">
+                            <img src="/img/event.svg">
                         </div>
                         <span id="required-date" class="required-text transparent">This field is required</span>
                     </div>
@@ -81,7 +81,7 @@
                         <div id="addTask-category" onclick="openCategories()"
                             class="input-container input-container-category input-container-select">
                             <span id="select-task-text" class="inputfield">Select task category</span>
-                            <img id="dropdown-img-category" class="dropdown-img" src="../img/arrow_drop_down.svg">
+                            <img id="dropdown-img-category" class="dropdown-img" src="/img/arrow_drop_down.svg">
                         </div>
                         <div id="addTask-category-container" class="d-none">
                             <span id="technicalTask" onclick="selectCategory('technicalTask')" class="single-Category">Technical Task</span>
@@ -95,11 +95,11 @@
                     <div id="addTask-subtasks-container" class="input-container">
                         <input id="addTask-subtasks" onclick="openIcons()" class="inputfield" type="text" placeholder="Add new subtask">
                         <div id="addTask-subtasks-icons" class="subtasks-icon d-none">
-                            <img onclick="emptySubtaskInput()" src="../img/closeVectorBlack.svg" alt="Löschen">
+                            <img onclick="emptySubtaskInput()" src="/img/closeVectorBlack.svg" alt="Löschen">
                             <div class="parting-line subtasks-icon-line"></div>
-                            <img onclick="addSubtask()" src="../img/done.svg" alt="Bestätigen">
+                            <img onclick="addSubtask()" src="/img/done.svg" alt="Bestätigen">
                         </div>
-                        <img id="dropdown-img-plus" onclick="addSubtask()" class="dropdown-img dropdown-img-plus" src="../img/subtasks.svg">
+                        <img id="dropdown-img-plus" onclick="addSubtask()" class="dropdown-img dropdown-img-plus" src="/img/subtasks.svg">
                     </div>
                     <div id="subtasks-list" class="subtasks-list"></div>
                 </div>
@@ -119,7 +119,7 @@
 
             <button id="createTaskButton" onclick="checkInput()">
                 <span>Create Task</span>
-                <img src="../img/check-white.svg" alt="Bestätigen">
+                <img src="/img/check-white.svg" alt="Bestätigen">
             </button>
         </div>
     </div>
