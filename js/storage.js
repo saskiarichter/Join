@@ -1,10 +1,11 @@
 async function onloadFunc() {
     await loadData();
-<<<<<<< HEAD
     fillRemembereInputs();
-=======
+}
+
+async function onloadTasks() {
+    await loadData();
     await loadTasks();
->>>>>>> 17244aae2704385f5ee01660a57e7351c04d323f
 }
 
 
