@@ -205,8 +205,16 @@ input {
     justify-content: start;
     align-items: center;
     height: 20px;
-    margin-left: 16px;
+    margin-left: 32px;
     margin-bottom: 10px;
+}
+
+#msgbox {
+    color: red;
+}
+
+#msgbox-signup {
+    color: red;
 }
 
 .loginCheckbox {
@@ -346,6 +354,10 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
 .policeLink {
     font-size: 16px;
     color: #29ABE2;
+}
+
+.privacy-text {
+    color: #a8a8a8;
 }
 
 .policeLink:hover {

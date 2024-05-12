@@ -57,3 +57,30 @@ span {
 .navBar-container {
     display: none;
 }
+
+
+@media (max-width: 850px) {
+    .textHeadline {
+        top: 128px;
+        left: 0;
+        padding-right: 0;
+    }
+
+    .main-headline {
+        font-size: 47px;
+    }
+
+    span {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 16px;
+    }
+
+    .vector {
+        padding-right: 16px;
+    }
+
+    .sideMenu {
+        display: none;
+    }
+}

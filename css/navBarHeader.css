@@ -79,6 +79,10 @@ html {
     z-index: 50;
 }
 
+.headerLogoMedia {
+    display: none;
+}
+
 .headerInfo {
     display: flex;
     justify-content: center;
@@ -211,6 +215,10 @@ html {
 
 #hLogout {
     display: block;
+}
+
+.helpMedia {
+    display: none;
 }
 
 .userInitials {

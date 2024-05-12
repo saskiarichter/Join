@@ -8,4 +8,3 @@ async function init() {
 function privacyPoliceBg() {
     document.getElementById('privacyPolice').classList.add("bgfocus");
 }
-

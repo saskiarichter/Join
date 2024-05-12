@@ -1,5 +1,6 @@
 async function onloadFunc() {
     await loadData();
+    fillRemembereInputs();
 }
 
 

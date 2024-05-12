@@ -61,10 +61,31 @@ li::before {
 .headline-vector {
     display: flex;
     justify-content: space-between;
-    scale: 1.1;
 }
 
 .vector:hover {
     background-color: lightgrey;
     border-radius: 50%;
+}
+
+@media (max-width: 850px) {
+    .textHeadline {
+        top: 128px;
+        left: 0;
+        padding-right: 0;
+    }
+
+    .helpHeadline {
+        font-size: 47px;
+    }
+
+    span {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 16px;
+    }
+
+    .vector {
+        padding-right: 16px;
+    }
 }

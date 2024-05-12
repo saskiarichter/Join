@@ -22,17 +22,19 @@ function changeForm() {
                                 <input class="inputMailSignUp" type="email" placeholder="Email" required id="email">
                             </div>
                             <div>
-                                <input class="inputPasswordSignUp" type="password"  placeholder="Password" required id="password">
+                                <input class="inputPasswordSignUp" type="password" placeholder="Password" required id="password">
                             </div>
                             <div>
                                 <input class="inputPasswordSignUp" type="password" placeholder="Confirm Password" required id="password-confirm">
                             </div>
                             
-                            <div class="notification"></div>  
+                            <div class="notification">
+                                <p id="msgbox-signup"><p>
+                            </div>  
                             <div class="loginCheckboxSignUp">
                                 <input type="checkbox" class="loginCheckBoxRememberMe" id="loginCheckBoxRememberMe">
                                 <label for="loginCheckBoxRememberMe" class="loginCheckBoxRememberMeLabel"></label>
-                                <p for="exampleCheck1">I accept the <a class="policeLink" href"#">Privacy Police</a></label>
+                                <p class="privacy-text">I accept the <a class="policeLink" href"#">Privacy Police</a></label>
                             </div>
                             <div class="buttons">
                                 <button class="buttonLogin" onclick="addUser()">Sign up</button>
