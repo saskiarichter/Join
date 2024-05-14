@@ -1,17 +1,22 @@
 let contacts = [{
     'name': 'Sofia Müller',
-    'initials': 'SM'
+    'initials': 'SM',
+    'selected': false
 }, {
     'name': 'Alex Richter',
-    'initials': 'AR'
+    'initials': 'AR',
+    'selected': false
 }, {
     'name': 'Jan Meiler',
-    'initials': 'JM'
+    'initials': 'JM',
+    'selected': false
 }, {
     'name': 'Maria Manner',
-    'initials': 'MM'
+    'initials': 'MM',
+    'selected': false
 }];
 let selectedContacts = [];
+let contactsSearch = [];
 let subtasks = [];
 let tasks = [];
 
@@ -42,6 +47,11 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         container.innerHTML += templateContact(i, contact);
+        if (contact['selected'] === true) {
+            document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
+        } else {
+            document.getElementById(`contact-container${i}`).classList.remove('contact-container-focus');
+        }
     }
 }
 
@@ -151,13 +161,13 @@ function openCloseContacts(event) {
  */
 function searchContacts() {
     let search = document.getElementById('addTask-assigned').value.toLowerCase();
-    contactsSearch = [];
     if (search.length > 0) {
         for (let i = 0; i < contacts.length; i++) {
             let contactName = contacts[i]['name'];
             let contactInitials = contacts[i]['initials'];
+            let contactSelected = contacts[i]['selected'];
             if (contactName.toLowerCase().includes(search)) {
-                contactsSearch.push({ 'name': contactName, 'initials': contactInitials });
+                contactsSearch.push({ 'name': contactName, 'initials': contactInitials, 'selected': contactSelected });
             }
         }
         showContactResults();
@@ -174,25 +184,78 @@ function showContactResults() {
     container.innerHTML = '';
     for (let i = 0; i < contactsSearch.length; i++) {
         const contact = contactsSearch[i];
-        container.innerHTML += templateContact(i, contact);
+        container.innerHTML += templateContactSearch(i, contact);
+        if (contactsSearch['selected'] === true) {
+            document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
+        } else {
+            document.getElementById(`contact-container${i}`).classList.remove('contact-container-focus');
+        }
+    }
+
+}
+
+/**
+ * returns HTML of single contact while search
+ * 
+ * @param {number} i - position in contacts json
+ * @param {json} contact - json of single contact
+ * @returns 
+ */
+function templateContactSearch(i, contact) {
+    return `
+    <div id="contact-container${i}" onclick="selectContactSearch(${i})" class="contact-container" tabindex="1">
+        <div class="contact-container-name">
+            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
+            <span id="contactName${i}">${contact['name']}</span>
+        </div>
+        <div class="contact-container-check"></div>
+    </div> 
+`;
+}
+
+/**
+ * adds and removes hover style when selecting contact in search list
+ * 
+ * @param {number} i - position of contact in contactsSearch array
+ */
+function selectContactSearch(i) {
+    let container = document.getElementById(`contact-container${i}`);
+    let contactName = contactsSearch[i]['name'];
+    let contactInitals = contactsSearch[i]['initials'];
+    let index = contacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
+    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
+    if (contactsSearch[i]['selected'] === true) {
+        selectedContacts.splice(indexSelected, 1);
+        contacts.splice(index, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
+        contactsSearch.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
+        container.classList.remove('contact-container-focus');
+    } else {
+        selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
+        contacts.splice(index, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
+        contactsSearch.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
+        container.classList.add('contact-container-focus');
     }
 }
 
 
 /**
- * adds and removes hover style when selecting contact
+ * adds and removes hover style when selecting contact in contact list
+ * 
+ * @param {number} i - position of contact in contacts array
  */
 function selectContact(i) {
     let container = document.getElementById(`contact-container${i}`);
     let contactName = contacts[i]['name'];
     let contactInitals = contacts[i]['initials'];
-    if (container.classList.contains('contact-container-focus')) {
+    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
+    if (contacts[i]['selected'] === true) {
+        selectedContacts.splice(indexSelected, 1);
+        contacts.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
         container.classList.remove('contact-container-focus');
-        let index = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-        selectedContacts.splice(index, 1);
     } else {
-        container.classList.add('contact-container-focus');
         selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
+        contacts.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
+        container.classList.add('contact-container-focus');
     }
 }
 
@@ -429,8 +492,8 @@ async function checkInput() {
     if (title !== '' && date !== '' && category !== `Select task category`) {
         createTask();
         await safeTask();
-        clearAddTask();
         redirectToBoard(); // from include.js
+        clearAddTask();
     } else {
         checkTitle(title);
         checkDate(date);
