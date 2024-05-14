@@ -13,6 +13,11 @@
     z-index: 999;
   }
 
+  .input-container-edit{
+    display: flex;
+    flex-direction: column;
+  }
+
   .addTask-edit-top{
     display: flex;
     flex-direction: column;

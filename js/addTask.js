@@ -1,25 +1,20 @@
 let contacts = [{
     'name': 'Sofia Müller',
-    'initials': 'SM',
-    'selected': false
+    'initials': 'SM'
 }, {
     'name': 'Alex Richter',
-    'initials': 'AR',
-    'selected': false
+    'initials': 'AR'
 }, {
     'name': 'Jan Meiler',
-    'initials': 'JM',
-    'selected': false
+    'initials': 'JM'
 }, {
     'name': 'Maria Manner',
-    'initials': 'MM',
-    'selected': false
+    'initials': 'MM'
 }];
 let selectedContacts = [];
-let contactsSearch = [];
 let subtasks = [];
 let tasks = [];
-
+let prioBtn = "";
 /**
  * loads navBar, header, arrays from firebase & renders contacts
  */
@@ -47,11 +42,6 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         container.innerHTML += templateContact(i, contact);
-        if (contact['selected'] === true) {
-            document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
-        } else {
-            document.getElementById(`contact-container${i}`).classList.remove('contact-container-focus');
-        }
     }
 }
 
@@ -161,13 +151,13 @@ function openCloseContacts(event) {
  */
 function searchContacts() {
     let search = document.getElementById('addTask-assigned').value.toLowerCase();
+    contactsSearch = [];
     if (search.length > 0) {
         for (let i = 0; i < contacts.length; i++) {
             let contactName = contacts[i]['name'];
             let contactInitials = contacts[i]['initials'];
-            let contactSelected = contacts[i]['selected'];
             if (contactName.toLowerCase().includes(search)) {
-                contactsSearch.push({ 'name': contactName, 'initials': contactInitials, 'selected': contactSelected });
+                contactsSearch.push({ 'name': contactName, 'initials': contactInitials });
             }
         }
         showContactResults();
@@ -184,78 +174,25 @@ function showContactResults() {
     container.innerHTML = '';
     for (let i = 0; i < contactsSearch.length; i++) {
         const contact = contactsSearch[i];
-        container.innerHTML += templateContactSearch(i, contact);
-        if (contactsSearch['selected'] === true) {
-            document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
-        } else {
-            document.getElementById(`contact-container${i}`).classList.remove('contact-container-focus');
-        }
-    }
-
-}
-
-/**
- * returns HTML of single contact while search
- * 
- * @param {number} i - position in contacts json
- * @param {json} contact - json of single contact
- * @returns 
- */
-function templateContactSearch(i, contact) {
-    return `
-    <div id="contact-container${i}" onclick="selectContactSearch(${i})" class="contact-container" tabindex="1">
-        <div class="contact-container-name">
-            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
-            <span id="contactName${i}">${contact['name']}</span>
-        </div>
-        <div class="contact-container-check"></div>
-    </div> 
-`;
-}
-
-/**
- * adds and removes hover style when selecting contact in search list
- * 
- * @param {number} i - position of contact in contactsSearch array
- */
-function selectContactSearch(i) {
-    let container = document.getElementById(`contact-container${i}`);
-    let contactName = contactsSearch[i]['name'];
-    let contactInitals = contactsSearch[i]['initials'];
-    let index = contacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-    if (contactsSearch[i]['selected'] === true) {
-        selectedContacts.splice(indexSelected, 1);
-        contacts.splice(index, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
-        contactsSearch.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
-        container.classList.remove('contact-container-focus');
-    } else {
-        selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
-        contacts.splice(index, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
-        contactsSearch.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
-        container.classList.add('contact-container-focus');
+        container.innerHTML += templateContact(i, contact);
     }
 }
 
 
 /**
- * adds and removes hover style when selecting contact in contact list
- * 
- * @param {number} i - position of contact in contacts array
+ * adds and removes hover style when selecting contact
  */
 function selectContact(i) {
     let container = document.getElementById(`contact-container${i}`);
     let contactName = contacts[i]['name'];
     let contactInitals = contacts[i]['initials'];
-    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-    if (contacts[i]['selected'] === true) {
-        selectedContacts.splice(indexSelected, 1);
-        contacts.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
+    if (container.classList.contains('contact-container-focus')) {
         container.classList.remove('contact-container-focus');
+        let index = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
+        selectedContacts.splice(index, 1);
     } else {
-        selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
-        contacts.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
         container.classList.add('contact-container-focus');
+        selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
     }
 }
 
@@ -492,8 +429,8 @@ async function checkInput() {
     if (title !== '' && date !== '' && category !== `Select task category`) {
         createTask();
         await safeTask();
-        redirectToBoard(); // from include.js
         clearAddTask();
+        redirectToBoard(); // from include.js
     } else {
         checkTitle(title);
         checkDate(date);
@@ -512,7 +449,7 @@ function createTask() {
     let prio;
     prio = getPrio();
     let category = document.getElementById('select-task-text').innerHTML;
-    pushTaskElements(title, description, date, prio, category);
+    pushTaskElements(title, description, date, prio, category,prioBtn);
 }
 
 /**
@@ -527,10 +464,13 @@ function getPrio() {
     let prio;
     if (urgent.classList.contains('urgentButton-focus')) {
         prio = 'Urgent'
+        prioBtn = './img/PrioAltaRed.svg'
     } else if (medium.classList.contains('mediumButton-focus')) {
         prio = 'Medium'
+        prioBtn= './img/PrioMediaOrange.svg'
     } else if (low.classList.contains('lowButton-focus')) {
         prio = 'Low'
+        prioBtn = './img/PrioBajaGreen.svg'
     } else {
         prio = ''
     }
@@ -546,7 +486,7 @@ function getPrio() {
  * @param {string} prio - selected urgent, medium or low button
  * @param {string} category - chosen category
  */
-function pushTaskElements(title, description, date, prio, category) {
+function pushTaskElements(title, description, date, prio, category,prioBtn) {
     if (selectedContacts.length < 1) { selectedContacts = '' };
     if (subtasks.length < 1) { subtasks = '' };
     let currentId = tasks.length;
@@ -560,6 +500,7 @@ function pushTaskElements(title, description, date, prio, category) {
         'subtasks': subtasks,
         'phases': 'To Do',
         'ID': currentId++,
+        'prioIcon': prioBtn
     })
 }
 
