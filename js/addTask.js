@@ -1,75 +1,26 @@
-let contacts = [{
-    'name': 'Sofia Müller',
-    'initials': 'SM'
-}, {
-    'name': 'Alex Richter',
-    'initials': 'AR'
-}, {
-    'name': 'Jan Meiler',
-    'initials': 'JM'
-}, {
-    'name': 'Maria Manner',
-    'initials': 'MM'
-}];
-let selectedContacts = [];
 let subtasks = [];
 let tasks = [];
+let prioBtn = "";
 
 /**
- * 
- * loads navBar and header
+ * loads navBar, header, arrays from firebase & renders contacts
  */
 async function init() {
-    await initInclude();
+    await initInclude(); // from include.js
     addTaskBgMenu();
-    displayUserInitials();
-    onloadFunc();
+    displayUserInitials(); // from summary.js
+    onloadTasks(); // from storage.js
     renderContacts();
 }
 
 /**
- * 
  * Adds bgcolor on current Page in the NavBar 
  */
 function addTaskBgMenu() {
     document.getElementById('addTaskMenu').classList.add('bgfocus');
 }
 
-
-
 /**
- * loads Contacts
- */
-function renderContacts() {
-    let container = document.getElementById('addTask-contacts-container');
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        container.innerHTML += templateContact(i, contact);
-    }
-}
-
-/**
- * 
- * returns HTML of single contact
- * 
- * @param {number} i - position in contacts json
- * @param {json} contact - json of single contact
- * @returns 
- */
-function templateContact(i, contact) {
-    return `
-    <div id="contact-container${i}" onclick="selectContact(${i})" class="contact-container" tabindex="1">
-        <div class="contact-container-name">
-            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
-            <span id="contactName${i}">${contact['name']}</span>
-        </div>
-        <div class="contact-container-check"></div>
-    </div> 
-`;
-}
-
-/**
- * 
  * removes red border color & hides required text info
  * 
  * @param {string} borderId - id of the container that has a red border
@@ -83,7 +34,6 @@ function hideRequiredInfo(borderId, textId) {
 }
 
 /**
- * 
  * Removes red color from Category
  */
 function hideRequiredCategory() {
@@ -91,7 +41,6 @@ function hideRequiredCategory() {
 }
 
 /**
- * 
  * opens dropdown
  * 
  * @param {object} container - dropdown container
@@ -103,7 +52,6 @@ function openDropdown(container, img) {
 }
 
 /**
- * 
  * closes dropdown
  * 
  * @param {object} container - dropdown container
@@ -115,121 +63,8 @@ function closeDropdown(container, img) {
 }
 
 /**
- * 
- * opens/closes contacts & shows/hides selected contacts 
- * --> with click within or outside of container
+ * changes backgroundcolor if urgent-button is selected
  */
-function openContacts() {
-    let container = document.getElementById('input-section-element');
-    let contacts = document.getElementById('addTask-contacts-container');
-    let img = document.getElementById('dropdown-img-contacts');
-
-    window.addEventListener('click', function (e) {
-        if (container.contains(e.target)) {
-            openDropdown(contacts, img);
-            hideSelectedContacts();
-        } else {
-            closeDropdown(contacts, img);
-            showSelectedContacts();
-        }
-    });
-}
-
-/**
- * 
- * opens/closes contacts & shows/hides selected contacts
- * --> with click on child element
- * 
- * @param {*} event 
- */
-function openCloseContacts(event) {
-    event.stopPropagation();
-    let container = document.getElementById('addTask-contacts-container');
-    let img = document.getElementById('dropdown-img-contacts');
-    if (container.classList.contains('d-none')) {
-        openDropdown(container, img);
-        hideSelectedContacts();
-    } else {
-        closeDropdown(container, img);
-        showSelectedContacts();
-    }
-};
-
-
-/**
- * 
- * searches for contacts
- */
-function searchContacts() {
-    let search = document.getElementById('addTask-assigned').value.toLowerCase();
-    contactsSearch = [];
-    for (let i = 0; i < contacts.length; i++) {
-        let contactName = contacts[i]['name'];
-        let contactInitials = contacts[i]['initials'];
-        if (contactName.toLowerCase().includes(search)) {
-            contactsSearch.push({ 'name': contactName, 'initials': contactInitials });
-        }
-    }
-    showContactResults();
-}
-
-
-/**
- * 
- * shows results of search
- */
-function showContactResults() {
-    let container = document.getElementById('addTask-contacts-container');
-    container.innerHTML = '';
-    for (let i = 0; i < contactsSearch.length; i++) {
-        const contact = contactsSearch[i];
-        container.innerHTML += templateContact(i, contact);
-    }
-}
-
-/**
- * 
- * adds and removes hover style when selecting contact
- */
-function selectContact(i) {
-    let container = document.getElementById(`contact-container${i}`);
-    let name = document.getElementById(`contactName${i}`).innerHTML;
-    let initals = document.getElementById(`contactInitals${i}`).innerHTML;
-
-    if (container.classList.contains('contact-container-focus')) {
-        container.classList.remove('contact-container-focus');
-        selectedContacts.splice({ 'name': name, 'initals': initals }, 1);
-    } else {
-        container.classList.add('contact-container-focus');
-        selectedContacts.push({ 'name': name, 'initals': initals });
-    }
-}
-
-/**
- * 
- * renders selected Contacts
- */
-function showSelectedContacts() {
-    let container = document.getElementById('selectedContacts');
-    container.classList.remove('d-none');
-    container.innerHTML = '';
-    for (let i = 0; i < selectedContacts.length; i++) {
-        const contact = selectedContacts[i];
-        container.innerHTML += `
-        <span class="circleName">${contact['initals']}</span>
-        `;
-    }
-}
-
-/**
- * 
- * hides selected contacts
- */
-function hideSelectedContacts() {
-    let container = document.getElementById('selectedContacts');
-    container.classList.add('d-none');
-}
-
 function selectUrgent() {
     let button = document.getElementById('urgentButton');
 
@@ -242,6 +77,9 @@ function selectUrgent() {
     }
 }
 
+/**
+ * changes backgroundcolor if medium-button is selected
+ */
 function selectMedium() {
     let button = document.getElementById('mediumButton');
 
@@ -254,6 +92,9 @@ function selectMedium() {
     }
 }
 
+/**
+ * changes backgroundcolor if low-button is selected
+ */
 function selectLow() {
     let button = document.getElementById('lowButton');
 
@@ -266,8 +107,7 @@ function selectLow() {
     }
 }
 
-/**
- * 
+/** 
  * opens and closes categories & sets back placeholder 
  * 
  * @param {string} containerId  - id of the dropdown container
@@ -287,7 +127,6 @@ function openCategories() {
 }
 
 /**
- * 
  * selects category and closes dropdown
  * 
  * @param {string} categoryId - id of the selected Category
@@ -302,7 +141,6 @@ function selectCategory(categoryId) {
 }
 
 /**
- * 
  * changes icons of subtasks field when click inside or outside of container
  */
 function openIcons() {
@@ -321,7 +159,6 @@ function openIcons() {
 }
 
 /**
- * 
  * empties subtask input
  */
 function emptySubtaskInput() {
@@ -330,7 +167,6 @@ function emptySubtaskInput() {
 }
 
 /**
- * 
  * adds subtask to list 
  */
 function addSubtask() {
@@ -343,7 +179,6 @@ function addSubtask() {
 }
 
 /**
- * 
  * generates list of subtasks
  */
 function generateSubtasksList() {
@@ -356,7 +191,6 @@ function generateSubtasksList() {
 }
 
 /**
- * 
  * generates HTML of list element
  * 
  * @param {number} i - position in subtasks array
@@ -377,7 +211,6 @@ function templateSubtaskListElement(i, subtask) {
 }
 
 /**
- * 
  * deletes one list element 
  * 
  * @param {number} i - position in subtasks array
@@ -388,7 +221,6 @@ function deleteSubtask(i) {
 }
 
 /**
- * 
  * opens field to edit subtask
  * 
  * @param {number} i - position in subtasks array
@@ -400,7 +232,6 @@ function editSubtask(i) {
 }
 
 /**
- * 
  * generates HTML of field to edit subtask
  * 
  * @param {number} i - position in subtasks array
@@ -418,7 +249,6 @@ function templateEditSubtask(i) {
 }
 
 /**
- * 
  * generates list with new Subtask & closes edit field
  * 
  * @param {number} i - position in subtasks array
@@ -432,18 +262,18 @@ function keepSubtask(i) {
 }
 
 /**
- * 
  * checks if required inputs are filled out 
+ * creates new task & opens board page
  */
-function checkInput() {
+async function checkInput() {
     let title = document.getElementById('taskTitle').value;
     let date = document.getElementById('taskDate').value;
     let category = document.getElementById('select-task-text').innerHTML;
     if (title !== '' && date !== '' && category !== `Select task category`) {
         createTask();
-        safeTask();
+        await safeTask();
         clearAddTask();
-        openBoard();
+        redirectToBoard(); // from include.js
     } else {
         checkTitle(title);
         checkDate(date);
@@ -451,6 +281,9 @@ function checkInput() {
     }
 }
 
+/**
+ * gets values of inputfields
+ */
 function createTask() {
     let title = document.getElementById('taskTitle').value;
     let description = document.getElementById('addTask-description').value;
@@ -459,9 +292,14 @@ function createTask() {
     let prio;
     prio = getPrio();
     let category = document.getElementById('select-task-text').innerHTML;
-    pushTaskElements(title, description, date, prio, category);
+    pushTaskElements(title, description, date, prio, category,prioBtn);
 }
 
+/**
+ * checks which prio button is selected
+ * 
+ * @returns string - selected prio
+ */
 function getPrio() {
     let urgent = document.getElementById('urgentButton');
     let medium = document.getElementById('mediumButton');
@@ -469,19 +307,32 @@ function getPrio() {
     let prio;
     if (urgent.classList.contains('urgentButton-focus')) {
         prio = 'Urgent'
+        prioBtn = './img/PrioAltaRed.svg'
     } else if (medium.classList.contains('mediumButton-focus')) {
         prio = 'Medium'
+        prioBtn= './img/PrioMediaOrange.svg'
     } else if (low.classList.contains('lowButton-focus')) {
         prio = 'Low'
+        prioBtn = './img/PrioBajaGreen.svg'
     } else {
         prio = ''
     }
     return prio
 }
 
-function pushTaskElements(title, description, date, prio, category) {
+/**
+ * pushing information to tasks array
+ * 
+ * @param {string} title - text of title input
+ * @param {string} description - text of description input
+ * @param {string} date - date of date input
+ * @param {string} prio - selected urgent, medium or low button
+ * @param {string} category - chosen category
+ */
+function pushTaskElements(title, description, date, prio, category,prioBtn) {
     if (selectedContacts.length < 1) { selectedContacts = '' };
-    if (subtasks.length < 1) { subtasks = '' }
+    if (subtasks.length < 1) { subtasks = '' };
+    let currentId = tasks.length;
     tasks.push({
         'title': title,
         'description': description,
@@ -490,23 +341,27 @@ function pushTaskElements(title, description, date, prio, category) {
         'prio': prio,
         'category': category,
         'subtasks': subtasks,
+        'phases': 'To Do',
+        'ID': currentId++,
+        'prioIcon': prioBtn
     })
 }
 
-function safeTask() {
+/**
+ * creates or updates tasks array on firebase
+ */
+async function safeTask() {
     if (tasks === '') {
-        postData("/tasks", tasks)
+        tasks.push({
+            'ID': 0,
+        })
+        await postData("/tasks", tasks) // from storage.js
     } else {
-        putData("/tasks", tasks)
+        await putData("/tasks", tasks) // from storage.js
     }
 }
 
-function openBoard() {
-
-}
-
 /**
- * 
  * adds red color if title input is not filled out
  * 
  * @param {string} title - value of title input
@@ -519,7 +374,6 @@ function checkTitle(title) {
 }
 
 /**
- * 
  * adds red color if date input is not filled out
  * 
  * @param {string} date - value of date input
@@ -532,7 +386,6 @@ function checkDate(date) {
 }
 
 /**
- * 
  * adds red color if no category is selected
  * 
  * @param {string} category - innerHTML of category field
@@ -543,9 +396,7 @@ function checkCategory(category) {
     }
 }
 
-
-/**
- * 
+/** 
  * resets whole AddTask page
  */
 function clearAddTask() {
@@ -558,6 +409,9 @@ function clearAddTask() {
     subtasks = [];
 }
 
+/**
+ * resets Prio buttons
+ */
 function deletePrio() {
     document.getElementById('urgentButton').classList.remove('urgentButton-focus');
     document.getElementById('mediumButton').classList.remove('mediumButton-focus');
@@ -565,7 +419,6 @@ function deletePrio() {
 }
 
 /**
- * 
  * empties all inputfields 
  */
 function emptyInput() {

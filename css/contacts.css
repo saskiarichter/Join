@@ -1,24 +1,29 @@
-.contactsMainDiv{
-    display:flex;
-    background-color: rgb(184,185,186);
-}
-
-
 .contactsLeftSide{
     width:456px;
-    height:928px;
-    padding-top:96px;
-    padding-left:232px;
+    position:fixed;
+    left:232px;
+    top:96px;
+    height:calc(100vh - 96px);
     background-color: #FFFFFF;
     display:flex;
     justify-content: center;
     box-shadow: 4px 0px 6px 0px #00000014; 
-    position:fixed;
+    
 
 }
 
 .contactsLeftSideinnerDiv{
     width:400px;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.contactList{
+    margin-top:110px;
+    overflow-x: hidden;
+    overflow-y:scroll;
     display:flex;
     align-items: center;
     flex-direction: column;
@@ -31,8 +36,9 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    
-    
+    background-color:#FFFFFF;
+    position: fixed;
+
 }
 
 .addContactButton{
@@ -78,11 +84,13 @@
 }
 
 .letter{
-    width:352px;
+    width:352px !important;
     font-size:20px;
-    height:58px;
     padding-top: 17px;
-    padding-left: 36px;
+    padding-bottom:17px;
+    padding-left:36px;
+    gap:8px;
+    display:flex;
 
 }
 
@@ -90,7 +98,7 @@
     width:352px;
     border: 1px solid #D1D1D1;
     gap:10px;
-    
+    display:flex;
 }
 
 .contactInnerDiv{
@@ -112,7 +120,7 @@
     height:73px;
     width:569px;
     gap:30px;
-    position:absolute;
+    position:fixed;
     left:743px;
     top:206px;
 }
@@ -148,8 +156,39 @@
     display:flex;
     align-items: center;
     cursor: pointer;
+    padding-top:15px;
+    padding-bottom:15px;
 
+}
+
+.contactListInnerDiv{
+    border-radius:10px;
+    width:352px;
+    height:78px;
+    gap:35px;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left:24px;
+    padding-right:24px;
+
+}
+
+.contactListInnerDiv:hover{
+    background: linear-gradient(160deg, #f9f9f9d7, #CCCCCC 150%);
     
+}
+
+.clicked {
+    background-color: rgb(42,54,71) !important;
+}
+
+.clicked .hover-effect {
+    background: linear-gradient(160deg, #f9f9f9d7, #FF0000 150%); 
+}
+
+.color-white{
+    color:#FFFFFF;
 }
 
 .circleProfilPic{
@@ -168,13 +207,11 @@
 }
 
 .nameAndEmail{
-    width:140px;
     height:48px;
     gap:5px;
 }
 
 .nameProfil{
-    width:121px;
     height:24px;
     font-size:20px;
     line-height: 24px;
@@ -196,17 +233,12 @@
 
 .dialogNewContactInnerDiv{
     display: flex;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     margin: auto;
     background-color: transparent; 
-    transition: all 500ms ease-in-out;
     height: 594px;
     z-index: 899;
     width: 1212px;
-
+    
 }
 
 .dialogLeft{
@@ -310,6 +342,8 @@ input{
     padding-left:10px;
     border: none;
     outline:none;
+    background-color:transparent !important;
+
 }
 
 .dialogIcons{
@@ -409,8 +443,13 @@ input{
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(150%, -50%);
     z-index: 1001;
+    transition: transform 0.5s ease; 
+}
+
+.dialogNewContactDiv.slide-in {
+    transform: translate(-50%, -50%); 
 }
 
 .contactsRightSectionShowProfilInner{
@@ -422,16 +461,22 @@ input{
     display:flex;
     flex-direction: column;
     justify-content: center;
+    padding-left:30px;
 }
 
 .contactsRightSectionShowProfil{
-    position:absolute;
+    position:fixed;
     width:461px;
     height:364px;
     top:311px;
     left:750px;
     gap:21px;
+    transform: translate(200%, 0%);
+    transition: transform 0.5s ease;
+}
 
+.contactsRightSectionShowProfil.slide-in{
+    transform: translate(0%, 0%);
 }
 
 .circleProfilPicShow{
@@ -477,10 +522,31 @@ input{
 
 .profilEdit{
     cursor: pointer;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    display:flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.profilEdit:hover{
+    transform: scale(1.1);
+    color: #29ABE2;
+    filter: brightness(0) saturate(100%) invert(66%) sepia(72%) saturate(3601%) hue-rotate(164deg) brightness(99%) contrast(79%);
 }
 
 .profilDelete{
     cursor: pointer;
+    display:flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.profilDelete:hover{
+    transform: scale(1.1);
+    color: #29ABE2;
+    filter: brightness(0) saturate(100%) invert(66%) sepia(72%) saturate(3601%) hue-rotate(164deg) brightness(99%) contrast(79%);
+
 }
 
 .contactInformation{
@@ -514,6 +580,7 @@ input{
 .contactInformationMail{
     margin-block-start: 0;
     margin-block-end: 0;
+    color:#007CEE;
 }
 
 .contactInformationPhone{

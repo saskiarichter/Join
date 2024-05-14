@@ -71,7 +71,22 @@ async function putData(path="", data={}){
 }
 
 
+async function postDataBoard(path="", data={}){
+    let res = await fetch (BASE_URL + path + ".json",{
+        method :"POST",
+        header: {
+            "Content-Type":"application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await res.json();
+}
 
+async function loadDataBoard(path=""){
+    let res = await fetch (BASE_URL + path + ".json");
+    let responseToJson = await res.json();
+    console.log(responseToJson);
+}
 
 
 const STORAGE_TOKEN = 'CtxTcEZlVAPVkjOjpZldtlcmqUaZRJ2I2WAuicYHaD9MSDiKX9dIFrhP8kxmEUqz';
