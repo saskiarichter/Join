@@ -205,20 +205,20 @@ html {
     border-radius: 20px;
 }
 
-#hHPP {
-    display: block;
-}
-
-#hHLN {
-    display: block;
-}
-
-#hLogout {
-    display: block;
-}
-
-.helpMedia {
+#help {
     display: none;
+}
+
+#pp {
+    display: block;
+}
+
+#ln {
+    display: block;
+}
+
+#logout {
+    display: block;
 }
 
 .userInitials {

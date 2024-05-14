@@ -105,8 +105,8 @@ async function login() {
 
 
 function logout() {
-    let logout = document.getElementById('hLogout');
-    logout.addEventListener("click", returnToHome()) 
+    sessionStorage.removeItem('loggedInUser');
+    window.location.href = "index.html";
 }
 
 

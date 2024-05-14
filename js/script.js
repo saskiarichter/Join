@@ -1,4 +1,5 @@
 function changeForm() {
+    document.querySelector('.signUpMobile').classList.add("d-none");
     document.getElementById('signUpContainer').innerHTML = "";
     let form = document.getElementById('form');
     form.classList.add("formSignUp");
@@ -10,7 +11,7 @@ function changeForm() {
                         <div class="formHeadline">
                             <div class="headline">
                                 <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
-                                <h1 class="formHeadlineText">Sign up</h1>
+                                <h1 class="formHeadlineTextSignUp">Sign up</h1>
                             </div>            
                             <div class="formHeadlineBorder"></div>
                         </div>    
@@ -45,12 +46,25 @@ function changeForm() {
 }
 
 
-
-
 function toggleMenu() {
     let dropdownMenu = document.querySelector('.headerLogoutButton .dropdownMenu');
     dropdownMenu.classList.toggle('d-none');
 }
+
+function changeImage() {
+    // Prüfen, ob Bildschirmbreite kleiner oder gleich 720px ist
+    if (window.innerWidth <= 720) {
+        document.getElementById('logo').style.display="none";
+        document.getElementById('logo2').style.display="block";
+        // Wenn ja, ändere das Bild nach 800 Millisekunden
+        setTimeout(function(){
+            document.getElementById('logo2').style.display="none";
+        }, 1200) 
+        document.getElementById('logo').style.display="block";}
+    }
+
+
+
 
 
 

@@ -4,12 +4,26 @@
  */
 async function initSummary() {
     await includeHTML();
+    await loadData();
     summaryBg();
     updateGreeting();
     displayUsername();
     displayUserInitials();
-    await loadData();
+    
+    setTimeout(function() {
+        document.getElementById('content').style.display = 'flex';
+        document.getElementById('content').style.flexDirection = 'column';
+    }, 2000);
+
+    if (window.innerWidth <= 850) {
+        setTimeout(function() {
+            document.getElementById('greeting-mobile').style.display = 'none';
+        }, 2000);
+    } else {
+        document.getElementById('greeting-mobile').style.display = 'none';
+    }
 }
+
 
 /**
  * highlight the summary link in the sidebar
@@ -34,6 +48,7 @@ function updateGreeting() {
         greeting = "Good evening";
     }
     document.getElementById("daytimeGreeting").innerText = greeting;
+    document.getElementById("daytimeGreetingMobile").innerText = greeting
     }
 
 /**
@@ -43,9 +58,12 @@ function displayUsername() {
     // Den Benutzernamen aus der Session abrufen
     let username = sessionStorage.getItem('loggedInUser');
     let greetingName = document.getElementById('nameGreeting');
+    let greetingNameMobile = document.getElementById('nameGreetingMobile');
+
         
     // Setze den Benutzernamen in das HTML-Element ein
     greetingName.innerText = username;
+    greetingNameMobile.innerText = username;
 }
 
 
@@ -65,4 +83,12 @@ function displayUserInitials() {
         // Falls kein Benutzer angemeldet ist, zeigen Sie ein Standardzeichen an
         userInitials.innerText = "G";
     }
+}
+
+
+function hideContentForTwoSeconds() {
+    document.getElementById('content').style.display = 'none';
+    setTimeout(function() {
+        document.getElementById('content').style.display = 'block';
+    }, 2000);
 }

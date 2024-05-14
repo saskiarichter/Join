@@ -1,4 +1,5 @@
 async function onloadFunc() {
+    changeImage()
     await loadData();
     fillRemembereInputs();
 }

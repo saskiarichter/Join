@@ -58,6 +58,10 @@ span {
     display: none;
 }
 
+.userInitials {
+    margin-bottom: 0;
+}
+
 
 @media (max-width: 850px) {
     .textHeadline {
@@ -82,5 +86,18 @@ span {
 
     .sideMenu {
         display: none;
+    }
+
+    .headlines {
+        padding-left: 0;
+    }
+
+    .highlight {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .userInitials {
+        padding-bottom: 0;
     }
 }

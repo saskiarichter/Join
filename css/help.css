@@ -4,7 +4,7 @@
     left: 328px;
     display: flex;
     flex-direction: column;
-    width: 1024px;
+    padding-right: 400px;
 }
 
 .helpHeadline {
@@ -72,14 +72,15 @@ li::before {
     .textHeadline {
         top: 128px;
         left: 0;
-        padding-right: 0;
+        padding-right: 16px;
+        padding-left: 16px;
     }
 
     .helpHeadline {
         font-size: 47px;
     }
 
-    span {
+    spans {
         padding-left: 16px;
         padding-right: 16px;
         padding-bottom: 16px;
@@ -87,5 +88,9 @@ li::before {
 
     .vector {
         padding-right: 16px;
+    }
+
+    h1 {
+        font-size: 27px;
     }
 }

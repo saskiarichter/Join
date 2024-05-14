@@ -19,16 +19,18 @@
     <div w3-include-html="/html/navigationBar.html"></div>
     <div w3-include-html="/html/header.html"></div>
     
-    <section class="content">
+
+    <section class="content" id="content">
         <div class="header-summary">
             <div><span class="headline-summary">Join 360</span></div>
             <div class="vertical-line"></div>
             <span class="span-headline">Key Metrics at a Glance</span>
+            <div class="horizontal-line-mobile"></div>
         </div>
         <div class="summary-greeting">
             <div class="summary-container">
                 <div class="toDo-Done">
-                    <div class="to-do">
+                    <div class="to-do" onclick="redirectToBoard()">
                         <div>
                             <img class="summary-images" src="/img/pencil.png">
                         </div>
@@ -37,7 +39,7 @@
                             <span class="summary-text">To-do</span>
                         </div>
                 </div>
-                    <div class="to-do done">
+                    <div class="to-do-lc done" onclick="redirectToBoard()">
                         <div>
                             <img class="summary-images" src="/img/check_summary.png">
                         </div>
@@ -47,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                    <div class="summary-board">
+                    <div class="summary-board" onclick="redirectToBoard()">
                         <div>
                             <img class="summary-images-urgency" src="/img/urgency.png">
                         </div>
@@ -63,17 +65,17 @@
                     </div>
 
                 <div class="task-progress-feedback">
-                    <div class="tpf-container">
+                    <div class="tpf-container" onclick="redirectToBoard()">
                         <span class="number">5</span>
                         <span class="summary-text">Tasks in</span>
                         <span class="summary-text">Board</span>
                     </div>
-                    <div class="tpf-container">
+                    <div class="tpf-container" onclick="redirectToBoard()">
                         <span class="number">2</span>
                         <span class="summary-text">Tasks in</span>
                         <span class="summary-text">Progress</span>
                     </div>
-                    <div class="tpf-container">
+                    <div class="tpf-container" onclick="redirectToBoard()">
                         <span class="number">2</span>
                         <span class="summary-text">Awaiting</span>
                         <span class="summary-text">Feedback</span>
@@ -86,5 +88,9 @@
             </div>
         </div>
     </section>
+    <div class="greeting-mobile" id="greeting-mobile">
+        <span class="daytime" id="daytimeGreetingMobile"></span>
+        <span class="guest-name" id="nameGreetingMobile"></span>
+    </div>
 </body>
 </html>
