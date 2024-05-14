@@ -1,20 +1,7 @@
-let contacts = [{
-    'name': 'Sofia Müller',
-    'initials': 'SM'
-}, {
-    'name': 'Alex Richter',
-    'initials': 'AR'
-}, {
-    'name': 'Jan Meiler',
-    'initials': 'JM'
-}, {
-    'name': 'Maria Manner',
-    'initials': 'MM'
-}];
-let selectedContacts = [];
 let subtasks = [];
 let tasks = [];
 let prioBtn = "";
+
 /**
  * loads navBar, header, arrays from firebase & renders contacts
  */
@@ -31,37 +18,6 @@ async function init() {
  */
 function addTaskBgMenu() {
     document.getElementById('addTaskMenu').classList.add('bgfocus');
-}
-
-/**
- * loads Contacts
- */
-function renderContacts() {
-    let container = document.getElementById('addTask-contacts-container');
-    container.innerHTML = '';
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        container.innerHTML += templateContact(i, contact);
-    }
-}
-
-/**
- * returns HTML of single contact
- * 
- * @param {number} i - position in contacts json
- * @param {json} contact - json of single contact
- * @returns 
- */
-function templateContact(i, contact) {
-    return `
-    <div id="contact-container${i}" onclick="selectContact(${i})" class="contact-container" tabindex="1">
-        <div class="contact-container-name">
-            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
-            <span id="contactName${i}">${contact['name']}</span>
-        </div>
-        <div class="contact-container-check"></div>
-    </div> 
-`;
 }
 
 /**
@@ -104,119 +60,6 @@ function openDropdown(container, img) {
 function closeDropdown(container, img) {
     container.classList.add('d-none');
     img.classList.remove('dropdown-img-rotated');
-}
-
-/**
- * opens/closes contacts & shows/hides selected contacts 
- * --> with click within or outside of container
- */
-function openContacts() {
-    let container = document.getElementById('input-section-element');
-    let contacts = document.getElementById('addTask-contacts-container');
-    let img = document.getElementById('dropdown-img-contacts');
-
-    window.addEventListener('click', function (e) {
-        if (container.contains(e.target)) {
-            openDropdown(contacts, img);
-            hideSelectedContacts();
-        } else {
-            closeDropdown(contacts, img);
-            showSelectedContacts();
-        }
-    });
-}
-
-/**
- * opens/closes contacts & shows/hides selected contacts
- * --> with click on child element
- * 
- * @param {*} event 
- */
-function openCloseContacts(event) {
-    event.stopPropagation();
-    let container = document.getElementById('addTask-contacts-container');
-    let img = document.getElementById('dropdown-img-contacts');
-    if (container.classList.contains('d-none')) {
-        openDropdown(container, img);
-        hideSelectedContacts();
-    } else {
-        closeDropdown(container, img);
-        showSelectedContacts();
-    }
-};
-
-
-/**
- * searches for contacts
- */
-function searchContacts() {
-    let search = document.getElementById('addTask-assigned').value.toLowerCase();
-    contactsSearch = [];
-    if (search.length > 0) {
-        for (let i = 0; i < contacts.length; i++) {
-            let contactName = contacts[i]['name'];
-            let contactInitials = contacts[i]['initials'];
-            if (contactName.toLowerCase().includes(search)) {
-                contactsSearch.push({ 'name': contactName, 'initials': contactInitials });
-            }
-        }
-        showContactResults();
-    } else {
-        renderContacts();
-    }
-}
-
-/**
- * shows results of search
- */
-function showContactResults() {
-    let container = document.getElementById('addTask-contacts-container');
-    container.innerHTML = '';
-    for (let i = 0; i < contactsSearch.length; i++) {
-        const contact = contactsSearch[i];
-        container.innerHTML += templateContact(i, contact);
-    }
-}
-
-
-/**
- * adds and removes hover style when selecting contact
- */
-function selectContact(i) {
-    let container = document.getElementById(`contact-container${i}`);
-    let contactName = contacts[i]['name'];
-    let contactInitals = contacts[i]['initials'];
-    if (container.classList.contains('contact-container-focus')) {
-        container.classList.remove('contact-container-focus');
-        let index = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-        selectedContacts.splice(index, 1);
-    } else {
-        container.classList.add('contact-container-focus');
-        selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
-    }
-}
-
-/**
- * renders selected Contacts
- */
-function showSelectedContacts() {
-    let container = document.getElementById('selectedContacts');
-    container.classList.remove('d-none');
-    container.innerHTML = '';
-    for (let i = 0; i < selectedContacts.length; i++) {
-        let contact = selectedContacts[i];
-        container.innerHTML += `
-        <span class="circleName">${contact['initials']}</span>
-        `;
-    }
-}
-
-/**
- * hides selected contacts
- */
-function hideSelectedContacts() {
-    let container = document.getElementById('selectedContacts');
-    container.classList.add('d-none');
 }
 
 /**
@@ -552,7 +395,6 @@ function checkCategory(category) {
         document.getElementById('addTask-category').classList.add('empty');
     }
 }
-
 
 /** 
  * resets whole AddTask page
