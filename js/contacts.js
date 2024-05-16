@@ -1,9 +1,10 @@
 let contacts = [];
+
 let nameInput = [];
 let emailInput = [];
 let phoneNumbersInput = [];
 let colorIndex = 0;
-let users = []; 
+
 
 const colors = [
     "#FF5733",
@@ -28,9 +29,14 @@ function addNewContact() {
     setTimeout(() => {
         dialog.classList.add('slide-in');
     }, 50); 
+
+    document.getElementById('overlay').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeContactDialog();
+        }
+    });
     
 }
-
 
 function closeContactDialog() {
     document.getElementById('overlay').style.display = 'none';
@@ -82,7 +88,7 @@ function HTMLTemplateNewContact(){
     `;
 }
 
-function createNewContact(){
+async function createNewContact() {
     let name = document.getElementById('inputName').value;
     let mail = document.getElementById('inputMail').value;
     let phone = document.getElementById('inputPhone').value;
@@ -95,6 +101,12 @@ function createNewContact(){
     nameInput.push(name);
     emailInput.push(mail);
     phoneNumbersInput.push(phone);
+
+    try {
+        await createNewContactInFirebase(name, mail, phone);
+    } catch (error) {
+        console.error('Failed to create contact in Firebase:', error.message);
+    }
 
     sortContactsByNameAndRender();
     closeContactDialog();
@@ -111,6 +123,12 @@ function editContact(index, nextColor){
     setTimeout(() => {
         dialog.classList.add('slide-in');
     }, 50); 
+
+    document.getElementById('overlay').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeContactDialog();
+        }
+    });
 }
 
 function HTMLTemplateEditContact(index, nextColor){
@@ -173,7 +191,16 @@ function sortContactsByNameAndRender() {
         phoneNumbersInput.push('');
     }
 
-    nameInput.sort((a, b) => a.localeCompare(b));
+    const contacts = nameInput.map((name, index) => ({
+        name,
+        email: emailInput[index],
+        phoneNumber: phoneNumbersInput[index]
+    }));
+
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
+    nameInput = contacts.map(contact => contact.name);
+    emailInput = contacts.map(contact => contact.email);
+    phoneNumbersInput = contacts.map(contact => contact.phoneNumber);
 
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
@@ -203,6 +230,7 @@ function sortContactsByNameAndRender() {
         contactList.appendChild(contactDiv);
     });
 }
+
 
 
 function getInitials(name) {
@@ -268,7 +296,7 @@ function showFullContact(index, nextColor) {
                 <div class="proilNameAndEditInner">
                     <p onclick="editContact(${index}, '${nextColor}')" class="profilEdit">Edit
                     <img class="logoRightSection" src="../img/edit.svg"></p>
-                    <p onclick="deleteContact(${index})" class="profilDelete">Delete
+                    <p onclick="deleteContact('${index}')" class="profilDelete">Delete
                     <img class="logoRightSection" src="../img/delete.png"></p>
                     </div>
                 </div>
@@ -314,26 +342,6 @@ function renderEditContact(index,nextColor) {
     }
 }
 
-function deleteContact(index) {
-    if (index >= 0 && index < nameInput.length) {
-        nameInput.splice(index, 1);
-        emailInput.splice(index, 1);
-        phoneNumbersInput.splice(index, 1);
-
-        let contactListItem = document.getElementById(`contactListInner${index}`);
-        if (contactListItem) {
-            contactListItem.remove();
-            
-        } else {
-            console.error(`Element with ID contactListInner${index} not found.`);
-        }
-    } else {
-        console.error(`Invalid index ${index}`);
-    }
-    let content = document.getElementById('contactsRightSectionShowProfil');
-    content.innerHTML = '';
-}
-
 function safeContact(){
     let ContactsNamesAsText = JSON.stringify(nameInput);
     localStorage.setItem('names', ContactsNamesAsText);
@@ -346,7 +354,7 @@ function safeContact(){
 
 }
 
-async function loadContacts(path = "/users/Contacts") {
+async function loadContacts(path = "/contacts") {
     nameInput = [];
     emailInput = [];
     phoneNumbersInput = [];
