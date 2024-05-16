@@ -1,7 +1,7 @@
 async function onloadFunc() {
-    changeImage()
     await loadData();
     fillRemembereInputs();
+    postContacts("", {"name": "frido"});
 }
 
 async function onloadTasks() {
@@ -16,9 +16,7 @@ async function loadData() {
     let response = await fetch(BASE_URL + "users.json");
     let usersData = await response.json();
 
-    // Überprüfen, ob Daten vorhanden sind
     if (usersData) {
-        // Iteriere durch die Benutzerdaten und füge sie dem users-Array hinzu
         Object.keys(usersData).forEach(key => {
             users.push(usersData[key]);
         });
@@ -29,12 +27,72 @@ async function loadTasks(){
     let response = await fetch(BASE_URL + "tasks.json");
     let tasksData = await response.json();
 
-    // Überprüfen, ob Daten vorhanden sind
     if (tasksData) {
-        // Iteriere durch die Benutzerdaten und füge sie dem users-Array hinzu
         Object.keys(tasksData).forEach(key => {
             tasks.push(tasksData[key]);
         });
+    }
+}
+
+async function getNextContactId() {
+    try {
+        const response = await fetch(`${BASE_URL}/contacts.json`);
+        const data = await response.json();
+
+        if (!data) {
+            return 0;
+        }
+        return Object.keys(data).length;
+    } catch (error) {
+        console.error('Error getting next contact ID:', error.message);
+        throw error;
+    }
+}
+
+async function createNewContactInFirebase(name, email, phoneNumber) {
+    try {
+        const nextContactId = await getNextContactId();
+
+        const response = await fetch(`${BASE_URL}/contacts/${nextContactId}.json`, {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                nummer: phoneNumber
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to create contact in Firebase.');
+        }
+
+        const data = await response.json();
+        console.log('New contact created in Firebase:', data);
+        return data;
+    } catch (error) {
+        console.error('Error creating contact in Firebase:', error.message);
+        throw error;
+    }
+}
+
+async function deleteContact(contactId) {
+    try {
+        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete contact.');
+        }
+
+        console.log('Contact deleted successfully.');
+        return true;
+    } catch (error) {
+        console.error('Error deleting contact:', error.message);
+        throw error;
     }
 }
 
@@ -49,7 +107,6 @@ async function postData(path="", data={}){
     });
     return responseToJson = await response.json();
 }
-
 
 async function deleteData(path=""){
     let response = await fetch(BASE_URL + path + ".json", {
@@ -106,4 +163,3 @@ async function getItem(key) {
         } throw `Could not find data with key "${key}".`;
     });
 }
-
