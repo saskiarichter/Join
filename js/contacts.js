@@ -1,5 +1,3 @@
-let contacts = [];
-
 let nameInput = [];
 let emailInput = [];
 let phoneNumbersInput = [];
@@ -77,8 +75,8 @@ function HTMLTemplateNewContact(){
                         </div>
                     </div>
                     <div class="dialogButtonDiv">
-                        <button onclick="closeContactDialog()" class="cancelButton">Cancel<img src="../img/close.png"></button>
-                        <button onclick="createNewContact()" class="createContactButton">Create contact<img src="../img/check.png"></button>
+                        <button onclick="closeContactDialog()" class="cancelButton">Cancel<img src="./img/close.png"></button>
+                        <button onclick="createNewContact()" class="createContactButton">Create contact<img src="./img/check.png"></button>
                     </div>
                 </div> 
             </div>
@@ -169,7 +167,7 @@ function HTMLTemplateEditContact(index, nextColor){
                             </div>
                             <div class="dialogButtonDiv">
                                 <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                                <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="../img/check.png"></button>
+                                <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="./img/check.png"></button>
                             </div>
                         </div> 
                     </div>
@@ -369,11 +367,10 @@ async function loadContacts(path = "/contacts") {
 
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
-
     let loadedContacts = 0;
 
     for (const key in contactsData) {
-        if (loadedContacts >= 5) {
+        if (loadedContacts >= 10) {
             break;
         }
 
