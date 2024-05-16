@@ -1,18 +1,21 @@
+let contacts = [];
+let tasks = [];
+
 async function onloadFunc() {
-    await loadContacts();
+    await loadData();
     fillRemembereInputs();
     postContacts("", {"name": "frido"});
 }
 
 async function onloadTasks() {
-    await loadContacts();
+    await loadData();
     await loadTasks();
 }
 
 
 const BASE_URL = "https://remotestorage-2c309-default-rtdb.europe-west1.firebasedatabase.app/";
 
-async function loadContacts() {
+async function loadData() {
     let response = await fetch(BASE_URL + "contacts.json");
     let contactsData = await response.json();
 

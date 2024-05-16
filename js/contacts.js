@@ -1,5 +1,3 @@
-let contacts = [];
-
 let nameInput = [];
 let emailInput = [];
 let phoneNumbersInput = [];

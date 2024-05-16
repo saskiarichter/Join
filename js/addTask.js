@@ -1,5 +1,3 @@
-let tasks = [];
-let contacts = [];
 let prioBtn = "";
 
 /**

@@ -1,4 +1,3 @@
-
 let selectedContacts = [];
 let contactsSearch = [];
 
@@ -30,7 +29,7 @@ function templateContact(i, contact) {
     return `
     <div id="contact-container${i}" onclick="selectContact(${i})" class="contact-container" tabindex="1">
         <div class="contact-container-name">
-            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
+            <span  id="contactInitals${i}" class="circleName">Initialien</span>
             <span id="contactName${i}">${contact['name']}</span>
         </div>
         <div class="contact-container-check"></div>
