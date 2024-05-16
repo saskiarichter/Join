@@ -1,4 +1,5 @@
 let tasks = [];
+let contacts = [];
 let prioBtn = "";
 
 /**
@@ -150,8 +151,9 @@ async function checkInput() {
     if (title !== '' && date !== '' && category !== `Select task category`) {
         createTask();
         await safeTask();
+        showTaskAdded();
+        setTimeout(redirectToBoard(), 2000); // from include.js
         clearAddTask();
-        redirectToBoard(); // from include.js
     } else {
         checkTitle(title);
         checkDate(date);
@@ -237,6 +239,10 @@ async function safeTask() {
     } else {
         await putData("/tasks", tasks) // from storage.js
     }
+}
+
+function showTaskAdded(){
+    document.getElementById('task-added').classList.remove('d-none');
 }
 
 /**

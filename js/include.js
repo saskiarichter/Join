@@ -1,6 +1,6 @@
 async function initInclude() {
     await includeHTML();
-    await loadData();
+    await loadContacts();
     displayUserInitials();
 }
 

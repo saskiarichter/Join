@@ -1,24 +1,24 @@
 async function onloadFunc() {
-    await loadData();
+    await loadContacts();
     fillRemembereInputs();
     postContacts("", {"name": "frido"});
 }
 
 async function onloadTasks() {
-    await loadData();
+    await loadContacts();
     await loadTasks();
 }
 
 
 const BASE_URL = "https://remotestorage-2c309-default-rtdb.europe-west1.firebasedatabase.app/";
 
-async function loadData() {
-    let response = await fetch(BASE_URL + "users.json");
-    let usersData = await response.json();
+async function loadContacts() {
+    let response = await fetch(BASE_URL + "contacts.json");
+    let contactsData = await response.json();
 
-    if (usersData) {
-        Object.keys(usersData).forEach(key => {
-            users.push(usersData[key]);
+    if (contactsData) {
+        Object.keys(contactsData).forEach(key => {
+            contacts.push(contactsData[key]);
         });
     }
 }

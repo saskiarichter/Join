@@ -1,20 +1,4 @@
-let contacts = [{
-    'name': 'Sofia Müller',
-    'initials': 'SM',
-    'selected': false
-}, {
-    'name': 'Alex Richter',
-    'initials': 'AR',
-    'selected': false
-}, {
-    'name': 'Jan Meiler',
-    'initials': 'JM',
-    'selected': false
-}, {
-    'name': 'Maria Manner',
-    'initials': 'MM',
-    'selected': false
-}];
+
 let selectedContacts = [];
 let contactsSearch = [];
 
