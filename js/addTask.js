@@ -7,7 +7,7 @@ async function init() {
     await initInclude(); // from include.js
     addTaskBgMenu();
     displayUserInitials(); // from summary.js
-    onloadTasks(); // from storage.js
+    loadTasks(); // from storage.js
     renderContacts();
 }
 
@@ -207,7 +207,7 @@ function getPrio() {
  * @param {string} prio - selected urgent, medium or low button
  * @param {string} category - chosen category
  */
-function pushTaskElements(title, description, date, prio, category,prioBtn) {
+function pushTaskElements(title, description, date, prio, category, prioBtn) {
     if (selectedContacts.length < 1) { selectedContacts = '' };
     if (subtasks.length < 1) { subtasks = '' };
     let currentId = tasks.length;
@@ -240,7 +240,7 @@ async function safeTask() {
 }
 
 function showTaskAdded(){
-    document.getElementById('task-added').classList.remove('d-none');
+    document.getElementById('added-container').classList.remove('d-none');
 }
 
 /**
@@ -281,7 +281,7 @@ function checkCategory(category) {
 /** 
  * resets whole AddTask page
  */
-function clearAddTask() {
+async function clearAddTask() {
     hideRequiredInfo('addTask-title', 'required-title');
     hideRequiredInfo('addTask-dueDate', 'required-date');
     hideRequiredCategory();
@@ -289,6 +289,9 @@ function clearAddTask() {
     emptyInput();
     selectedContacts = [];
     subtasks = [];
+    contacts = [];
+    await loadData();
+    renderContacts();
 }
 
 /**

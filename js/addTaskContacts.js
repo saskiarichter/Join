@@ -7,9 +7,11 @@ let contactsSearch = [];
 function renderContacts() {
     let container = document.getElementById('addTask-contacts-container');
     container.innerHTML = '';
-    for (let i = 0; i < contacts.length; i++) {
+    for (let i = 1; i < contacts.length; i++) {
         const contact = contacts[i];
-        container.innerHTML += templateContact(i, contact);
+        let name = contact['name'];
+        let initials = getInitials(name); // from contacts.js
+        container.innerHTML += templateContact(i, name, initials);
         if (contact['selected'] === true) {
             document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
         } else {
@@ -22,15 +24,16 @@ function renderContacts() {
  * returns HTML of single contact
  * 
  * @param {number} i - position in contacts json
- * @param {json} contact - json of single contact
+ * @param {string} name - name of contact
+ * @param {string} initials - initials of contact
  * @returns 
  */
-function templateContact(i, contact) {
+function templateContact(i, name, initials) {
     return `
     <div id="contact-container${i}" onclick="selectContact(${i})" class="contact-container" tabindex="1">
         <div class="contact-container-name">
-            <span  id="contactInitals${i}" class="circleName">Initialien</span>
-            <span id="contactName${i}">${contact['name']}</span>
+            <span  id="contactInitals${i}" class="circleName">${initials}</span>
+            <span id="contactName${i}">${name}</span>
         </div>
         <div class="contact-container-check"></div>
     </div> 
@@ -106,8 +109,10 @@ function showSelectedContacts() {
     container.innerHTML = '';
     for (let i = 0; i < selectedContacts.length; i++) {
         let contact = selectedContacts[i];
+        let name = contact['name'];
+        let initials = getInitials(name); // from contacts.js
         container.innerHTML += `
-        <span class="circleName">${contact['initials']}</span>
+        <span class="circleName">${initials}</span>
         `;
     }
 }
@@ -127,7 +132,7 @@ function searchContacts() {
     let search = document.getElementById('addTask-assigned').value.toLowerCase();
     contactsSearch = [];
     if (search.length > 0) {
-        for (let i = 0; i < contacts.length; i++) {
+        for (let i = 1; i < contacts.length; i++) {
             findContacts(i, search);
         }
         showContactResults();
@@ -142,12 +147,11 @@ function searchContacts() {
  * @param {number} i - position of contact in contacts array
  * @param {*} search - value of search input
  */
-function findContacts(i,search){
+function findContacts(i, search){
     let contactName = contacts[i]['name'];
-    let contactInitials = contacts[i]['initials'];
     let contactSelected = contacts[i]['selected'];
     if (contactName.toLowerCase().includes(search)) {
-        contactsSearch.push({ 'name': contactName, 'initials': contactInitials, 'selected': contactSelected });
+        contactsSearch.push({ 'name': contactName, 'selected': contactSelected });
     }
 }
 
@@ -159,7 +163,9 @@ function showContactResults() {
     container.innerHTML = '';
     for (let i = 0; i < contactsSearch.length; i++) {
         const contact = contactsSearch[i];
-        container.innerHTML += templateContactSearch(i, contact);
+        let name = contact['name'];
+        let initials = getInitials(name); // from contacts.js
+        container.innerHTML += templateContactSearch(i, name, initials);
         if (contactsSearch['selected'] === true) {
             document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
         } else {
@@ -172,15 +178,16 @@ function showContactResults() {
  * returns HTML of single contact while search
  * 
  * @param {number} i - position in contacts json
- * @param {json} contact - json of single contact
+ * @param {string} name - name of contact
+ * @param {string} initials - initials of contact
  * @returns 
  */
-function templateContactSearch(i, contact) {
+function templateContactSearch(i, name, initials) {
     return `
     <div id="contact-container${i}" onclick="selectContactSearch(${i})" class="contact-container" tabindex="1">
         <div class="contact-container-name">
-            <span  id="contactInitals${i}" class="circleName">${contact['initials']}</span>
-            <span id="contactName${i}">${contact['name']}</span>
+            <span  id="contactInitals${i}" class="circleName">${initials}</span>
+            <span id="contactName${i}">${name}</span>
         </div>
         <div class="contact-container-check"></div>
     </div> 
@@ -195,9 +202,9 @@ function templateContactSearch(i, contact) {
 function selectContactSearch(i) {
     let contactSelected = contactsSearch[i]['selected'];
     if (contactSelected === true) {
-        addContactSearch(i);
-    } else {
         removeContactSearch(i);
+    } else {
+        addContactSearch(i);
     }
 }
 
@@ -209,12 +216,11 @@ function selectContactSearch(i) {
 function addContactSearch(i) {
     let container = document.getElementById(`contact-container${i}`);
     let contactName = contactsSearch[i]['name'];
-    let contactInitals = contactsSearch[i]['initials'];
-    let index = contacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
+    let index = contacts.findIndex(contact => contact.name === contactName);
+    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName);
     selectedContacts.splice(indexSelected, 1);
-    contacts.splice(index, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
-    contactsSearch.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
+    contacts.splice(index, 1, { 'name': contactName, 'selected': false });
+    contactsSearch.splice(i, 1, { 'name': contactName, 'selected': false });
     container.classList.remove('contact-container-focus');
 }
 
@@ -226,10 +232,9 @@ function addContactSearch(i) {
 function removeContactSearch(i) {
     let container = document.getElementById(`contact-container${i}`);
     let contactName = contactsSearch[i]['name'];
-    let contactInitals = contactsSearch[i]['initials'];
-    let index = contacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
-    selectedContacts.push({ 'name': contactName, 'initials': contactInitals });
-    contacts.splice(index, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
-    contactsSearch.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
+    let index = contacts.findIndex(contact => contact.name === contactName);
+    selectedContacts.push({ 'name': contactName});
+    contacts.splice(index, 1, { 'name': contactName, 'selected': true });
+    contactsSearch.splice(i, 1, { 'name': contactName, 'selected': true });
     container.classList.add('contact-container-focus');
 }
