@@ -197,6 +197,7 @@
 
 #clearButton {
     height: 56px;
+    width: 126px;
     border: 1px solid #2A3647;
     box-sizing: border-box;
     background-color: transparent;
