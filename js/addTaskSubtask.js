@@ -39,6 +39,20 @@ function addSubtask() {
 }
 
 /**
+ * adds subtask to list with click on Enter
+ */
+function addSubtaskEnter(){
+    let input = document.getElementById('addTask-subtasks');
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter"){
+            event.preventDefault();
+            document.getElementById("add-subtask-button").click();
+        } 
+    });
+}
+
+
+/**
  * generates list of subtasks
  */
 function generateSubtasksList() {

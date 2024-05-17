@@ -100,12 +100,12 @@
                     <div class="input-section-element">
                         <label for="addTask-subtasks">Subtasks</label>
                         <div id="addTask-subtasks-container" class="input-container">
-                            <input id="addTask-subtasks" onclick="openIcons()" class="inputfield" type="text"
+                            <input id="addTask-subtasks" onkeypress="addSubtaskEnter()" onclick="openIcons()" class="inputfield" type="text"
                                 placeholder="Add new subtask">
                             <div id="addTask-subtasks-icons" class="subtasks-icon d-none">
                                 <img onclick="emptySubtaskInput()" src="/img/closeVectorBlack.svg" alt="Löschen">
                                 <div class="parting-line subtasks-icon-line"></div>
-                                <img onclick="addSubtask()" src="/img/done.svg" alt="Bestätigen">
+                                <img id="add-subtask-button" onclick="addSubtask()" src="/img/done.svg" alt="Bestätigen">
                             </div>
                             <img id="dropdown-img-plus" onclick="addSubtask()" class="dropdown-img dropdown-img-plus"
                                 src="/img/subtasks.svg">
@@ -135,10 +135,10 @@
     </div>
 
     <div id="added-container" class="added-container d-none">
-    <div id="task-added">
-        Task added to board
-        <img src="../img/board.svg" alt="">
+        <div id="task-added">
+            Task added to board
+            <img src="../img/board.svg" alt="">
+        </div>
     </div>
-</div>
 
 </div>
