@@ -1,13 +1,14 @@
 let selectedContacts = [];
 let contactsSearch = [];
 
+
 /**
  * loads Contacts
  */
 function renderContacts() {
     let container = document.getElementById('addTask-contacts-container');
     container.innerHTML = '';
-    for (let i = 1; i < contacts.length; i++) {
+    for (let i = 2; i < contacts.length; i++) {
         const contact = contacts[i];
         let name = contact['name'];
         let initials = getInitials(name); // from contacts.js
@@ -19,6 +20,7 @@ function renderContacts() {
         }
     }
 }
+
 
 /**
  * returns HTML of single contact
@@ -40,6 +42,7 @@ function templateContact(i, name, initials) {
 `;
 }
 
+
 /**
  * opens/closes contacts & shows/hides selected contacts 
  * --> with click within or outside of container
@@ -60,6 +63,7 @@ function openContacts() {
     });
 }
 
+
 /**
  * opens/closes contacts & shows/hides selected contacts
  * --> with click on child element
@@ -79,6 +83,7 @@ function openCloseContacts(event) {
     }
 };
 
+
 /**
  * adds and removes hover style when selecting contact in contact list
  * 
@@ -91,14 +96,15 @@ function selectContact(i) {
     let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName && contact.initials === contactInitals);
     if (contacts[i]['selected'] === true) {
         selectedContacts.splice(indexSelected, 1);
-        contacts.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': false });
+        contacts.splice(i, 1, { 'name': contactName, 'selected': false });
         container.classList.remove('contact-container-focus');
     } else {
-        selectedContacts.push({ 'name': contactName, 'initials': contactInitals, 'selected': true });
-        contacts.splice(i, 1, { 'name': contactName, 'initials': contactInitals, 'selected': true });
+        selectedContacts.push({ 'name': contactName, 'selected': true });
+        contacts.splice(i, 1, { 'name': contactName, 'selected': true });
         container.classList.add('contact-container-focus');
     }
 }
+
 
 /**
  * renders selected Contacts
@@ -117,6 +123,7 @@ function showSelectedContacts() {
     }
 }
 
+
 /**
  * hides selected contacts
  */
@@ -124,6 +131,7 @@ function hideSelectedContacts() {
     let container = document.getElementById('selectedContacts');
     container.classList.add('d-none');
 }
+
 
 /**
  * searches for contacts
@@ -141,6 +149,7 @@ function searchContacts() {
     }
 }
 
+
 /**
  * push found contacts to contactsSearch
  * 
@@ -154,6 +163,7 @@ function findContacts(i, search){
         contactsSearch.push({ 'name': contactName, 'selected': contactSelected });
     }
 }
+
 
 /**
  * shows results of search
@@ -173,6 +183,7 @@ function showContactResults() {
         }
     }
 }
+
 
 /**
  * returns HTML of single contact while search
@@ -194,6 +205,7 @@ function templateContactSearch(i, name, initials) {
 `;
 }
 
+
 /**
  * adds and removes contact and hover style when selecting contact in search list
  * 
@@ -207,6 +219,7 @@ function selectContactSearch(i) {
         addContactSearch(i);
     }
 }
+
 
 /**
  * adds contact and hover style when selecting contact in search list
@@ -223,6 +236,7 @@ function addContactSearch(i) {
     contactsSearch.splice(i, 1, { 'name': contactName, 'selected': false });
     container.classList.remove('contact-container-focus');
 }
+
 
 /**
  * removes contact and hover style when selecting contact in search list

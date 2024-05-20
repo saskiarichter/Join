@@ -1,7 +1,8 @@
 /*  DESCRIPTION FIELD  */
 
-#input-container-description {
+.input-container-description {
     height: 120px;
+    width: 100%;
     display: flex;
     flex-direction: column !important;
     align-items: flex-end;
@@ -9,7 +10,7 @@
     padding: 18px 16px 4px 16px !important;
 }
 
-#input-container-description img {
+.input-container-description img {
     margin-right: -12px;
     height: 18.9px;
     width: 18.9px;
@@ -169,7 +170,7 @@
 
 .prio-buttons button {
     width: 33.3%;
-    height: 56px;
+    height: auto;
     border: none;
     border-radius: 10px;
     padding: 16px 10px 16px 10px;

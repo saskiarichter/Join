@@ -1,9 +1,8 @@
 .content {
     position: relative;
     height: 100vh;
-    margin-left: 232px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
 }
 
@@ -21,8 +20,13 @@
 
 /*  LAYOUT  */
 
+.addTaskPage{
+    margin-left: 232px;
+    padding-inline: 64px;
+}
+
 .addTask {
-    height: auto;
+    height: max-content;
     width: 976.25px;
     display: flex;
     flex-direction: column;
@@ -128,7 +132,7 @@
 
 .inputfield {
     width: 100%;
-    border: none;
+    border: unset;
     padding: 0;
     font-size: 20px;
     font-weight: 400;

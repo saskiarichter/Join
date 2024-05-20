@@ -1,5 +1,6 @@
 let prioBtn = "";
 
+
 /**
  * loads navBar, header, arrays from firebase & renders contacts
  */
@@ -11,12 +12,14 @@ async function init() {
     renderContacts();
 }
 
+
 /**
  * Adds bgcolor on current Page in the NavBar 
  */
 function addTaskBgMenu() {
     document.getElementById('addTaskMenu').classList.add('bgfocus');
 }
+
 
 /**
  * removes red border color & hides required text info
@@ -31,12 +34,14 @@ function hideRequiredInfo(borderId, textId) {
     text.classList.add('transparent');
 }
 
+
 /**
  * Removes red color from Category
  */
 function hideRequiredCategory() {
     document.getElementById('addTask-category').classList.remove('empty');
 }
+
 
 /**
  * opens dropdown
@@ -49,6 +54,7 @@ function openDropdown(container, img) {
     img.classList.add('dropdown-img-rotated');
 }
 
+
 /**
  * closes dropdown
  * 
@@ -59,6 +65,7 @@ function closeDropdown(container, img) {
     container.classList.add('d-none');
     img.classList.remove('dropdown-img-rotated');
 }
+
 
 /**
  * changes backgroundcolor if urgent-button is selected
@@ -75,6 +82,7 @@ function selectUrgent() {
     }
 }
 
+
 /**
  * changes backgroundcolor if medium-button is selected
  */
@@ -90,6 +98,7 @@ function selectMedium() {
     }
 }
 
+
 /**
  * changes backgroundcolor if low-button is selected
  */
@@ -104,6 +113,7 @@ function selectLow() {
         document.getElementById('mediumButton').classList.remove('mediumButton-focus');
     }
 }
+
 
 /** 
  * opens and closes categories & sets back placeholder 
@@ -124,6 +134,7 @@ function openCategories() {
     selectedCategory.innerHTML = `Select task category`;
 }
 
+
 /**
  * selects category and closes dropdown
  * 
@@ -137,6 +148,7 @@ function selectCategory(categoryId) {
     selectedCategory.innerHTML = `${category}`;
     closeDropdown(container, img);
 }
+
 
 /**
  * checks if required inputs are filled out 
@@ -170,8 +182,9 @@ function createTask() {
     let prio;
     prio = getPrio();
     let category = document.getElementById('select-task-text').innerHTML;
-    pushTaskElements(title, description, date, prio, category,prioBtn);
+    pushTaskElements(title, description, date, prio, category, prioBtn);
 }
+
 
 /**
  * checks which prio button is selected
@@ -197,6 +210,7 @@ function getPrio() {
     }
     return prio
 }
+
 
 /**
  * pushing information to tasks array
@@ -225,6 +239,7 @@ function pushTaskElements(title, description, date, prio, category, prioBtn) {
     })
 }
 
+
 /**
  * creates or updates tasks array on firebase
  */
@@ -239,9 +254,11 @@ async function safeTask() {
     }
 }
 
+
 function showTaskAdded(){
     document.getElementById('added-container').classList.remove('d-none');
 }
+
 
 /**
  * adds red color if title input is not filled out
@@ -255,6 +272,7 @@ function checkTitle(title) {
     }
 }
 
+
 /**
  * adds red color if date input is not filled out
  * 
@@ -267,6 +285,7 @@ function checkDate(date) {
     }
 }
 
+
 /**
  * adds red color if no category is selected
  * 
@@ -277,6 +296,7 @@ function checkCategory(category) {
         document.getElementById('addTask-category').classList.add('empty');
     }
 }
+
 
 /** 
  * resets whole AddTask page
@@ -294,6 +314,7 @@ async function clearAddTask() {
     renderContacts();
 }
 
+
 /**
  * resets Prio buttons
  */
@@ -302,6 +323,7 @@ function deletePrio() {
     document.getElementById('mediumButton').classList.remove('mediumButton-focus');
     document.getElementById('lowButton').classList.remove('lowButton-focus');
 }
+
 
 /**
  * empties all inputfields 

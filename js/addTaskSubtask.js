@@ -1,5 +1,6 @@
 let subtasks = [];
 
+
 /**
  * changes icons of subtasks field when click inside or outside of container
  */
@@ -18,6 +19,7 @@ function openIcons() {
     });
 }
 
+
 /**
  * empties subtask input
  */
@@ -25,6 +27,7 @@ function emptySubtaskInput() {
     let container = document.getElementById('addTask-subtasks');
     container.value = '';
 }
+
 
 /**
  * adds subtask to list 
@@ -37,6 +40,7 @@ function addSubtask() {
         emptySubtaskInput();
     }
 }
+
 
 /**
  * adds subtask to list with click on Enter
@@ -64,6 +68,7 @@ function generateSubtasksList() {
     }
 }
 
+
 /**
  * generates HTML of list element
  * 
@@ -84,6 +89,7 @@ function templateSubtaskListElement(i, subtask) {
 `;
 }
 
+
 /**
  * deletes one list element 
  * 
@@ -93,6 +99,7 @@ function deleteSubtask(i) {
     subtasks.splice(i, 1);
     generateSubtasksList();
 }
+
 
 /**
  * opens field to edit subtask
@@ -104,6 +111,7 @@ function editSubtask(i) {
     container.classList.add('subtask-edit-container');
     container.innerHTML = templateEditSubtask(i);
 }
+
 
 /**
  * generates HTML of field to edit subtask
@@ -121,6 +129,7 @@ function templateEditSubtask(i) {
     </div>
     `;
 }
+
 
 /**
  * generates list with new Subtask & closes edit field
