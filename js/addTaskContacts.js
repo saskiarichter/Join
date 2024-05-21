@@ -8,7 +8,7 @@ let contactsSearch = [];
 function renderContacts() {
     let container = document.getElementById('addTask-contacts-container');
     container.innerHTML = '';
-    for (let i = 1; i < contacts.length; i++) {
+    for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i]['name'];
         let initials = getInitials(name); // from contacts.js
         let color = contacts[i]['color'];
