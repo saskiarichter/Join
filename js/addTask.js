@@ -179,8 +179,7 @@ function createTask() {
     let description = document.getElementById('addTask-description').value;
     if (description === '') { description = '' };
     let date = document.getElementById('taskDate').value;
-    let prio;
-    prio = getPrio();
+    let prio = getPrio();
     let category = document.getElementById('select-task-text').innerHTML;
     pushTaskElements(title, description, date, prio, category, prioBtn);
 }
@@ -192,17 +191,13 @@ function createTask() {
  * @returns string - selected prio
  */
 function getPrio() {
-    let urgent = document.getElementById('urgentButton');
-    let medium = document.getElementById('mediumButton');
-    let low = document.getElementById('lowButton');
-    let prio;
-    if (urgent.classList.contains('urgentButton-focus')) {
+    if (document.getElementById('urgentButton').classList.contains('urgentButton-focus')) {
         prio = 'Urgent'
         prioBtn = './img/PrioAltaRed.svg'
-    } else if (medium.classList.contains('mediumButton-focus')) {
+    } else if (document.getElementById('mediumButton').classList.contains('mediumButton-focus')) {
         prio = 'Medium'
         prioBtn= './img/PrioMediaOrange.svg'
-    } else if (low.classList.contains('lowButton-focus')) {
+    } else if (document.getElementById('lowButton').classList.contains('lowButton-focus')) {
         prio = 'Low'
         prioBtn = './img/PrioBajaGreen.svg'
     } else {
