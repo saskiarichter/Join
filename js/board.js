@@ -284,7 +284,6 @@ function subtasksShowRender(i){
 
 function UpdateProgress(i){
   let checkedCount = 0;
-  debugger
   for(let j = 0; j < tasks[i]["subtasks"].length; j++){
     let checkbox  = document.getElementById(`checkbox${j}`);
     if (checkbox.checked){
