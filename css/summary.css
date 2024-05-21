@@ -501,36 +501,6 @@
     }
 }
 
-/*@keyframes fadeIn {
-    0% { opacity: 0; }
-    80% {opacity: 0;}
-    100% { opacity: 1; }
-  }
-
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    80% {opacity: 0;}
-    100% { opacity: 1; }
-  }
-
-  .fade-in{
-    animation: fadeIn 1.8s;
-  }*/
-
-
-
-
-/*@media (min-width: 1051px) {
-    .content {
-        display: block;
-    }
-}
-
-.d-none {
-    display: none;
-}*/
-
-
 .greeting-mobile {
     position: fixed;
     top: 50%;

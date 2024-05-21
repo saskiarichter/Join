@@ -11,7 +11,59 @@ let users = [
     }
 ];
 
+/**
+ * Changes the form into the signup form
+ */
+function changeForm() {
+    document.querySelector('.signUpMobile').classList.add("d-none");
+    document.getElementById('signUpContainer').innerHTML = "";
+    let form = document.getElementById('form');
+    form.classList.add("formSignUp");
+    let checkboxSignUp = document.getElementById('checkboxSignUp');
+    checkboxSignUp.classList.add("loginCheckboxSignUp");
 
+    form.innerHTML = `
+                    <form onsubmit="return false;">
+                        <div class="formHeadline">
+                            <div class="headline">
+                                <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
+                                <h1 class="formHeadlineTextSignUp">Sign up</h1>
+                            </div>            
+                            <div class="formHeadlineBorder"></div>
+                        </div>    
+                        <div class="mailPassword">
+                            <div>
+                                <input class="inputNameSignUp" type="text" placeholder="Name" required id="name">
+                            </div>    
+                            <div>
+                                <input class="inputMailSignUp" type="email" placeholder="Email" required id="email">
+                            </div>
+                            <div>
+                                <input class="inputPasswordSignUp" type="password" placeholder="Password" required id="password">
+                            </div>
+                            <div>
+                                <input class="inputPasswordSignUp" type="password" placeholder="Confirm Password" required id="password-confirm">
+                            </div>
+                            
+                            <div class="notification">
+                                <p id="msgbox-signup"><p>
+                            </div>  
+                            <div class="loginCheckboxSignUp">
+                                <input type="checkbox" class="loginCheckBoxRememberMe" id="loginCheckBoxRememberMe">
+                                <label for="loginCheckBoxRememberMe" class="loginCheckBoxRememberMeLabel"></label>
+                                <p class="privacy-text">I accept the <a class="policeLink" onclick="redirectToPrivacyPoliceSignup()">Privacy Police</a></label>
+                            </div>
+                            <div class="buttons">
+                                <button class="buttonLogin" onclick="addUser()">Sign up</button>
+                            </div>
+                        </div>
+                    </form> 
+    `;
+}
+
+/**
+ * this function is for the logout
+ */
 async function addUser() {
     let name = document.getElementById('name').value.trim();
     let email = document.getElementById('email').value.trim();
@@ -80,6 +132,10 @@ async function addUser() {
 }
 
 
+
+/**
+ * this function is for the login
+ */
 async function login() {
     let email = document.getElementById('email-login').value;
     let password = document.getElementById('password-login').value;
@@ -95,7 +151,7 @@ async function login() {
         localStorage.setItem('lastLoggedInPassword', password); // Speichere das Passwort im Local Storage
         localStorage.setItem('rememberMeChecked', rememberMeChecked); // Speichere den Status der Checkbox im Local Storage
 
-        alert("Login successful!"); // Hinweis: Du kannst diesen Hinweis durch eine Weiterleitung ersetzen
+        alert("Login successful!");
 
         window.location.href = "summary.html"; // Weiterleitung zur summary.html-Seite
     } else {
@@ -103,14 +159,17 @@ async function login() {
     }
 }
 
-
+/**
+ * this function is for the logout
+ */
 function logout() {
     sessionStorage.removeItem('loggedInUser');
     window.location.href = "index.html";
 }
 
-
-// Füllt die Inputfelder mit den zuletzt eingeloggten Anmeldeinformationen aus dem Local Storage
+/**
+ * Fills the input fields with the last logged-in credentials from the local storage
+ */
 function fillRemembereInputs() {
     const lastLoggedInEmail = localStorage.getItem('lastLoggedInEmail');
     const lastLoggedInPassword = localStorage.getItem('lastLoggedInPassword');
@@ -122,3 +181,18 @@ function fillRemembereInputs() {
         document.getElementById('loginCheckBoxRememberMe').checked = true; // Stelle sicher, dass die Checkbox aktiviert ist
     }
 }
+
+/**
+ * Changes the animation image in the responsive view
+ */
+function changeImage() {
+    // Prüfen, ob Bildschirmbreite kleiner oder gleich 720px ist
+    if (window.innerWidth <= 720) {
+        document.getElementById('logo').style.display="none";
+        document.getElementById('logo2').style.display="block";
+        // Wenn ja, ändere das Bild nach 800 Millisekunden
+        setTimeout(function(){
+            document.getElementById('logo2').style.display="none";
+        }, 1200) 
+        document.getElementById('logo').style.display="block";}
+    }

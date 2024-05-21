@@ -1,4 +1,4 @@
-function changeForm() {
+/*function changeForm() {
     document.querySelector('.signUpMobile').classList.add("d-none");
     document.getElementById('signUpContainer').innerHTML = "";
     let form = document.getElementById('form');
@@ -35,7 +35,7 @@ function changeForm() {
                             <div class="loginCheckboxSignUp">
                                 <input type="checkbox" class="loginCheckBoxRememberMe" id="loginCheckBoxRememberMe">
                                 <label for="loginCheckBoxRememberMe" class="loginCheckBoxRememberMeLabel"></label>
-                                <p class="privacy-text">I accept the <a class="policeLink" href"#">Privacy Police</a></label>
+                                <p class="privacy-text">I accept the <a class="policeLink" onclick="redirectToPrivacyPoliceSignup()">Privacy Police</a></label>
                             </div>
                             <div class="buttons">
                                 <button class="buttonLogin" onclick="addUser()">Sign up</button>
@@ -61,30 +61,4 @@ function changeImage() {
             document.getElementById('logo2').style.display="none";
         }, 1200) 
         document.getElementById('logo').style.display="block";}
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }*/

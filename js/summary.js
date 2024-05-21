@@ -4,24 +4,14 @@
  */
 async function initSummary() {
     await includeHTML();
-    await loadData();
+    await loadDataLogin();
     summaryBg();
     updateGreeting();
     displayUsername();
     displayUserInitials();
-    
-    setTimeout(function() {
-        document.getElementById('content').style.display = 'flex';
-        document.getElementById('content').style.flexDirection = 'column';
-    }, 2000);
-
-    if (window.innerWidth <= 850) {
-        setTimeout(function() {
-            document.getElementById('greeting-mobile').style.display = 'none';
-        }, 2000);
-    } else {
-        document.getElementById('greeting-mobile').style.display = 'none';
-    }
+    showContent();
+    handleGreetingMobile();
+    onloadTasks();
 }
 
 
@@ -66,7 +56,6 @@ function displayUsername() {
     greetingNameMobile.innerText = username;
 }
 
-
 /**
  * show initials from username
  */
@@ -85,10 +74,26 @@ function displayUserInitials() {
     }
 }
 
-
-function hideContentForTwoSeconds() {
-    document.getElementById('content').style.display = 'none';
+/**
+ * this function shows the main content after 1500 ms
+ */
+function showContent() {
     setTimeout(function() {
-        document.getElementById('content').style.display = 'block';
-    }, 2000);
+        const content = document.getElementById('content');
+        content.style.display = 'flex';
+        content.style.flexDirection = 'column';
+    }, 1500);
+}
+
+/**
+ * this function hides the greeting after 1500 ms in the responsive view
+ */
+function handleGreetingMobile() {
+    if (window.innerWidth <= 850) {
+        setTimeout(function() {
+            document.getElementById('greeting-mobile').style.display = 'none';
+        }, 1500);
+    } else {
+        document.getElementById('greeting-mobile').style.display = 'none';
+    }
 }

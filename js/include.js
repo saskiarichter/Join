@@ -19,6 +19,11 @@ async function includeHTML() {
     }
 }
 
+function toggleMenu() {
+    let dropdownMenu = document.querySelector('.headerLogoutButton .dropdownMenu');
+    dropdownMenu.classList.toggle('d-none');
+}
+
 
 function returnToHome() {
     window.location.href = "index.html";
