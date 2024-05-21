@@ -35,7 +35,7 @@
                             <img class="summary-images" src="/img/pencil.png">
                         </div>
                         <div class="to-do-span">
-                            <span class="number">1</span>
+                            <span class="number" id="summaryTodoInfoCounter">0</span>
                             <span class="summary-text">To-do</span>
                         </div>
                 </div>
@@ -44,7 +44,7 @@
                             <img class="summary-images" src="/img/check_summary.png">
                         </div>
                         <div class="to-do-span">
-                            <span class="number">1</span>
+                            <span class="number" id="summaryDoneInfoCounter">0</span>
                             <span class="summary-text">Done</span>
                         </div>
                     </div>
@@ -54,29 +54,29 @@
                             <img class="summary-images-urgency" src="/img/urgency.png">
                         </div>
                         <div class="to-do-span-urgency">
-                            <span class="number">1</span>
+                            <span class="number" id="summaryUrgentTaskCount">0</span>
                             <span class="urgent-text">urgent</span>
                         </div>
                         <div class="summary-board-border"></div>
                         <div class="summary-board-span">
-                            <span class="summary-board-time">April 27, 2024</span>
-                            <span>Upcoming Deadline</span>
+                            <span class="summary-board-time" id="summaryUrgentTaskNextDate">April 27, 2024</span>
+                            <span id="summaryUrgentTaskInfo">Upcoming Deadline</span>
                         </div>
                     </div>
 
                 <div class="task-progress-feedback">
                     <div class="tpf-container" onclick="redirectToBoard()">
-                        <span class="number">5</span>
+                        <span class="number" id="tasksInBoardNum">0</span>
                         <span class="summary-text">Tasks in</span>
                         <span class="summary-text">Board</span>
                     </div>
                     <div class="tpf-container" onclick="redirectToBoard()">
-                        <span class="number">2</span>
+                        <span class="number" id="taskInProgressNum">0</span>
                         <span class="summary-text">Tasks in</span>
                         <span class="summary-text">Progress</span>
                     </div>
                     <div class="tpf-container" onclick="redirectToBoard()">
-                        <span class="number">2</span>
+                        <span class="number" id="awaitingFeedbackNum">0</span>
                         <span class="summary-text">Awaiting</span>
                         <span class="summary-text">Feedback</span>
                     </div>

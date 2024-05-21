@@ -11,7 +11,8 @@ async function initSummary() {
     displayUserInitials();
     showContent();
     handleGreetingMobile();
-    onloadTasks();
+    //onloadTasks();
+    await getTasksAndProcess();
 }
 
 
@@ -96,4 +97,132 @@ function handleGreetingMobile() {
     } else {
         document.getElementById('greeting-mobile').style.display = 'none';
     }
+}
+
+/**
+ * allocate the tasks to the respective categories
+ */
+let todo = 0;
+let inProgress = 0;
+let awaitFeedback = 0;
+let done = 0;
+let taskInBoard = 0;
+let urgendTask = 0;
+let dates = [];
+
+async function getTasksAndProcess() {
+    await getTask();
+    countTasks();
+    getUrgendTask(tasks);
+    dates.push(tasks);
+    taskInBoard = todo + inProgress + awaitFeedback + done;
+    allocateTasks();
+    const earliestDate = getEarliestDate(tasks);
+    allocateEarliestDate(earliestDate);
+}
+
+/**
+ * get the tasks from firebase
+ */
+
+async function getTask() {
+    try {
+        let response = await fetch(BASE_URL + "tasks.json");
+        let tasksData = await response.json();
+
+        if (tasksData) {
+            tasks = Object.keys(tasksData).map(key => tasksData[key]);
+        } else {
+            tasks = [];
+        }
+    } catch (error) {
+        console.error('Error loading tasks:', error.message);
+        tasks = [];
+    }
+}
+
+/**
+ * allocate the earliest date of the urgent task
+ */
+
+function allocateEarliestDate(earliestDate) {
+    if (earliestDate) {
+        const options = {year: "numeric", month: "long", day: "numeric"};
+        document.getElementById("summaryUrgentTaskNextDate").innerHTML =
+            earliestDate.toLocaleDateString("en-US", options);
+        document.getElementById("summaryUrgentTaskInfo").innerHTML =
+            "Upcoming Deadline";
+    } else {
+        document.getElementById("summaryUrgentTaskNextDate").innerHTML =
+            "No urgent deadlines";
+        document.getElementById("summaryUrgentTaskInfo").innerHTML =
+            "Upcoming Deadline";
+    }
+}
+
+/**
+ * allocate the tasks to the respective categories
+ */
+function allocateTasks() {
+    document.getElementById("summaryTodoInfoCounter").innerHTML = todo;
+    document.getElementById("summaryDoneInfoCounter").innerHTML = done;
+    document.getElementById("tasksInBoardNum").innerHTML = taskInBoard;
+    document.getElementById("taskInProgressNum").innerHTML = inProgress;
+    document.getElementById("awaitingFeedbackNum").innerHTML = awaitFeedback;
+}
+
+/**
+ * count the tasks in the respective categories
+ */
+function countTasks() {
+    for (i = 0; i < tasks.length; i++) {
+        const cat = tasks[i];
+        let phase = cat["phases"];
+        if (phase == "To Do") {
+            todo++;
+        } else if (phase == "In progress") {
+            inProgress++;
+        } else if (phase == "Await feedback") {
+            awaitFeedback++;
+        } else if (phase == "Done") {
+            done++;
+        }
+    }
+}
+
+/**
+ * count the urgent tasks from the task array
+ */
+function getUrgendTask(tasks) {
+    const taskCount = tasks.filter((t) => t.prio === "Urgent");
+    document.getElementById("summaryUrgentTaskCount").innerHTML =
+        taskCount.length;
+}
+
+/**
+ * check valid date and return the earliest date of the urgent tasks
+ */
+function getEarliestDate(tasks) {
+    const urgentTasks = tasks.filter((t) => t.prio === "Urgent");
+    if (urgentTasks.length > 0) {
+        const earliestDate = new Date(
+            Math.min(
+                ...urgentTasks.map((t) => {
+                    const taskDate = new Date(t.date);
+                    if (
+                        Object.prototype.toString.call(taskDate) ===
+                            "[object Date]" &&
+                        !isNaN(taskDate)
+                    ) {
+                        return taskDate;
+                    } else {
+                        console.error("Ungültiges Datum gefunden:", t.date);
+                        return NaN;
+                    }
+                })
+            )
+        );
+        return earliestDate;
+    }
+    return null;
 }

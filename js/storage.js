@@ -4,7 +4,7 @@ let tasks = [];
 async function onloadFunc() {
     await loadDataLogin();
     fillRemembereInputs();
-    postContacts("", {"name": "frido"});
+    changeImage();
 }
 
 async function onloadTasks() {
