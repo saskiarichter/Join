@@ -52,7 +52,21 @@ async function getNextContactId() {
     }
 }
 
-async function createNewContactInFirebase(name, email, phoneNumber) {
+async function loadContacts(path = "/contacts") {
+    resetInputs();
+    const contactsData = await fetchContactsData(path);
+
+    if (!contactsData) {
+        console.log("No contact data found.");
+        return { names: [], emails: [], phoneNumbers: [] };
+    }
+
+    const contactList = document.getElementById('contactList');
+    contactList.innerHTML = '';
+    processContacts(contactsData, contactList);
+}
+
+async function createNewContactInFirebase(name, email, phoneNumber, color) {
     try {
         const nextContactId = await getNextContactId();
 
@@ -64,7 +78,8 @@ async function createNewContactInFirebase(name, email, phoneNumber) {
             body: JSON.stringify({
                 name: name,
                 email: email,
-                nummer: phoneNumber
+                nummer: phoneNumber,
+                color: color
             })
         });
 
@@ -79,6 +94,22 @@ async function createNewContactInFirebase(name, email, phoneNumber) {
         console.error('Error creating contact in Firebase:', error.message);
         throw error;
     }
+}
+
+async function updateContactInFirebase(id, name, mail, phone, color) {
+    const response = await fetch(`${BASE_URL}/contacts/${id}.json`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email: mail, nummer: phone, color: color })
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to update contact in Firebase.');
+    }
+
+    return await response.json();
 }
 
 async function deleteContact(contactId) {
@@ -98,7 +129,6 @@ async function deleteContact(contactId) {
         throw error;
     }
 }
-
 
 async function postData(path="", data={}){
     let response = await fetch(BASE_URL + path + ".json", {
@@ -157,7 +187,7 @@ async function setItem(key, value) {
     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
         .then(res => res.json());
 }
-
+ 
 async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(url).then(res => res.json()).then(res => {
