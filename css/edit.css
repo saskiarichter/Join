@@ -22,6 +22,9 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    height: 600px;
+    overflow-y: auto;
+    scrollbar-width:thin;
   }
 
   #addTask-edit-description{
@@ -31,13 +34,43 @@
   .addTask-edit-bottom{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
     font-size: 20px;
     font-weight: 400;
-    flex-direction: column;
-    margin-top: 20px;
+    margin-top: 30px;
+    gap: 20px;
   }
+
+  .save-button{
+    background-color: #2A3647;
+    color: #FFFFFF;
+    width: 143px;
+    cursor: pointer;
+    height: 36px;
+    border: none !important;
+    font-size: 16px !important;
+    border-radius: 10px;
+  }
+  
+  .save-button:hover{
+    background-color: #29ABE2;
+  }
+
+  .back-button{
+    background-color: transparent;
+    height: 36px;
+    width: 55px;
+    cursor: pointer;
+    border: 1px solid #2A3647;
+    font-size: 16px !important;
+  }
+  
+  .back-button:hover{
+    border-color: #29ABE2;
+    color: #29ABE2;
+  }
+  
 
   .input-section-edit{
     width: 100%;
@@ -47,13 +80,27 @@
     font-weight: 400;
     line-height: 24px;
     flex-direction: column;
+    gap: 30px;
+  }
+
+  .input-section-element-edit{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .input-section-right-edit{
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
 
   .input-section-left-edit{
     width: 440px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
   }
 
   .input-edit{
@@ -132,4 +179,18 @@
     cursor: pointer;
     padding: 5px 7px 0px 7px;
     height: 36px;
+  }
+
+  .urgentImg-edit{
+    background-color: white;
+  }
+
+  .user-content-edit-letter{
+    display: flex;
+    gap: 10px;
+    margin-left: 7px;
+  }
+
+  #newSubtask{
+    padding-inline-start: 0;
   }

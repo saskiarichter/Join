@@ -1,7 +1,5 @@
-let allTasks = [];
 let subtask = [];
 let user = [];
-let users =[];
 tasks = [];
 prioBtn = "";
 let prioText = "";
@@ -10,7 +8,7 @@ function initBoard() {
   initInclude();
   load();
   onloadTasks();
-  loadDataBoard("/allTasks");
+  loadDataBoard("/tasks");
   updateHTML();
 }
 /** To open the AddTask with addTask Button */
@@ -33,6 +31,7 @@ function closeMe() {
   editContent.classList.add("hidden");
   let overlay = document.getElementsByClassName("overlay")[0];
   overlay.classList.add("hidden");
+  updateHTML();
 }
 
 
@@ -54,6 +53,8 @@ function activeEditButton() {
     mediumEditbutton.classList.remove("active");
     lowEditbutton.classList.remove("active");
     lastClick = urgentEditbutton;
+    prioText ='Urgent'
+    prioBtn ='./img/PrioAltaRed.svg';
   });
 
   mediumEditbutton.addEventListener("click", function () {
@@ -64,6 +65,8 @@ function activeEditButton() {
     mediumEditbutton.classList.add("active");
     lowEditbutton.classList.remove("active");
     lastClick = mediumEditbutton;
+    prioText = 'Medium'
+    prioBtn= './img/PrioMediaOrange.svg'
   });
 
   lowEditbutton.addEventListener("click", function () {
@@ -74,6 +77,8 @@ function activeEditButton() {
     mediumEditbutton.classList.remove("active");
     lowEditbutton.classList.add("active");
     lastClick = lowEditbutton;
+    prioText = 'Low'
+    prioBtn = './img/PrioBajaGreen.svg'
   });
 }
 
@@ -132,7 +137,7 @@ function noTaskTransparent() {
 }
 
 /** to Take the first letter of the user contect */
-
+/*
 function firstLetters() {
   let userValue = document.getElementById("addTask-assigned");
   let letter = userValue.value.split(" ");
@@ -141,7 +146,7 @@ function firstLetters() {
   let result = firstNameLetter + lastNameLetter;
   user.push(result);
   save();
-}
+}*/
 
 function setFocus(e) {
   e.style.borderColor = "#29ABE2";
@@ -157,7 +162,7 @@ function setFocus(e) {
 
 function deleteTask(i) {
   tasks.splice(i,1);
-  deleteData("/tasks", tasks[i]);
+  putData("/tasks", tasks);
   save();
   updateHTML();
   styleOfNoTaskToDo();
@@ -204,6 +209,10 @@ function renderOfContects(num){
   }
 }
 
+
+/** to open the Task */
+
+
 function showTask(i) {
   let showContent = document.getElementById("showTask");
   showContent.classList.remove("hidden");
@@ -211,7 +220,10 @@ function showTask(i) {
   overlay.classList.remove("hidden");
   showContent.innerHTML = "";
   showContent.innerHTML += `
-  <div id="card-category-title-show${i}">${tasks[i]["category"]}</div>
+  <div class="category-show-content">
+    <div id="card-category-title-show${i}">${tasks[i]["category"]}</div>
+    <div class="closeImg" onclick="closeMe()"></div>
+  </div>
   <div class="title-description-content">
     <div class="title-content-show"><h2 class="show-card-title">${tasks[i]["title"]}</h2></div>
     <p class="show-card-description">${tasks[i]["description"]}</p>
@@ -228,12 +240,12 @@ function showTask(i) {
   <div class="show-assignedTo-content">
     <div class="assignedToText">Assigned To:</div>
     <div class="show-user-content">
-      <div class="user-inner-container">${tasks[i]['contacts'][0]['initials']}</div>
-      <div id="contacts-content">${tasks[i]['contacts'][0]['name']}</div>
-      </div>
+      <div class="user-task-show-content" id="user-show-letter"></div>
+      <div class="user-show-content" id="user-show-name"></div>
+    </div>
   </div>
   <div>Subtasks</div>
-  <ul><li>${tasks[i]['subtasks']}</li><ul>
+  <div id="subtask-show"></div>
   <div class="show-btn-content">
     <div class="show-delete-content" onclick="deleteTask(${i})">
       <i class="fa fa-trash-o" style="font-size:24px"></i>
@@ -246,7 +258,60 @@ function showTask(i) {
       </div>
   </div> 
   `;
-  changeColorOfCategoryTitleShow(i) /** ???????? */
+  changeColorOfCategoryTitleShow(i);
+  contactsShowLetterRender(i);
+  contactsShowNameRender(i);
+  subtasksShowRender(i);
+  getColorOfContactsShow();
+}
+
+function getColorOfContactsShow(){
+  let content = document.querySelectorAll('.user-task-content-show');
+  content.forEach(function(div){
+    div.style.backgroundColor = colorRandom();
+  });
+}
+
+function subtasksShowRender(i){
+  let content = document.getElementById('subtask-show');
+  content.innerHTML ='';
+  for(let j = 0;  j < tasks[i]['subtasks'].length; j++){
+    content.innerHTML += `<div class="checkbox-show-content"><input type="checkbox" onclick="UpdateProgress(${i})" checked id="checkbox${j}">
+    <label class="subtask-show-text">${tasks[i]['subtasks'][j]}</label></div>`;
+  }
+}
+
+function UpdateProgress(i){
+    let checkbox1  = document.getElementById(`checkbox${0}`);
+    let checkbox2 = document.getElementById(`checkbox${1}`);
+    let progress = document.getElementById(`progressBar${i}`);
+    let numberOfSubtask = document.getElementsByClassName('numberOfSubtask')[i];
+    numberOfSubtask.innerHTML ='';
+    if(checkbox1.checked && checkbox2.checked){
+      progress.value = 100;
+      numberOfSubtask.textContent = '2/2';
+    }else if(checkbox1.checked || checkbox2.checked){
+      progress.value = 50;
+      numberOfSubtask.textContent = '1/2';
+    }else{
+      progress.value = 0;
+      numberOfSubtask.textContent = '0/2';
+    }
+}
+
+
+function contactsShowLetterRender(i){
+    let content = document.getElementById('user-show-letter');
+    for(let j = 0; j < tasks[i]['contacts'].length; j++){
+      content.innerHTML += `<div class="user-task-content-show">${tasks[i]['contacts'][j]['initials']}</div>`;
+    }
+}
+
+function contactsShowNameRender(i){
+  let content = document.getElementById('user-show-name');
+  for(let j = 0; j < tasks[i]['contacts'].length; j++){
+    content.innerHTML += `<div class="user-show-name">${tasks[i]['contacts'][j]['name']}</div>`;
+  }
 }
 
 /** to edit the Task */
@@ -270,7 +335,7 @@ function openEdit(i) {
   let hiddenInput = document.getElementById("hiddenInput");
   let description = document.getElementById("addTask-edit-description");
   let assignedTo = document.getElementById("addTask-assigned");
-  let dates = document.getElementById("addTask-edit-dueDate");
+  let dates = document.getElementById("task-edit-Date");
   let subtasks = document.getElementById('newSubtask');
   title.value = tasks[i]["title"];
   hiddenInput.value = tasks[i]["title"];
@@ -279,7 +344,28 @@ function openEdit(i) {
   dates.value = tasks[i]["date"];
   subtasks.innerHTML =`${tasks[i]['subtasks'][i]}`;
   activeButton(i);
-  activeEditButton(); 
+  activeEditButton();
+  subtasksEditRender(i);
+  contactsEditRender(i);
+  getColorOfContacts();
+}
+
+
+function contactsEditRender(i){
+  let content = document.getElementsByClassName('user-content-edit-letter')[0];
+  content.innerHTML ='';
+    for(let j = 0; j < tasks[i]['contacts'].length; j++){
+      content.innerHTML += `<div class="user-task-content">${tasks[i]['contacts'][j]['initials']}</div>`;
+    }
+}
+
+function subtasksEditRender(i){
+  let content = document.getElementById('newSubtask');
+  content.innerHTML ='';
+  for(let j = 0;  j < tasks[i]['subtasks'].length; j++){
+    content.innerHTML += `<div class="checkbox-show-content"><input type="checkbox" checked id="checkSub${j}">
+    <label class="subtask-show-text">${tasks[i]['subtasks'][j]}</label></div>`;
+  }
 }
 
 function activeButton(i){
@@ -304,8 +390,8 @@ function saveEditTask() {
   let title = document.getElementById("addTask-edit-title").value;
   let hiddenInput = document.getElementById("hiddenInput").value;
   let description = document.getElementById("addTask-edit-description").value;
-  let user = document.getElementById("addTask-edit-assigned").value;
-  let date = document.getElementById("addTask-edit-dueDate").value;
+  /*let user = document.getElementById("addTask-assigned").value;*/
+  let date = document.getElementById("task-edit-Date").value;
   if (title.trim() === "" || date.trim() === "") {
     return;
   } else {
@@ -313,7 +399,7 @@ function saveEditTask() {
       if (tasks[i].title === hiddenInput) {
         tasks[i].title = title;
         tasks[i].description = description;
-        tasks[i]['contacts'][i] = user;
+        /*tasks[i]['contacts'][i] = user;*/
         tasks[i].date = date;
         tasks[i].prioIcon = prioBtn;
         tasks[i].prio = prioText;
@@ -321,6 +407,7 @@ function saveEditTask() {
       }
     }
   }
+  putData("/tasks", tasks);
   save();
   updateHTML();
   closeMe();
@@ -338,7 +425,7 @@ let currentDraggedElement;
     for (let index = 0; index < toDo.length; index++) {
       const element = toDo[index];
       document.getElementById("newTask-toDo").innerHTML +=  genereteAllTasksHTML(element);
-      styleOfNoTaskToDo(); 
+      styleOfNoTaskToDo();
     }
 
     let inProgress = tasks.filter((t) => t["phases"] == "In progress");
@@ -366,6 +453,8 @@ let currentDraggedElement;
       styleOfNoTaskDone(); 
     }
     changeColorOfCategoryTitle();
+    contactsRender();
+    getColorOfContacts();
 }
 
 function startDragging(id) {
@@ -384,6 +473,41 @@ function valueOfProgressBar(i){
   return value;
 }
 
+let usedColor =[];
+
+function contactsRender(){
+  for(let i = 0; i < tasks.length; i++){
+    let content = document.getElementsByClassName('user-inner-container')[i];
+    for(let j = 0; j < tasks[i]['contacts'].length; j++){
+      content.innerHTML += `<div class="user-task-content">${tasks[i]['contacts'][j]['initials']}</div>`;
+    }
+  }
+}
+
+function colorRandom(){
+  let color = '#';
+  let isUnique = false;
+  while(!isUnique){
+    color = '#';
+    for(let i = 0; i < 3; i++){
+      let hex = Math.floor(Math.random() * 128).toString(16);
+      color += hex.length == 1 ? '0' + hex: hex; 
+    }
+    if(!usedColor.includes(color)){
+      isUnique = true;
+      usedColor.push(color);
+    }
+  }
+  return color
+}
+
+function getColorOfContacts(){
+  let content = document.querySelectorAll('.user-task-content');
+  content.forEach(function(div){
+    div.style.backgroundColor = colorRandom();
+  });
+}
+
  function genereteAllTasksHTML(element) {
   return ` <div id ="cardId${element["ID"]}" draggable="true" ondragstart="startDragging(${element["ID"]})"  onclick="showTask(${element["ID"]})">
   <div class="card">
@@ -393,20 +517,16 @@ function valueOfProgressBar(i){
      <p class="card-description">${element["description"]}</p>
    </div>
    <div class="progress-bar-content">
-     <progress value="${valueOfProgressBar(element["ID"])}" max="100" id="progressBar"></progress>
-     <p class="card-subtasks-text"><span class="numberOfSubtask">${element["subtasks"].length}</span>/2 Subtasks</p>
+     <progress value="${valueOfProgressBar(element["ID"])}" max="100" id="progressBar${element["ID"]}"></progress>
+     <p class="card-subtasks-text"><span class="numberOfSubtask">${element["subtasks"].length}/2</span> Subtasks</p>
     </div>
     <div class="card-user-content">
-      <div class="user-inner-container" id="contacts-content-letter>element["ID"]}">${tasks[element["ID"]]['contacts'][0]['initials']}</div>
+      <div class="user-inner-container" id="newDiv${element['ID']}"></div>
       <img src="${element["prioIcon"]}" alt="">
     </div>
   </div>
   </div>`;
 }
-
-
-/*renderOfContects(element["ID"])
-element["ID"]}">${tasks[element["ID"]]['contacts'][element["ID"]]['initials']*/
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -418,10 +538,8 @@ function moveTo(phase) {
   styleOfNoTaskToDo();
   styleOfNoTaskInProgress();
   styleOfNoTaskAwaitFeedback();
-  styleOfNoTaskDone();
-  changeColorOfCategoryTitle(); 
-  save();
-  /*putData("/tasks", tasks[currentDraggedElement]["phases"]);*/
+  styleOfNoTaskDone(); 
+  putData("/tasks", tasks);
 }
 
 function styleOfNoTaskToDo() {
@@ -458,4 +576,9 @@ function styleOfNoTaskDone(){
   }else{
     document.getElementById('noTask-done').classList.remove('hidden');
   }
+}
+
+function checkwidthForAddTask(){
+    window.location.href = '/html/addTask.html';
+
 }
