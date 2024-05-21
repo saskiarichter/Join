@@ -4,10 +4,10 @@ tasks = [];
 prioBtn = "";
 let prioText = "";
 
-function initBoard() {
-  initInclude();
+async function initBoard() {
+  await initInclude();
   load();
-  onloadTasks();
+  loadTasks();
   loadDataBoard("/tasks");
   updateHTML();
 }

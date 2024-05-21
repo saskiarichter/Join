@@ -218,7 +218,6 @@ function templateContactSearch(i, name, initials, color) {
 function selectContactSearch(i) {
     let contactSelected = contactsSearch[i]['selected'];
     if (contactSelected === true) {
-       
         removeContactSearch(i);
     } else {
         addContactSearch(i);
@@ -256,6 +255,6 @@ function removeContactSearch(i) {
     let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName);
     selectedContacts.splice(indexSelected, 1);
     contacts.splice(index, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
-    contactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
+    contactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
     container.classList.remove('contact-container-focus');
 }
