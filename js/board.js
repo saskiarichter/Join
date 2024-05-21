@@ -283,21 +283,28 @@ function subtasksShowRender(i){
 }
 
 function UpdateProgress(i){
-    let checkbox1  = document.getElementById(`checkbox${0}`);
-    let checkbox2 = document.getElementById(`checkbox${1}`);
+  let checkedCount = 0;
+  debugger
+  for(let j = 0; j < tasks[i]["subtasks"].length; j++){
+    let checkbox  = document.getElementById(`checkbox${j}`);
+    if (checkbox.checked){
+      checkedCount++;
+    }
+
     let progress = document.getElementById(`progressBar${i}`);
     let numberOfSubtask = document.getElementsByClassName('numberOfSubtask')[i];
     numberOfSubtask.innerHTML ='';
-    if(checkbox1.checked && checkbox2.checked){
+    if(checkedCount > 1){
       progress.value = 100;
       numberOfSubtask.textContent = '2/2';
-    }else if(checkbox1.checked || checkbox2.checked){
+    }else if(checkedCount === 1){
       progress.value = 50;
       numberOfSubtask.textContent = '1/2';
     }else{
       progress.value = 0;
       numberOfSubtask.textContent = '0/2';
     }
+  }
 }
 
 
