@@ -97,7 +97,7 @@ function selectContact(i) {
     let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName);
     if (contacts[i]['selected'] === true) {
         selectedContacts.splice(indexSelected, 1);
-        contacts.splice(i, 1, { 'name': contactName, 'selected': false });
+        contacts.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
         container.classList.remove('contact-container-focus');
     } else {
         selectedContacts.push({ 'name': contactName, 'color': contactColor, 'selected': true });
@@ -178,7 +178,8 @@ function showContactResults() {
         const contact = contactsSearch[i];
         let name = contact['name'];
         let initials = getInitials(name); // from contacts.js
-        container.innerHTML += templateContactSearch(i, name, initials);
+        let color = contact['color'];
+        container.innerHTML += templateContactSearch(i, name, initials, color);
         if (contact['selected'] === true) {
             document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
         } else {
@@ -196,8 +197,7 @@ function showContactResults() {
  * @param {string} initials - initials of contact
  * @returns 
  */
-function templateContactSearch(i, name, initials) {
-    let color = contacts[i]['color'];
+function templateContactSearch(i, name, initials, color) {
     return `
     <div id="contact-container${i}" onclick="selectContactSearch(${i})" class="contact-container" tabindex="1">
         <div class="contact-container-name">
@@ -218,10 +218,10 @@ function templateContactSearch(i, name, initials) {
 function selectContactSearch(i) {
     let contactSelected = contactsSearch[i]['selected'];
     if (contactSelected === true) {
-        addContactSearch(i);
-        
-    } else {
+       
         removeContactSearch(i);
+    } else {
+        addContactSearch(i);
     }
 }
 
@@ -236,11 +236,10 @@ function addContactSearch(i) {
     let contactName = contactsSearch[i]['name'];
     let contactColor = contactsSearch[i]['color'];
     let index = contacts.findIndex(contact => contact.name === contactName);
-    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName);
-    selectedContacts.splice(indexSelected, 1);
-    contacts.splice(index, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
-    contactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
-    container.classList.remove('contact-container-focus');
+    selectedContacts.push({ 'name': contactName,  'color': contactColor, 'selected': true });
+    contacts.splice(index, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
+    contactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
+    container.classList.add('contact-container-focus');
 }
 
 
@@ -254,8 +253,9 @@ function removeContactSearch(i) {
     let contactName = contactsSearch[i]['name'];
     let contactColor = contactsSearch[i]['color'];
     let index = contacts.findIndex(contact => contact.name === contactName);
-    selectedContacts.push({ 'name': contactName});
-    contacts.splice(index, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
-    contactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
-    container.classList.add('contact-container-focus');
+    let indexSelected = selectedContacts.findIndex(contact => contact.name === contactName);
+    selectedContacts.splice(indexSelected, 1);
+    contacts.splice(index, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
+    contactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': false });
+    container.classList.remove('contact-container-focus');
 }
