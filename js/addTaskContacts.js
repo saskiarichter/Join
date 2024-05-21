@@ -8,7 +8,7 @@ let contactsSearch = [];
 function renderContacts() {
     let container = document.getElementById('addTask-contacts-container');
     container.innerHTML = '';
-    for (let i = 2; i < contacts.length; i++) {
+    for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let name = contact['name'];
         let initials = getInitials(name); // from contacts.js
@@ -140,7 +140,7 @@ function searchContacts() {
     let search = document.getElementById('addTask-assigned').value.toLowerCase();
     contactsSearch = [];
     if (search.length > 0) {
-        for (let i = 1; i < contacts.length; i++) {
+        for (let i = 0; i < contacts.length; i++) {
             findContacts(i, search);
         }
         showContactResults();
@@ -176,7 +176,7 @@ function showContactResults() {
         let name = contact['name'];
         let initials = getInitials(name); // from contacts.js
         container.innerHTML += templateContactSearch(i, name, initials);
-        if (contactsSearch['selected'] === true) {
+        if (contact['selected'] === true) {
             document.getElementById(`contact-container${i}`).classList.add('contact-container-focus');
         } else {
             document.getElementById(`contact-container${i}`).classList.remove('contact-container-focus');
@@ -214,9 +214,10 @@ function templateContactSearch(i, name, initials) {
 function selectContactSearch(i) {
     let contactSelected = contactsSearch[i]['selected'];
     if (contactSelected === true) {
-        removeContactSearch(i);
-    } else {
         addContactSearch(i);
+        
+    } else {
+        removeContactSearch(i);
     }
 }
 

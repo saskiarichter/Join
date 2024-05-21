@@ -18,6 +18,7 @@ function openAddTask() {
   content.classList.remove("hidden");
   let overlay = document.getElementsByClassName("overlay")[0];
   overlay.classList.remove("hidden");
+  renderContacts();
 }
 
 /** to close the Task or the addTask section*/
