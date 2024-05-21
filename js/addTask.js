@@ -154,27 +154,26 @@ function selectCategory(categoryId) {
  * checks if required inputs are filled out 
  * creates new task & opens board page
  */
-async function checkInput() {
+async function createTask() {
     let title = document.getElementById('taskTitle').value;
     let date = document.getElementById('taskDate').value;
     let category = document.getElementById('select-task-text').innerHTML;
     if (title !== '' && date !== '' && category !== `Select task category`) {
-        createTask();
+        document.getElementById('createTaskButton').disabled = true;
+        getValues();
         await safeTask();
         showTaskAdded();
         setTimeout(redirectToBoard(), 2000); // from include.js
         clearAddTask();
     } else {
-        checkTitle(title);
-        checkDate(date);
-        checkCategory(category);
+        checkInput(title, date, category)
     }
 }
 
 /**
  * gets values of inputfields
  */
-function createTask() {
+function getValues() {
     let title = document.getElementById('taskTitle').value;
     let description = document.getElementById('addTask-description').value;
     if (description === '') { description = '' };
@@ -250,8 +249,24 @@ async function safeTask() {
 }
 
 
+/**
+ * shows field that task is added
+ */
 function showTaskAdded(){
     document.getElementById('added-container').classList.remove('d-none');
+}
+
+
+/**
+ * 
+ * @param {string} title - value of title input
+ * @param {string} date - value of date input
+ * @param {string} category - innerHTML of category field
+ */
+function checkInput(title, date, category){
+    checkTitle(title);
+    checkDate(date);
+    checkCategory(category);
 }
 
 
