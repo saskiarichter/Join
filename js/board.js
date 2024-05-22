@@ -18,7 +18,11 @@ function openAddTask() {
   content.classList.remove("hidden");
   let overlay = document.getElementsByClassName("overlay")[0];
   overlay.classList.remove("hidden");
-  renderContacts();
+  let dialog = document.querySelector('.addTaskBoard');
+  dialog.classList.remove('slide-in'); 
+  setTimeout(() => {
+      dialog.classList.add('slide-in');
+  }, 50);
 }
 
 /** to close the Task or the addTask section*/
@@ -267,6 +271,11 @@ function showTask(i) {
   contactsShowNameRender(i);
   subtasksShowRender(i);
   getColorOfContactsShow();
+  let dialog = document.querySelector('.showTask');
+  dialog.classList.remove('slide-in'); 
+  setTimeout(() => {
+      dialog.classList.add('slide-in');
+  }, 50);
 }
 
 function getColorOfContactsShow(){
@@ -590,5 +599,4 @@ function styleOfNoTaskDone(){
 
 function checkwidthForAddTask(){
     window.location.href = '/html/addTask.html';
-
 }
