@@ -52,7 +52,6 @@ function displayUsername() {
     let greetingName = document.getElementById('nameGreeting');
     let greetingNameMobile = document.getElementById('nameGreetingMobile');
 
-        
     // Setze den Benutzernamen in das HTML-Element ein
     greetingName.innerText = username;
     greetingNameMobile.innerText = username;
@@ -68,17 +67,12 @@ function displayUserInitials() {
     let userInitials = document.getElementById('userInitials');
 
     if (username) {
-        // Den Benutzernamen in Wörter aufteilen
-        let words = username.split(' ');
+        let words = username.split(' ');    // Den Benutzernamen in Wörter aufteilen
+        let initials = calculateUserInitials(words);    // Berechnen der Initialen mit der neuen Funktion
 
-        // Berechnen der Initialen mit der neuen Funktion
-        let initials = calculateUserInitials(words);
-        
-        // Setzen des Texts des Elements
-        userInitials.innerText = initials;
+        userInitials.innerText = initials;  // Setzen des Texts des Elements
     } else {
-        // Falls kein Benutzer angemeldet ist, zeigen Sie ein Standardzeichen an
-        userInitials.innerText = "G";
+        userInitials.innerText = "G";   // Falls kein Benutzer angemeldet ist, zeigen Sie ein Standardzeichen an
     }
 }
 
