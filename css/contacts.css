@@ -653,4 +653,6 @@ input{
     position:relative;
 }
 
-
+.closeResponsiveButton{
+    display:none;
+}

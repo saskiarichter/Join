@@ -20,13 +20,21 @@
         height: 0;
         width: 90px;
         border-radius: 8px;
-        order: 2; /* Ändert die Reihenfolge */
+        order: 2; 
     }
 
     .contactsRightBetterWith {
         margin-block-start: 0;
         margin-block-end: 0;
-        order: 1; /* Ändert die Reihenfolge */
+        order: 1;
+    }
+
+    .closeResponsiveButton{
+        display:block;
+        position: absolute;
+        top: 20px;
+        left: 705px;
+        cursor: pointer;
     }
 }
 
@@ -378,7 +386,7 @@
         border-radius: 30px;
         width: 52px;
         height: 52px;
-        position: relative; /* Wichtig für das Popup */
+        position: relative; 
     }
 
     .editAndDeleteResponsiveDivOutside{
@@ -421,6 +429,13 @@
     .profilDelete{
         display:flex;
         flex-direction: row;
+    }
+
+    .closeResponsiveButton{
+        display:block;
+        position: absolute;
+        top: 25px;
+        left: 460px;
     }
 }
 
@@ -504,7 +519,14 @@
     }
 
     .createContactButton{
-        width:160px;
+        width:170px;
+    }
+
+    .closeResponsiveButton{
+        display:block;
+        position: absolute;
+        top: 25px;
+        left: 330px;
     }
 }
 
