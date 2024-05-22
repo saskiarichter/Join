@@ -78,8 +78,8 @@ function HTMLTemplateNewContact() {
 <form onsubmit="createNewContact(); return false;">
     <div class="dialogNewContactInnerDiv">
         <div class="dialogLeft">
-        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png"
-            <img class="joinLogoDialog" src="/img/Capa 2.png">
+        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./img/closeResponsive.png"
+            <img class="joinLogoDialog" src="./img/Capa 2.png">
             <div class="dialogLeftInnerDiv">
                 <h1 class="HeadlineDialog">Add contact</h1>
                 <p class="subheadingDialog">Tasks are better with a team!</p>
@@ -88,28 +88,28 @@ function HTMLTemplateNewContact() {
         </div>
         <div class="dialogRight">
             <div class="dialogCloseDiv">
-                <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
+                <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
             </div>
             <div class="dialogProfilPictureDiv">
-                <img class="dialogProfilPicture" src="/img/Group 13.png">
+                <img class="dialogProfilPicture" src="./img/Group 13.png">
                 <div class="dialogAddData">
                     <div class="dialogInputfield">
                         <div class="dialogInputfieldDiv">
                             <input id="inputName" placeholder="Name" required>
-                            <img class="dialogIcons" src="/img/person.png">
+                            <img class="dialogIcons" src="./img/person.png">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputMail" type="email" placeholder="Email" pattern=".+@.+" required>
-                            <img class="dialogIcons" src="/img/mail.png">
+                            <img class="dialogIcons" src="./img/mail.png">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputPhone" type="number" placeholder="Phone" class="no-spinners" required>
-                            <img class="dialogIcons" src="/img/call.png">
+                            <img class="dialogIcons" src="./img/call.png">
                         </div>
                     </div>
                     <div class="dialogButtonDiv">
-                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="/img/close.png"></button>
-                        <button type="submit" class="createContactButton">Create contact<img src="/img/check.png"></button>
+                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="./img/close.png"></button>
+                        <button type="submit" class="createContactButton">Create contact<img src="./img/check.png"></button>
                     </div>
                 </div> 
             </div>
@@ -157,8 +157,10 @@ async function createNewContact() {
  * Returns the next color from the color array.
  */
 function getNextColor() {
-    colorIndex = (colorIndex + 1) % colors.length;
-    return colors[colorIndex];
+    colorIndex = colorIndex % colors.length;  // Ensure the index wraps around correctly
+    const color = colors[colorIndex];  // Get the current color
+    colorIndex++;  // Increment the index
+    return color;  // Return the color
 }
 
 /**
@@ -204,8 +206,8 @@ function HTMLTemplateEditContact(index, nextColor, newContactId) {
         <form onsubmit="saveEditContact(${index}, '${nextColor}'); return false;">
             <div class="dialogNewContactInnerDiv">
                 <div class="dialogLeft">
-                    <img class="closeResponsiveButton" src="/img/closeResponsive.png"
-                    <img class="joinLogoDialog" src="/img/Capa 2.png">
+                    <img class="closeResponsiveButton" src="./img/closeResponsive.png"
+                    <img class="joinLogoDialog" src="./img/Capa 2.png">
                     <div class="dialogLeftInnerDiv">
                         <h1 class="HeadlineDialog">Edit contact</h1>
                         <div class="dialogLine"></div>
@@ -213,7 +215,7 @@ function HTMLTemplateEditContact(index, nextColor, newContactId) {
                 </div>
                 <div class="dialogRight">
                     <div class="dialogCloseDiv">
-                        <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
+                        <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
                     </div>
                     <div class="dialogProfilPictureDiv">
                         <div class="circleProfilPicShowEdit" style="background-color: ${nextColor}">${initials}</div>
@@ -221,20 +223,20 @@ function HTMLTemplateEditContact(index, nextColor, newContactId) {
                             <div class="dialogInputfield">
                                 <div class="dialogInputfieldDiv">
                                     <input id="inputName" value="${name}" required>
-                                    <img class="dialogIcons" src="/img/person.png">
+                                    <img class="dialogIcons" src="./img/person.png">
                                 </div>
                                 <div class="dialogInputfieldDiv">
                                     <input id="inputMail" value="${email}" type="email" pattern=".+@.+" required>
-                                    <img class="dialogIcons" src="/img/mail.png">
+                                    <img class="dialogIcons" src="./img/mail.png">
                                 </div>
                                 <div class="dialogInputfieldDiv">
                                     <input id="inputPhone" value="${phone}" type="tel" class="no-spinners" required>
-                                    <img class="dialogIcons" src="/img/call.png">
+                                    <img class="dialogIcons" src="./img/call.png">
                                 </div>
                             </div>
                             <div class="dialogButtonDiv">
                                 <button type="button" onclick="closeContactDialog()" class="cancelButtonEdit">Cancel</button>
-                                <button type="submit" class="createContactButton">Save<img src="/img/check.png"></button>
+                                <button type="submit" class="createContactButton">Save<img src="./img/check.png"></button>
                             </div>
                         </div> 
                     </div>
@@ -465,10 +467,10 @@ function showFullContact(id, nextColor) {
                 <p class="nameProfilShow">${name}</p>
                 <div class="proilNameAndEditInner">
                     <p onclick="editContact('${id}', '${nextColor}')" class="profilEdit">Edit
-                        <img class="logoRightSection" src="/img/edit.svg">
+                        <img class="logoRightSection" src="./img/edit.svg">
                     </p>
                     <p onclick="deleteContact('${id}')" class="profilDelete">Delete
-                        <img class="logoRightSection" src="/img/delete.png">
+                        <img class="logoRightSection" src="./img/delete.png">
                     </p>
                 </div>
             </div>
@@ -489,8 +491,8 @@ function showFullContact(id, nextColor) {
                 <div class="editAndDeleteResponsive">
                     <img src="/img/more_vert.png" onclick="togglePopup()">
                     <div id="popup" class="popup">
-                        <p onclick="editContact('${id}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="/img/edit.svg">Edit</p>
-                        <p onclick="deleteContact('${id}')" class="profilDelete"><img class="logoRightSection" src="/img/delete.png">Delete</p>
+                        <p onclick="editContact('${id}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="./img/edit.svg">Edit</p>
+                        <p onclick="deleteContact('${id}')" class="profilDelete"><img class="logoRightSection" src="./img/delete.png">Delete</p>
                     </div>
                 </div>
             </div>
@@ -499,6 +501,7 @@ function showFullContact(id, nextColor) {
 
     showFullContactResponsive();
 }
+
 
 /**
  * Displays the full contact information in a responsive manner.
