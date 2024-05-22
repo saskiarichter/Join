@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
+    <link rel="icon" type="image/x-icon" href="/img/joinlogo.png">
     <script src="/js/contacts.js"></script>
     <script src="/js/include.js"></script>
     <script src="/js/storage.js"></script>
-    <script src="/js/summary.js"></script>
     <link rel="stylesheet" href="/css/navBarHeader.css">
     <link rel="stylesheet" href="/css/contacts.css">
     <link rel="stylesheet" href="/css/contactsResponsive.css">
 </head>
-<body onload="initInclude(); loadContacts()">
+<body onload="init()">
     <div w3-include-html="/html/header.html"></div>
     <div w3-include-html="/html/navigationBar.html"></div>
 
@@ -34,7 +34,7 @@
         <div id="contactsRightSide" class="contactsRightSide contactsRightSideMainDiv.slide-in">
             <div class="contactsHeadlineAndLeftIconDiv">
             <h1 class="contactsHeadlineRightSection">Contacts</h1>
-                <img onclick="goBackResponsive()" class="backLogoResponsive" src="./img/arrow-left-line.png">
+                <img onclick="goBackResponsive()" class="backLogoResponsive" src="/img/arrow-left-line.png">
             </div>
                 <div class="lineRightSection"></div>
                 <p class="contactsRightBetterWith">Better with a team</p>
