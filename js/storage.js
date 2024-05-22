@@ -28,7 +28,6 @@ async function loadDataLogin() {
     }
 }
 
-
 async function loadData() {
     let response = await fetch(BASE_URL + "contacts.json");
     let contactsData = await response.json();
@@ -40,7 +39,6 @@ async function loadData() {
     }
 }
 
-
 async function loadTasks(){
     let response = await fetch(BASE_URL + "tasks.json");
     let tasksData = await response.json();
@@ -51,7 +49,6 @@ async function loadTasks(){
         });
     }
 }
-
 
 async function getNextContactId() {
     try {
@@ -68,7 +65,6 @@ async function getNextContactId() {
     }
 }
 
-
 async function loadContacts(path = "/contacts") {
     resetInputs();
     const contactsData = await fetchContactsData(path);
@@ -81,8 +77,8 @@ async function loadContacts(path = "/contacts") {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
     processContacts(contactsData, contactList);
-}
 
+}
 
 async function createNewContactInFirebase(name, email, phoneNumber, color) {
     try {
@@ -114,7 +110,6 @@ async function createNewContactInFirebase(name, email, phoneNumber, color) {
     }
 }
 
-
 async function updateContactInFirebase(id, name, mail, phone, color) {
     const response = await fetch(`${BASE_URL}/contacts/${id}.json`, {
         method: 'PUT',
@@ -131,7 +126,6 @@ async function updateContactInFirebase(id, name, mail, phone, color) {
     return await response.json();
 }
 
-
 async function deleteContact(contactId) {
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
@@ -143,13 +137,25 @@ async function deleteContact(contactId) {
         }
 
         console.log('Contact deleted successfully.');
+
+        // Entferne den Kontakt aus den lokalen Arrays
+        const index = contactIds.indexOf(contactId);
+        if (index !== -1) {
+            nameInput.splice(index, 1);
+            emailInput.splice(index, 1);
+            phoneNumbersInput.splice(index, 1);
+            contactIds.splice(index, 1);
+        }
+
+        // Render die Kontaktliste neu
+        closeFullContact();
+        sortContactsByNameAndRender();
         return true;
     } catch (error) {
         console.error('Error deleting contact:', error.message);
         throw error;
     }
 }
-
 
 async function postData(path="", data={}){
     let response = await fetch(BASE_URL + path + ".json", {
@@ -161,7 +167,6 @@ async function postData(path="", data={}){
     });
     return responseToJson = await response.json();
 }
-
 
 async function deleteData(path=""){
     let response = await fetch(BASE_URL + path + ".json", {
@@ -193,7 +198,6 @@ async function postDataBoard(path="", data={}){
     });
     return responseToJson = await res.json();
 }
-
 
 async function loadDataBoard(path=""){
     let res = await fetch (BASE_URL + path + ".json");
