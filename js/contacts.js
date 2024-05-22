@@ -1,3 +1,10 @@
+async function init(){
+    await initInclude();
+    await loadContacts();
+    contactsBgMenu();
+    
+}
+
 /**
  * Stores contact names.
  */
@@ -71,7 +78,7 @@ function HTMLTemplateNewContact() {
 <form onsubmit="createNewContact(); return false;">
     <div class="dialogNewContactInnerDiv">
         <div class="dialogLeft">
-        <img class="closeResponsiveButton" src="/img/closeResponsive.png"
+        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png"
             <img class="joinLogoDialog" src="/img/Capa 2.png">
             <div class="dialogLeftInnerDiv">
                 <h1 class="HeadlineDialog">Add contact</h1>
@@ -154,10 +161,6 @@ function getNextColor() {
     return colors[colorIndex];
 }
 
-
-/**
- * Opens the dialog to edit an existing contact.
- */
 /**
  * Opens the dialog to edit an existing contact.
  */
@@ -187,7 +190,6 @@ function editContact(id, nextColor) {
         }
     });
 }
-
 
 /**
  * HTML template for editing a contact.
@@ -256,6 +258,7 @@ async function saveEditContact(index, nextColor) {
     nameInput[index] = changedName;
     emailInput[index] = changedMail;
     phoneNumbersInput[index] = changedPhone;
+    colorsInput[index] = nextColor;
 
     try {
         // Update the contact in Firebase
@@ -453,6 +456,7 @@ function showFullContact(id, nextColor) {
     let email = emailInput[index];
     let phone = phoneNumbersInput[index];
     let initials = getInitials(name);
+    let color = colorsInput[index];
 
     content.innerHTML = `
         <div class="contactsRightSectionShowProfilInner">
@@ -496,7 +500,6 @@ function showFullContact(id, nextColor) {
     showFullContactResponsive();
 }
 
-
 /**
  * Displays the full contact information in a responsive manner.
  */
@@ -525,12 +528,8 @@ async function deleteContact(id) {
         emailInput.splice(index, 1);
         phoneNumbersInput.splice(index, 1);
         contactIds.splice(index, 1);
-        colorsInput.splice(index, 1);
 
-        sortContactsByNameAndRender();
-        setTimeout(() => {
-            location.reload();
-        }, 10);
+   
     } catch (error) {
         console.error('Failed to delete contact from Firebase:', error.message);
     }
@@ -563,10 +562,6 @@ function safeContact() {
     localStorage.setItem('phoneNumbers', phoneNumbersAsText);
 }
 
-/**
- * Loads contacts from a given path and renders them into the contact list.
- * The default path is "/contacts".
- */
 /**
  * Resets the input arrays for names, emails, and phone numbers.
  */
@@ -614,7 +609,7 @@ function processContacts(contactsData, contactList) {
  */
 function processContact(contact, contactList, id) {
     if (contact) {
-        const { name, email, nummer, color } = contact; // Farbe laden
+        const { name, email, nummer, color } = contact; 
         const contactHTML = renderHTMLcreateNewContact(name, email, nummer, id, color);
         contactList.insertAdjacentHTML('beforeend', contactHTML);
 
@@ -648,7 +643,7 @@ function togglePopup() {
 document.addEventListener('click', function(event) {
     const popup = document.getElementById('popup');
     
-    if (popup) { // Überprüfen, ob popup existiert
+    if (popup) { 
         const isClickInsidePopup = popup.contains(event.target);
         const isClickOnTrigger = event.target.closest('.editAndDeleteResponsive img') !== null;
         
@@ -657,3 +652,14 @@ document.addEventListener('click', function(event) {
         }
     }
 });
+
+function contactsBgMenu() {
+    document.getElementById('Contacts').classList.add("bgfocus");
+}
+
+function closeFullContact() {
+    const contactDetailSection = document.getElementById('contactsRightSectionShowProfil');
+    if (contactDetailSection) {
+        contactDetailSection.classList.add('d-none');
+    }
+}
