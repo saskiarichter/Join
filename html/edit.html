@@ -1,98 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AddTaskEdit</title>
-  <link rel="stylesheet" href="/css/edit.css">
-  <script src="/js/addTask.js"></script>
-  <script src="/js/board.js"></script>
-</head>
-<body>
-  <div id="addTask-edit" class="hidden">
-    <div class="addTask-edit-top">
-      <div class="addTask-title-content">
-        <h2 class="addTask-edit-title">Edit Task</h2>
-        <i onclick="closeMe()" class="fa fa-close close-edit-btn"></i>
-      </div>
-      <div class="input-section-edit">
-        <div class="input-section-left-edit">
-          <div class="input-container-edit">
-            <label for="addTask-title">Title</label>
-            <div class="input-container-required">
-              <div class="input-container-edit" tabindex="1">
-                <input id="addTask-edit-title" class="input-edit" type="text" placeholder="Enter a title" autocomplete="off" required>
-                <input type="text" class="hidden" id="hiddenInput">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AddTaskEdit</title>
+  </head>
+  <body>
+    <div id="addTask-edit" class="hidden">
+      <div class="addTask-edit-top">
+        <div class="addTask-title-content">
+          <h2 class="addTask-edit-title">Edit Task</h2>
+          <i onclick="closeMe()" class="fa fa-close close-edit-btn"></i>
+        </div>
+        <div class="input-section-edit">
+          <div class="input-section-left-edit">
+            <div class="input-container-edit">
+              <label for="addTask-title">Title</label>
+              <div class="input-container-required">
+                <div class="input-container-edit" tabindex="1">
+                  <input
+                    id="addTask-edit-title"
+                    class="input-edit"
+                    type="text"
+                    placeholder="Enter a title"
+                    autocomplete="off"
+                    required
+                  />
+                  <input type="text" class="hidden" id="hiddenInput" />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="input-container-edit">
-            <label for="addTask-description">Description</label>
-            <textarea id="addTask-edit-description" class="input-edit" placeholder="Enter a Description"
-              style="resize: none;" autocomplete="off"></textarea>
-          </div>
-    </div>
-
-        <div class="input-section-right-edit">
-          <div class="input-section-element">
-            <label for="addTask-dueDate">Due Date</label>
-            <div class="input-container-required">
-                <div id="addTask-dueDate" onclick="hideRequiredInfo('addTask-dueDate', 'required-date')"
-                    class="input-container">
-                    <input id="task-edit-Date" class="inputfield" type="date" placeholder="dd/mm/yyyy" required>
-                    <img src="/img/event.svg">
-                </div>
+            <div class="input-container-edit">
+              <label for="addTask-description">Description</label>
+              <textarea
+                id="addTask-edit-description"
+                class="input-edit"
+                placeholder="Enter a Description"
+                style="resize: none"
+                autocomplete="off"
+              ></textarea>
             </div>
-        </div>
-          <div class="input-section-element-edit">
-            <span>Prio</span>
-            <div class="prio-buttons">
-                <button id="urgentButton" onclick="selectUrgent()" class="urgent-edit-button">
-                    <span>Urgent</span>
-                    <div class="urgentImg"></div>
+          </div>
+
+          <div class="input-section-right-edit">
+            <div class="input-section-element">
+              <label for="addTask-dueDate">Due Date</label>
+              <div class="input-container-required">
+                <div
+                  id="addTask-dueDate"
+                  onclick="hideRequiredInfo('addTask-dueDate', 'required-date')"
+                  class="input-container"
+                >
+                  <input
+                    id="task-edit-Date"
+                    class="inputfield"
+                    type="date"
+                    placeholder="dd/mm/yyyy"
+                    required
+                  />
+                  <img src="/img/event.svg" />
+                </div>
+              </div>
+            </div>
+            <div class="input-section-element-edit">
+              <span class="Priority-title">Priority</span>
+              <div class="prio-buttons">
+                <button
+                  id="urgentEditButton"
+                  onclick="selectEditUrgent()"
+                  class="urgent-edit-button"
+                >
+                  <span>Urgent</span>
+                  <div class="urgentImg"></div>
                 </button>
-                <button id="mediumButton" onclick="selectMedium()" class="medium-edit-button">
-                    <span>Medium</span>
-                    <div class="mediumImg"></div>
+                <button
+                  id="mediumEditButton"
+                  onclick="selectEditMedium()"
+                  class="medium-edit-button"
+                >
+                  <span>Medium</span>
+                  <div class="mediumImg"></div>
                 </button>
-                <button id="lowButton" onclick="selectLow()" class="low-edit-button">
-                    <span>Low</span>
-                    <div class="lowImg"></div>
+                <button
+                  id="lowEditButton"
+                  onclick="selectEditLow()"
+                  class="low-edit-button"
+                >
+                  <span>Low</span>
+                  <div class="lowImg"></div>
                 </button>
+              </div>
             </div>
 
             <div id="input-assigned-edit-section" class="input-section-element">
               <label for="addTask-assigned">Assigned to</label>
-              <div id="contacts-input-container" onclick="openContacts()" class="input-container input-container-select" tabindex="1">
-                  <input id="addTask-assigned" onkeyup="searchContacts()" class="inputfield" type="text"
-                      placeholder="Select contacts to assign" onfocus="this.placeholder = ''"
-                      onblur="this.placeholder = 'Select contacts to assign'">
-                  <img id="dropdown-img-contacts-edit" onclick="openCloseContacts(event)" class="dropdown-img" src="/img/arrow_drop_down.svg">
+              <div
+                id="contacts-input-container"
+                onclick="openContacts()"
+                class="input-container input-container-select"
+                tabindex="1"
+              >
+                <input
+                  id="addTask-assigned"
+                  onkeyup="searchContacts()"
+                  class="inputfield"
+                  type="text"
+                  placeholder="Select contacts to assign"
+                  onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = 'Select contacts to assign'"
+                />
+                <img
+                  id="dropdown-img-contacts-edit"
+                  onclick="openCloseContacts(event)"
+                  class="dropdown-img"
+                  src="/img/arrow_drop_down.svg"
+                />
               </div>
               <div class="user-content-edit-letter"></div>
-              <div id="selectedContacts-edit" class="contact-circles d-none"></div>
+              <div
+                id="selectedContacts-edit"
+                class="contact-circles d-none"
+              ></div>
               <div id="addTask-contacts-container-edit" class="d-none"></div>
+            </div>
+
+            <div class="input-section-element">
+              <label for="addTask-subtasks">Subtasks</label>
+              <div class="input-edit-subtask" onclick="setFocus(this)">
+                <input
+                  id="addTask-edit-subtasks"
+                  class="inputfield"
+                  type="text"
+                  placeholder="Add new subtask"
+                  maxlength="26"
+                  autocomplete="off"
+                />
+                <img
+                  src="/img/subtasks.svg"
+                  class="plus-icon-subtasks"
+                  onclick="addSubtask()"
+                />
+              </div>
+              <ul id="newSubtask"></ul>
+            </div>
           </div>
         </div>
-          <div class="input-section-element">
-            <label for="addTask-subtasks">Subtasks</label>
-            <div class="input-edit-subtask" onclick="setFocus(this)">
-                <input id="addTask-edit-subtasks" class="inputfield" type="text" placeholder="Add new subtask" maxlength="26" autocomplete="off">
-                <img src="/img/subtasks.svg" class="plus-icon-subtasks" onclick="addSubtask()">
-            </div>
-            <ul id="newSubtask">
-            </ul>
-        </div>
-        </div>
       </div>
-    </div>
-    <div class="addTask-edit-bottom">
-  
+      <div class="addTask-edit-bottom">
         <button class="save-button" onclick="saveEditTask()">
           <span>OK</span>
+          <i class="fa fa-check" style="font-size: 20px"></i>
         </button>
-      
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
