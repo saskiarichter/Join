@@ -132,7 +132,7 @@ function handleGreetingMobile() {
  */
 let todo = 0;
 let done = 0;
-let urgenTTask = 0;
+let urgentTask = 0;
 let taskInBoard = 0;
 let inProgress = 0;
 let awaitFeedback = 0;
@@ -144,7 +144,7 @@ async function getTasksAndProcess() {
     getUrgentTask(tasks);
     dates.push(tasks);
     taskInBoard = todo + inProgress + awaitFeedback + done;
-    allocateTasks();
+    assignTasks();
     const earliestDate = filterEarliestDate(tasks);
     getEarliestDate(earliestDate);
 }
@@ -192,7 +192,7 @@ function getEarliestDate(earliestDate) {
 /**
  * allocate the tasks to the respective categories
  */
-function allocateTasks() {
+function assignTasks() {
     document.getElementById("summaryTodoInfoCounter").innerHTML = todo;
     document.getElementById("summaryDoneInfoCounter").innerHTML = done;
     document.getElementById("tasksInBoardNum").innerHTML = taskInBoard;
@@ -206,8 +206,8 @@ function allocateTasks() {
  */
 function countTasks() {
     for (i = 0; i < tasks.length; i++) {
-        const cat = tasks[i];
-        let phase = cat["phases"];
+        let taskArr = tasks[i];
+        let phase = taskArr["phases"];
         if (phase == "To Do") {
             todo++;
         } else if (phase == "In progress") {
@@ -244,7 +244,7 @@ function filterEarliestDate(tasks) {
 
 
 /**
- * 
+ * filters the transferred list of tasks for those that are marked as "Urgent"
  */
 function filterUrgentTasks(tasks) {
     return tasks.filter((t) => t.prio === "Urgent");
@@ -252,7 +252,7 @@ function filterUrgentTasks(tasks) {
 
 
 /**
- * 
+ * searches for the earliest date among the given tasks
  */
 function findEarliestDate(tasks) {
     const earliestDate = new Date(

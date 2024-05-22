@@ -1,15 +1,4 @@
-let users = [ 
-    {
-    'name': 'Onur',    
-    'email': 'onur@test.de',
-    'password': 'test123' 
-    },
-    {
-    'name': 'Alex',    
-    'email': 'alex@test.de',
-    'password': 'alex123' 
-    }
-];
+let users = [];
 
 
 /**
@@ -32,7 +21,7 @@ function changeForm() {
  */
 function getFormContent() {
     return `
-        <form onsubmit="return false;">
+        <form onsubmit="addUser(); return false;">
             <div class="formHeadline">
                 <div class="headline">
                     <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
@@ -63,7 +52,7 @@ function getFormContent() {
                     <p class="privacy-text">I accept the <a class="policeLink" onclick="redirectToPrivacyPoliceSignup()">Privacy Police</a></label>
                 </div>
                 <div class="buttons">
-                    <button class="buttonLogin" onclick="addUser()">Sign up</button>
+                    <button class="buttonLogin">Sign up</button>
                 </div>
             </div>
         </form> 
@@ -72,7 +61,9 @@ function getFormContent() {
 
 
 /**
- * this function is for the logout
+ * The addUser function registers a new user after it has performed various validations. 
+ * It uses several auxiliary functions to ensure that the entries are correct and that there 
+ * are no conflicts with existing users
  */
 async function addUser() {
     let name = document.getElementById('name').value.trim();
@@ -81,31 +72,42 @@ async function addUser() {
     let passwordConfirm = document.getElementById('password-confirm').value.trim();
     let msgbox = document.getElementById('msgbox-signup');
 
-    if (!validatePassword(password, passwordConfirm, msgbox)) {
-        return;
-    }
-    if (!validateCheckbox(msgbox)) {
-        return;
-    }
-    if (!validateInput(name, email, password, msgbox)) {
-        return;
-    }
-    if (!checkExistingUser(email, password, msgbox)) {
+    if (!validateUserInput(name, email, password, passwordConfirm, msgbox)) {
         return;
     }
 
     users.push({name: name, email: email, password: password});     // Benutzer zum Array hinzufügen
-    await postData("users", {name: name, email: email, password: password});    // Daten in Firebase speichern
+    await postData("users", {name: name, email: email, password: password});        // Daten in Firebase speichern
     window.location.href = 'index.html?msg=You have successfully registered';
     clearInputFields();
 }
 
 
 /**
- * 
+ * The validateUserInput function checks the validity of the user input 
+ * and ensures that all required criteria are met before the registration of a new user is continued.
  */
-function validatePassword(password, passwordConfirm, msgbox) {
-    // Überprüfen, ob Passwort und Passwortbestätigung übereinstimmen
+function validateUserInput(name, email, password, passwordConfirm, msgbox) {
+    if (!checkPasswordMatch(password, passwordConfirm, msgbox)) {         // Passwort und Passwortbestätigung überprüfen
+        return false;
+    }
+    if (!checkPrivacyPolicy(msgbox)) {      // Überprüfen, ob die Checkbox akzeptiert wurde
+        return false;
+    }
+    if (!checkInputValidity(name, email, password, msgbox)) {      // Überprüfen von Name, E-Mail und Passwort
+        return false;
+    }
+    if (!checkExistingUser(email, password, msgbox)) {    // Überprüfen, ob E-Mail oder Passwort bereits existieren
+        return false;
+    }
+    return true;
+}
+
+
+/**
+ * The checkPasswordMatch function checks whether the password entered and the password confirmation match
+ */
+function checkPasswordMatch(password, passwordConfirm, msgbox) {
     if (password !== passwordConfirm) {
         msgbox.innerHTML = "Your passwords don't match";
         return false;
@@ -115,10 +117,9 @@ function validatePassword(password, passwordConfirm, msgbox) {
 
 
 /**
- * 
+ * The checkPrivacyPolicy function checks whether a checkbox confirming that the user has accepted the privacy policy is activated
  */
-function validateCheckbox(msgbox) {
-    // Überprüfen, ob die Checkbox aktiviert ist
+function checkPrivacyPolicy(msgbox) {
     if (!document.getElementById('loginCheckBoxRememberMe').checked) {
         msgbox.innerHTML = "Please accept the Privacy Policy";
         return false;
@@ -128,20 +129,19 @@ function validateCheckbox(msgbox) {
 
 
 /**
- * 
+ * This function checks the validity of the data entered, namely the name, e-mail address and password
  */
-function validateInput(name, email, password, msgbox) {
-    const allowedCharacters = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;  // Regulärer Ausdruck für erlaubte Zeichen in Name, E-Mail und Passwort
-
-    if (!name.match(/^[a-zA-Z\s]+$/)) {
+function checkInputValidity(name, email, password, msgbox) {
+    const allowedCharacters = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+    if (!name.match(/^[a-zA-Z\s]+$/)) {     // Überprüfen, ob Name gültig ist
         msgbox.innerHTML = "Name can only contain letters and spaces";
         return false;
     }
-    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {       // Überprüfen, ob E-Mail gültig ist
         msgbox.innerHTML = "Invalid email address";
         return false;
     }
-    if (!password.match(allowedCharacters)) {
+    if (!password.match(allowedCharacters)) {       // Überprüfen, ob das Passwort gültig ist
         msgbox.innerHTML = "Password can only contain letters, numbers, and certain special characters";
         return false;
     }
@@ -150,7 +150,7 @@ function validateInput(name, email, password, msgbox) {
 
 
 /**
- * 
+ * checks whether a user with the specified e-mail address or password already exists in a list of users
  */
 function checkExistingUser(email, password, msgbox) {
     // Überprüfen, ob die E-Mail bereits existiert
@@ -164,12 +164,13 @@ function checkExistingUser(email, password, msgbox) {
         msgbox.innerHTML = "Password already exists";
         return false;
     }
+
     return true;
 }
 
 
 /**
- * 
+ * clears the input fields of a signup form
  */
 function clearInputFields() {
     document.getElementById('name').value = "";

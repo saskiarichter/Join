@@ -28,6 +28,7 @@ async function loadDataLogin() {
     }
 }
 
+
 async function loadData() {
     let response = await fetch(BASE_URL + "contacts.json");
     let contactsData = await response.json();
@@ -39,6 +40,7 @@ async function loadData() {
     }
 }
 
+
 async function loadTasks(){
     let response = await fetch(BASE_URL + "tasks.json");
     let tasksData = await response.json();
@@ -49,6 +51,7 @@ async function loadTasks(){
         });
     }
 }
+
 
 async function getNextContactId() {
     try {
@@ -65,6 +68,7 @@ async function getNextContactId() {
     }
 }
 
+
 async function loadContacts(path = "/contacts") {
     resetInputs();
     const contactsData = await fetchContactsData(path);
@@ -78,6 +82,7 @@ async function loadContacts(path = "/contacts") {
     contactList.innerHTML = '';
     processContacts(contactsData, contactList);
 }
+
 
 async function createNewContactInFirebase(name, email, phoneNumber, color) {
     try {
@@ -109,6 +114,7 @@ async function createNewContactInFirebase(name, email, phoneNumber, color) {
     }
 }
 
+
 async function updateContactInFirebase(id, name, mail, phone, color) {
     const response = await fetch(`${BASE_URL}/contacts/${id}.json`, {
         method: 'PUT',
@@ -124,6 +130,7 @@ async function updateContactInFirebase(id, name, mail, phone, color) {
 
     return await response.json();
 }
+
 
 async function deleteContact(contactId) {
     try {
@@ -143,6 +150,7 @@ async function deleteContact(contactId) {
     }
 }
 
+
 async function postData(path="", data={}){
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -153,6 +161,7 @@ async function postData(path="", data={}){
     });
     return responseToJson = await response.json();
 }
+
 
 async function deleteData(path=""){
     let response = await fetch(BASE_URL + path + ".json", {
@@ -184,6 +193,7 @@ async function postDataBoard(path="", data={}){
     });
     return responseToJson = await res.json();
 }
+
 
 async function loadDataBoard(path=""){
     let res = await fetch (BASE_URL + path + ".json");
