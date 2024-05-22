@@ -163,6 +163,9 @@ function setFocus(e) {
 
 function deleteTask(i) {
   tasks.splice(i,1);
+  for (let j = 0; j < tasks.length; j++){
+    tasks[j].ID = j;
+  }
   putData("/tasks", tasks);
   save();
   updateHTML();
