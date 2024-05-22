@@ -81,59 +81,97 @@ async function addUser() {
     let passwordConfirm = document.getElementById('password-confirm').value.trim();
     let msgbox = document.getElementById('msgbox-signup');
 
+    if (!validatePassword(password, passwordConfirm, msgbox)) {
+        return;
+    }
+    if (!validateCheckbox(msgbox)) {
+        return;
+    }
+    if (!validateInput(name, email, password, msgbox)) {
+        return;
+    }
+    if (!checkExistingUser(email, password, msgbox)) {
+        return;
+    }
+
+    users.push({name: name, email: email, password: password});     // Benutzer zum Array hinzufügen
+    await postData("users", {name: name, email: email, password: password});    // Daten in Firebase speichern
+    window.location.href = 'index.html?msg=You have successfully registered';
+    clearInputFields();
+}
+
+
+/**
+ * 
+ */
+function validatePassword(password, passwordConfirm, msgbox) {
     // Überprüfen, ob Passwort und Passwortbestätigung übereinstimmen
     if (password !== passwordConfirm) {
         msgbox.innerHTML = "Your passwords don't match";
-        return;
+        return false;
     }
+    return true;
+}
 
+
+/**
+ * 
+ */
+function validateCheckbox(msgbox) {
     // Überprüfen, ob die Checkbox aktiviert ist
     if (!document.getElementById('loginCheckBoxRememberMe').checked) {
         msgbox.innerHTML = "Please accept the Privacy Policy";
-        return;
+        return false;
     }
-    
-    // Regulärer Ausdruck für erlaubte Zeichen in Name, E-Mail und Passwort
-    const allowedCharacters = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+    return true;
+}
 
-    // Überprüfen, ob Name gültig ist
+
+/**
+ * 
+ */
+function validateInput(name, email, password, msgbox) {
+    const allowedCharacters = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;  // Regulärer Ausdruck für erlaubte Zeichen in Name, E-Mail und Passwort
+
     if (!name.match(/^[a-zA-Z\s]+$/)) {
         msgbox.innerHTML = "Name can only contain letters and spaces";
-        return;
+        return false;
     }
-    // Überprüfen, ob E-Mail gültig ist
     if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
         msgbox.innerHTML = "Invalid email address";
-        return;
+        return false;
     }
-
-    // Überprüfen, ob das Passwort gültig ist
     if (!password.match(allowedCharacters)) {
         msgbox.innerHTML = "Password can only contain letters, numbers, and certain special characters";
-        return;
+        return false;
     }
+    return true;
+}
 
+
+/**
+ * 
+ */
+function checkExistingUser(email, password, msgbox) {
     // Überprüfen, ob die E-Mail bereits existiert
     if (users.some(user => user.email === email)) {
         msgbox.innerHTML = "Email already exists";
-        return;
+        return false;
     }
 
     // Überprüfen, ob das Passwort bereits existiert
     if (users.some(user => user.password === password)) {
         msgbox.innerHTML = "Password already exists";
-        return;
+        return false;
     }
+    return true;
+}
 
-    // Benutzer zum Array hinzufügen
-    users.push({name: name, email: email, password: password});
 
-    // Daten in Firebase speichern
-    await postData("users", {name: name, email: email, password: password});
-
-    window.location.href = 'index.html?msg=You have successfully registered';
-
-    // Eingabefelder leeren
+/**
+ * 
+ */
+function clearInputFields() {
     document.getElementById('name').value = "";
     document.getElementById('email').value = "";
     document.getElementById('password').value = "";

@@ -11,7 +11,6 @@ async function initSummary() {
     displayUserInitials();
     showContent();
     handleGreetingMobile();
-    //onloadTasks();
     await getTasksAndProcess();
 }
 
@@ -236,26 +235,42 @@ function getUrgentTask(tasks) {
  * check valid date and return the earliest date of the urgent tasks
  */
 function filterEarliestDate(tasks) {
-    const urgentTasks = tasks.filter((t) => t.prio === "Urgent");
+    const urgentTasks = filterUrgentTasks(tasks);
     if (urgentTasks.length > 0) {
-        const earliestDate = new Date(
-            Math.min(
-                ...urgentTasks.map((t) => {
-                    const taskDate = new Date(t.date);
-                    if (
-                        Object.prototype.toString.call(taskDate) ===
-                            "[object Date]" &&
-                        !isNaN(taskDate)
-                    ) {
-                        return taskDate;
-                    } else {
-                        console.error("Unvalid date:", t.date);
-                        return NaN;
-                    }
-                })
-            )
-        );
-        return earliestDate;
+        return findEarliestDate(urgentTasks);
     }
     return null;
+}
+
+
+/**
+ * 
+ */
+function filterUrgentTasks(tasks) {
+    return tasks.filter((t) => t.prio === "Urgent");
+}
+
+
+/**
+ * 
+ */
+function findEarliestDate(tasks) {
+    const earliestDate = new Date(
+        Math.min(
+            ...tasks.map((t) => {
+                const taskDate = new Date(t.date);
+                if (
+                    Object.prototype.toString.call(taskDate) ===
+                        "[object Date]" &&
+                    !isNaN(taskDate)
+                ) {
+                    return taskDate;
+                } else {
+                    console.error("Unvalid date:", t.date);
+                    return NaN;
+                }
+            })
+        )
+    );
+    return earliestDate;
 }
