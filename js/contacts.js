@@ -657,7 +657,7 @@ document.addEventListener('click', function(event) {
 });
 
 function contactsBgMenu() {
-    document.getElementById('Contacts').classList.add("bgfocus");
+    document.getElementById('contacts').classList.add("bgfocus");
 }
 
 function closeFullContact() {
