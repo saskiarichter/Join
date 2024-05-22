@@ -100,4 +100,13 @@ span {
     .userInitials {
         padding-bottom: 0;
     }
+
+    .last-span {
+        padding-bottom: 80px;
+    }
+
+    .privacyLastSpan {
+        padding-left: 0;
+        padding-bottom: 90px;
+    }
 }

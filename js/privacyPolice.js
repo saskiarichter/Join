@@ -5,6 +5,11 @@ async function init() {
     displayUserInitials();
 }
 
+async function initSignupPrivacy() {
+    await includeHTML();
+    privacyPoliceBg();
+}
+
 
 function privacyPoliceBg() {
     document.getElementById('privacyPolice').classList.add("bgfocus");
