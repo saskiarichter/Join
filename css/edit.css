@@ -187,12 +187,6 @@
     background-color: #7AE229;
     color: #FFFFFF;
   }
-  
-  .urgent-edit-button img, .medium-edit-button img, .low-edit-button img{
-    background-color: #FFFFFF;
-    border: none;
-    padding: 2px;
-  }
 
   .close-edit-btn{
     color: #2A3647;

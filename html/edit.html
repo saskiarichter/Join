@@ -58,7 +58,7 @@
                     placeholder="dd/mm/yyyy"
                     required
                   />
-                  <img src="/img/event.svg" />
+                  <img src="./img/event.svg" />
                 </div>
               </div>
             </div>
@@ -67,27 +67,27 @@
               <div class="prio-buttons">
                 <button
                   id="urgentEditButton"
-                  onclick="selectEditUrgent()"
+                  onclick="activeEditButton()"
                   class="urgent-edit-button"
                 >
                   <span>Urgent</span>
-                  <div class="urgentImg"></div>
+                  <div class="urgent-edit-img"><img id="urgentImg" src="/img/PrioAltaRed.svg" alt="UrgenIcon"></div>
                 </button>
                 <button
                   id="mediumEditButton"
-                  onclick="selectEditMedium()"
+                  onclick="activeEditButton()"
                   class="medium-edit-button"
                 >
                   <span>Medium</span>
-                  <div class="mediumImg"></div>
+                  <div class="medium-edit-img"> <img id="mediumImg" src="/img/PrioMediaOrange.svg" alt="mediumIcon"></div>
                 </button>
                 <button
                   id="lowEditButton"
-                  onclick="selectEditLow()"
+                  onclick="activeEditButton()"
                   class="low-edit-button"
                 >
                   <span>Low</span>
-                  <div class="lowImg"></div>
+                  <div class="low-edit-img"><img id="lowImg" src="/img/PrioBajaGreen.svg" alt="LowIcon"></div>
                 </button>
               </div>
             </div>
@@ -96,7 +96,7 @@
               <label for="addTask-assigned">Assigned to</label>
               <div
                 id="contacts-input-container"
-                onclick="openContacts()"
+                onclick="openEditContacts()"
                 class="input-container input-container-select"
                 tabindex="1"
               >
@@ -112,7 +112,7 @@
                 <img
                   id="dropdown-img-contacts-edit"
                   onclick="openCloseContacts(event)"
-                  class="dropdown-img"
+                  class="dropdown-edit-img"
                   src="/img/arrow_drop_down.svg"
                 />
               </div>

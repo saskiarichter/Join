@@ -2,6 +2,7 @@ let subtask = [];
 let user = [];
 tasks = [];
 prioBtn = "";
+let prioIcon ="";
 let prioText = "";
 
 async function initBoard() {
@@ -43,10 +44,8 @@ function closeMe() {
 /** active Edit Button for Task */
 
 function activeEditButton() {
-  let urgentEditbutton =
-    document.getElementsByClassName("urgent-edit-button")[0];
-  let mediumEditbutton =
-    document.getElementsByClassName("medium-edit-button")[0];
+  let urgentEditbutton = document.getElementsByClassName("urgent-edit-button")[0];
+  let mediumEditbutton = document.getElementsByClassName("medium-edit-button")[0];
   let lowEditbutton = document.getElementsByClassName("low-edit-button")[0];
   let lastClick = null;
 
@@ -59,7 +58,9 @@ function activeEditButton() {
     lowEditbutton.classList.remove("active");
     lastClick = urgentEditbutton;
     prioText ='Urgent'
-    prioBtn ='./img/PrioAltaRed.svg';
+    prioIcon ='./img/PrioAltaWhite.svg';
+    prioBtn ="./img/PrioAltaRed.svg";
+    changeIconOfUrgent();
   });
 
   mediumEditbutton.addEventListener("click", function () {
@@ -70,8 +71,10 @@ function activeEditButton() {
     mediumEditbutton.classList.add("active");
     lowEditbutton.classList.remove("active");
     lastClick = mediumEditbutton;
-    prioText = 'Medium'
-    prioBtn= './img/PrioMediaOrange.svg'
+    prioText = 'Medium';
+    prioIcon = './img/PrioMediaWhite.svg';
+    prioBtn = './img/PrioMediaOrange.svg';
+    changeIconOfMedium();
   });
 
   lowEditbutton.addEventListener("click", function () {
@@ -82,9 +85,38 @@ function activeEditButton() {
     mediumEditbutton.classList.remove("active");
     lowEditbutton.classList.add("active");
     lastClick = lowEditbutton;
-    prioText = 'Low'
-    prioBtn = './img/PrioBajaGreen.svg'
+    prioText = 'Low';
+    prioIcon = './img/PrioBajaWhite.svg';
+    prioBtn = './img/PrioBajaGreen.svg';
+    changeIconOfLow();
   });
+}
+
+function changeIconOfUrgent(){
+  let urgent = document.getElementById('urgentImg');
+  urgent.src = prioIcon;
+  let medium = document.getElementById('mediumImg');
+  medium.src = './img/PrioMediaOrange.svg';
+  let low = document.getElementById('lowImg');
+  low.src = './img/PrioBajaGreen.svg';
+}
+
+function changeIconOfMedium(){
+  let medium = document.getElementById('mediumImg');
+  medium.src = prioIcon;
+  let urgent = document.getElementById('urgentImg');
+  urgent.src = './img/PrioAltaRed.svg';
+  let low = document.getElementById('lowImg');
+  low.src = './img/PrioBajaGreen.svg';
+}
+
+function changeIconOfLow(){
+  let low = document.getElementById('lowImg');
+  low.src = prioIcon;
+  let medium = document.getElementById('mediumImg');
+  medium.src = './img/PrioMediaOrange.svg';
+  let urgent = document.getElementById('urgentImg');
+  urgent.src = './img/PrioAltaRed.svg';
 }
 
 /** to add the Task  */
@@ -229,9 +261,7 @@ function showTask(i) {
   )}</div>
   <div class="priority-content">
     <div class="prioText">Priority:</div>
-    <div class="prio-icon-text-content">${tasks[i]["prio"]} <img src="${
-    tasks[i]["prioIcon"]
-  }" alt=""></div>
+    <div class="prio-icon-text-content">${tasks[i]["prio"]} <img src="${tasks[i]["prioIcon"]}" alt=""></div>
   </div>
   <div class="show-assignedTo-content">
     <div class="assignedToText">Assigned To:</div>
@@ -347,11 +377,10 @@ function openEdit(i) {
   assignedTo.value = tasks[i]["contacts"][i];
   dates.value = tasks[i]["date"];
   subtasks.innerHTML =`${tasks[i]['subtasks'][i]}`;
-  activeButton(i);
   activeEditButton();
+  activeButton(i);
   subtasksEditRender(i);
   contactsEditRender(i);
-  getColorOfContacts();
 }
 
 
@@ -359,7 +388,11 @@ function contactsEditRender(i){
   let content = document.getElementsByClassName('user-content-edit-letter')[0];
   content.innerHTML ='';
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
-      content.innerHTML += `<div class="user-task-content">${tasks[i]['contacts'][j]['initials']}</div>`;
+      let letter = tasks[i]['contacts'][j]['name'].split(" ");
+      let firstNameLetter = letter[0][0];
+      let lastNameLetter = letter[1][0];
+      let result = firstNameLetter +lastNameLetter;
+      content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }
 }
 
@@ -375,14 +408,20 @@ function subtasksEditRender(i){
 function activeButton(i){
   if (tasks[i]["prio"] === "Low") {
     document.getElementsByClassName("low-edit-button")[0].classList.add("active");
-    document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");
+    prioIcon = './img/PrioBajaWhite.svg';
+    changeIconOfLow();
+    document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");;
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
   } else if (tasks[i]["prio"] === "Urgent") {
     document.getElementsByClassName("urgent-edit-button")[0].classList.add("active");
+    prioIcon ='./img/PrioAltaWhite.svg';
+    changeIconOfUrgent();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
   } else {
     document.getElementsByClassName("medium-edit-button")[0].classList.add("active");
+    prioIcon = './img/PrioMediaWhite.svg';
+    changeIconOfMedium();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");
   }
