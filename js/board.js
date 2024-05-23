@@ -141,18 +141,6 @@ function noTaskTransparent() {
   document.getElementById("newTask-toDo").classList.add("transparent");
 }
 
-/** to Take the first letter of the user contect */
-/*
-function firstLetters() {
-  let userValue = document.getElementById("addTask-assigned");
-  let letter = userValue.value.split(" ");
-  let firstNameLetter = letter[0][0];
-  let lastNameLetter = letter[1][0];
-  let result = firstNameLetter + lastNameLetter;
-  user.push(result);
-  save();
-}*/
-
 function setFocus(e) {
   e.style.borderColor = "#29ABE2";
   e.focus();
@@ -270,19 +258,11 @@ function showTask(i) {
   contactsShowLetterRender(i);
   contactsShowNameRender(i);
   subtasksShowRender(i);
-  getColorOfContactsShow();
   let dialog = document.querySelector('.showTask');
   dialog.classList.remove('slide-in'); 
   setTimeout(() => {
       dialog.classList.add('slide-in');
   }, 50);
-}
-
-function getColorOfContactsShow(){
-  let content = document.querySelectorAll('.user-task-content-show');
-  content.forEach(function(div){
-    div.style.backgroundColor = colorRandom();
-  });
 }
 
 function subtasksShowRender(i){
@@ -322,7 +302,12 @@ function UpdateProgress(i){
 function contactsShowLetterRender(i){
     let content = document.getElementById('user-show-letter');
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
-      content.innerHTML += `<div class="user-task-content-show">${tasks[i]['contacts'][j]['initials']}</div>`;
+      let letter = tasks[i]['contacts'][j]['name'].split(" ");
+      let firstNameLetter = letter[0][0];
+      let lastNameLetter = letter[1][0];
+      let result = firstNameLetter +lastNameLetter;
+      console.log(result);
+      content.innerHTML += `<div class="user-task-content-show" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }
 }
 
@@ -473,7 +458,6 @@ let currentDraggedElement;
     }
     changeColorOfCategoryTitle();
     contactsRender();
-    getColorOfContacts();
 }
 
 function startDragging(id) {
@@ -492,39 +476,17 @@ function valueOfProgressBar(i){
   return value;
 }
 
-let usedColor =[];
-
 function contactsRender(){
   for(let i = 0; i < tasks.length; i++){
     let content = document.getElementsByClassName('user-inner-container')[i];
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
-      content.innerHTML += `<div class="user-task-content">${tasks[i]['contacts'][j]['initials']}</div>`;
+      let letter = tasks[i]['contacts'][j]['name'].split(" ");
+      let firstNameLetter = letter[0][0];
+      let lastNameLetter = letter[1][0];
+      let result = firstNameLetter +lastNameLetter;
+      content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }
   }
-}
-
-function colorRandom(){
-  let color = '#';
-  let isUnique = false;
-  while(!isUnique){
-    color = '#';
-    for(let i = 0; i < 3; i++){
-      let hex = Math.floor(Math.random() * 128).toString(16);
-      color += hex.length == 1 ? '0' + hex: hex; 
-    }
-    if(!usedColor.includes(color)){
-      isUnique = true;
-      usedColor.push(color);
-    }
-  }
-  return color
-}
-
-function getColorOfContacts(){
-  let content = document.querySelectorAll('.user-task-content');
-  content.forEach(function(div){
-    div.style.backgroundColor = colorRandom();
-  });
 }
 
  function genereteAllTasksHTML(element) {
