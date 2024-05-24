@@ -58,7 +58,7 @@
                     placeholder="dd/mm/yyyy"
                     required
                   />
-                  <img src="./img/event.svg" />
+                  <img src="/img/event.svg" />
                 </div>
               </div>
             </div>
@@ -126,20 +126,15 @@
 
             <div class="input-section-element">
               <label for="addTask-subtasks">Subtasks</label>
-              <div class="input-edit-subtask" onclick="setFocus(this)">
-                <input
-                  id="addTask-edit-subtasks"
-                  class="inputfield"
-                  type="text"
-                  placeholder="Add new subtask"
-                  maxlength="26"
-                  autocomplete="off"
-                />
-                <img
-                  src="/img/subtasks.svg"
-                  class="plus-icon-subtasks"
-                  onclick="addSubtask()"
-                />
+              <div class="input-edit-subtask">
+                <input id="addTask-edit-subtasks" class="inputfield" type="text"
+                  placeholder="Add new subtask" maxlength="26" autocomplete="off" onclick="openEditSubtaskIcons()"/>
+                  <div id="addTask-subtasks-edit-icons" class="subtasks-icon d-none">
+                    <img  src="/img/closeVectorBlack.svg" alt="Delete" onclick="closeEditSubtaskIcons()">
+                    <div class="parting-line subtasks-icon-line"></div>
+                    <img id="add-subtask-button" src="/img/done.svg" alt="confirm" onclick="addEditSubtasks()">
+                  </div>
+                <img src="/img/subtasks.svg" class="plus-icon-edit-subtasks" id="plus-edit-icon" onclick="openEditSubtaskIcons()"/>
               </div>
               <ul id="newSubtask"></ul>
             </div>

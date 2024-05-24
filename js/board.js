@@ -311,7 +311,6 @@ function UpdateProgress(i){
     if (checkbox.checked){
       checkedCount++;
     }
-
     let progress = document.getElementById(`progressBar${i}`);
     let numberOfSubtask = document.getElementsByClassName('numberOfSubtask')[i];
     numberOfSubtask.innerHTML ='';
@@ -333,8 +332,8 @@ function contactsShowLetterRender(i){
     let content = document.getElementById('user-show-letter');
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
       let letter = tasks[i]['contacts'][j]['name'].split(" ");
-      let firstNameLetter = letter[0][0];
-      let lastNameLetter = letter[1][0];
+      let firstNameLetter = letter[0][0].toUpperCase();
+      let lastNameLetter = letter[1][0].toUpperCase();
       let result = firstNameLetter +lastNameLetter;
       console.log(result);
       content.innerHTML += `<div class="user-task-content-show" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
@@ -350,15 +349,7 @@ function contactsShowNameRender(i){
 
 /** to edit the Task */
 
-function renderOfUserEdit(){
-  let content = document.getElementById('selectedContacts');
-    content.innerHTML =`<div>3</div>`;
-    content.style.color='red';
-
-}
-
 function openEdit(i) {
-  renderOfUserEdit();
   let showContent = document.getElementById("showTask");
   showContent.classList.add("hidden");
   let editConten = document.getElementById("addTask-edit");
@@ -370,13 +361,11 @@ function openEdit(i) {
   let description = document.getElementById("addTask-edit-description");
   let assignedTo = document.getElementById("addTask-assigned");
   let dates = document.getElementById("task-edit-Date");
-  let subtasks = document.getElementById('newSubtask');
   title.value = tasks[i]["title"];
   hiddenInput.value = tasks[i]["title"];
   description.value = tasks[i]["description"];
   assignedTo.value = tasks[i]["contacts"][i];
   dates.value = tasks[i]["date"];
-  subtasks.innerHTML =`${tasks[i]['subtasks'][i]}`;
   activeEditButton();
   activeButton(i);
   subtasksEditRender(i);
@@ -389,8 +378,8 @@ function contactsEditRender(i){
   content.innerHTML ='';
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
       let letter = tasks[i]['contacts'][j]['name'].split(" ");
-      let firstNameLetter = letter[0][0];
-      let lastNameLetter = letter[1][0];
+      let firstNameLetter = letter[0][0].toUpperCase();
+      let lastNameLetter = letter[1][0].toUpperCase();
       let result = firstNameLetter +lastNameLetter;
       content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }
@@ -400,8 +389,105 @@ function subtasksEditRender(i){
   let content = document.getElementById('newSubtask');
   content.innerHTML ='';
   for(let j = 0;  j < tasks[i]['subtasks'].length; j++){
-    content.innerHTML += `<div class="checkbox-show-content"><input type="checkbox" checked id="checkSub${j}">
-    <label class="subtask-show-text">${tasks[i]['subtasks'][j]}</label></div>`;
+    content.innerHTML += `
+  <div class="checkbox-edit-content">
+    <div id="checkbox-edit-content${j}" class="checkbox-show-content">
+      <input type="checkbox" checked id="checkSub${j}">
+      <label id="subtask-edit-text${j}" class="subtask-show-text">${tasks[i]['subtasks'][j]}</label>
+    </div>
+
+    <div id="edit-input-board-content${j}" class=" subtasks-icon input-subtask-edit-content hidden">
+      <input type ="text" class="editInputBoard" id = "editInputBoard${j}" value =${tasks[i]['subtasks'][j]}>
+      <div class="edit-buttons-content">
+        <img onclick="deleteEditBoardSubtask(${i}, ${j})" src="/img/delete.svg" alt="delete">
+        <div class="parting-line subtasks-icon-line"></div>
+        <img onclick="confirmEdit(${i}, ${j})" src="/img/done.svg" alt="confirm">
+      </div>
+    </div>
+
+    <div id="subtasks-icon${j}" class="subtasks-icon subtasks-icon-hidden">
+      <img onclick="editBoardSubtask(${j})" src="./img/edit.svg" alt="edit">
+      <div class="parting-line subtasks-icon-line"></div>
+      <img onclick="deleteEditBoardSubtask(${i}, ${j})" src="/img/delete.svg" alt="delete">
+    </div>
+  </div> `
+    ;
+  }
+}
+
+function confirmEdit(taskIndex, subtaskIndex){
+  let inputSubtask = document.getElementById(`editInputBoard${subtaskIndex}`).value;
+  deleteEditBoardSubtask(taskIndex, subtaskIndex);
+  if(!Array.isArray(tasks[taskIndex].subtasks)){
+    tasks[taskIndex].subtasks = [];
+  }
+  tasks[taskIndex]["subtasks"].push(inputSubtask);
+  subtasksEditRender(taskIndex);
+  putData("/tasks", tasks);
+  inputSubtask ="";
+}
+
+function editBoardSubtask(i){
+  document.getElementById(`edit-input-board-content${i}`).classList.remove('hidden');
+  document.getElementById(`checkbox-edit-content${i}`).classList.add('hidden');
+  document.getElementById(`subtasks-icon${i}`).classList.add('hidden');
+  let subtaskInput = document.getElementById(`editInputBoard${i}`).value;
+  let labelOfSubtask = document.getElementById(`subtask-edit-text${i}`);
+  labelOfSubtask.innerHTML = subtaskInput;
+}
+
+function deleteEditBoardSubtask(taskIndex, subtaskIndex){
+  if(tasks[taskIndex]["subtasks"].length === 1){
+    if(Array.isArray(tasks[taskIndex].subtasks)){
+      tasks[taskIndex].subtasks = "";
+    }
+    subtasksEditRender(taskIndex);
+  }else{
+    tasks[taskIndex]["subtasks"].splice(subtaskIndex, 1);
+    subtasksEditRender(taskIndex);
+  }
+  putData("/tasks", tasks);
+}
+
+function openEditSubtaskIcons(){
+  document.getElementById('addTask-subtasks-edit-icons').classList.remove('d-none');
+  document.getElementById('plus-edit-icon').classList.add('d-none');
+}
+
+function closeEditSubtaskIcons(){
+  document.getElementById('addTask-subtasks-edit-icons').classList.add('d-none');
+  document.getElementById('plus-edit-icon').classList.remove('d-none');
+}
+
+function addEditSubtasks(){
+  let inputSubtask = document.getElementById('addTask-edit-subtasks').value;
+  let hiddenInput = document.getElementById("hiddenInput").value;
+    for(let i = 0; i < tasks.length; i++){
+      if(tasks[i].title === hiddenInput){
+      if(tasks[i]['subtasks'].length >= 2 || inputSubtask.trim() === ""){
+        return;
+      }else{
+        let list = document.getElementById('newSubtask');
+        list.innerHTML += `
+        <div class="checkbox-edit-content">
+          <div class="checkbox-show-content">
+            <input type="checkbox" checked>
+            <label class="subtask-show-text">${inputSubtask}</label>
+          </div>
+          <div class="subtasks-icon subtasks-icon-hidden">
+            <img onclick="editBoardSubtask(${i})" src="/img/edit.svg" alt="Bearbeiten">
+            <div class="parting-line subtasks-icon-line"></div>
+            <img onclick="deleteEditBoardSubtask(${i})" src="/img/delete.svg" alt="Delete">
+          </div>
+        </div> `;
+        if(!Array.isArray(tasks[i].subtasks)){
+          tasks[i].subtasks = [];
+        }
+        tasks[i]["subtasks"].push(inputSubtask);
+        putData("/tasks", tasks);
+        inputSubtask ="";
+      }
+     }
   }
 }
 
@@ -433,7 +519,6 @@ function saveEditTask() {
   let title = document.getElementById("addTask-edit-title").value;
   let hiddenInput = document.getElementById("hiddenInput").value;
   let description = document.getElementById("addTask-edit-description").value;
-  /*let user = document.getElementById("addTask-assigned").value;*/
   let date = document.getElementById("task-edit-Date").value;
   if (title.trim() === "" || date.trim() === "") {
     return;
@@ -442,7 +527,6 @@ function saveEditTask() {
       if (tasks[i].title === hiddenInput) {
         tasks[i].title = title;
         tasks[i].description = description;
-        /*tasks[i]['contacts'][i] = user;*/
         tasks[i].date = date;
         tasks[i].prioIcon = prioBtn;
         tasks[i].prio = prioText;
@@ -455,6 +539,7 @@ function saveEditTask() {
   updateHTML();
   closeMe();
 }
+
 
 /**Drag and Drop  and Render  HTML*/
 
@@ -505,14 +590,14 @@ function startDragging(id) {
 
 function valueOfProgressBar(i){
   let value;
-  if(tasks[i]["subtasks"].length === 0){
-    value = 0;
-  }else if(tasks[i]["subtasks"].length === 1){
-    value = 50;
-  }else{
-    value = 100;
-  }
-  return value;
+    if(tasks[i]["subtasks"].length === 0){
+      value = 0;
+    }else if(tasks[i]["subtasks"].length === 1){
+      value = 50;
+    }else{
+      value = 100;
+    }
+    return value;
 }
 
 function contactsRender(){
@@ -520,8 +605,8 @@ function contactsRender(){
     let content = document.getElementsByClassName('user-inner-container')[i];
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
       let letter = tasks[i]['contacts'][j]['name'].split(" ");
-      let firstNameLetter = letter[0][0];
-      let lastNameLetter = letter[1][0];
+      let firstNameLetter = letter[0][0].toUpperCase();
+      let lastNameLetter = letter[1][0].toUpperCase();
       let result = firstNameLetter +lastNameLetter;
       content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }

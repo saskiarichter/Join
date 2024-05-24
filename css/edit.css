@@ -138,7 +138,7 @@
   .input-edit-subtask{
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    padding: 6px 11px 6px 11px;
+    padding: 12px 16px;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -209,4 +209,57 @@
 
   #newSubtask{
     padding-inline-start: 0;
+  }
+
+  .plus-icon-edit-subtasks{
+    cursor: pointer;
+  }
+
+  .checkbox-edit-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 15px;
+  }
+
+  .checkbox-edit-content:hover{
+    background-color: #EEEEEE;
+    .subtasks-icon-hidden {
+      visibility: visible;
+  }
+  }
+
+  .input-subtask-edit-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid #005DFF;
+    border-radius: 0;
+    padding: 4px 16px 4px 16px;
+  }
+
+  .input-subtask-edit-content:hover{
+    background-color: #FFFFFF;
+  }
+
+  .edit-buttons-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editInputBoard{
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 400;
+    color: #425262;
+  }
+
+  #newSubtask{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
