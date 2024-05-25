@@ -81,7 +81,6 @@ async function loadContacts(path = "/contacts") {
 }
 
 async function createNewContactInFirebase(name, email, phoneNumber, color) {
-    try {
         const nextContactId = await getNextContactId();
 
         const response = await fetch(`${BASE_URL}/contacts/${nextContactId}.json`, {
@@ -96,18 +95,6 @@ async function createNewContactInFirebase(name, email, phoneNumber, color) {
                 color: color
             })
         });
-
-        if (!response.ok) {
-            throw new Error('Failed to create contact in Firebase.');
-        }
-
-        const data = await response.json();
-        console.log('New contact created in Firebase:', data);
-        return data;
-    } catch (error) {
-        console.error('Error creating contact in Firebase:', error.message);
-        throw error;
-    }
 }
 
 async function updateContactInFirebase(id, name, mail, phone, color) {
@@ -118,43 +105,13 @@ async function updateContactInFirebase(id, name, mail, phone, color) {
         },
         body: JSON.stringify({ name, email: mail, nummer: phone, color: color })
     });
-
-    if (!response.ok) {
-        throw new Error('Failed to update contact in Firebase.');
-    }
-
-    return await response.json();
 }
 
-async function deleteContact(contactId) {
-    try {
-        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-            method: "DELETE",
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete contact.');
-        }
-
-        console.log('Contact deleted successfully.');
-
-        // Entferne den Kontakt aus den lokalen Arrays
-        const index = contactIds.indexOf(contactId);
-        if (index !== -1) {
-            nameInput.splice(index, 1);
-            emailInput.splice(index, 1);
-            phoneNumbersInput.splice(index, 1);
-            contactIds.splice(index, 1);
-        }
-
-        // Render die Kontaktliste neu
-        closeFullContact();
-        sortContactsByNameAndRender();
-        return true;
-    } catch (error) {
-        console.error('Error deleting contact:', error.message);
-        throw error;
-    }
+async function deleteContactBackend(path) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return await response.json();
 }
 
 async function postData(path="", data={}){
