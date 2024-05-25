@@ -44,8 +44,8 @@ function HTMLTemplateNewContact() {
 <form onsubmit="createNewContact(); return false;">
     <div class="dialogNewContactInnerDiv">
         <div class="dialogLeft">
-        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png"
-            <img class="joinLogoDialog" src="/img/Capa 2.png">
+        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./img/closeResponsive.png"
+            <img class="joinLogoDialog" src="./img/Capa 2.png">
             <div class="dialogLeftInnerDiv">
                 <h1 class="HeadlineDialog">Add contact</h1>
                 <p class="subheadingDialog">Tasks are better with a team!</p>
@@ -54,28 +54,28 @@ function HTMLTemplateNewContact() {
         </div>
         <div class="dialogRight">
             <div class="dialogCloseDiv">
-                <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
+                <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
             </div>
             <div class="dialogProfilPictureDiv">
-                <img class="dialogProfilPicture" src="/img/Group 13.png">
+                <img class="dialogProfilPicture" src="./img/Group 13.png">
                 <div class="dialogAddData">
                     <div class="dialogInputfield">
                         <div class="dialogInputfieldDiv">
                             <input id="inputName" placeholder="Name" required>
-                            <img class="dialogIcons" src="/img/person.png">
+                            <img class="dialogIcons" src="./img/person.png">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputMail" type="email" placeholder="Email" pattern=".+@.+" required>
-                            <img class="dialogIcons" src="/img/mail.png">
+                            <img class="dialogIcons" src="./img/mail.png">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputPhone" type="number" placeholder="Phone" class="no-spinners" required>
-                            <img class="dialogIcons" src="/img/call.png">
+                            <img class="dialogIcons" src="./img/call.png">
                         </div>
                     </div> 
                     <div class="dialogButtonDiv">
-                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="/img/close.png"></button>
-                        <button type="submit" class="createContactButton">Create contact<img src="/img/check.png"></button>
+                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="./img/close.png"></button>
+                        <button type="submit" class="createContactButton">Create contact<img src="./img/check.png"></button>
                     </div>
                 </div> 
             </div>
@@ -199,10 +199,10 @@ function showFullContact(index, nextColor, id){
                 <p class="nameProfilShow">${name}</p>
                 <div class="proilNameAndEditInner">
                     <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit">Edit
-                        <img class="logoRightSection" src="/img/edit.svg">
+                        <img class="logoRightSection" src="./img/edit.svg">
                     </p>
                     <p onclick="deleteContact('${index}')" class="profilDelete">Delete
-                        <img class="logoRightSection" src="/img/delete.png">
+                        <img class="logoRightSection" src="./img/delete.png">
                     </p>
                 </div>
             </div>
@@ -223,8 +223,8 @@ function showFullContact(index, nextColor, id){
                 <div class="editAndDeleteResponsive">
                     <img src="/img/more_vert.png" onclick="togglePopup()">
                     <div id="popup" class="popup">
-                        <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="/img/edit.svg">Edit</p>
-                        <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="/img/delete.png">Delete</p>
+                        <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="./img/edit.svg">Edit</p>
+                        <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="./img/delete.png">Delete</p>
                     </div>
                 </div>
             </div>
@@ -259,14 +259,14 @@ function HTMLTemplateEditContact(index, nextColor){
     return `    
         <div class="dialogNewContactInnerDiv">
             <div class="dialogLeft">
-                <img class="joinLogoDialog" src="/img/Capa 2.png">
+                <img class="joinLogoDialog" src="./img/Capa 2.png">
                 <div class="dialogLeftInnerDiv">
                     <h1 class="HeadlineDialog">Edit contact</h1>
                 </div>
             </div>
             <div class="dialogRight">
                 <div class="dialogCloseDiv">
-                    <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
+                    <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
                 </div>
                 <div class="dialogProfilPictureDiv">
                     <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
@@ -287,7 +287,7 @@ function HTMLTemplateEditContact(index, nextColor){
                         </div>
                         <div class="dialogButtonDiv">
                             <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="/img/check.png"></button>
+                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="./img/check.png"></button>
                         </div>
                     </div> 
                 </div>
@@ -318,26 +318,33 @@ function saveEditContact(index,nextColor) {
     closeContactDialog();
     showFullContact(index,nextColor);
     renderEditContact(index,nextColor);
-    updateContactInFirebase(id, name, mail, phone, color);
+    updateContactInFirebase();
 }
 
 async function deleteContact(index) {
-    const contactId = contactIds[index];
+    const contactId = contactIds[index]; // ID des zu löschenden Kontakts
+
+    // Lösche den spezifischen Kontakt in Firebase
     await deleteContactBackend(`/contacts/${contactId}`);
 
+    // Entferne den Kontakt aus den lokalen Arrays
     nameInput.splice(index, 1);
     emailInput.splice(index, 1);
     phoneNumbersInput.splice(index, 1);
     contactIds.splice(index, 1);
     let dialog = document.getElementById('contactsRightSectionShowProfil');
     dialog.classList.remove('slide-in');
+
+    // Lade alle verbleibenden Kontakte
     const contactsData = await fetchContactsData("/contacts");
 
+    // Überprüfen, ob contactsData gültig ist
     if (!contactsData) {
         console.error("No contact data found.");
         return;
     }
 
+    // Neu ordnen und die Kontaktliste erstellen
     const contacts = [];
     let i = 0;
     for (let key in contactsData) {
@@ -355,13 +362,18 @@ async function deleteContact(index) {
         }
     }
 
+    // Lösche alle Kontakte in Firebase
     await deleteContactBackend("/contacts");
 
+    // Aktualisiere Firebase mit den neu nummerierten Kontakten
     for (let i = 0; i < contacts.length; i++) {
         await createNewContactInFirebase(contacts[i].name, contacts[i].email, contacts[i].nummer, contacts[i].color, i);
     }
+
+    // Lade die aktualisierten Kontakte in die lokale Ansicht
     await loadContacts();
 }
+
 
 function resetInputs() {
     nameInput = [];
