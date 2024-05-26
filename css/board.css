@@ -287,7 +287,7 @@ h1{
   width: 976.25px;
   background-color: #FFFFFF;
   position: fixed;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(150%, -50%);
   padding: 2rem;
@@ -367,7 +367,7 @@ h1{
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 100;
 }
 
 #addTask-title, #addTask-description, #addTask-dueDate, #addTask-category, #addTask-subtasks, #addTask-assigned{

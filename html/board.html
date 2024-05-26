@@ -58,7 +58,7 @@
           <div class="inner-management-content">
             <div class="title-m-content"> 
               <p class="title-m">To do</p>
-              <button onclick="openAddTask()" class="plus-btn">
+              <button onclick="updateButtonOnClick()" class="plus-btn">
                 <i class="fa fa-plus" style="font-size: 12px"></i>
               </button>
             </div>
@@ -71,7 +71,7 @@
           <div class="inner-management-content">
             <div class="title-m-content">
               <p class="title-m">In progress</p>
-              <button onclick="openAddTask()" class="plus-btn">
+              <button onclick="updateButtonOnClick()" class="plus-btn">
                 <i class="fa fa-plus" style="font-size: 12px"></i>
               </button>
             </div>
@@ -84,7 +84,7 @@
           <div class="inner-management-content">
             <div class="title-m-content">
               <p class="title-m">Await feedback</p>
-              <button onclick="openAddTask()" class="plus-btn">
+              <button onclick="updateButtonOnClick()" class="plus-btn">
                 <i class="fa fa-plus" style="font-size: 12px"></i>
               </button>
             </div>
@@ -108,14 +108,14 @@
       <div id="showTask" class="showTask slide-in hidden"></div>
     </section>
     <div class="overlay hidden" onclick="closeMe()"></div>
+    <script src="/js/storage.js"></script>
+    <script src="/js/include.js"></script>
     <script src="/js/addTask.js"></script>
     <script src="/js/addTaskContacts.js"></script>
     <script src="/js/addTaskSubtask.js"></script>
     <script src="/js/contacts.js"></script>
     <script src="/js/summary.js"></script>
     <script src="/js/board.js"></script>
-    <script src="/js/include.js"></script>
-    <script src="/js/storage.js"></script>
     <script src="/js/register.js"></script>
   </body>
 </html>

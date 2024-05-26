@@ -406,7 +406,7 @@ function subtasksEditRender(i){
     </div>
 
     <div id="subtasks-icon${j}" class="subtasks-icon subtasks-icon-hidden">
-      <img onclick="editBoardSubtask(${j})" src="./img/edit.svg" alt="edit">
+      <img onclick="editBoardSubtask(${j})" src="/img/edit.svg" alt="edit">
       <div class="parting-line subtasks-icon-line"></div>
       <img onclick="deleteEditBoardSubtask(${i}, ${j})" src="/img/delete.svg" alt="delete">
     </div>
@@ -686,3 +686,23 @@ function styleOfNoTaskDone(){
 function checkwidthForAddTask(){
     window.location.href = '/html/addTask.html';
 }
+
+function updateButtonOnClick(){
+  let plusbutton1 = document.getElementsByClassName('plus-btn')[0];
+  let plusbutton2 = document.getElementsByClassName('plus-btn')[1];
+  let plusbutton3 = document.getElementsByClassName('plus-btn')[2];
+  if(window.innerWidth <= 1075){
+    plusbutton1.setAttribute('onclick', "window.location.href = './addTask.html'");
+    plusbutton2.setAttribute('onclick', "window.location.href = './addTask.html'");
+    plusbutton3.setAttribute('onclick', "window.location.href = './addTask.html'");
+  }else{
+    plusbutton1.setAttribute('onclick', 'openAddTask()');
+    plusbutton2.setAttribute('onclick', 'openAddTask()');
+    plusbutton3.setAttribute('onclick', 'openAddTask()');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () =>{
+  updateButtonOnClick();
+  window.addEventListener('resize', updateButtonOnClick)
+});
