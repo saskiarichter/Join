@@ -10,6 +10,7 @@ let emailInput = [];
 let phoneNumbersInput = [];
 let contactIds = [];
 let colorIndex = 0;
+let loadedColors = [];
 
 const colors = [
     "#3380FF",
@@ -44,8 +45,8 @@ function HTMLTemplateNewContact() {
 <form onsubmit="createNewContact(); return false;">
     <div class="dialogNewContactInnerDiv">
         <div class="dialogLeft">
-        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./img/closeResponsive.png"
-            <img class="joinLogoDialog" src="./img/Capa 2.png">
+        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png"
+            <img class="joinLogoDialog" src="/img/Capa 2.png">
             <div class="dialogLeftInnerDiv">
                 <h1 class="HeadlineDialog">Add contact</h1>
                 <p class="subheadingDialog">Tasks are better with a team!</p>
@@ -54,28 +55,28 @@ function HTMLTemplateNewContact() {
         </div>
         <div class="dialogRight">
             <div class="dialogCloseDiv">
-                <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
+                <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
             </div>
             <div class="dialogProfilPictureDiv">
-                <img class="dialogProfilPicture" src="./img/Group 13.png">
+                <img class="dialogProfilPicture" src="/img/Group 13.png">
                 <div class="dialogAddData">
                     <div class="dialogInputfield">
                         <div class="dialogInputfieldDiv">
                             <input id="inputName" placeholder="Name" required>
-                            <img class="dialogIcons" src="./img/person.png">
+                            <img class="dialogIcons" src="/img/person.png">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputMail" type="email" placeholder="Email" pattern=".+@.+" required>
-                            <img class="dialogIcons" src="./img/mail.png">
+                            <img class="dialogIcons" src="/img/mail.png">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputPhone" type="number" placeholder="Phone" class="no-spinners" required>
-                            <img class="dialogIcons" src="./img/call.png">
+                            <img class="dialogIcons" src="/img/call.png">
                         </div>
                     </div> 
                     <div class="dialogButtonDiv">
-                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="./img/close.png"></button>
-                        <button type="submit" class="createContactButton">Create contact<img src="./img/check.png"></button>
+                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="/img/close.png"></button>
+                        <button type="submit" class="createContactButton">Create contact<img src="/img/check.png"></button>
                     </div>
                 </div> 
             </div>
@@ -98,6 +99,7 @@ async function createNewContact(){
     nameInput.push(name);
     emailInput.push(mail);
     phoneNumbersInput.push(phone);
+    loadedColors.push(nextColor);
 
     document.getElementById('overlay').style.display = 'none'; 
     document.getElementById('dialogNewContactDiv').classList.add('d-none');
@@ -107,7 +109,26 @@ async function createNewContact(){
 }
 
 function sortContactsByNameAndRender() {
-    nameInput.sort((a, b) => a.localeCompare(b));
+    const sortedIndices = [...nameInput.keys()].sort((a, b) => nameInput[a].localeCompare(nameInput[b]));
+
+    const sortedNames = sortedIndices.map(i => nameInput[i]);
+    const sortedEmails = sortedIndices.map(i => emailInput[i]);
+    const sortedPhoneNumbers = sortedIndices.map(i => phoneNumbersInput[i]);
+    const sortedColors = sortedIndices.map(i => loadedColors[i]);
+    const sortedIds = sortedIndices.map(i => contactIds[i]);
+
+    nameInput.length = 0;
+    emailInput.length = 0;
+    phoneNumbersInput.length = 0;
+    loadedColors.length = 0;
+    contactIds.length = 0;
+
+    nameInput.push(...sortedNames);
+    emailInput.push(...sortedEmails);
+    phoneNumbersInput.push(...sortedPhoneNumbers);
+    loadedColors.push(...sortedColors);
+    contactIds.push(...sortedIds);
+
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
 
@@ -129,7 +150,7 @@ function sortContactsByNameAndRender() {
 
         const contactDiv = document.createElement('div');
         contactDiv.classList.add('contactListInner');
-        contactDiv.innerHTML = renderHTMLLeftContactSide(name, emailInput[index], phoneNumbersInput[index], index, colors[index % colors.length]);
+        contactDiv.innerHTML = renderHTMLLeftContactSide(name, emailInput[index], phoneNumbersInput[index], index, loadedColors[index]);
         contactList.appendChild(contactDiv);
     });
 }
@@ -199,10 +220,10 @@ function showFullContact(index, nextColor, id){
                 <p class="nameProfilShow">${name}</p>
                 <div class="proilNameAndEditInner">
                     <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit">Edit
-                        <img class="logoRightSection" src="./img/edit.svg">
+                        <img class="logoRightSection" src="/img/edit.svg">
                     </p>
                     <p onclick="deleteContact('${index}')" class="profilDelete">Delete
-                        <img class="logoRightSection" src="./img/delete.png">
+                        <img class="logoRightSection" src="/img/delete.png">
                     </p>
                 </div>
             </div>
@@ -223,8 +244,8 @@ function showFullContact(index, nextColor, id){
                 <div class="editAndDeleteResponsive">
                     <img src="/img/more_vert.png" onclick="togglePopup()">
                     <div id="popup" class="popup">
-                        <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="./img/edit.svg">Edit</p>
-                        <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="./img/delete.png">Delete</p>
+                        <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="/img/edit.svg">Edit</p>
+                        <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="/img/delete.png">Delete</p>
                     </div>
                 </div>
             </div>
@@ -259,14 +280,14 @@ function HTMLTemplateEditContact(index, nextColor){
     return `    
         <div class="dialogNewContactInnerDiv">
             <div class="dialogLeft">
-                <img class="joinLogoDialog" src="./img/Capa 2.png">
+                <img class="joinLogoDialog" src="/img/Capa 2.png">
                 <div class="dialogLeftInnerDiv">
                     <h1 class="HeadlineDialog">Edit contact</h1>
                 </div>
             </div>
             <div class="dialogRight">
                 <div class="dialogCloseDiv">
-                    <img onclick="closeContactDialog()" class="closeIcon" src="./img/Close.png">
+                    <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
                 </div>
                 <div class="dialogProfilPictureDiv">
                     <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
@@ -274,20 +295,20 @@ function HTMLTemplateEditContact(index, nextColor){
                         <div class="dialogInputfield">
                             <div class="dialogInputfieldDiv">
                                 <input id="inputName" value="${name}">
-                                <img class="dialogIcons" src="./img/person.png">
+                                <img class="dialogIcons" src="/img/person.png">
                             </div>
                             <div class="dialogInputfieldDiv">
                                 <input id="inputMail" value="${email}" type="email" pattern=".+@.+" required>
-                                <img class="dialogIcons" src="./img/mail.png">
+                                <img class="dialogIcons" src="/img/mail.png">
                             </div>
                             <div class="dialogInputfieldDiv">
                                 <input id="inputPhone" value="${phone}" type="number" class="no-spinners">
-                                <img class="dialogIcons" src="./img/call.png">
+                                <img class="dialogIcons" src="/img/call.png">
                             </div>
                         </div>
                         <div class="dialogButtonDiv">
                             <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="./img/check.png"></button>
+                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="/img/check.png"></button>
                         </div>
                     </div> 
                 </div>
@@ -306,25 +327,34 @@ function renderEditContact(index,nextColor) {
     }
 }
 
-function saveEditContact(index,nextColor) {
+async function saveEditContact(index, nextColor) {
     let changedName = document.getElementById('inputName').value;
     let changedMail = document.getElementById('inputMail').value;
     let changedPhone = document.getElementById('inputPhone').value;
+    const id = contactIds[index];
 
     nameInput[index] = changedName;
     emailInput[index] = changedMail;
     phoneNumbersInput[index] = changedPhone;
+    loadedColors[index] = nextColor;
+
+    try {
+        // Update the contact in Firebase
+        await updateContactInFirebase(id, changedName, changedMail, changedPhone, nextColor);
+        sortContactsByNameAndRender();
+    } catch (error) {
+        console.error('Failed to update contact in Firebase:', error.message);
+    }
 
     closeContactDialog();
-    showFullContact(index,nextColor);
-    renderEditContact(index,nextColor);
-    updateContactInFirebase();
+    showFullContact(index, nextColor);
+    renderEditContact(index, nextColor);
+    document.getElementById('contactsRightSectionShowProfil').classList.add('d-none');
 }
 
 async function deleteContact(index) {
-    const contactId = contactIds[index]; // ID des zu löschenden Kontakts
+    const contactId = contactIds[index]; 
 
-    // Lösche den spezifischen Kontakt in Firebase
     await deleteContactBackend(`/contacts/${contactId}`);
 
     // Entferne den Kontakt aus den lokalen Arrays
@@ -332,10 +362,10 @@ async function deleteContact(index) {
     emailInput.splice(index, 1);
     phoneNumbersInput.splice(index, 1);
     contactIds.splice(index, 1);
+    loadedColors.splice(index, 1);
     let dialog = document.getElementById('contactsRightSectionShowProfil');
     dialog.classList.remove('slide-in');
 
-    // Lade alle verbleibenden Kontakte
     const contactsData = await fetchContactsData("/contacts");
 
     // Überprüfen, ob contactsData gültig ist
@@ -344,7 +374,6 @@ async function deleteContact(index) {
         return;
     }
 
-    // Neu ordnen und die Kontaktliste erstellen
     const contacts = [];
     let i = 0;
     for (let key in contactsData) {
@@ -424,12 +453,12 @@ function processContact(contact, contactList, id) {
     if (contact) {
         const { name, email, nummer, color } = contact; 
         const contactHTML = renderHTMLLeftContactSide(name, email, nummer, id, color);
-        contactList.insertAdjacentHTML('beforeend', contactHTML);
 
         nameInput.push(name);
         emailInput.push(email);
         phoneNumbersInput.push(nummer);
         contactIds.push(id);
+        loadedColors.push(color);
     }
 }
 

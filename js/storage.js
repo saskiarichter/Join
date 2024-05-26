@@ -103,8 +103,12 @@ async function updateContactInFirebase(id, name, mail, phone, color) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email: mail, nummer: phone, color: color })
+        body: JSON.stringify({ name, email: mail, nummer: phone, color })
     });
+
+    if (!response.ok) {
+        throw new Error('Failed to update contact in Firebase');
+    }
 }
 
 async function deleteContactBackend(path) {
