@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AddTaskEdit</title>
   </head>
-  <body>
+  <body onload="init()">
     <div id="addTask-edit" class="hidden">
       <div class="addTask-edit-top">
         <div class="addTask-title-content">
@@ -99,7 +99,7 @@
                 onclick="openEditContacts()"
                 class="input-container input-container-select"
                 tabindex="1"
-              >
+                >
                 <input
                   id="addTask-assigned"
                   onkeyup="searchContacts()"
@@ -111,7 +111,7 @@
                 />
                 <img
                   id="dropdown-img-contacts-edit"
-                  onclick="openCloseContacts(event)"
+                  onclick="openCloseContactsEdit(event)"
                   class="dropdown-edit-img"
                   src="/img/arrow_drop_down.svg"
                 />
@@ -121,7 +121,7 @@
                 id="selectedContacts-edit"
                 class="contact-circles d-none"
               ></div>
-              <div id="addTask-contacts-container-edit" class="d-none"></div>
+              <div id="addTask-contacts-container-edit" class="addTask-contacts-container d-none"></div>
             </div>
 
             <div class="input-section-element">

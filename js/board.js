@@ -11,6 +11,7 @@ async function initBoard() {
   loadTasks();
   loadDataBoard("/tasks");
   updateHTML();
+  renderContacts('addTask-contacts-container');
 }
 /** To open the AddTask with addTask Button */
 
@@ -369,21 +370,38 @@ function openEdit(i) {
   activeEditButton();
   activeButton(i);
   subtasksEditRender(i);
-  contactsEditRender(i);
+  renderContacts('addTask-contacts-container-edit');
 }
 
 
-function contactsEditRender(i){
-  let content = document.getElementsByClassName('user-content-edit-letter')[0];
-  content.innerHTML ='';
-    for(let j = 0; j < tasks[i]['contacts'].length; j++){
-      let letter = tasks[i]['contacts'][j]['name'].split(" ");
-      let firstNameLetter = letter[0][0].toUpperCase();
-      let lastNameLetter = letter[1][0].toUpperCase();
-      let result = firstNameLetter +lastNameLetter;
-      content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
+function openEditContacts(){
+  let container = document.getElementById('input-assigned-edit-section');
+  let contacts = document.getElementById('addTask-contacts-container-edit');
+  let img = document.getElementById('dropdown-img-contacts-edit');
+
+  window.addEventListener('click', function (e) {
+    if (container.contains(e.target)) {
+      openDropdown(contacts, img);
+      hideSelectedContacts();
+    } else {
+      closeDropdown(contacts, img);
+      showSelectedContacts();
     }
+  });
 }
+
+function openCloseContactsEdit(event) {
+  event.stopPropagation();
+  let container = document.getElementById('addTask-contacts-container-edit');
+  let img = document.getElementById('dropdown-img-contacts-edit');
+  if (container.classList.contains('d-none')) {
+      openDropdown(container, img);
+      hideSelectedContacts();
+  } else {
+      closeDropdown(container, img);
+      showSelectedContacts();
+  }
+};
 
 function subtasksEditRender(i){
   let content = document.getElementById('newSubtask');

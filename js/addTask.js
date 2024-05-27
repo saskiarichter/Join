@@ -9,7 +9,7 @@ async function init() {
     addTaskBgMenu();
     displayUserInitials(); // from summary.js
     loadTasks(); // from storage.js
-    renderContacts();
+    renderContacts('addTask-contacts-container');
 }
 
 

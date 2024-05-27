@@ -5,8 +5,8 @@ let contactsSearch = [];
 /**
  * loads Contacts
  */
-function renderContacts() {
-    let container = document.getElementById('addTask-contacts-container');
+function renderContacts(contactContainer) {
+    let container = document.getElementById(`${contactContainer}`);
     container.innerHTML = '';
     for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i]['name'];
