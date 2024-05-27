@@ -133,7 +133,7 @@ function removeHidden(){
 
 function changeColorOfCategoryTitle() {
   for (let i = 0; i < tasks.length; i++) {
-    let content = document.getElementsByClassName("card-category-title")[i];
+    let content = document.getElementById(`cardCategoryTitle${i}`);
     let category = tasks[i]["category"];
     if (category.includes("User Story")) {
       content.classList.add("blue");
@@ -620,7 +620,7 @@ function valueOfProgressBar(i){
 
 function contactsRender(){
   for(let i = 0; i < tasks.length; i++){
-    let content = document.getElementsByClassName('user-inner-container')[i];
+    let content = document.getElementById(`newDiv${i}`);
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
       let letter = tasks[i]['contacts'][j]['name'].split(" ");
       let firstNameLetter = letter[0][0].toUpperCase();
