@@ -475,19 +475,19 @@ function addEditSubtasks(){
 function activeButton(taskIndex){
   if (tasks[taskIndex]["prio"] === "Low") {
     document.getElementsByClassName("low-edit-button")[0].classList.add("active");
-    prioIcon = './img/PrioBajaWhite.svg';
+    prioIcon = '/img/PrioBajaWhite.svg';
     changeIconOfLow();
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");;
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
   } else if (tasks[taskIndex]["prio"] === "Urgent") {
     document.getElementsByClassName("urgent-edit-button")[0].classList.add("active");
-    prioIcon ='./img/PrioAltaWhite.svg';
+    prioIcon ='/img/PrioAltaWhite.svg';
     changeIconOfUrgent();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
   } else {
     document.getElementsByClassName("medium-edit-button")[0].classList.add("active");
-    prioIcon = './img/PrioMediaWhite.svg';
+    prioIcon = '/img/PrioMediaWhite.svg';
     changeIconOfMedium();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");
