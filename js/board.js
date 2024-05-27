@@ -7,11 +7,9 @@ let prioText = "";
 
 async function initBoard() {
   await initInclude();
-  load();
+  displayUserInitials();
   loadTasks();
-  loadDataBoard("/tasks");
   updateHTML();
-  renderContacts('addTask-contacts-container');
 }
 /** To open the AddTask with addTask Button */
 
@@ -59,8 +57,8 @@ function activeEditButton() {
     lowEditbutton.classList.remove("active");
     lastClick = urgentEditbutton;
     prioText ='Urgent'
-    prioIcon ='./img/PrioAltaWhite.svg';
-    prioBtn ="./img/PrioAltaRed.svg";
+    prioIcon ='/img/PrioAltaWhite.svg';
+    prioBtn ="/img/PrioAltaRed.svg";
     changeIconOfUrgent();
   });
 
@@ -73,8 +71,8 @@ function activeEditButton() {
     lowEditbutton.classList.remove("active");
     lastClick = mediumEditbutton;
     prioText = 'Medium';
-    prioIcon = './img/PrioMediaWhite.svg';
-    prioBtn = './img/PrioMediaOrange.svg';
+    prioIcon = '/img/PrioMediaWhite.svg';
+    prioBtn = '/img/PrioMediaOrange.svg';
     changeIconOfMedium();
   });
 
@@ -87,8 +85,8 @@ function activeEditButton() {
     lowEditbutton.classList.add("active");
     lastClick = lowEditbutton;
     prioText = 'Low';
-    prioIcon = './img/PrioBajaWhite.svg';
-    prioBtn = './img/PrioBajaGreen.svg';
+    prioIcon = '/img/PrioBajaWhite.svg';
+    prioBtn = '/img/PrioBajaGreen.svg';
     changeIconOfLow();
   });
 }
@@ -97,27 +95,27 @@ function changeIconOfUrgent(){
   let urgent = document.getElementById('urgentImg');
   urgent.src = prioIcon;
   let medium = document.getElementById('mediumImg');
-  medium.src = './img/PrioMediaOrange.svg';
+  medium.src = '/img/PrioMediaOrange.svg';
   let low = document.getElementById('lowImg');
-  low.src = './img/PrioBajaGreen.svg';
+  low.src = '/img/PrioBajaGreen.svg';
 }
 
 function changeIconOfMedium(){
   let medium = document.getElementById('mediumImg');
   medium.src = prioIcon;
   let urgent = document.getElementById('urgentImg');
-  urgent.src = './img/PrioAltaRed.svg';
+  urgent.src = '/img/PrioAltaRed.svg';
   let low = document.getElementById('lowImg');
-  low.src = './img/PrioBajaGreen.svg';
+  low.src = '/img/PrioBajaGreen.svg';
 }
 
 function changeIconOfLow(){
   let low = document.getElementById('lowImg');
   low.src = prioIcon;
   let medium = document.getElementById('mediumImg');
-  medium.src = './img/PrioMediaOrange.svg';
+  medium.src = '/img/PrioMediaOrange.svg';
   let urgent = document.getElementById('urgentImg');
-  urgent.src = './img/PrioAltaRed.svg';
+  urgent.src = '/img/PrioAltaRed.svg';
 }
 
 /** to add the Task  */
@@ -143,31 +141,14 @@ function changeColorOfCategoryTitle() {
   }
 }
 
-function changeColorOfCategoryTitleShow(i){
-    let content = document.getElementById(`card-category-title-show${i}`);
-    let category = tasks[i]["category"];
+function changeColorOfCategoryTitleShow(taskIndex){
+    let content = document.getElementById(`card-category-title-show${taskIndex}`);
+    let category = tasks[taskIndex]["category"];
     if (category.includes("User Story")) {
       content.classList.add("blue");
     } else if (category.includes("Technical Task")){
       content.classList.add("green");
     }
-}
-
-async function save() {
-  await setItem("tasks", JSON.stringify(tasks));
-  await setItem("user", JSON.stringify(user));
-  await setItem("subtask", JSON.stringify(subtask));
-}
-
-async function load() {
-  try {
-    allTasks = JSON.parse(await getItem("tasks"));
-    user = JSON.parse(await getItem("user"));
-    subtask = JSON.parse(await getItem("subtask"));
-    updateHTML();
-  } catch (e) {
-    console.error("Loading error:", e);
-  }
 }
 
 function noTaskTransparent() {
@@ -186,13 +167,12 @@ function setFocus(e) {
 
 /** to delete the Task */
 
-function deleteTask(i) {
-  tasks.splice(i,1);
+function deleteTask(taskIndex) {
+  tasks.splice(taskIndex,1);
   for (let j = 0; j < tasks.length; j++){
     tasks[j].ID = j;
   }
   putData("/tasks", tasks);
-  save();
   updateHTML();
   styleOfNoTaskToDo();
   styleOfNoTaskInProgress();
@@ -242,7 +222,7 @@ function renderOfContects(num){
 /** to open the Task */
 
 
-function showTask(i) {
+function showTask(taskIndex) {
   let showContent = document.getElementById("showTask");
   showContent.classList.remove("hidden");
   let overlay = document.getElementsByClassName("overlay")[0];
@@ -250,19 +230,18 @@ function showTask(i) {
   showContent.innerHTML = "";
   showContent.innerHTML += `
   <div class="category-show-content">
-    <div id="card-category-title-show${i}">${tasks[i]["category"]}</div>
+    <div id="card-category-title-show${taskIndex}">${tasks[taskIndex]["category"]}</div>
     <div class="closeImg" onclick="closeMe()"></div>
   </div>
   <div class="title-description-content">
-    <div class="title-content-show"><h2 class="show-card-title">${tasks[i]["title"]}</h2></div>
-    <p class="show-card-description">${tasks[i]["description"]}</p>
+    <div class="title-content-show"><h2 class="show-card-title">${tasks[taskIndex]["title"]}</h2></div>
+    <p class="show-card-description">${tasks[taskIndex]["description"]}</p>
   </div>
-  <div class="dueDate-content"><div class="dueDateText-content">Due date:</div>  ${convertDate(
-    tasks[i]["date"]
-  )}</div>
+  <div class="dueDate-content"><div class="dueDateText-content">Due date:</div>${convertDate(
+    tasks[taskIndex]["date"])}</div>
   <div class="priority-content">
     <div class="prioText">Priority:</div>
-    <div class="prio-icon-text-content">${tasks[i]["prio"]} <img src="${tasks[i]["prioIcon"]}" alt=""></div>
+    <div class="prio-icon-text-content">${tasks[taskIndex]["prio"]} <img src="${tasks[taskIndex]["prioIcon"]}" alt=""></div>
   </div>
   <div class="show-assignedTo-content">
     <div class="assignedToText">Assigned To:</div>
@@ -274,21 +253,21 @@ function showTask(i) {
   <div>Subtasks</div>
   <div id="subtask-show"></div>
   <div class="show-btn-content">
-    <div class="show-delete-content" onclick="deleteTask(${i})">
+    <div class="show-delete-content" onclick="deleteTask(${taskIndex})">
       <i class="fa fa-trash-o" style="font-size:24px"></i>
       <button>Delete</button>
     </div>
     <div class="show-line-content"></div>
-      <div class="show-edit-content" onclick="openEdit(${i})">
+      <div class="show-edit-content" onclick="openEdit(${taskIndex})">
         <i class="fa fa-edit" style="font-size:24px"></i>
         <button>Edit</button>
       </div>
   </div> 
   `;
-  changeColorOfCategoryTitleShow(i);
-  contactsShowLetterRender(i);
-  contactsShowNameRender(i);
-  subtasksShowRender(i);
+  changeColorOfCategoryTitleShow(taskIndex);
+  contactsShowLetterRender(taskIndex);
+  contactsShowNameRender(taskIndex);
+  subtasksShowRender(taskIndex);
   let dialog = document.querySelector('.showTask');
   dialog.classList.remove('slide-in'); 
   setTimeout(() => {
@@ -296,24 +275,24 @@ function showTask(i) {
   }, 50);
 }
 
-function subtasksShowRender(i){
+function subtasksShowRender(taskIndex){
   let content = document.getElementById('subtask-show');
   content.innerHTML ='';
-  for(let j = 0;  j < tasks[i]['subtasks'].length; j++){
-    content.innerHTML += `<div class="checkbox-show-content"><input type="checkbox" onclick="UpdateProgress(${i})" checked id="checkbox${j}">
-    <label class="subtask-show-text">${tasks[i]['subtasks'][j]}</label></div>`;
+  for(let subtaskIndex = 0;  subtaskIndex < tasks[taskIndex]['subtasks'].length; subtaskIndex++){
+    content.innerHTML += `<div class="checkbox-show-content"><input type="checkbox" onclick="UpdateProgress(${taskIndex})" checked id="checkbox${subtaskIndex}">
+    <label class="subtask-show-text">${tasks[taskIndex]['subtasks'][subtaskIndex]}</label></div>`;
   }
 }
 
-function UpdateProgress(i){
+function UpdateProgress(taskIndex){
   let checkedCount = 0;
-  for(let j = 0; j < tasks[i]["subtasks"].length; j++){
+  for(let j = 0; j < tasks[taskIndex]["subtasks"].length; j++){
     let checkbox  = document.getElementById(`checkbox${j}`);
     if (checkbox.checked){
       checkedCount++;
     }
-    let progress = document.getElementById(`progressBar${i}`);
-    let numberOfSubtask = document.getElementsByClassName('numberOfSubtask')[i];
+    let progress = document.getElementById(`progressBar${taskIndex}`);
+    let numberOfSubtask = document.getElementsByClassName('numberOfSubtask')[taskIndex];
     numberOfSubtask.innerHTML ='';
     if(checkedCount > 1){
       progress.value = 100;
@@ -329,28 +308,28 @@ function UpdateProgress(i){
 }
 
 
-function contactsShowLetterRender(i){
+function contactsShowLetterRender(taskIndex){
     let content = document.getElementById('user-show-letter');
-    for(let j = 0; j < tasks[i]['contacts'].length; j++){
-      let letter = tasks[i]['contacts'][j]['name'].split(" ");
-      let firstNameLetter = letter[0][0].toUpperCase();
-      let lastNameLetter = letter[1][0].toUpperCase();
-      let result = firstNameLetter +lastNameLetter;
-      console.log(result);
-      content.innerHTML += `<div class="user-task-content-show" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
+    for(let j = 0; j < tasks[taskIndex]['contacts'].length; j++){
+      let letter = tasks[taskIndex]['contacts'][j]['name'].split(" ");
+      let result = "";
+      for(let name = 0; name < letter.length; name++){
+        result += letter[name].charAt(0);
+      }
+      content.innerHTML += `<div class="user-task-content-show" style="background-color:${tasks[taskIndex]['contacts'][j]['color']};">${result}</div>`;
     }
 }
 
-function contactsShowNameRender(i){
+function contactsShowNameRender(taskIndex){
   let content = document.getElementById('user-show-name');
-  for(let j = 0; j < tasks[i]['contacts'].length; j++){
-    content.innerHTML += `<div class="user-show-name">${tasks[i]['contacts'][j]['name']}</div>`;
+  for(let j = 0; j < tasks[taskIndex]['contacts'].length; j++){
+    content.innerHTML += `<div class="user-show-name">${tasks[taskIndex]['contacts'][j]['name']}</div>`;
   }
 }
 
 /** to edit the Task */
 
-function openEdit(i) {
+function openEdit(taskIndex) {
   let showContent = document.getElementById("showTask");
   showContent.classList.add("hidden");
   let editConten = document.getElementById("addTask-edit");
@@ -362,71 +341,55 @@ function openEdit(i) {
   let description = document.getElementById("addTask-edit-description");
   let assignedTo = document.getElementById("addTask-assigned");
   let dates = document.getElementById("task-edit-Date");
-  title.value = tasks[i]["title"];
-  hiddenInput.value = tasks[i]["title"];
-  description.value = tasks[i]["description"];
-  assignedTo.value = tasks[i]["contacts"][i];
-  dates.value = tasks[i]["date"];
+  title.value = tasks[taskIndex]["title"];
+  hiddenInput.value = tasks[taskIndex]["title"];
+  description.value = tasks[taskIndex]["description"];
+  assignedTo.value = tasks[taskIndex]["contacts"][taskIndex];
+  dates.value = tasks[taskIndex]["date"];
   activeEditButton();
-  activeButton(i);
-  subtasksEditRender(i);
-  renderContacts('addTask-contacts-container-edit');
+  activeButton(taskIndex);
+  subtasksEditRender(taskIndex);
+  contactsEditRender(taskIndex);
 }
 
 
-function openEditContacts(){
-  let container = document.getElementById('input-assigned-edit-section');
-  let contacts = document.getElementById('addTask-contacts-container-edit');
-  let img = document.getElementById('dropdown-img-contacts-edit');
-
-  window.addEventListener('click', function (e) {
-    if (container.contains(e.target)) {
-      openDropdown(contacts, img);
-      hideSelectedContacts();
-    } else {
-      closeDropdown(contacts, img);
-      showSelectedContacts();
+function contactsEditRender(taskIndex){
+  let content = document.getElementsByClassName('user-content-edit-letter')[0];
+  content.innerHTML ='';
+    for(let j = 0; j < tasks[taskIndex]['contacts'].length; j++){
+      let letter = tasks[taskIndex]['contacts'][j]['name'].split(" ");
+      let result = "";
+      for(let name = 0; name < letter.length; name++){
+        result += letter[name].charAt(0);
+      }
+      content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[taskIndex]['contacts'][j]['color']};">${result}</div>`;
     }
-  });
 }
 
-function openCloseContactsEdit(event) {
-  event.stopPropagation();
-  let container = document.getElementById('addTask-contacts-container-edit');
-  let img = document.getElementById('dropdown-img-contacts-edit');
-  if (container.classList.contains('d-none')) {
-      openDropdown(container, img);
-      hideSelectedContacts();
-  } else {
-      closeDropdown(container, img);
-      showSelectedContacts();
-  }
-};
-
-function subtasksEditRender(i){
+function subtasksEditRender(taskIndex){
   let content = document.getElementById('newSubtask');
   content.innerHTML ='';
-  for(let j = 0;  j < tasks[i]['subtasks'].length; j++){
+  for(let j = 0;  j < tasks[taskIndex]['subtasks'].length; j++){
     content.innerHTML += `
   <div class="checkbox-edit-content">
     <div id="checkbox-edit-content${j}" class="checkbox-show-content">
       <input type="checkbox" checked id="checkSub${j}">
-      <label id="subtask-edit-text${j}" class="subtask-show-text">${tasks[i]['subtasks'][j]}</label>
+      <label id="subtask-edit-text${j}" class="subtask-show-text">${tasks[taskIndex]['subtasks'][j]}</label>
     </div>
 
     <div id="edit-input-board-content${j}" class=" subtasks-icon input-subtask-edit-content hidden">
-      <input type ="text" class="editInputBoard" id = "editInputBoard${j}" value =${tasks[i]['subtasks'][j]}>
+      <input type ="text" class="editInputBoard" id = "editInputBoard${j}" value =${tasks[taskIndex]['subtasks'][j]}>
       <div class="edit-buttons-content">
-        <img onclick="deleteEditBoardSubtask(${i}, ${j})" src="/img/delete.svg" alt="delete">
+        <img onclick="deleteEditBoardSubtask(${taskIndex}, ${j})" src="/img/delete.svg" alt="delete">
         <div class="parting-line subtasks-icon-line"></div>
-        <img onclick="confirmEdit(${i}, ${j})" src="/img/done.svg" alt="confirm">
+        <img onclick="confirmEdit(${taskIndex}, ${j})" src="/img/done.svg" alt="confirm">
       </div>
     </div>
 
     <div id="subtasks-icon${j}" class="subtasks-icon subtasks-icon-hidden">
       <img onclick="editBoardSubtask(${j})" src="/img/edit.svg" alt="edit">
       <div class="parting-line subtasks-icon-line"></div>
-      <img onclick="deleteEditBoardSubtask(${i}, ${j})" src="/img/delete.svg" alt="delete">
+      <img onclick="deleteEditBoardSubtask(${taskIndex}, ${j})" src="/img/delete.svg" alt="delete">
     </div>
   </div> `
     ;
@@ -445,12 +408,12 @@ function confirmEdit(taskIndex, subtaskIndex){
   inputSubtask ="";
 }
 
-function editBoardSubtask(i){
-  document.getElementById(`edit-input-board-content${i}`).classList.remove('hidden');
-  document.getElementById(`checkbox-edit-content${i}`).classList.add('hidden');
-  document.getElementById(`subtasks-icon${i}`).classList.add('hidden');
-  let subtaskInput = document.getElementById(`editInputBoard${i}`).value;
-  let labelOfSubtask = document.getElementById(`subtask-edit-text${i}`);
+function editBoardSubtask(taskIndex){
+  document.getElementById(`edit-input-board-content${taskIndex}`).classList.remove('hidden');
+  document.getElementById(`checkbox-edit-content${taskIndex}`).classList.add('hidden');
+  document.getElementById(`subtasks-icon${taskIndex}`).classList.add('hidden');
+  let subtaskInput = document.getElementById(`editInputBoard${taskIndex}`).value;
+  let labelOfSubtask = document.getElementById(`subtask-edit-text${taskIndex}`);
   labelOfSubtask.innerHTML = subtaskInput;
 }
 
@@ -509,14 +472,14 @@ function addEditSubtasks(){
   }
 }
 
-function activeButton(i){
-  if (tasks[i]["prio"] === "Low") {
+function activeButton(taskIndex){
+  if (tasks[taskIndex]["prio"] === "Low") {
     document.getElementsByClassName("low-edit-button")[0].classList.add("active");
     prioIcon = './img/PrioBajaWhite.svg';
     changeIconOfLow();
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");;
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
-  } else if (tasks[i]["prio"] === "Urgent") {
+  } else if (tasks[taskIndex]["prio"] === "Urgent") {
     document.getElementsByClassName("urgent-edit-button")[0].classList.add("active");
     prioIcon ='./img/PrioAltaWhite.svg';
     changeIconOfUrgent();
@@ -553,7 +516,6 @@ function saveEditTask() {
     }
   }
   putData("/tasks", tasks);
-  save();
   updateHTML();
   closeMe();
 }
@@ -623,9 +585,10 @@ function contactsRender(){
     let content = document.getElementById(`newDiv${i}`);
     for(let j = 0; j < tasks[i]['contacts'].length; j++){
       let letter = tasks[i]['contacts'][j]['name'].split(" ");
-      let firstNameLetter = letter[0][0].toUpperCase();
-      let lastNameLetter = letter[1][0].toUpperCase();
-      let result = firstNameLetter +lastNameLetter;
+      let result = "";
+      for(let name = 0; name < letter.length; name++){
+        result += letter[name].charAt(0);
+      }
       content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }
   }
@@ -634,7 +597,7 @@ function contactsRender(){
  function genereteAllTasksHTML(element) {
   return ` <div id ="cardId${element["ID"]}" draggable="true" ondragstart="startDragging(${element["ID"]})"  onclick="showTask(${element["ID"]})">
   <div class="card">
-   <div class="card-category-title">${element["category"]}</div>
+   <div id="cardCategoryTitle${element["ID"]}" class="card-category-title">${element["category"]}</div>
    <div class="title-description-content">
      <h2 class="card-title">${element["title"]}</h2>
      <p class="card-description">${element["description"]}</p>

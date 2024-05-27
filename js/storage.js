@@ -47,6 +47,7 @@ async function loadTasks(){
         Object.keys(tasksData).forEach(key => {
             tasks.push(tasksData[key]);
         });
+        updateHTML(); //form Board.js
     }
 }
 
@@ -146,41 +147,4 @@ async function putData(path="", data={}){
         body: JSON.stringify(data)
     });
     return responseToJson = await response.json();
-}
-
-
-async function postDataBoard(path="", data={}){
-    let res = await fetch (BASE_URL + path + ".json",{
-        method :"POST",
-        header: {
-            "Content-Type":"application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await res.json();
-}
-
-async function loadDataBoard(path=""){
-    let res = await fetch (BASE_URL + path + ".json");
-    let responseToJson = await res.json();
-    console.log(responseToJson);
-}
-
-
-const STORAGE_TOKEN = 'CtxTcEZlVAPVkjOjpZldtlcmqUaZRJ2I2WAuicYHaD9MSDiKX9dIFrhP8kxmEUqz';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
-
-async function setItem(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
-        .then(res => res.json());
-}
- 
-async function getItem(key) {
-    const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    return fetch(url).then(res => res.json()).then(res => {
-        if (res.data) {
-            return res.data.value;
-        } throw `Could not find data with key "${key}".`;
-    });
 }
