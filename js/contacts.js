@@ -1,3 +1,7 @@
+/**
+ * Initializes the application.
+ * Calls the functions to initialize the inclusion, load contacts, set background menu, and display user initials.
+ */
 async function init(){
     await initInclude();
     await loadContacts();
@@ -22,9 +26,12 @@ const colors = [
     "#33E6FF",
     "#FF33A2",
     "#33FFF1"
-  ];
-  
+];
 
+/**
+ * Displays the dialog to add a new contact.
+ * Reveals the overlay and dialog, and sets the HTML content for the new contact form.
+ */
 function addNewContact() {
     document.getElementById('overlay').style.display = 'block'; 
     document.getElementById('dialogNewContactDiv').classList.remove('d-none');
@@ -38,14 +45,14 @@ function addNewContact() {
 }
 
 /**
- * HTML template for adding a new contact.
+ * Returns the HTML template for adding a new contact.
  */
 function HTMLTemplateNewContact() {
     return `    
 <form onsubmit="createNewContact(); return false;">
     <div class="dialogNewContactInnerDiv">
         <div class="dialogLeft">
-        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png"
+        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png">
             <img class="joinLogoDialog" src="/img/Capa 2.png">
             <div class="dialogLeftInnerDiv">
                 <h1 class="HeadlineDialog">Add contact</h1>
@@ -86,11 +93,25 @@ function HTMLTemplateNewContact() {
     `;
 }
 
+/**
+ * Sorts the contacts by name and renders them.
+ */
+function sortContactsByNameAndRender() {
+    sortContactsByName();
+    renderSortedContacts();
+}
+
+/**
+ * Creates a new contact.
+ * Retrieves input values, generates the next color, and resets the input fields.
+ * Adds the new contact details to the corresponding arrays and hides the dialog.
+ * Creates the new contact in Firebase, updates the contact ID array, sorts and renders the contacts.
+ */
 async function createNewContact(){
     let name = document.getElementById('inputName').value;
     let mail = document.getElementById('inputMail').value;
     let phone = document.getElementById('inputPhone').value;
-    const nextColor = getNextColor(); // Verwende die Funktion, um die nächste Farbe zu erhalten
+    const nextColor = getNextColor();
 
     document.getElementById('inputName').value = '';
     document.getElementById('inputMail').value = '';
@@ -108,7 +129,11 @@ async function createNewContact(){
     sortContactsByNameAndRender();
 }
 
-function sortContactsByNameAndRender() {
+/**
+ * Sorts the contacts by name.
+ * Reorders the name, email, phone number, color, and ID arrays based on the sorted names.
+ */
+function sortContactsByName() {
     const sortedIndices = [...nameInput.keys()].sort((a, b) => nameInput[a].localeCompare(nameInput[b]));
 
     const sortedNames = sortedIndices.map(i => nameInput[i]);
@@ -128,7 +153,13 @@ function sortContactsByNameAndRender() {
     phoneNumbersInput.push(...sortedPhoneNumbers);
     loadedColors.push(...sortedColors);
     contactIds.push(...sortedIds);
+}
 
+/**
+ * Renders the sorted contacts.
+ * Clears the contact list and generates HTML for each contact based on the sorted arrays.
+ */
+function renderSortedContacts() {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
 
@@ -155,18 +186,24 @@ function sortContactsByNameAndRender() {
     });
 }
 
-
+/**
+ * Closes the contact dialog.
+ * Hides the overlay and the dialog.
+ */
 function closeContactDialog() {
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('dialogNewContactDiv').classList.add('d-none');
 }
 
+/**
+ * Returns the HTML for a contact item.
+ */
 function renderHTMLLeftContactSide(name, email, phoneNumber, index, nextColor){
     let initials = getInitials(name);
 
     return `
     <div onclick="showFullContact(${index}, '${nextColor}')" id="contactListInner${index}" class="contactListInner">
-    <div class="contactListInnerDiv" id="contactListInnerDiv${index}" onclick="changeBackgroundColor(this)">
+    <div class="contactListInnerDiv" id="contactListInnerDiv${index}" onclick="changeBackgroundColor(this); showFullContactResponsive(${index});">
     <div class="circleProfilPic" style="background-color: ${nextColor}">${initials}</div>
     <div class="nameAndEmail">
         <p id="nameProfil${index}" class="nameProfil">${name}</p>
@@ -176,6 +213,10 @@ function renderHTMLLeftContactSide(name, email, phoneNumber, index, nextColor){
     `;
 }
 
+/**
+ * Changes the background color of the clicked contact element.
+ * Adds a clicked class and changes the name text color to white.
+ */
 function changeBackgroundColor(clickedElement) {
     const previouslyClickedElement = document.querySelector('.contactListInnerDiv.clicked');
 
@@ -188,71 +229,92 @@ function changeBackgroundColor(clickedElement) {
     clickedElement.querySelector('.nameProfil').classList.add('color-white');
 }
 
+/**
+ * Gets the initials from a name.
+ */
 function getInitials(name) {
     return name.split(' ').map(word => word.charAt(0).toUpperCase()).join(' ');
-
 }
 
+/**
+ * Returns the next color from the colors array.
+ * Increments the color index for the next call.
+ */
 function getNextColor() {
-    colorIndex = colorIndex % colors.length;  // Ensure the index wraps around correctly
-    const color = colors[colorIndex];  // Get the current color
-    colorIndex++;  // Increment the index
-    return color;  // Return the color
+    colorIndex = colorIndex % colors.length;  
+    const color = colors[colorIndex]; 
+    colorIndex++;  
+    return color;  
 }
 
+/**
+ * Shows the full contact details.
+ * Updates the right section with the contact details and reveals the dialog.
+ */
 function showFullContact(index, nextColor, id){
     let content = document.getElementById('contactsRightSectionShowProfil');
     content.innerHTML = '';
-        let name = nameInput[index];
-        let email = emailInput[index];
-        let phone = phoneNumbersInput[index];
-        let initials = getInitials(name);
-        let dialog = document.getElementById('contactsRightSectionShowProfil');
+    let name = nameInput[index];
+    let email = emailInput[index];
+    let phone = phoneNumbersInput[index];
+    let initials = getInitials(name);
+    let dialog = document.getElementById('contactsRightSectionShowProfil');
     
-        dialog.classList.remove('slide-in');
-        setTimeout(() => {
-            dialog.classList.add('slide-in');
-        }, 150);
-        content.innerHTML = `
-        <div id="contactsRightSectionShowProfilInner" class="contactsRightSectionShowProfilInner">
-            <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
-            <div class="proilNameAndEdit">
-                <p class="nameProfilShow">${name}</p>
-                <div class="proilNameAndEditInner">
-                    <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit">Edit
-                        <img class="logoRightSection" src="/img/edit.svg">
-                    </p>
-                    <p onclick="deleteContact('${index}')" class="profilDelete">Delete
-                        <img class="logoRightSection" src="/img/delete.png">
-                    </p>
-                </div>
+    dialog.classList.remove('slide-in');
+    setTimeout(() => {
+        dialog.classList.add('slide-in');
+    }, 150);
+    content.innerHTML = HTMLTemplateShowFullContact(name, email, phone, initials, nextColor, index, id);
+} 
+
+/**
+ * Returns the HTML template for displaying full contact details.
+ */
+function HTMLTemplateShowFullContact(name, email, phone, initials, nextColor, index, id){
+    return `
+    <div onclick="showFullContactResponsive()" id="contactsRightSectionShowProfilInner" class="contactsRightSectionShowProfilInner">
+        <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
+        <div class="proilNameAndEdit">
+            <p class="nameProfilShow">${name}</p>
+            <div class="proilNameAndEditInner">
+                <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit">Edit
+                    <img class="logoRightSection" src="/img/edit.svg">
+                </p>
+                <p onclick="deleteContact('${index}')" class="profilDelete">Delete
+                    <img class="logoRightSection" src="/img/delete.png">
+                </p>
             </div>
-            <div class="contactInformation">
-                <p>Contact Information</p>
+        </div>
+        <div class="contactInformation">
+            <p>Contact Information</p>
+        </div>
+        <div class="contactInformationEmailAndPhone">
+            <div>
+                <p class="contactInformationlHeadlineMailAndPhone">Email</p>
+                <p class="contactInformationMail">${email}</p>
             </div>
-            <div class="contactInformationEmailAndPhone">
-                <div>
-                    <p class="contactInformationlHeadlineMailAndPhone">Email</p>
-                    <p class="contactInformationMail">${email}</p>
-                </div>
-                <div>
-                    <p class="contactInformationlHeadlineMailAndPhone">Phone</p>
-                    <p class="contactInformationPhone">${phone}</p>
-                </div>
+            <div>
+                <p class="contactInformationlHeadlineMailAndPhone">Phone</p>
+                <p class="contactInformationPhone">${phone}</p>
             </div>
-            <div class="editAndDeleteResponsiveDivOutside">
-                <div class="editAndDeleteResponsive">
-                    <img src="/img/more_vert.png" onclick="togglePopup()">
-                    <div id="popup" class="popup">
-                        <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="/img/edit.svg">Edit</p>
-                        <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="/img/delete.png">Delete</p>
-                    </div>
+        </div>
+        <div class="editAndDeleteResponsiveDivOutside">
+        <div class="editAndDeleteResponsive">
+            <img src="./img/more_vert.png" onclick="togglePopup(event)" alt="More">
+                <div id="popup" class="popup">
+                    <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="/img/edit.svg">Edit</p>
+                    <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="/img/delete.png">Delete</p>
                 </div>
             </div>
         </div>
-    `;
-} 
+    </div>
+`;
+}
 
+/**
+ * Edits a contact.
+ * Shows the dialog with the contact details prefilled for editing.
+ */
 function editContact(index, nextColor) {
     document.getElementById('overlay').style.display = 'block'; 
     document.getElementById('dialogNewContactDiv').classList.remove('d-none');
@@ -271,6 +333,9 @@ function editContact(index, nextColor) {
     });
 }
 
+/**
+ * Returns the HTML template for editing a contact.
+ */
 function HTMLTemplateEditContact(index, nextColor){
     let name = nameInput[index];
     let email = emailInput[index];
@@ -290,7 +355,7 @@ function HTMLTemplateEditContact(index, nextColor){
                     <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
                 </div>
                 <div class="dialogProfilPictureDiv">
-                    <div class="circleProfilPicShow" style="background-color: ${nextColor}">${initials}</div>
+                    <div class="circleProfilPicShowEdit" style="background-color: ${nextColor}">${initials}</div>
                     <div class="dialogAddData">
                         <div class="dialogInputfield">
                             <div class="dialogInputfieldDiv">
@@ -317,6 +382,10 @@ function HTMLTemplateEditContact(index, nextColor){
     `;
 }
 
+/**
+ * Renders the edited contact.
+ * Updates the contact list with the edited contact details.
+ */
 function renderEditContact(index,nextColor) {
     let editedContactHTML = renderHTMLLeftContactSide(nameInput[index], emailInput[index], phoneNumbersInput[index], index, nextColor);
     let contactListItem = document.getElementById(`contactListInner${index}`);
@@ -327,19 +396,22 @@ function renderEditContact(index,nextColor) {
     }
 }
 
+/**
+ * Saves the edited contact.
+ * Updates the contact details in the arrays and Firebase, sorts and renders the contacts.
+ */
 async function saveEditContact(index, nextColor) {
     let changedName = document.getElementById('inputName').value;
     let changedMail = document.getElementById('inputMail').value;
     let changedPhone = document.getElementById('inputPhone').value;
-    const id = contactIds[index];
 
+    const id = contactIds[index];
     nameInput[index] = changedName;
     emailInput[index] = changedMail;
     phoneNumbersInput[index] = changedPhone;
     loadedColors[index] = nextColor;
 
     try {
-        // Update the contact in Firebase
         await updateContactInFirebase(id, changedName, changedMail, changedPhone, nextColor);
         sortContactsByNameAndRender();
     } catch (error) {
@@ -352,12 +424,15 @@ async function saveEditContact(index, nextColor) {
     document.getElementById('contactsRightSectionShowProfil').classList.add('d-none');
 }
 
+/**
+ * Deletes a contact.
+ * Removes the contact from the arrays and Firebase, and reloads the contacts.
+ */
 async function deleteContact(index) {
     const contactId = contactIds[index]; 
 
     await deleteContactBackend(`/contacts/${contactId}`);
 
-    // Entferne den Kontakt aus den lokalen Arrays
     nameInput.splice(index, 1);
     emailInput.splice(index, 1);
     phoneNumbersInput.splice(index, 1);
@@ -367,8 +442,6 @@ async function deleteContact(index) {
     dialog.classList.remove('slide-in');
 
     const contactsData = await fetchContactsData("/contacts");
-
-    // Überprüfen, ob contactsData gültig ist
     if (!contactsData) {
         console.error("No contact data found.");
         return;
@@ -390,20 +463,16 @@ async function deleteContact(index) {
             }
         }
     }
-
-    // Lösche alle Kontakte in Firebase
     await deleteContactBackend("/contacts");
-
-    // Aktualisiere Firebase mit den neu nummerierten Kontakten
     for (let i = 0; i < contacts.length; i++) {
         await createNewContactInFirebase(contacts[i].name, contacts[i].email, contacts[i].nummer, contacts[i].color, i);
     }
-
-    // Lade die aktualisierten Kontakte in die lokale Ansicht
     await loadContacts();
 }
 
-
+/**
+ * Resets the input arrays.
+ */
 function resetInputs() {
     nameInput = [];
     emailInput = [];
@@ -411,6 +480,10 @@ function resetInputs() {
     contactIds = [];
 }
 
+/**
+ * Goes back to the previous responsive view.
+ * Removes the slide-in class from the right side main div.
+ */
 function goBackResponsive() {
     const element = document.getElementById('contactsRightSideMainDivId');
     if (element) {
@@ -420,11 +493,18 @@ function goBackResponsive() {
     }
 }
 
+/**
+ * Fetches contact data from the server.
+ */
 async function fetchContactsData(path) {
     const response = await fetch(BASE_URL + path + ".json");
     return await response.json();
 }
 
+/**
+ * Processes the contacts data and renders it into the contact list.
+ * Extracts and processes up to 10 contacts, then sorts and renders them.
+ */
 function processContacts(contactsData, contactList) {
     let loadedContacts = 0;
 
@@ -448,7 +528,6 @@ function processContacts(contactsData, contactList) {
  * Processes a single contact and renders it into the contact list.
  * Extracts name, email, and number from the contact data, generates HTML, and updates the input arrays.
  */
-
 function processContact(contact, contactList, id) {
     if (contact) {
         const { name, email, nummer, color } = contact; 
@@ -462,10 +541,18 @@ function processContact(contact, contactList, id) {
     }
 }
 
+/**
+ * Sets the background menu for contacts.
+ * Adds the background focus class to the contacts element.
+ */
 function contactsBgMenu() {
     document.getElementById('contacts').classList.add("bgfocus");
 }
 
+/**
+ * Displays the user's initials.
+ * Retrieves the logged-in user's name from session storage and displays the initial.
+ */
 function displayUserInitials() {
     let username = sessionStorage.getItem('loggedInUser');
     let userInitials = document.getElementById('userInitials');
@@ -475,5 +562,49 @@ function displayUserInitials() {
         userInitials.innerText = initials;
     } else {
         userInitials.innerText = "G";
+    }
+}
+
+/**
+ * Goes back to the previous responsive view.
+ * Removes the slide-in class from the right side main div.
+ */
+function goBackResponsive() {
+    let dialog = document.querySelector('.contactsRightSideMainDiv');
+    dialog.classList.remove('slide-in'); // Beispiel: Rückwärtsanimation oder andere Rückkehrlogik
+    isFullContactShown = false;
+    console.log("Zur vorherigen Ansicht zurückgekehrt");
+}
+
+/**
+ * Toggles the popup visibility.
+ * Stops event propagation and toggles the popup display style.
+ */
+function togglePopup(event) {
+    event.stopPropagation();
+    const popup = document.getElementById('popup');
+    if (popup.style.display === 'none' || popup.style.display === '') {
+        popup.style.setProperty('display', 'block', 'important');
+    } else {
+        popup.style.setProperty('display', 'none', 'important');
+    }
+}
+
+/**
+ * Shows the full contact details in responsive view.
+ * Adds the slide-in class to the right side main div.
+ */
+let isFullContactShown = false;
+
+function showFullContactResponsive() {
+    if (!isFullContactShown) {
+        let dialog = document.querySelector('.contactsRightSideMainDiv');
+        dialog.classList.remove('slide-in'); 
+        setTimeout(() => {
+            dialog.classList.add('slide-in');
+        }, 50); 
+        isFullContactShown = true;
+    } else {
+        console.log("Die Funktion showFullContactResponsive() kann erst nach dem Aufruf von goBackResponsive() erneut aufgerufen werden.");
     }
 }
