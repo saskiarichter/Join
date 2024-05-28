@@ -36,6 +36,13 @@
 
   #addTask-edit-description{
     height: 60px;
+    outline-color: #29ABE2;
+    border: 1px solid #D1D1D1;
+  }
+
+  #addTask-edit-title{
+    outline-color: #29ABE2;
+    border: 1px solid #D1D1D1;
   }
 
   .addTask-edit-bottom{
@@ -265,3 +272,16 @@
     flex-direction: column;
     gap: 10px;
   }
+
+  .contact-container-edit-focus {
+    background-color: #2A3647;
+    color: white !important;
+
+    .contact-container-check {
+        background-image: url('/img/checkedbuttonWhite.svg');
+    }
+}
+
+.contact-container-edit-focus:hover {
+    background-color: #091931;
+}

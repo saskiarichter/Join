@@ -101,8 +101,8 @@
                 tabindex="1"
               >
                 <input
-                  id="addTask-assigned"
-                  onkeyup="searchContacts()"
+                  id="addTask-edit-assigned"
+                  onkeyup="searchEditContacts()"
                   class="inputfield"
                   type="text"
                   placeholder="Select contacts to assign"
@@ -111,16 +111,14 @@
                 />
                 <img
                   id="dropdown-img-contacts-edit"
-                  onclick="openCloseContacts(event)"
+                  onclick="openCloseEditContacts(event)"
                   class="dropdown-edit-img"
                   src="/img/arrow_drop_down.svg"
                 />
               </div>
-              <div class="user-content-edit-letter"></div>
+              <div id="user-content-edit-letter" class="user-content-edit-letter"></div>
               <div
-                id="selectedContacts-edit"
-                class="contact-circles d-none"
-              ></div>
+                id="selectedContacts-edit" class="contact-circles d-none"></div>
               <div id="addTask-contacts-container-edit" class="d-none"></div>
             </div>
 
