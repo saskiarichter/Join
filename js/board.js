@@ -785,8 +785,10 @@ function saveEditTask() {
         tasks[i].date = date;
         tasks[i].prioIcon = prioBtn;
         tasks[i].prio = prioText;
-        tasks[i]["contacts"].splice(0, tasks[i]["contacts"].length);
-        tasks[i]["contacts"].push(...selectedEditContacts);
+        if(selectedEditContacts.length > 0){
+          tasks[i]["contacts"].splice(0, tasks[i]["contacts"].length);
+          tasks[i]["contacts"].push(...selectedEditContacts);
+        }
         break;
       }
     }
