@@ -8,10 +8,12 @@ let prioText = "";
 async function initBoard() {
   await initInclude();
   displayUserInitials();
-  loadTasks();
+  loadTasksBoard();
   updateHTML();
 }
+
 /** To open the AddTask with addTask Button */
+
 
 function openAddTask() {
   let content = document.getElementById("addTask");
@@ -27,6 +29,7 @@ function openAddTask() {
 
 /** to close the Task or the addTask section*/
 
+
 function closeMe() {
   let content = document.getElementById("addTask");
   let showContent = document.getElementById("showTask");
@@ -39,8 +42,8 @@ function closeMe() {
   updateHTML();
 }
 
-
 /** active Edit Button for Task */
+
 
 function activeEditButton() {
   let urgentEditbutton = document.getElementsByClassName("urgent-edit-button")[0];
@@ -91,6 +94,7 @@ function activeEditButton() {
   });
 }
 
+
 function changeIconOfUrgent(){
   let urgent = document.getElementById('urgentImg');
   urgent.src = prioIcon;
@@ -99,6 +103,7 @@ function changeIconOfUrgent(){
   let low = document.getElementById('lowImg');
   low.src = '/img/PrioBajaGreen.svg';
 }
+
 
 function changeIconOfMedium(){
   let medium = document.getElementById('mediumImg');
@@ -109,6 +114,7 @@ function changeIconOfMedium(){
   low.src = '/img/PrioBajaGreen.svg';
 }
 
+
 function changeIconOfLow(){
   let low = document.getElementById('lowImg');
   low.src = prioIcon;
@@ -118,16 +124,8 @@ function changeIconOfLow(){
   urgent.src = '/img/PrioAltaRed.svg';
 }
 
-/** to add the Task  */
-
-function removeHidden(){
-    document.getElementById("required-title").classList.remove("hidden");
-    document.getElementById("required-date").classList.remove("hidden");
-    document.getElementsByClassName("required-text")[1].classList.remove("hidden");
-    document.getElementById("required-phase").classList.remove("hidden");
-}
-
 /** to change the color of the Category tilte after add */
+
 
 function changeColorOfCategoryTitle() {
   for (let i = 0; i < tasks.length; i++) {
@@ -141,6 +139,7 @@ function changeColorOfCategoryTitle() {
   }
 }
 
+
 function changeColorOfCategoryTitleShow(taskIndex){
     let content = document.getElementById(`card-category-title-show${taskIndex}`);
     let category = tasks[taskIndex]["category"];
@@ -151,9 +150,6 @@ function changeColorOfCategoryTitleShow(taskIndex){
     }
 }
 
-function noTaskTransparent() {
-  document.getElementById("newTask-toDo").classList.add("transparent");
-}
 
 function setFocus(e) {
   e.style.borderColor = "#29ABE2";
@@ -166,6 +162,7 @@ function setFocus(e) {
 }
 
 /** to delete the Task */
+
 
 function deleteTask(taskIndex) {
   tasks.splice(taskIndex,1);
@@ -181,6 +178,7 @@ function deleteTask(taskIndex) {
 }
 
 /** to search the Task  */
+
 
 function searchTask() {
   let search = document.getElementById("search-input").value.toLowerCase();
@@ -202,22 +200,12 @@ function searchTask() {
 
 /** to convert the Date */
 
+
 function convertDate(date) {
   let datePart = date.split("-");
   let newDate = datePart[2] + "/" + datePart[1] + "/" + datePart[0];
   return newDate;
 }
-
-/** to open the Task */
-
-function renderOfContects(num){
-  let contact = document.getElementById(`contacts-content-letter${num}`);
-  contact.innerHTML ='';
-  for(let i = 0; i< tasks[num].length; i++){
-    contact.innerHTML =`${tasks[num]['contacts'][i]['initials']}`;
-  }
-}
-
 
 /** to open the Task */
 
@@ -273,7 +261,18 @@ function showTask(taskIndex) {
   setTimeout(() => {
       dialog.classList.add('slide-in');
   }, 50);
+  heightOfShowTaskAdjust();
 }
+
+function heightOfShowTaskAdjust(){
+  let showContent = document.getElementById('showTask');
+  if(showContent.scrollHeight > 650){
+    showContent.style.height = 'auto';
+  }else{
+    showContent.style.maxHeight = '650px';
+  }
+}
+
 
 function subtasksShowRender(taskIndex){
   let content = document.getElementById('subtask-show');
@@ -283,6 +282,7 @@ function subtasksShowRender(taskIndex){
     <label class="subtask-show-text">${tasks[taskIndex]['subtasks'][subtaskIndex]}</label></div>`;
   }
 }
+
 
 function UpdateProgress(taskIndex){
   let checkedCount = 0;
@@ -320,6 +320,7 @@ function contactsShowLetterRender(taskIndex){
     }
 }
 
+
 function contactsShowNameRender(taskIndex){
   let content = document.getElementById('user-show-name');
   for(let j = 0; j < tasks[taskIndex]['contacts'].length; j++){
@@ -328,6 +329,7 @@ function contactsShowNameRender(taskIndex){
 }
 
 /** to edit the Task */
+
 
 function openEdit(taskIndex) {
   let showContent = document.getElementById("showTask");
@@ -350,6 +352,16 @@ function openEdit(taskIndex) {
   activeButton(taskIndex);
   subtasksEditRender(taskIndex);
   contactsEditRender(taskIndex);
+  let content = document.getElementsByClassName(`input-edit-subtask`)[0];
+  content.innerHTML =`      
+  <input id="addTask-edit-subtasks${taskIndex}" class="inputfield" type="text"
+  placeholder="Add new subtask" maxlength="26" autocomplete="off" onclick="openEditSubtaskIcons()"/>
+  <div id="addTask-subtasks-edit-icons" class="subtasks-icon d-none">
+    <img  src="/img/closeVectorBlack.svg" alt="Delete" onclick="closeEditSubtaskIcons()">
+    <div class="parting-line subtasks-icon-line"></div>
+    <img id="add-subtask-button" src="/img/done.svg" alt="confirm" onclick="addEditSubtasks(${taskIndex})">
+  </div>
+  <img src="/img/subtasks.svg" class="plus-icon-edit-subtasks" id="plus-edit-icon" onclick="openEditSubtaskIcons()"/>`;
 }
 
 
@@ -365,6 +377,7 @@ function contactsEditRender(taskIndex){
       content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[taskIndex]['contacts'][j]['color']};">${result}</div>`;
     }
 }
+
 
 function subtasksEditRender(taskIndex){
   let content = document.getElementById('newSubtask');
@@ -408,6 +421,7 @@ function confirmEdit(taskIndex, subtaskIndex){
   inputSubtask ="";
 }
 
+
 function editBoardSubtask(taskIndex){
   document.getElementById(`edit-input-board-content${taskIndex}`).classList.remove('hidden');
   document.getElementById(`checkbox-edit-content${taskIndex}`).classList.add('hidden');
@@ -416,6 +430,7 @@ function editBoardSubtask(taskIndex){
   let labelOfSubtask = document.getElementById(`subtask-edit-text${taskIndex}`);
   labelOfSubtask.innerHTML = subtaskInput;
 }
+
 
 function deleteEditBoardSubtask(taskIndex, subtaskIndex){
   if(tasks[taskIndex]["subtasks"].length === 1){
@@ -430,22 +445,22 @@ function deleteEditBoardSubtask(taskIndex, subtaskIndex){
   putData("/tasks", tasks);
 }
 
+
 function openEditSubtaskIcons(){
   document.getElementById('addTask-subtasks-edit-icons').classList.remove('d-none');
   document.getElementById('plus-edit-icon').classList.add('d-none');
 }
+
 
 function closeEditSubtaskIcons(){
   document.getElementById('addTask-subtasks-edit-icons').classList.add('d-none');
   document.getElementById('plus-edit-icon').classList.remove('d-none');
 }
 
-function addEditSubtasks(){
-  let inputSubtask = document.getElementById('addTask-edit-subtasks').value;
-  let hiddenInput = document.getElementById("hiddenInput").value;
-    for(let i = 0; i < tasks.length; i++){
-      if(tasks[i].title === hiddenInput){
-      if(tasks[i]['subtasks'].length >= 2 || inputSubtask.trim() === ""){
+
+function addEditSubtasks(taskIndex){
+  let inputSubtask = document.getElementById(`addTask-edit-subtasks${taskIndex}`).value;
+      if(tasks[taskIndex]['subtasks'].length >= 2 || inputSubtask.trim() === ""){
         return;
       }else{
         let list = document.getElementById('newSubtask');
@@ -456,21 +471,20 @@ function addEditSubtasks(){
             <label class="subtask-show-text">${inputSubtask}</label>
           </div>
           <div class="subtasks-icon subtasks-icon-hidden">
-            <img onclick="editBoardSubtask(${i})" src="/img/edit.svg" alt="Bearbeiten">
+            <img onclick="editBoardSubtask(${taskIndex})" src="/img/edit.svg" alt="Bearbeiten">
             <div class="parting-line subtasks-icon-line"></div>
-            <img onclick="deleteEditBoardSubtask(${i})" src="/img/delete.svg" alt="Delete">
+            <img onclick="deleteEditBoardSubtask(${taskIndex})" src="/img/delete.svg" alt="Delete">
           </div>
         </div> `;
-        if(!Array.isArray(tasks[i].subtasks)){
-          tasks[i].subtasks = [];
+        if(!Array.isArray(tasks[taskIndex].subtasks)){
+          tasks[taskIndex].subtasks = [];
         }
-        tasks[i]["subtasks"].push(inputSubtask);
+        tasks[taskIndex]["subtasks"].push(inputSubtask);
         putData("/tasks", tasks);
         inputSubtask ="";
       }
      }
-  }
-}
+
 
 function activeButton(taskIndex){
   if (tasks[taskIndex]["prio"] === "Low") {
@@ -496,6 +510,7 @@ function activeButton(taskIndex){
 
 /** to Save the Task after processing */
 
+
 function saveEditTask() {
   let title = document.getElementById("addTask-edit-title").value;
   let hiddenInput = document.getElementById("hiddenInput").value;
@@ -520,10 +535,10 @@ function saveEditTask() {
   closeMe();
 }
 
-
 /**Drag and Drop  and Render  HTML*/
 
 let currentDraggedElement;
+
 
  function updateHTML() {
   let toDo = tasks.filter((t) => t["phases"] == "To Do");
@@ -568,6 +583,7 @@ function startDragging(id) {
   currentDraggedElement = id;
 }
 
+
 function valueOfProgressBar(i){
   let value;
     if(tasks[i]["subtasks"].length === 0){
@@ -580,10 +596,12 @@ function valueOfProgressBar(i){
     return value;
 }
 
+
 function contactsRender(){
   for(let i = 0; i < tasks.length; i++){
+    let maxConatcts = 3;
     let content = document.getElementById(`newDiv${i}`);
-    for(let j = 0; j < tasks[i]['contacts'].length; j++){
+    for(let j = 0; j < Math.min(tasks[i]['contacts'].length, maxConatcts); j++){
       let letter = tasks[i]['contacts'][j]['name'].split(" ");
       let result = "";
       for(let name = 0; name < letter.length; name++){
@@ -591,8 +609,15 @@ function contactsRender(){
       }
       content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[i]['contacts'][j]['color']};">${result}</div>`;
     }
+    if(i === maxConatcts -1 && tasks[i]["contacts"].length > maxConatcts){
+      let additionalContacts = tasks[i]["contacts"].length - maxConatcts;
+      let numberOfContacts = document.getElementById(`plus-number-contacts${i}`);
+      numberOfContacts.innerHTML ="";
+      numberOfContacts.innerHTML =`+${additionalContacts}`;
+    }
   }
 }
+
 
  function genereteAllTasksHTML(element) {
   return ` <div id ="cardId${element["ID"]}" draggable="true" ondragstart="startDragging(${element["ID"]})"  onclick="showTask(${element["ID"]})">
@@ -607,7 +632,10 @@ function contactsRender(){
      <p class="card-subtasks-text"><span class="numberOfSubtask">${element["subtasks"].length}/2</span> Subtasks</p>
     </div>
     <div class="card-user-content">
-      <div class="user-inner-container" id="newDiv${element['ID']}"></div>
+      <div class="user-container-board">
+        <div class="user-inner-container" id="newDiv${element['ID']}"></div>
+        <div class="number-of-contacts" id = "plus-number-contacts${element['ID']}"></div>
+      </div>
       <img src="${element["prioIcon"]}" alt="">
     </div>
   </div>
@@ -617,6 +645,7 @@ function contactsRender(){
 function allowDrop(ev) {
   ev.preventDefault();
 }
+
 
 function moveTo(phase) {
   tasks[currentDraggedElement]["phases"] = phase;
@@ -628,6 +657,7 @@ function moveTo(phase) {
   putData("/tasks", tasks);
 }
 
+
 function styleOfNoTaskToDo() {
   let toDoConetnt = document.getElementById("newTask-toDo");
   if(toDoConetnt.childElementCount > 0){
@@ -636,6 +666,7 @@ function styleOfNoTaskToDo() {
     document.getElementById('noTask-toDo').classList.remove('hidden');
   }
 }
+
 
 function styleOfNoTaskInProgress(){
   let inProgressContent = document.getElementById("newTask-inProgress");
@@ -646,6 +677,7 @@ function styleOfNoTaskInProgress(){
   }
 }
 
+
 function styleOfNoTaskAwaitFeedback(){
   let inProgressContent = document.getElementById("newTask-await");
   if(inProgressContent.childElementCount > 0){
@@ -654,6 +686,7 @@ function styleOfNoTaskAwaitFeedback(){
     document.getElementById('noTask-await').classList.remove('hidden');
   }
 }
+
 
 function styleOfNoTaskDone(){
   let inProgressContent = document.getElementById("newTask-done");
@@ -664,24 +697,27 @@ function styleOfNoTaskDone(){
   }
 }
 
+
 function checkwidthForAddTask(){
     window.location.href = '/html/addTask.html';
 }
 
+
 function updateButtonOnClick(){
-  let plusbutton1 = document.getElementsByClassName('plus-btn')[0];
-  let plusbutton2 = document.getElementsByClassName('plus-btn')[1];
-  let plusbutton3 = document.getElementsByClassName('plus-btn')[2];
-  if(window.innerWidth <= 1075){
-    plusbutton1.setAttribute('onclick', "window.location.href = './addTask.html'");
-    plusbutton2.setAttribute('onclick', "window.location.href = './addTask.html'");
-    plusbutton3.setAttribute('onclick', "window.location.href = './addTask.html'");
-  }else{
-    plusbutton1.setAttribute('onclick', 'openAddTask()');
-    plusbutton2.setAttribute('onclick', 'openAddTask()');
-    plusbutton3.setAttribute('onclick', 'openAddTask()');
+  let plusbutton = document.getElementsByClassName('plus-btn');
+  if(plusbutton.length > 0){
+    if(window.innerWidth <= 1075){
+      for(let i = 0; i < plusbutton.length; i++){
+        plusbutton[i].setAttribute('onclick', "window.location.href = './addTask.html'");
+      }
+    }else{
+      for(let i = 0; i < plusbutton.length; i++){
+      plusbutton[i].setAttribute('onclick', 'openAddTask()');
+      }
+    }
   }
 }
+
 
 document.addEventListener('DOMContentLoaded', () =>{
   updateButtonOnClick();

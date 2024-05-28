@@ -47,6 +47,17 @@ async function loadTasks(){
         Object.keys(tasksData).forEach(key => {
             tasks.push(tasksData[key]);
         });
+    }
+}
+
+async function loadTasksBoard(){
+    let response = await fetch(BASE_URL + "tasks.json");
+    let tasksData = await response.json();
+
+    if (tasksData) {
+        Object.keys(tasksData).forEach(key => {
+            tasks.push(tasksData[key]);
+        });
         updateHTML(); //form Board.js
     }
 }

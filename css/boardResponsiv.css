@@ -227,6 +227,10 @@
   #user-show-name{
     gap: 27px;
   }
+
+  .subtask-show-text{
+    font-size: 14px;
+  }
   
 }
 
@@ -343,5 +347,15 @@
 
   .prio-buttons button{
     width: 33% !important;
+  }
+
+  .subtask-show-text{
+    font-size: 12px;
+  }
+
+  input[type="checkbox"]::before{
+    width: 10px;
+    height: 10px;
+    font-size: 16px;
   }
 }
