@@ -278,10 +278,10 @@
     color: white !important;
 
     .contact-container-check {
-        background-image: url('/img/checkedbuttonWhite.svg');
+        background-image: url('../img/checkedbuttonWhite.svg');
     }
-}
+  }
 
-.contact-container-edit-focus:hover {
-    background-color: #091931;
-}
+  .contact-container-edit-focus:hover {
+    background-color: #091931 !important;
+  }

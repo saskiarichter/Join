@@ -12,7 +12,7 @@ async function initBoard() {
   displayUserInitials();
   loadTasksBoard();
   updateHTML();
-  renderEditContacts('addTask-contacts-container');
+  renderEditContacts('addTask-contacts-container-edit');
 }
 
 function renderEditContacts(contactContainer) {
@@ -93,6 +93,8 @@ function openCloseEditContacts(event) {
  * 
  * @param {number} i - position of contact in contacts array
  */
+
+
 function selectEditContact(i) {
   let container = document.getElementById(`contact-edit-container${i}`);
   let contactName = contacts[i]['name'];
@@ -112,6 +114,8 @@ function selectEditContact(i) {
 /**
  * renders selected Contacts
  */
+
+
 function showSelectedEditContacts() {
   let container = document.getElementById('user-content-edit-letter');
   container.classList.remove('d-none');
@@ -135,6 +139,7 @@ function hideSelectedEditContacts() {
   let container = document.getElementById('selectedContacts-edit');
   container.classList.add('d-none');
 }
+
 /**
 * searches for contacts
 */
@@ -214,7 +219,6 @@ function templateEditContactSearch(i, name, initials, color) {
 `;
 }
 
-
 /**
  * adds and removes contact and hover style when selecting contact in search list
  * 
@@ -267,7 +271,6 @@ function removeEditContactSearch(i) {
   editContactsSearch.splice(i, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
   container.classList.remove('contact-container-edit-focus');
 }
-
 
  /**  ******Board******* */
 /** To open the AddTask with addTask Button */
