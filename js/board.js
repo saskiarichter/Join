@@ -13,6 +13,7 @@ async function initBoard() {
   loadTasksBoard();
   updateHTML();
   renderEditContacts('addTask-contacts-container-edit');
+  renderContacts('addTask-contacts-container');
 }
 
 function renderEditContacts(contactContainer) {
