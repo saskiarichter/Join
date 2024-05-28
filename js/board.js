@@ -530,6 +530,7 @@ function heightOfShowTaskAdjust(){
   let showContent = document.getElementById('showTask');
   if(showContent.scrollHeight > 650){
     showContent.style.height = 'auto';
+    showContent.style.maxHeight ='none';
   }else{
     showContent.style.maxHeight = '650px';
   }
