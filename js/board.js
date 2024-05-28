@@ -758,12 +758,15 @@ function activeButton(taskIndex){
     changeIconOfUrgent();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
-  } else {
+  } else if(tasks[taskIndex]["prio"] === "Medium") {
     document.getElementsByClassName("medium-edit-button")[0].classList.add("active");
     prioIcon = '/img/PrioMediaWhite.svg';
     changeIconOfMedium();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");
+  }else{
+    prio ='';
+    prioBtn ='';
   }
 }
 
