@@ -321,7 +321,7 @@ async function clearAddTask() {
     subtasks = [];
     contacts = [];
     await loadData();
-    renderContacts();
+    renderContacts('addTask-contacts-container');
 }
 
 

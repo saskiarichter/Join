@@ -147,7 +147,7 @@ function searchContacts() {
         }
         showContactResults();
     } else {
-        renderContacts();
+        renderContacts('addTask-contacts-container');
     }
 }
 
