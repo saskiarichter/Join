@@ -10,6 +10,16 @@ async function init() {
     displayUserInitials(); // from summary.js
     loadTasks(); // from storage.js
     renderContacts('addTask-contacts-container');
+    chooseMedium();
+}
+
+
+/**
+ * selects Medium Prio 
+ */
+function chooseMedium(){
+    let button = document.getElementById('mediumButton')
+    button.classList.add('mediumButton-focus');
 }
 
 
@@ -116,12 +126,10 @@ function selectLow() {
 
 
 /** 
- * opens and closes categories & sets back placeholder 
- * 
- * @param {string} containerId  - id of the dropdown container
- * @param {string} imgId - id of the image that rotates
+ * opens and closes categories --> with click on icon & sets back placeholder 
  */
-function openCategories() {
+function openCategories(event) {
+    event.stopPropagation();
     hideRequiredCategory();
     let container = document.getElementById('addTask-category-container');
     let img = document.getElementById('dropdown-img-category');
@@ -132,6 +140,23 @@ function openCategories() {
     }
     let selectedCategory = document.getElementById('select-task-text');
     selectedCategory.innerHTML = `Select task category`;
+}
+
+/**
+ * opens/closes categories --> with click within or outside of container
+ */
+function openCategoriesWindow() {
+    let container = document.getElementById('addTask-category-section');
+    let categories = document.getElementById('addTask-category-container');
+    let img = document.getElementById('dropdown-img-category');
+
+    window.addEventListener('click', function (e) {
+        if (container.contains(e.target)) {
+            openDropdown(categories, img);
+        } else {
+            closeDropdown(categories, img);
+        }
+    });
 }
 
 

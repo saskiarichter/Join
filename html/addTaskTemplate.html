@@ -82,11 +82,11 @@
                     <!-- CATEGORY -->
                     <div class="input-section-element">
                         <label for="addTask-category">Category<span style="color: #FF8190">*</span></label>
-                        <div class="addTask-category-section">
-                            <div id="addTask-category" onclick="openCategories()"
+                        <div id="addTask-category-section" onclick="openCategoriesWindow()" class="addTask-category-section">
+                            <div id="addTask-category"
                                 class="input-container input-container-category input-container-select">
                                 <span id="select-task-text" class="inputfield">Select task category</span>
-                                <img id="dropdown-img-category" class="dropdown-img" src="/img/arrow_drop_down.svg">
+                                <img id="dropdown-img-category" onclick="openCategories(event)" class="dropdown-img" src="/img/arrow_drop_down.svg">
                             </div>
                             <div id="addTask-category-container" class="d-none">
                                 <span id="technicalTask" onclick="selectCategory('technicalTask')"
