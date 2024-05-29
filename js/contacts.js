@@ -94,14 +94,6 @@ function HTMLTemplateNewContact() {
 }
 
 /**
- * Sorts the contacts by name and renders them.
- */
-function sortContactsByNameAndRender() {
-    sortContactsByName();
-    renderSortedContacts();
-}
-
-/**
  * Creates a new contact.
  * Retrieves input values, generates the next color, and resets the input fields.
  * Adds the new contact details to the corresponding arrays and hides the dialog.
@@ -133,7 +125,7 @@ async function createNewContact(){
  * Sorts the contacts by name.
  * Reorders the name, email, phone number, color, and ID arrays based on the sorted names.
  */
-function sortContactsByName() {
+function sortContactsByNameAndRender() {
     const sortedIndices = [...nameInput.keys()].sort((a, b) => nameInput[a].localeCompare(nameInput[b]));
 
     const sortedNames = sortedIndices.map(i => nameInput[i]);
@@ -153,13 +145,7 @@ function sortContactsByName() {
     phoneNumbersInput.push(...sortedPhoneNumbers);
     loadedColors.push(...sortedColors);
     contactIds.push(...sortedIds);
-}
 
-/**
- * Renders the sorted contacts.
- * Clears the contact list and generates HTML for each contact based on the sorted arrays.
- */
-function renderSortedContacts() {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
 
@@ -352,7 +338,7 @@ function HTMLTemplateEditContact(index, nextColor){
             </div>
             <div class="dialogRight">
                 <div class="dialogCloseDiv">
-                    <img onclick="closeContactDialog()" class="closeIcon" src="/img/Close.png">
+                <img onclick="closeContactDialog()" class="closeResponsiveButton" src="/img/closeResponsive.png">
                 </div>
                 <div class="dialogProfilPictureDiv">
                     <div class="circleProfilPicShowEdit" style="background-color: ${nextColor}">${initials}</div>
