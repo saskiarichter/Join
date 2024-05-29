@@ -218,10 +218,30 @@
     }
 }
 
+@media(max-height:730px){
+    #contactsRightSectionShowProfil{
+        top:255px;
+    }
+
+    #contactsRightSide{
+        height:30px;
+    }
+}
+
 @media(max-width:850px){
+    body{
+        overflow-x: hidden !important;
+    }
+
+    .contactsRightSideMainDiv{
+        position: fixed;
+    }
+
     .contactsLeftSide{
         left:0;
         width:100vw;
+        position:absolute;
+        height: calc(115vh - 96px);
     }
 
     .addNewContactDiv{
