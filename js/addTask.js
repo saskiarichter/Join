@@ -146,7 +146,7 @@ function openCategories(event) {
  * opens/closes categories --> with click within or outside of container
  */
 function openCategoriesWindow() {
-    let container = document.getElementById('addTask-category-section');
+    let container = document.getElementById('addTask-category');
     let categories = document.getElementById('addTask-category-container');
     let img = document.getElementById('dropdown-img-category');
 
