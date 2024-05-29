@@ -83,7 +83,7 @@ function templateSubtaskListElement(i, subtask) {
         <div class="subtasks-icon subtasks-icon-hidden">
             <img onclick="editSubtask(${i})" src="../img/edit.svg" alt="Bearbeiten">
             <div class="parting-line subtasks-icon-line"></div>
-            <img onclick="deleteSubtask(${i})" src="../img/delete.svg" alt="Bestätigen">
+            <img onclick="deleteSubtask(${i})" src="../img/delete.svg" alt="Löschen">
         </div>
     </div>
 `;
