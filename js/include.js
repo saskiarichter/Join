@@ -65,3 +65,10 @@ function redirectToPrivacyPoliceSignup() {
 function redirectToLegalNoticeSignup() {
     window.open("legalNoticeSignup.html", "_blank");
 }
+
+
+async function initHelp() {
+    await includeHTML();
+    await loadData();
+    displayUserInitials();
+}

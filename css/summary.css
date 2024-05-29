@@ -362,6 +362,10 @@
         height: 110px;
     }
 
+    .summary-images-urgency {
+        padding-left: 20px;
+    }
+
     .summary-board-border {
         margin-left: 40px;
         margin-right: 40px;
@@ -475,12 +479,13 @@
     .summary-images-urgency {
         width: 40px;
         height: 40px;
+        padding-left: 10px;
     }
 
     .summary-board-border {
         height: 62px;
-        margin-left: 24px;
-        margin-right: 24px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
     .summary-board-span {

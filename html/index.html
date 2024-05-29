@@ -9,6 +9,7 @@
     <script src="/js/include.js"></script>
     <script src="/js/register.js"></script>
     <script src="/js/storage.js"></script>
+    <script src="/js/summary.js"></script>
 </head>
 <body onload="onloadFunc()">
    <div class="main">
@@ -25,7 +26,7 @@
             </div>
 
             <div id="formFadeIn" class="formLinksContainer fade-in">
-                <form id="form" class="form" onsubmit="addUser(); return false;">
+                <div id="form" class="form">
                     <div class="formHeadline">
                         <h1 class="formHeadlineText">Log in</h1>
                         <div class="formHeadlineBorder"></div>
@@ -47,11 +48,11 @@
                             <p class="loginCheckBoxRememberMeSpan">Remember me</label>
                         </div>
                         <div class="buttons">
-                            <button class="buttonLogin" onclick="login(); return false;">Log in</button>
+                            <button class="buttonLogin" type="submit" onclick="login(); return false;">Log in</button>
                             <button class="buttonGuest" type="button" onclick="redirectToSummary()">Guest Log in</button>
                         </div>
                     </div>
-                </form>
+                </div>
                 <div class="signUpMobile" id="signUpContainer">
                     <p class="signUpText">Not a Join user?</p>
                     <button class="sign_up_button" onclick="changeForm()">Sign up</button>

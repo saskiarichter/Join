@@ -99,11 +99,17 @@ function calculateUserInitials(words) {
  * this function shows the main content after 1500 ms
  */
 function showContent() {
+if (window.innerWidth >= 850) {
+    const content = document.getElementById('content');
+    content.style.display = 'flex';
+    content.style.flexDirection = 'column';
+} else {
     setTimeout(function() {
-        const content = document.getElementById('content');
-        content.style.display = 'flex';
-        content.style.flexDirection = 'column';
+    const content = document.getElementById('content');
+    content.style.display = 'flex';
+    content.style.flexDirection = 'column';
     }, 1000);
+}
 }
 
 
@@ -187,8 +193,8 @@ function getEarliestDate(earliestDate) {
  * allocate the tasks to the respective categories
  */
 function assignTasks() {
-    document.getElementById("summaryTodoInfoCounter").innerHTML = todo;
-    document.getElementById("summaryDoneInfoCounter").innerHTML = done;
+    document.getElementById("todoCounter").innerHTML = todo;
+    document.getElementById("doneCounter").innerHTML = done;
     document.getElementById("tasksInBoardNum").innerHTML = taskInBoard;
     document.getElementById("taskInProgressNum").innerHTML = inProgress;
     document.getElementById("awaitingFeedbackNum").innerHTML = awaitFeedback;
@@ -220,7 +226,7 @@ function countTasks() {
  */
 function getUrgentTask(tasks) {
     const taskCount = tasks.filter((t) => t.prio === "Urgent");
-    document.getElementById("summaryUrgentTaskCount").innerHTML =
+    document.getElementById("urgentCount").innerHTML =
         taskCount.length;
 }
 
@@ -249,22 +255,11 @@ function filterUrgentTasks(tasks) {
  * searches for the earliest date among the given tasks
  */
 function findEarliestDate(tasks) {
-    const earliestDate = new Date(
-        Math.min(
-            ...tasks.map((t) => {
-                const taskDate = new Date(t.date);
-                if (
-                    Object.prototype.toString.call(taskDate) ===
-                        "[object Date]" &&
-                    !isNaN(taskDate)
-                ) {
-                    return taskDate;
-                } else {
-                    console.error("Unvalid date:", t.date);
-                    return NaN;
-                }
-            })
-        )
-    );
+    const validDates = tasks.map(t => new Date(t.date)).filter(d => !isNaN(d));
+    if (validDates.length === 0) {
+        console.error("No valid dates found.");
+        return null;
+    }
+    const earliestDate = new Date(Math.min(...validDates));
     return earliestDate;
 }
