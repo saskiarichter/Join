@@ -248,6 +248,7 @@ async function saveEditTask() {
           tasks[i]["contacts"].splice(0, tasks[i]["contacts"].length);
           tasks[i]["contacts"].push(...selectedEditContacts);
         }
+        keepPrioButton(i);
         break;
       }
     }
@@ -256,6 +257,30 @@ async function saveEditTask() {
   await updateHTML();
   await closeMe();
   window.location.reload();
+}
+
+
+/**
+ * to keep prio Button after Save a Task at the specified index in the task list.
+ * @param {number} taskIndex - The index of the task to be edited
+ */
+function keepPrioButton(taskIndex){
+  let urgentEditbutton = document.getElementsByClassName("urgent-edit-button")[0];
+  let mediumEditbutton = document.getElementsByClassName("medium-edit-button")[0];
+  let lowEditbutton = document.getElementsByClassName("low-edit-button")[0];
+  if(/(\s|^)active(\s|$)/.test(urgentEditbutton.className)) {
+   tasks[taskIndex]["prio"] = 'Urgent';
+   tasks[taskIndex]["prioIcon"] = "./img/PrioAltaRed.svg";
+  }else if(/(\s|^)active(\s|$)/.test(mediumEditbutton.className)){
+    tasks[taskIndex]["prio"] = 'Medium';
+    tasks[taskIndex]["prioIcon"] = "./img/PrioMediaOrange.svg";
+  }else if(/(\s|^)active(\s|$)/.test(lowEditbutton.className)){
+    tasks[taskIndex]["prio"] = 'Low';
+    tasks[taskIndex]["prioIcon"] = './img/PrioBajaGreen.svg';
+  }else{
+    tasks[taskIndex]["prio"] = '';
+    tasks[taskIndex]["prioIcon"] = '';
+  }
 }
 
 
