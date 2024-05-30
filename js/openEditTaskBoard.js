@@ -19,11 +19,29 @@ function openEdit(taskIndex) {
   description.value = tasks[taskIndex]["description"];
   assignedTo.value = tasks[taskIndex]["contacts"][taskIndex];
   dates.value = tasks[taskIndex]["date"];
+  generateEditTask(taskIndex);
+}
+
+
+/**
+ * to generate IEditTask at the specified index in the task list.
+ * @param {number} taskIndex - The index of the task to be rendered.
+*/
+function generateEditTask(taskIndex){
   activeEditButton();
   activeButton(taskIndex);
   subtasksEditRender(taskIndex);
   contactsEditRender(taskIndex);
   renderEditContacts('addTask-contacts-container-edit');
+  generateInputEditSubtask(taskIndex);
+}
+
+
+/**
+ * to generate Inputfield by Edit Subtask at the specified index in the task list.
+ * @param {number} taskIndex - The index of the task to be rendered.
+*/
+function generateInputEditSubtask(taskIndex){
   let content = document.getElementsByClassName(`input-edit-subtask`)[0];
   content.innerHTML =`      
   <input id="addTask-edit-subtasks${taskIndex}" class="inputfield" type="text"
@@ -164,29 +182,46 @@ function closeEditSubtaskIcons(){
  */
 function addEditSubtasks(taskIndex){
   let inputSubtask = document.getElementById(`addTask-edit-subtasks${taskIndex}`).value;
-      if(tasks[taskIndex]['subtasks'].length >= 2 || inputSubtask.trim() === ""){
+      if(inputSubtask.trim() === ""){
         return;
       }else{
-        let list = document.getElementById('newSubtask');
-        list.innerHTML += `
-        <div class="checkbox-edit-content">
-          <div class="checkbox-show-content">
-            <input type="checkbox" checked>
-            <label class="subtask-show-text">${inputSubtask}</label>
-          </div>
-          <div class="subtasks-icon subtasks-icon-hidden">
-            <img onclick="editBoardSubtask(${taskIndex})" src="./img/edit.svg" alt="Bearbeiten">
-            <div class="parting-line subtasks-icon-line"></div>
-            <img onclick="deleteEditBoardSubtask(${taskIndex})" src="./img/delete.svg" alt="Delete">
-          </div>
-        </div> `;
         if(!Array.isArray(tasks[taskIndex].subtasks)){
           tasks[taskIndex].subtasks = [];
         }
-        tasks[taskIndex]["subtasks"].push(inputSubtask);
+        if(tasks[taskIndex]["subtasks"].length === 2){
+          tasks[taskIndex]["subtasks"].pop();
+          tasks[taskIndex]["subtasks"].push(inputSubtask);
+        }else{
+          tasks[taskIndex]["subtasks"].push(inputSubtask);
+        }
+        generateEditSubtask(taskIndex);
         putData("/tasks", tasks);
         inputSubtask ="";
       }
+}
+
+
+/**
+ * to generate Subtasks at the specified index in the task list.
+ * @param {number} taskIndex - The index of the task to be edited
+ */
+function generateEditSubtask(taskIndex){
+  let list = document.getElementById('newSubtask');
+  list.innerHTML = '';
+  for(let i= 0; i < tasks[taskIndex]["subtasks"].length; i++){
+    list.innerHTML += `
+    <div class="checkbox-edit-content">
+      <div class="checkbox-show-content">
+        <input type="checkbox" checked>
+        <label class="subtask-show-text">${tasks[taskIndex]["subtasks"][i]}</label>
+      </div>
+      <div class="subtasks-icon subtasks-icon-hidden">
+        <img onclick="editBoardSubtask(${taskIndex})" src="./img/edit.svg" alt="Bearbeiten">
+        <div class="parting-line subtasks-icon-line"></div>
+        <img onclick="deleteEditBoardSubtask(${taskIndex})" src="./img/delete.svg" alt="Delete">
+      </div>
+    </div> `;
+  }
 }
 
 
@@ -226,11 +261,21 @@ function saveEditTask() {
  * active Edit Buttons for Task 
 */
 function activeEditButton() {
+  let lastClick = null;
+  urgentButtenEdit(lastClick);
+  mediumButtonEdit(lastClick);
+  lowButtonEdit(lastClick);
+}
+
+
+/**
+ * to change color & Icon of the UrgentButton
+ * @param {number} lastClick - to ckeck the last click-button
+ */
+function urgentButtenEdit(lastClick){
   let urgentEditbutton = document.getElementsByClassName("urgent-edit-button")[0];
   let mediumEditbutton = document.getElementsByClassName("medium-edit-button")[0];
   let lowEditbutton = document.getElementsByClassName("low-edit-button")[0];
-  let lastClick = null;
-
   urgentEditbutton.addEventListener("click", function () {
     if (lastClick) {
       lastClick.classList.remove("active");
@@ -244,7 +289,17 @@ function activeEditButton() {
     prioBtn ="./img/PrioAltaRed.svg";
     changeIconOfUrgent();
   });
+}
 
+
+/**
+ * to change color & Icon of the MediumButton
+ * @param {number} lastClick - to ckeck the last click-button
+ */
+function mediumButtonEdit(lastClick){
+  let urgentEditbutton = document.getElementsByClassName("urgent-edit-button")[0];
+  let mediumEditbutton = document.getElementsByClassName("medium-edit-button")[0];
+  let lowEditbutton = document.getElementsByClassName("low-edit-button")[0];
   mediumEditbutton.addEventListener("click", function () {
     if (lastClick) {
       lastClick.classList.remove("active");
@@ -258,7 +313,17 @@ function activeEditButton() {
     prioBtn = './img/PrioMediaOrange.svg';
     changeIconOfMedium();
   });
+}
 
+
+/**
+ * to change color & Icon of the LowButton
+ * @param {number} lastClick - to ckeck the last click-button
+ */
+function lowButtonEdit(lastClick){
+  let urgentEditbutton = document.getElementsByClassName("urgent-edit-button")[0];
+  let mediumEditbutton = document.getElementsByClassName("medium-edit-button")[0];
+  let lowEditbutton = document.getElementsByClassName("low-edit-button")[0];
   lowEditbutton.addEventListener("click", function () {
     if (lastClick) {
       lastClick.classList.remove("active");
@@ -273,7 +338,6 @@ function activeEditButton() {
     changeIconOfLow();
   });
 }
-
 
 /**
  * to show the color of the button after edit click

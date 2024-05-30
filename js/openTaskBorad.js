@@ -8,7 +8,22 @@ function showTask(taskIndex) {
   let overlay = document.getElementsByClassName("overlay")[0];
   overlay.classList.remove("hidden");
   showContent.innerHTML = "";
-  showContent.innerHTML += `
+  showContent.innerHTML += generateShowTask(taskIndex);
+  changeColorOfCategoryTitleShow(taskIndex);
+  contactsShowLetterRender(taskIndex);
+  contactsShowNameRender(taskIndex);
+  subtasksShowRender(taskIndex);
+  slideInTask();
+  heightOfShowTaskAdjust();
+}
+
+
+/**
+ * to generate showTask at the specified index in the task list.
+ * @param {number} taskIndex - The index of the task to be opened.
+ */
+function generateShowTask(taskIndex){
+  return `
   <div class="category-show-content">
     <div id="card-category-title-show${taskIndex}">${tasks[taskIndex]["category"]}</div>
     <div class="closeImg" onclick="closeMe()"></div>
@@ -44,14 +59,7 @@ function showTask(taskIndex) {
       </div>
   </div> 
   `;
-  changeColorOfCategoryTitleShow(taskIndex);
-  contactsShowLetterRender(taskIndex);
-  contactsShowNameRender(taskIndex);
-  subtasksShowRender(taskIndex);
-  slideInTask();
-  heightOfShowTaskAdjust();
 }
-
 
 /**
  * to slide a task from right to the middle of the Screen.

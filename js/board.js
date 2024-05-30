@@ -371,7 +371,6 @@ function checkwidthForAddTask(){
     window.location.href = '../html/addTask.html';
 }
 
-
 /**
  * Checks the screen width and navigates to addTask.html if the width is 1075 pixels.
 */
