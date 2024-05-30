@@ -14,6 +14,7 @@ async function initBoard() {
   updateHTML();
   renderEditContacts('addTask-contacts-container-edit');
   renderContacts('addTask-contacts-container');
+  chooseMedium();
 }
 
 function renderEditContacts(contactContainer) {
