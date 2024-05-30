@@ -229,7 +229,7 @@ function generateEditSubtask(taskIndex){
 /**
  *  to Save the Task after processing
 */
-function saveEditTask() {
+async function saveEditTask() {
   let title = document.getElementById("addTask-edit-title").value;
   let hiddenInput = document.getElementById("hiddenInput").value;
   let description = document.getElementById("addTask-edit-description").value;
@@ -252,9 +252,10 @@ function saveEditTask() {
       }
     }
   }
-  putData("/tasks", tasks);
-  updateHTML();
-  closeMe();
+  await  putData("/tasks", tasks);
+  await updateHTML();
+  await closeMe();
+  window.location.reload();
 }
 
 
