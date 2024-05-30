@@ -198,6 +198,7 @@ function addEditSubtasks(taskIndex){
         putData("/tasks", tasks);
         inputSubtask ="";
       }
+      subtasksEditRender(taskIndex);
 }
 
 
