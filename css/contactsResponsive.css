@@ -226,7 +226,15 @@
     #contactsRightSide{
         height:30px;
     }
+
 }
+
+@media(max-height:700px){
+    .dialogNewContactDiv.slide-in {
+        transform: translate(-150px, -55%) !important;
+    }
+}
+
 
 @media(max-width:850px){
     body{
@@ -507,6 +515,7 @@
     .dialogInputfieldDiv{
         width:320px;
         height:40px;
+        gap:0px;
     }
 
     .dialogNewContactDiv{
@@ -523,7 +532,7 @@
 
     .subheadingDialog{
         font-size:20px;
-        width:290px;
+        width:100%;
     }
 
     .dialogLeftInnerDiv{
@@ -576,13 +585,13 @@
     }
 
     .dialogInputfieldDiv{
-        width:270px;
+        width:280px;
         height:35px;
     }
 
     .dialogIcons{
         width:20px;
-        height:20px;
+        height:18px;
     }
 
     .dialogInputfield{

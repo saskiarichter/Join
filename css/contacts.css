@@ -503,7 +503,7 @@ input{
     top:311px;
     left:750px;
     gap:21px;
-    transform: translate(250%, 0%);
+    transform: translate(100vw, 0%);
     transition: transform 0.5s ease;
 }
 
