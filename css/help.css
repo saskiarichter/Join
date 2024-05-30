@@ -4,7 +4,7 @@
     left: 328px;
     display: flex;
     flex-direction: column;
-    padding-right: 400px;
+    margin-right: 400px;
 }
 
 .helpHeadline {
@@ -74,6 +74,7 @@ li::before {
         left: 0;
         padding-right: 16px;
         padding-left: 16px;
+        margin-right: 16px;
     }
 
     .helpHeadline {

@@ -31,7 +31,7 @@
                         <h1 class="formHeadlineText">Log in</h1>
                         <div class="formHeadlineBorder"></div>
                     </div>
-                    <div class="mailPassword">    
+                    <form class="mailPassword" onsubmit="login(); return false;">    
                             <div>
                                 <input class="inputMail" type="email" id="email-login" placeholder="Email" required>
                             </div>
@@ -48,9 +48,9 @@
                             <p class="loginCheckBoxRememberMeSpan">Remember me</label>
                         </div>
                         <div class="buttons">
-                            <button class="buttonLogin" type="submit" onclick="login(); return false;">Log in</button>
+                            <button class="buttonLogin" type="submit" >Log in</button>
                             <button class="buttonGuest" type="button" onclick="redirectToSummary()">Guest Log in</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="signUpMobile" id="signUpContainer">
