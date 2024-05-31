@@ -19,7 +19,22 @@ function openEdit(taskIndex) {
   description.value = tasks[taskIndex]["description"];
   assignedTo.value = tasks[taskIndex]["contacts"][taskIndex];
   dates.value = tasks[taskIndex]["date"];
+  let selected = tasks[taskIndex]["contacts"];
+  showSelectedContactsEdit(selected);
   generateEditTask(taskIndex);
+}
+
+
+function showSelectedContactsEdit(selected){
+  console.log(selected);
+  for (let i = 0; i < selected.length; i++) {
+    const selectedContact = selected[i];
+    let contactColor = selectedContact['color'];
+    let contactName = selectedContact['name'];
+    let index = contacts.findIndex(contact => contact.name === contactName);
+    contacts.splice(index, 1, { 'name': contactName, 'color': contactColor, 'selected': true });
+    selectedEditContacts.push(selectedContact);
+  }
 }
 
 
@@ -31,9 +46,23 @@ function generateEditTask(taskIndex){
   activeEditButton();
   activeButton(taskIndex);
   subtasksEditRender(taskIndex);
-  contactsEditRender(taskIndex);
+  contactsEditRender(taskIndex)
   renderEditContacts('addTask-contacts-container-edit');
   generateInputEditSubtask(taskIndex);
+
+}
+
+function contactsEditRender(taskIndex){
+  let content = document.getElementsByClassName('user-content-edit-letter')[0];
+  content.innerHTML ='';
+    for(let j = 0; j < selectedEditContacts.length; j++){
+      let letter = selectedEditContacts[j]['name'].split(" ");
+      let result = "";
+      for(let name = 0; name < letter.length; name++){
+        result += letter[name].charAt(0).toUpperCase();
+      }
+      content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[taskIndex]['contacts'][j]['color']};">${result}</div>`;
+    }
 }
 
 
@@ -55,22 +84,7 @@ function generateInputEditSubtask(taskIndex){
 }
 
 
-/**
- * to render the contact at the specified index in the task list.
- * @param {number} taskIndex - The index of the task to be rendered.
-*/
-function contactsEditRender(taskIndex){
-  let content = document.getElementsByClassName('user-content-edit-letter')[0];
-  content.innerHTML ='';
-    for(let j = 0; j < tasks[taskIndex]['contacts'].length; j++){
-      let letter = tasks[taskIndex]['contacts'][j]['name'].split(" ");
-      let result = "";
-      for(let name = 0; name < letter.length; name++){
-        result += letter[name].charAt(0).toUpperCase();
-      }
-      content.innerHTML += `<div class="user-task-content" style="background-color:${tasks[taskIndex]['contacts'][j]['color']};">${result}</div>`;
-    }
-}
+
 
 
 /**
@@ -256,7 +270,6 @@ async function saveEditTask() {
   await  putData("/tasks", tasks);
   await updateHTML();
   await closeMe();
-  window.location.reload();
 }
 
 

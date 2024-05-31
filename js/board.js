@@ -92,6 +92,9 @@ function closeMe() {
   let overlay = document.getElementsByClassName("overlay")[0];
   overlay.classList.add("hidden");
   updateHTML();
+  contacts = [];
+  selectedEditContacts = [];
+  loadData();
 }
 
 
