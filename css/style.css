@@ -50,7 +50,7 @@ body {
 }
 
 .animationLogo {
-    animation: shrinkAndMove 500ms ease-in-out forwards; /* Verwende die Animation */
+    animation: shrinkAndMove 800ms ease-in-out forwards; /* Verwende die Animation */
     animation-delay: 800ms; /* Verzögerung der Animation um 1 Sekunde */
 }
 

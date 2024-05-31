@@ -244,11 +244,10 @@ function fillRemembereInputs() {
 function changeImage() {
     // Prüfen, ob Bildschirmbreite kleiner oder gleich 720px ist
     if (window.innerWidth <= 720) {
-        document.getElementById('logo').style.display="none";
         document.getElementById('logo2').style.display="block";
-        // Wenn ja, ändere das Bild nach 800 Millisekunden
+        // Wenn ja, ändere das Bild nach 500 Millisekunden
         setTimeout(function(){
             document.getElementById('logo2').style.display="none";
-        }, 1200) 
+        }, 500) 
         document.getElementById('logo').style.display="block";}
     }
