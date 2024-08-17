@@ -184,7 +184,6 @@ async function createTask() {
     let date = document.getElementById('taskDate').value;
     let category = document.getElementById('select-task-text').innerHTML;
     if (title !== '' && date !== '' && category !== `Select task category`) {
-        document.getElementById('createTaskButton').disabled = true;
         getValues();
         await safeTask();
         showTaskAdded();

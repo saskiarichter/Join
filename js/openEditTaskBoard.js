@@ -25,8 +25,12 @@ function openEdit(taskIndex) {
 }
 
 
+/**
+ * pushes selected contacts of task to selectedEditContacts Array
+ * 
+ * @param {array} selected - array of selected conatcs - tasks[taskIndex]["contacts"]
+ */
 function showSelectedContactsEdit(selected){
-  console.log(selected);
   for (let i = 0; i < selected.length; i++) {
     const selectedContact = selected[i];
     let contactColor = selectedContact['color'];
@@ -46,7 +50,7 @@ function generateEditTask(taskIndex){
   activeEditButton();
   activeButton(taskIndex);
   subtasksEditRender(taskIndex);
-  contactsEditRender(taskIndex)
+  contactsEditRender(taskIndex);
   renderEditContacts('addTask-contacts-container-edit');
   generateInputEditSubtask(taskIndex);
 
@@ -258,7 +262,7 @@ async function saveEditTask() {
         tasks[i].date = date;
         tasks[i].prioIcon = prioBtn;
         tasks[i].prio = prioText;
-        if(selectedEditContacts.length > 0){
+        if(selectedEditContacts.length >= 0){
           tasks[i]["contacts"].splice(0, tasks[i]["contacts"].length);
           tasks[i]["contacts"].push(...selectedEditContacts);
         }
