@@ -19,7 +19,7 @@ async function initSummary() {
  * highlight the summary link in the sidebar
  */
 function summaryBg() {
-    document.getElementById('summary').classList.add("bgfocus");
+    document.getElementById('summary').classList.add('bgfocus');
 }
 
 

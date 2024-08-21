@@ -27,43 +27,43 @@ function toggleMenu() {
 
 
 function returnToHome() {
-    window.location.href = "index.html";
+    window.location.href = "./../index.html";
 }
 
 function redirectToHelp() {
-    window.location.href = "help.html";
+    window.location.href = "./../html/help.html";
 }
 
 function redirectToSummary() {
-    window.location.href = "summary.html";
+    window.location.href = "./../html/summary.html";
 }
 
 function redirectToAddTask() {
-    window.location.href = "addTask.html";
+    window.location.href = "./../html/addTask.html";
 }
 
 function redirectToBoard() {
-    window.location.href = "board.html";
+    window.location.href = "./../html/board.html";
 }
 
 function redirectToContact() {
-    window.location.href = "contacts.html";
+    window.location.href = "./../html/contacts.html";
 }
 
 function redirectToLegalNotice() {
-    window.location.href = "legalNotice.html";
+    window.location.href = "./../html/legalNotice.html";
 }
 
 function redirectToPrivacyPolice() {
-    window.location.href = "privacyPolice.html";
+    window.location.href = "./../html/privacyPolice.html";
 }
 
 function redirectToPrivacyPoliceSignup() {
-    window.open("privacyPoliceSignup.html", "_blank");
+    window.open("./../html/privacyPoliceSignup.html", "_blank");
 }
 
 function redirectToLegalNoticeSignup() {
-    window.open("legalNoticeSignup.html", "_blank");
+    window.open("./../html/legalNoticeSignup.html", "_blank");
 }
 
 

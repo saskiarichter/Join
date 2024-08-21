@@ -7,15 +7,17 @@ body {
 }
 
 .main {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 32px;
 }
 
 .content {
     width: 1440px;
     max-height: 1024px;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +28,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 63.5px;
+    margin-bottom: 50px;
 }
 
 .logoPlaceholder {
@@ -111,11 +113,9 @@ body {
     flex-direction: column;
     align-items: center;
     width: 652px;
-    height: 493px;
     border-radius: 30px;
     background-color: white;
-    margin-top: 250px;
-    margin-bottom: 100px;
+    margin-top: 150px;
 }
 
 .vector {
@@ -164,9 +164,9 @@ body {
     width: 422px;
     height: 48px;
     margin: 16px;
-    background-image: url(/img/mail.png);
+    background-image: url('./img/mail.svg');
     background-repeat: no-repeat;
-    background-position: 377px 16px;
+    background-position: 377px 14px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     text-indent: 21px;
@@ -176,9 +176,9 @@ body {
     width: 422px;
     height: 48px;
     margin: 16px 16px 4px 16px;
-    background-image: url(/img/lock.png);
+    background-image: url('./img/lock.svg');
     background-repeat: no-repeat;
-    background-position: 377px 16px;
+    background-position: 377px 14px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     text-indent: 21px;
@@ -203,7 +203,7 @@ input {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+
 }
 
 .logInButton {
@@ -347,9 +347,8 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
 
 .formSignUp {
     width: 598px;
-    height: 630px;
-    margin-top: 155px;
-    margin-bottom: 60px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .loginCheckboxSignUp {
@@ -378,9 +377,9 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
     width: 422px;
     height: 48px;
     margin: 10px;
-    background-image: url(/img/person.png);
+    background-image: url('./img/person.svg');
     background-repeat: no-repeat;
-    background-position: 377px 16px;
+    background-position: 377px 14px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     text-indent: 21px;
@@ -390,9 +389,9 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
     width: 422px;
     height: 48px;
     margin: 10px;
-    background-image: url(/img/mail.png);
+    background-image: url('./img/mail.svg');
     background-repeat: no-repeat;
-    background-position: 377px 16px;
+    background-position: 377px 14px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     text-indent: 21px;
@@ -402,9 +401,9 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
     width: 422px;
     height: 48px;
     margin: 10px;
-    background-image: url(/img/lock.png);
+    background-image: url('./img/lock.svg');
     background-repeat: no-repeat;
-    background-position: 377px 16px;
+    background-position: 377px 14px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     text-indent: 21px;
@@ -661,6 +660,10 @@ input[id="loginCheckBoxRememberMe"]:checked + label:after {
     .vector {
         right: 88px;
         top: 50px;
+    }
+
+    .footer{
+        padding-bottom: 30px;
     }
 }
 

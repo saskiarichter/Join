@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
-    <link rel="stylesheet" href="/css/navBarHeader.css">
-    <link rel="stylesheet" href="/css/navBarHeaderResponsive.css">
-    <link rel="stylesheet" href="/css/summary.css">
-    <link rel="icon" type="image/x-icon" href="/img/joinlogo.png">
-    <script src="/js/include.js"></script>
-    <script src="/js/register.js"></script>
-    <script src="/js/summary.js"></script>
-    <script src="/js/storage.js"></script>
-    <script src="/js/board.js"></script>
+    <link rel="stylesheet" href="./../css/navBarHeader.css">
+    <link rel="stylesheet" href="./../css/navBarHeaderResponsive.css">
+    <link rel="stylesheet" href="./../css/summary.css">
+    <link rel="icon" type="image/x-icon" href="./../img/joinlogo.svg">
+    <script src="./../js/include.js"></script>
+    <script src="./../js/register.js"></script>
+    <script src="./../js/summary.js"></script>
+    <script src="./../js/storage.js"></script>
+    <script src="./../js/board.js"></script>
 </head>
 <body onload="initSummary()">
-    <div w3-include-html="/html/navigationBar.html"></div>
-    <div w3-include-html="/html/header.html"></div>
+    <div w3-include-html="./navigationBar.html"></div>
+    <div w3-include-html="./header.html"></div>
     
 
     <section class="content" id="content">
@@ -31,7 +31,7 @@
                 <div class="toDo-Done">
                     <div class="to-do" onclick="redirectToBoard()">
                         <div>
-                            <img class="summary-images" src="/img/pencil.png">
+                            <img class="summary-images" src="./../img/pencil.svg">
                         </div>
                         <div class="to-do-span">
                             <span class="number" id="todoCounter">0</span>
@@ -40,7 +40,7 @@
                 </div>
                     <div class="to-do-lc done" onclick="redirectToBoard()">
                         <div>
-                            <img class="summary-images" src="/img/check_summary.png">
+                            <img class="summary-images" src="./../img/check_summary.svg">
                         </div>
                         <div class="to-do-span">
                             <span class="number" id="doneCounter">0</span>
@@ -50,7 +50,7 @@
                 </div>
                     <div class="summary-board" onclick="redirectToBoard()">
                         <div>
-                            <img class="summary-images-urgency" src="/img/urgency.png">
+                            <img class="summary-images-urgency" src="./../img/urgency.svg">
                         </div>
                         <div class="to-do-span-urgency">
                             <span class="number" id="urgentCount">0</span>

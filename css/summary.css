@@ -1,6 +1,7 @@
 .content{
-    margin-top: 140px;
-    margin-left: 428px;
+    margin-top: 100px;
+    margin-left: 232px;
+    padding-left: 64px;
 }
 
 .header-summary {
@@ -18,8 +19,9 @@
 
 .headline-summary {
     font-weight: 700;
-    font-size: 61px;
+    font-size: 60px;
     line-height: 73.2px;
+    color: #2A3647;
 }
 
 .span-headline {
@@ -217,19 +219,19 @@
 }
 
 .to-do .summary-images {
-    content: url('/img/pencil.png');
+    content: url('./../img/pencil.svg');
 }
 
 .done .summary-images {
-    content: url('/img/check_summary.png');
+    content: url('./../img/check_summary.svg');
 }
 
 .to-do:hover .summary-images {
-    content: url('/img/pencil_hover.png');
+    content: url('./../img/pencil-hover.svg');
 }
 
 .done:hover .summary-images {
-    content: url('/img/check_hover.png');
+    content: url('./../img/check_summary-hover.svg');
 }
 
 @media (max-width: 1400px) {
@@ -502,6 +504,7 @@
 
     .content {
         margin-top: 90px;
+        padding-left: 0;
     }
 }
 

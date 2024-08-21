@@ -21,10 +21,10 @@ function changeForm() {
  */
 function getFormContent() {
     return `
-        <form onsubmit="addUser(); return false;">
+        <form onsubmit="addUser(); return false;" class="signup-container">
             <div class="formHeadline">
                 <div class="headline">
-                    <img onclick="returnToHome()" class="vector" src="/img/Vector.png">
+                    <img onclick="returnToHome()" class="vector" src="./../img/back-blue.svg">
                     <h1 class="formHeadlineTextSignUp">Sign up</h1>
                 </div>            
                 <div class="formHeadlineBorder"></div>
@@ -218,7 +218,7 @@ function handleLogin(email, password, rememberMeChecked, msgbox) {
  */
 function logout() {
     sessionStorage.removeItem('loggedInUser');
-    window.location.href = "index.html";
+    window.location.href = "./../index.html";
 }
 
 

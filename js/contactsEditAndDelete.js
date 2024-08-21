@@ -86,14 +86,14 @@ function HTMLTemplateEditContact(index, nextColor){
     return `    
         <div class="dialogNewContactInnerDiv">
             <div class="dialogLeft">
-                <img class="joinLogoDialog" src="./img/Capa 2.png">
+                <img class="joinLogoDialog" src="./../img/joinlogo2.svg">
                 <div class="dialogLeftInnerDiv">
                     <h1 class="HeadlineDialog">Edit contact</h1>
                 </div>
             </div>
             <div class="dialogRight">
                 <div class="dialogCloseDiv">
-                <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./img/closeResponsive.png">
+                <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./../img/closeVectorBlue.svg">
                 </div>
                 <div class="dialogProfilPictureDiv">
                     <div class="circleProfilPicShowEdit" style="background-color: ${nextColor}">${initials}</div>
@@ -101,20 +101,20 @@ function HTMLTemplateEditContact(index, nextColor){
                         <div class="dialogInputfield">
                             <div class="dialogInputfieldDiv">
                                 <input id="inputName" value="${name}">
-                                <img class="dialogIcons" src="./img/person.png">
+                                <img class="dialogIcons" src="./../img/person.svg">
                             </div>
                             <div class="dialogInputfieldDiv">
                                 <input id="inputMail" value="${email}" type="email" pattern=".+@.+" required>
-                                <img class="dialogIcons" src="./img/mail.png">
+                                <img class="dialogIcons" src="./../img/mail.svg">
                             </div>
                             <div class="dialogInputfieldDiv">
                                 <input id="inputPhone" value="${phone}" type="number" class="no-spinners">
-                                <img class="dialogIcons" src="./img/call.png">
+                                <img class="dialogIcons" src="./../img/call.svg">
                             </div>
                         </div>
                         <div class="dialogButtonDiv">
                             <button onclick="closeContactDialog()" class="cancelButton">Cancel</button>
-                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="./img/check.png"></button>
+                            <button onclick="saveEditContact(${index}, '${nextColor}')" class="createContactButton">Save<img src="./../img/check.svg"></button>
                         </div>
                     </div> 
                 </div>

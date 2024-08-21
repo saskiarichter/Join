@@ -6,7 +6,7 @@ async function init(){
     await initInclude();
     await loadContacts();
     contactsBgMenu();
-    displayUserInitials();
+    displayUserInitials(); 
     
 }
 
@@ -53,8 +53,8 @@ function HTMLTemplateNewContact() {
 <form onsubmit="createNewContact(); return false;">
     <div class="dialogNewContactInnerDiv">
         <div class="dialogLeft">
-        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./img/closeResponsive.png">
-            <img class="joinLogoDialog" src="./img/Capa 2.png">
+        <img onclick="closeContactDialog()" class="closeResponsiveButton" src="./../img/closeVectorBlue.svg">
+            <img class="joinLogoDialog" src="./../img/joinlogo2.svg">
             <div class="dialogLeftInnerDiv">
                 <h1 class="HeadlineDialog">Add contact</h1>
                 <p class="subheadingDialog">Tasks are better with a team!</p>
@@ -63,28 +63,28 @@ function HTMLTemplateNewContact() {
         </div>
         <div class="dialogRight">
             <div class="dialogCloseDiv">
-                <img onclick="closeContactDialog()" class="closeIcon" src="./img/close.png">
+                <img onclick="closeContactDialog()" class="closeIcon" src="./../img/closeVectorBlack.svg">
             </div>
             <div class="dialogProfilPictureDiv">
-                <img class="dialogProfilPicture" src="./img/Group 13.png">
+                <img class="dialogProfilPicture" src="./../img/group.svg">
                 <div class="dialogAddData">
                     <div class="dialogInputfield">
                         <div class="dialogInputfieldDiv">
                             <input id="inputName" placeholder="Name" required>
-                            <img class="dialogIcons" src="./img/person.png">
+                            <img class="dialogIcons" src="./../img/person.svg">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputMail" type="email" placeholder="Email" pattern=".+@.+" required>
-                            <img class="dialogIcons" src="./img/mail.png">
+                            <img class="dialogIcons" src="./../img/mail.svg">
                         </div>
                         <div class="dialogInputfieldDiv">
                             <input id="inputPhone" type="number" placeholder="Phone" class="no-spinners" required>
-                            <img class="dialogIcons" src="./img/call.png">
+                            <img class="dialogIcons" src="./../img/call.svg">
                         </div>
                     </div> 
                     <div class="dialogButtonDiv">
-                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="./img/close.png"></button>
-                        <button type="submit" class="createContactButton">Create contact<img src="./img/check.png"></button>
+                        <button type="button" onclick="closeContactDialog()" class="cancelButton">Cancel<img src="./../img/closeVectorBlack.svg"></button>
+                        <button type="submit" class="createContactButton">Create contact<img src="./../img/check-white.svg"></button>
                     </div>
                 </div> 
             </div>
@@ -265,10 +265,10 @@ function HTMLTemplateShowFullContact(name, email, phone, initials, nextColor, in
             <p class="nameProfilShow">${name}</p>
             <div class="proilNameAndEditInner">
                 <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit">Edit
-                    <img class="logoRightSection" src="./img/edit.svg">
+                    <img class="logoRightSection" src="./../img/edit.svg">
                 </p>
                 <p onclick="deleteContact('${index}')" class="profilDelete">Delete
-                    <img class="logoRightSection" src="./img/delete.png">
+                    <img class="logoRightSection" src="./../img/delete.svg">
                 </p>
             </div>
         </div>
@@ -287,10 +287,10 @@ function HTMLTemplateShowFullContact(name, email, phone, initials, nextColor, in
         </div>
         <div class="editAndDeleteResponsiveDivOutside">
         <div class="editAndDeleteResponsive">
-            <img src="./img/more_vert.png" onclick="togglePopup(event)" alt="More">
+            <img src="./../img/more_vert.png" onclick="togglePopup(event)" alt="More">
                 <div id="popup" class="popup">
-                    <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="./img/edit.svg">Edit</p>
-                    <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="./img/delete.png">Delete</p>
+                    <p onclick="editContact('${index}', '${nextColor}')" class="profilEdit"><img class="logoRightSection" src="./../img/edit.svg">Edit</p>
+                    <p onclick="deleteContact('${index}', '${id}')" class="profilDelete"><img class="logoRightSection" src="./../img/delete.png">Delete</p>
                 </div>
             </div>
         </div>

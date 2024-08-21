@@ -371,7 +371,7 @@ function styleOfNoTaskDone(){
  * Checks the screen width and navigates to addTask.html if the width is 1075 pixels.
 */
 function checkwidthForAddTask(){
-    window.location.href = '../html/addTask.html';
+    window.location.href = './../html/addTask.html';
 }
 
 /**
@@ -382,7 +382,7 @@ function updateButtonOnClick(){
   if(plusbutton.length > 0){
     if(window.innerWidth <= 1075){
       for(let i = 0; i < plusbutton.length; i++){
-        plusbutton[i].setAttribute('onclick', "window.location.href = './addTask.html'");
+        plusbutton[i].setAttribute('onclick', "window.location.href = './../addTask.html'");
       }
     }else{
       for(let i = 0; i < plusbutton.length; i++){

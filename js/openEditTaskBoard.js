@@ -80,11 +80,11 @@ function generateInputEditSubtask(taskIndex){
   <input id="addTask-edit-subtasks${taskIndex}" class="inputfield" type="text"
   placeholder="Add new subtask" maxlength="26" autocomplete="off" onclick="openEditSubtaskIcons()"/>
   <div id="addTask-subtasks-edit-icons" class="subtasks-icon d-none">
-    <img  src="./img/closeVectorBlack.svg" alt="Delete" onclick="closeEditSubtaskIcons()">
+    <img  src="./../img/closeVectorBlack.svg" alt="Delete" onclick="closeEditSubtaskIcons()">
     <div class="parting-line subtasks-icon-line"></div>
-    <img id="add-subtask-button" src="./img/done.svg" alt="confirm" onclick="addEditSubtasks(${taskIndex})">
+    <img id="add-subtask-button" src="./../img/done.svg" alt="confirm" onclick="addEditSubtasks(${taskIndex})">
   </div>
-  <img src="./img/subtasks.svg" class="plus-icon-edit-subtasks" id="plus-edit-icon" onclick="openEditSubtaskIcons()"/>`;
+  <img src="./../img/subtasks.svg" class="plus-icon-edit-subtasks" id="plus-edit-icon" onclick="openEditSubtaskIcons()"/>`;
 }
 
 
@@ -109,16 +109,16 @@ function subtasksEditRender(taskIndex){
     <div id="edit-input-board-content${j}" class=" subtasks-icon input-subtask-edit-content hidden">
       <input type ="text" class="editInputBoard" id = "editInputBoard${j}" value =${tasks[taskIndex]['subtasks'][j]}>
       <div class="edit-buttons-content">
-        <img onclick="deleteEditBoardSubtask(${taskIndex}, ${j})" src="./img/delete.svg" alt="delete">
+        <img onclick="deleteEditBoardSubtask(${taskIndex}, ${j})" src="./../img/delete.svg" alt="delete">
         <div class="parting-line subtasks-icon-line"></div>
-        <img onclick="confirmEdit(${taskIndex}, ${j})" src="./img/done.svg" alt="confirm">
+        <img onclick="confirmEdit(${taskIndex}, ${j})" src="./../img/done.svg" alt="confirm">
       </div>
     </div>
 
     <div id="subtasks-icon${j}" class="subtasks-icon subtasks-icon-hidden">
-      <img onclick="editBoardSubtask(${j})" src="./img/edit.svg" alt="edit">
+      <img onclick="editBoardSubtask(${j})" src="./../img/edit.svg" alt="edit">
       <div class="parting-line subtasks-icon-line"></div>
-      <img onclick="deleteEditBoardSubtask(${taskIndex}, ${j})" src="./img/delete.svg" alt="delete">
+      <img onclick="deleteEditBoardSubtask(${taskIndex}, ${j})" src="./../img/delete.svg" alt="delete">
     </div>
   </div> `
     ;
@@ -235,9 +235,9 @@ function generateEditSubtask(taskIndex){
         <label class="subtask-show-text">${tasks[taskIndex]["subtasks"][i]}</label>
       </div>
       <div class="subtasks-icon subtasks-icon-hidden">
-        <img onclick="editBoardSubtask(${taskIndex})" src="./img/edit.svg" alt="Bearbeiten">
+        <img onclick="editBoardSubtask(${taskIndex})" src="./../img/edit.svg" alt="Bearbeiten">
         <div class="parting-line subtasks-icon-line"></div>
-        <img onclick="deleteEditBoardSubtask(${taskIndex})" src="./img/delete.svg" alt="Delete">
+        <img onclick="deleteEditBoardSubtask(${taskIndex})" src="./../img/delete.svg" alt="Delete">
       </div>
     </div> `;
   }
@@ -287,13 +287,13 @@ function keepPrioButton(taskIndex){
   let lowEditbutton = document.getElementsByClassName("low-edit-button")[0];
   if(/(\s|^)active(\s|$)/.test(urgentEditbutton.className)) {
    tasks[taskIndex]["prio"] = 'Urgent';
-   tasks[taskIndex]["prioIcon"] = "./img/PrioAltaRed.svg";
+   tasks[taskIndex]["prioIcon"] = "./../img/PrioAltaRed.svg";
   }else if(/(\s|^)active(\s|$)/.test(mediumEditbutton.className)){
     tasks[taskIndex]["prio"] = 'Medium';
-    tasks[taskIndex]["prioIcon"] = "./img/PrioMediaOrange.svg";
+    tasks[taskIndex]["prioIcon"] = "./../img/PrioMediaOrange.svg";
   }else if(/(\s|^)active(\s|$)/.test(lowEditbutton.className)){
     tasks[taskIndex]["prio"] = 'Low';
-    tasks[taskIndex]["prioIcon"] = './img/PrioBajaGreen.svg';
+    tasks[taskIndex]["prioIcon"] = './../img/PrioBajaGreen.svg';
   }else{
     tasks[taskIndex]["prio"] = '';
     tasks[taskIndex]["prioIcon"] = '';
@@ -329,8 +329,8 @@ function urgentButtenEdit(lastClick){
     lowEditbutton.classList.remove("active");
     lastClick = urgentEditbutton;
     prioText ='Urgent'
-    prioIcon ='./img/PrioAltaWhite.svg';
-    prioBtn ="./img/PrioAltaRed.svg";
+    prioIcon ='./../img/PrioAltaWhite.svg';
+    prioBtn ="./../img/PrioAltaRed.svg";
     changeIconOfUrgent();
   });
 }
@@ -353,8 +353,8 @@ function mediumButtonEdit(lastClick){
     lowEditbutton.classList.remove("active");
     lastClick = mediumEditbutton;
     prioText = 'Medium';
-    prioIcon = './img/PrioMediaWhite.svg';
-    prioBtn = './img/PrioMediaOrange.svg';
+    prioIcon = './../img/PrioMediaWhite.svg';
+    prioBtn = './../img/PrioMediaOrange.svg';
     changeIconOfMedium();
   });
 }
@@ -377,8 +377,8 @@ function lowButtonEdit(lastClick){
     lowEditbutton.classList.add("active");
     lastClick = lowEditbutton;
     prioText = 'Low';
-    prioIcon = './img/PrioBajaWhite.svg';
-    prioBtn = './img/PrioBajaGreen.svg';
+    prioIcon = './../img/PrioBajaWhite.svg';
+    prioBtn = './../img/PrioBajaGreen.svg';
     changeIconOfLow();
   });
 }
@@ -390,19 +390,19 @@ function lowButtonEdit(lastClick){
 function activeButton(taskIndex){
   if (tasks[taskIndex]["prio"] === "Low") {
     document.getElementsByClassName("low-edit-button")[0].classList.add("active");
-    prioIcon = './img/PrioBajaWhite.svg';
+    prioIcon = './../img/PrioBajaWhite.svg';
     changeIconOfLow();
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");;
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
   } else if (tasks[taskIndex]["prio"] === "Urgent") {
     document.getElementsByClassName("urgent-edit-button")[0].classList.add("active");
-    prioIcon ='./img/PrioAltaWhite.svg';
+    prioIcon ='./../img/PrioAltaWhite.svg';
     changeIconOfUrgent();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("medium-edit-button")[0].classList.remove("active");
   } else if(tasks[taskIndex]["prio"] === "Medium") {
     document.getElementsByClassName("medium-edit-button")[0].classList.add("active");
-    prioIcon = './img/PrioMediaWhite.svg';
+    prioIcon = './../img/PrioMediaWhite.svg';
     changeIconOfMedium();
     document.getElementsByClassName("low-edit-button")[0].classList.remove("active");
     document.getElementsByClassName("urgent-edit-button")[0].classList.remove("active");
@@ -420,9 +420,9 @@ function changeIconOfUrgent(){
   let urgent = document.getElementById('urgentImg');
   urgent.src = prioIcon;
   let medium = document.getElementById('mediumImg');
-  medium.src = './img/PrioMediaOrange.svg';
+  medium.src = './../img/PrioMediaOrange.svg';
   let low = document.getElementById('lowImg');
-  low.src = './img/PrioBajaGreen.svg';
+  low.src = './../img/PrioBajaGreen.svg';
 }
 
 
@@ -433,9 +433,9 @@ function changeIconOfMedium(){
   let medium = document.getElementById('mediumImg');
   medium.src = prioIcon;
   let urgent = document.getElementById('urgentImg');
-  urgent.src = './img/PrioAltaRed.svg';
+  urgent.src = './../img/PrioAltaRed.svg';
   let low = document.getElementById('lowImg');
-  low.src = './img/PrioBajaGreen.svg';
+  low.src = './../img/PrioBajaGreen.svg';
 }
 
 
@@ -446,7 +446,7 @@ function changeIconOfLow(){
   let low = document.getElementById('lowImg');
   low.src = prioIcon;
   let medium = document.getElementById('mediumImg');
-  medium.src = './img/PrioMediaOrange.svg';
+  medium.src = './../img/PrioMediaOrange.svg';
   let urgent = document.getElementById('urgentImg');
-  urgent.src = './img/PrioAltaRed.svg';
+  urgent.src = './../img/PrioAltaRed.svg';
 }

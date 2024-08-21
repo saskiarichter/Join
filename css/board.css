@@ -8,16 +8,19 @@
 }
 
 .board-content{
-  height: 70%;
-  margin-left: 280px;
+  height: 100%;
+  margin-left: 232px;
+  padding-left: 64px;
   width: 80%;
   margin-right: 60px;
+  margin-top: 100px;
 }
 
 h1{
-  font-size: 61px;
+  font-size: 60px;
   font-weight: 700;
   line-height: 73.2px;
+  color: #2A3647;
 }
 
 .board-header{

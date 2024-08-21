@@ -25,16 +25,14 @@
 }
 
 .addTask {
-    height: fit-content;
     width: 976.25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: #2A3647;
-    padding-top: 160px;
-    padding-bottom: 50px;
+    margin-top: 100px;
     overflow: scroll !important;
-    gap: 80px
+
 }
 
 .addTask-top {
@@ -46,7 +44,7 @@
 
 .addTask-title {
     margin: 0;
-    font-size: 61px;
+    font-size: 60px;
     font-weight: 700;
 }
 
@@ -214,12 +212,12 @@
     color: #29ABE2;
 
     .closeImg {
-        background-image: url(../img/closeVectorBlue.svg);
+        background-image: url('./../img/closeVectorBlue.svg');
     }
 }
 
 .closeImg {
-    background-image: url(../img/closeVectorBlack.svg);
+    background-image: url('./../img/closeVectorBlack.svg');
     background-size: contain;
     width: 24px;
     height: 24px;
